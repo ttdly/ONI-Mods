@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{DD48872E-7B35-44EF-A5D3-6F1472F322CE}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.props.default = Directory.Build.props.default
+		Directory.Build.targets = Directory.Build.targets
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GravitasMemory", "GravitasMemory\GravitasMemory.csproj", "{F15FC183-3908-4EBE-B443-45945E8DC673}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Mergedown = Debug|Mergedown
+		Debug|Vanilla = Debug|Vanilla
+		Release|Mergedown = Release|Mergedown
+		Release|Vanilla = Release|Vanilla
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F15FC183-3908-4EBE-B443-45945E8DC673}.Debug|Mergedown.ActiveCfg = Debug|Mergedown
+		{F15FC183-3908-4EBE-B443-45945E8DC673}.Debug|Mergedown.Build.0 = Debug|Mergedown
+		{F15FC183-3908-4EBE-B443-45945E8DC673}.Debug|Vanilla.ActiveCfg = Debug|Vanilla
+		{F15FC183-3908-4EBE-B443-45945E8DC673}.Debug|Vanilla.Build.0 = Debug|Vanilla
+		{F15FC183-3908-4EBE-B443-45945E8DC673}.Release|Mergedown.ActiveCfg = Release|Mergedown
+		{F15FC183-3908-4EBE-B443-45945E8DC673}.Release|Mergedown.Build.0 = Release|Mergedown
+		{F15FC183-3908-4EBE-B443-45945E8DC673}.Release|Vanilla.ActiveCfg = Release|Vanilla
+		{F15FC183-3908-4EBE-B443-45945E8DC673}.Release|Vanilla.Build.0 = Release|Vanilla
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {05AD4341-9C99-4998-8BEC-CFBB218B464B}
+	EndGlobalSection
+EndGlobal

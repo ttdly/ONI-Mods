@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyTitle>GravitasMemory 庄严旧事</AssemblyTitle>
+    <FileVersion>0.0.1</FileVersion>
+    <RootNamespace>GravitasMemory</RootNamespace>
+    <Description>这是描述</Description>
+    <AssemblyVersion>1.0.1</AssemblyVersion>
+    <LastWorkingBuild>526233</LastWorkingBuild>
+    <Platforms>Vanilla;Mergedown</Platforms>
+	<DebugType>portable</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="images\GravitasMemory_icon.png" />
+    <None Remove="images\GravitasMemory_image.png" />
+    <None Remove="images\gravitas_memory_codex_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="images\GravitasMemory_icon.png" />
+    <EmbeddedResource Include="images\GravitasMemory_image.png" />
+    <EmbeddedResource Include="images\gravitas_memory_codex_icon.png" />
+  </ItemGroup>
+</Project>
