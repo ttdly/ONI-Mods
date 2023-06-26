@@ -9,377 +9,543 @@ info:
 cells:
 - element: Granite
   mass: 100
-  temperature: 293.105133
+  temperature: 292.838867
   location_x: -6
   location_y: -4
 - element: Granite
   mass: 100
-  temperature: 293.147278
+  temperature: 286.384979
   location_x: -5
   location_y: -4
 - element: Granite
   mass: 100
-  temperature: 293.20401
+  temperature: 287.550751
   location_x: -4
   location_y: -4
 - element: Granite
   mass: 100
-  temperature: 293.154846
+  temperature: 293.470001
   location_x: -3
   location_y: -4
 - element: Granite
   mass: 100
-  temperature: 293.154816
+  temperature: 286.379486
   location_x: -2
   location_y: -4
 - element: Granite
   mass: 100
-  temperature: 293.150238
+  temperature: 283.356171
   location_x: -1
   location_y: -4
 - element: Granite
   mass: 100
-  temperature: 293.143738
+  temperature: 282.356659
   location_y: -4
 - element: Granite
   mass: 100
-  temperature: 292.161224
+  temperature: 286.802246
   location_x: 1
   location_y: -4
 - element: Granite
   mass: 100
-  temperature: 293.147278
+  temperature: 298.324829
   location_x: 2
   location_y: -4
 - element: Granite
   mass: 100
-  temperature: 293.15097
+  temperature: 303.022461
   location_x: 3
   location_y: -4
 - element: Granite
   mass: 100
-  temperature: 293.154846
+  temperature: 304.399078
   location_x: 4
   location_y: -4
 - element: Granite
   mass: 100
-  temperature: 293.154816
+  temperature: 303.414398
   location_x: 5
   location_y: -4
 - element: Granite
   mass: 100
-  temperature: 293.150238
+  temperature: 301.627075
   location_x: 6
   location_y: -4
 - element: Granite
   mass: 100
-  temperature: 293.141754
+  temperature: 297.87262
   location_x: 7
   location_y: -4
 - element: Granite
   mass: 100
-  temperature: 293.105133
+  temperature: 301.011841
   location_x: -6
   location_y: -3
-- element: Vacuum
+- element: CrudeOil
+  mass: 75.1321106
+  temperature: 309.818634
   location_x: -5
   location_y: -3
-- element: Vacuum
+- element: CrudeOil
+  mass: 74.6207123
+  temperature: 310.535431
   location_x: -4
   location_y: -3
-- element: Vacuum
+- element: CrudeOil
+  mass: 74.2845001
+  temperature: 311.407166
   location_x: -3
   location_y: -3
-- element: Vacuum
+- element: CrudeOil
+  mass: 73.8262177
+  temperature: 310.72287
   location_x: -2
   location_y: -3
-- element: Vacuum
+- element: CrudeOil
+  mass: 73.3261871
+  temperature: 310.246887
   location_x: -1
   location_y: -3
-- element: Vacuum
+- element: CrudeOil
+  mass: 72.78125
+  temperature: 310.051514
   location_y: -3
-- element: Vacuum
+- element: CrudeOil
+  mass: 72.2187347
+  temperature: 310.674316
   location_x: 1
   location_y: -3
-- element: Vacuum
+- element: CrudeOil
+  mass: 71.6737976
+  temperature: 311.592438
   location_x: 2
   location_y: -3
-- element: Vacuum
+- element: CrudeOil
+  mass: 71.1737747
+  temperature: 312.384155
   location_x: 3
   location_y: -3
-- element: Vacuum
+- element: CrudeOil
+  mass: 70.7155075
+  temperature: 311.737823
   location_x: 4
   location_y: -3
-- element: Vacuum
+- element: CrudeOil
+  mass: 70.379303
+  temperature: 311.229889
   location_x: 5
   location_y: -3
-- element: Vacuum
+- element: CrudeOil
+  mass: 69.8679276
+  temperature: 310.209534
   location_x: 6
   location_y: -3
 - element: Granite
   mass: 100
-  temperature: 293.111542
+  temperature: 300.491974
   location_x: 7
   location_y: -3
 - element: Vacuum
   location_x: -6
   location_y: -2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000370408583
+  temperature: 307.979675
   location_x: -5
   location_y: -2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000502867508
+  temperature: 313.313324
   location_x: -4
   location_y: -2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000523686118
+  temperature: 312.834839
   location_x: -3
   location_y: -2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000584720634
+  temperature: 313.975433
   location_x: -2
   location_y: -2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000623511442
+  temperature: 311.69693
   location_x: -1
   location_y: -2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000632602721
+  temperature: 311.527893
   location_y: -2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000633367745
+  temperature: 312.080109
   location_x: 1
   location_y: -2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000613947283
+  temperature: 312.504211
   location_x: 2
   location_y: -2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000570736534
+  temperature: 313.171539
   location_x: 3
   location_y: -2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000510202546
+  temperature: 313.264496
   location_x: 4
   location_y: -2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000432194793
+  temperature: 312.068787
   location_x: 5
   location_y: -2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000331608811
+  temperature: 312.613037
   location_x: 6
   location_y: -2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000193699962
+  temperature: 303.002136
   location_x: 7
   location_y: -2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.00026325247
+  temperature: 299.330139
   location_x: -6
   location_y: -1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000397660333
+  temperature: 310.457672
   location_x: -5
   location_y: -1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000485006894
+  temperature: 311.646637
   location_x: -4
   location_y: -1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000550011231
+  temperature: 313.0159
   location_x: -3
   location_y: -1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000604305882
+  temperature: 313.718872
   location_x: -2
   location_y: -1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000628867827
+  temperature: 311.641174
   location_x: -1
   location_y: -1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000635504257
+  temperature: 311.661346
   location_y: -1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000633732881
+  temperature: 311.375427
   location_x: 1
   location_y: -1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000613074284
+  temperature: 312.542084
   location_x: 2
   location_y: -1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000572788937
+  temperature: 313.046844
   location_x: 3
   location_y: -1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.00050715328
+  temperature: 312.990784
   location_x: 4
   location_y: -1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000440113188
+  temperature: 312.318817
   location_x: 5
   location_y: -1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000350872666
+  temperature: 306.233246
   location_x: 6
   location_y: -1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000250555255
+  temperature: 298.295807
   location_x: 7
   location_y: -1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000352832809
+  temperature: 297.063171
   location_x: -6
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000431981811
+  temperature: 301.213104
   location_x: -5
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000514659041
+  temperature: 300.217255
   location_x: -4
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000574434234
+  temperature: 299.617859
   location_x: -3
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000618178921
+  temperature: 310.744171
   location_x: -2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000637402583
+  temperature: 310.970276
   location_x: -1
-- element: Vacuum
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000645029591
+  temperature: 310.970306
+- element: Oxygen
+  mass: 0.000644075335
+  temperature: 310.970276
   location_x: 1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000624604756
+  temperature: 310.970245
   location_x: 2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000581886561
+  temperature: 310.271973
   location_x: 3
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000530710269
+  temperature: 306.692657
   location_x: 4
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000488587015
+  temperature: 301.849304
   location_x: 5
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000413399015
+  temperature: 298.2771
   location_x: 6
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000310953241
+  temperature: 297.438965
   location_x: 7
 - element: Granite
   mass: 100
-  temperature: 293.105133
+  temperature: 294.362122
   location_x: -6
   location_y: 1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000527472701
+  temperature: 299.14151
   location_x: -5
   location_y: 1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000601273496
+  temperature: 297.254944
   location_x: -4
   location_y: 1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000563821697
+  temperature: 297.58429
   location_x: -3
   location_y: 1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000633349584
+  temperature: 298.648102
   location_x: -2
   location_y: 1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000653489085
+  temperature: 300.460052
   location_x: -1
   location_y: 1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000661288504
+  temperature: 308.527985
   location_y: 1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000658102799
+  temperature: 298.345093
   location_x: 1
   location_y: 1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000641424733
+  temperature: 296.809174
   location_x: 2
   location_y: 1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000604881148
+  temperature: 298.441132
   location_x: 3
   location_y: 1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000572590332
+  temperature: 307.353485
   location_x: 4
   location_y: 1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000535122177
+  temperature: 299.963196
   location_x: 5
   location_y: 1
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000505245756
+  temperature: 299.99176
   location_x: 6
   location_y: 1
 - element: Granite
   mass: 100
-  temperature: 293.105133
+  temperature: 286.929779
   location_x: 7
   location_y: 1
 - element: Granite
   mass: 100
-  temperature: 293.105133
+  temperature: 293.675323
   location_x: -6
   location_y: 2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000588792725
+  temperature: 297.651855
   location_x: -5
   location_y: 2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000598713348
+  temperature: 296.163055
   location_x: -4
   location_y: 2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000618111459
+  temperature: 295.194244
   location_x: -3
   location_y: 2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000656495336
+  temperature: 293.78772
   location_x: -2
   location_y: 2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000673458911
+  temperature: 297.483124
   location_x: -1
   location_y: 2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000675057585
+  temperature: 294.845306
   location_y: 2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000677992415
+  temperature: 294.925446
   location_x: 1
   location_y: 2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000660954916
+  temperature: 298.481934
   location_x: 2
   location_y: 2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000634695753
+  temperature: 305.924103
   location_x: 3
   location_y: 2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000582480745
+  temperature: 296.462311
   location_x: 4
   location_y: 2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.00057203474
+  temperature: 297.800873
   location_x: 5
   location_y: 2
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000548075943
+  temperature: 294.69281
   location_x: 6
   location_y: 2
 - element: Granite
   mass: 100
-  temperature: 293.105133
+  temperature: 287.919403
   location_x: 7
   location_y: 2
 - element: Granite
   mass: 100
-  temperature: 293.105133
+  temperature: 293.275269
   location_x: -6
   location_y: 3
 - element: Granite
   mass: 100
-  temperature: 293.105133
+  temperature: 293.109558
   location_x: -5
   location_y: 3
 - element: Granite
   mass: 100
-  temperature: 293.105133
+  temperature: 293.131073
   location_x: -4
   location_y: 3
 - element: Granite
   mass: 100
-  temperature: 293.105133
+  temperature: 293.874115
   location_x: -3
   location_y: 3
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000685637177
+  temperature: 295.873596
   location_x: -2
   location_y: 3
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000688324275
+  temperature: 294.668732
   location_x: -1
   location_y: 3
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000686208718
+  temperature: 294.205597
   location_y: 3
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000689995592
+  temperature: 295.181824
   location_x: 1
   location_y: 3
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000675692048
+  temperature: 293.942169
   location_x: 2
   location_y: 3
-- element: Vacuum
+- element: Oxygen
+  mass: 0.000671607442
+  temperature: 298.411835
   location_x: 3
   location_y: 3
 - element: Granite
   mass: 100
-  temperature: 293.105133
+  temperature: 291.16391
   location_x: 4
   location_y: 3
 - element: Granite
   mass: 100
-  temperature: 293.105133
+  temperature: 290.909821
   location_x: 5
   location_y: 3
 - element: Granite
   mass: 100
-  temperature: 293.105133
+  temperature: 289.914795
   location_x: 6
   location_y: 3
 - element: Granite
   mass: 100
-  temperature: 293.105133
+  temperature: 288.914337
   location_x: 7
   location_y: 3
 - element: Katairite
   mass: 500
-  temperature: 276.149994
+  temperature: 276.164459
   location_x: -6
   location_y: 4
 - element: Katairite
@@ -389,504 +555,504 @@ cells:
   location_y: 4
 - element: Katairite
   mass: 500
-  temperature: 276.149994
+  temperature: 276.172882
   location_x: -4
   location_y: 4
 - element: Granite
   mass: 100
-  temperature: 293.105133
+  temperature: 294.720123
   location_x: -3
   location_y: 4
 - element: Granite
   mass: 100
-  temperature: 293.105133
+  temperature: 295.42868
   location_x: -2
   location_y: 4
 - element: Granite
   mass: 100
-  temperature: 293.105133
+  temperature: 295.448853
   location_x: -1
   location_y: 4
 - element: Granite
   mass: 100
-  temperature: 293.105133
+  temperature: 294.499115
   location_y: 4
 - element: Granite
   mass: 100
-  temperature: 293.105133
+  temperature: 293.500549
   location_x: 1
   location_y: 4
 - element: Granite
   mass: 100
-  temperature: 293.105133
+  temperature: 292.506592
   location_x: 2
   location_y: 4
 - element: Granite
   mass: 100
-  temperature: 293.105133
+  temperature: 291.506958
   location_x: 3
   location_y: 4
 - element: Granite
   mass: 100
-  temperature: 293.105133
+  temperature: 290.516876
   location_x: 4
   location_y: 4
 - element: Katairite
   mass: 500
-  temperature: 276.149994
+  temperature: 276.135529
   location_x: 5
   location_y: 4
 - element: Katairite
   mass: 500
-  temperature: 276.149994
+  temperature: 276.135529
   location_x: 6
   location_y: 4
 - element: Katairite
   mass: 500
-  temperature: 276.149994
+  temperature: 276.134125
   location_x: 7
   location_y: 4
 buildings:
 - id: PropGravitasLabWall
   location_y: -3
   element: Granite
-  temperature: 292.800537
+  temperature: 310.630585
 - id: PropGravitasLabWall
   location_x: 4
   location_y: -3
   element: Granite
-  temperature: 292.834747
+  temperature: 311.649841
 - id: PropGravitasLabWindow
   location_x: -2
   location_y: -3
   element: Glass
-  temperature: 293.214355
+  temperature: 311.735931
 - id: PropGravitasLabWindow
   location_x: 2
   location_y: -3
   element: Glass
-  temperature: 293.114655
+  temperature: 312.872345
 - id: TilePOI
   location_x: 2
   location_y: -4
   element: Granite
-  temperature: 293.147278
+  temperature: 294.810242
 - id: TilePOI
   location_x: 1
   location_y: -4
   element: Granite
-  temperature: 292.41391
+  temperature: 282.524445
 - id: TilePOI
   location_x: 5
   location_y: -4
   element: Granite
-  temperature: 293.154816
+  temperature: 299.935303
 - id: TilePOI
   location_x: 4
   location_y: -4
   element: Granite
-  temperature: 293.154846
+  temperature: 300.765503
 - id: TilePOI
   location_x: 3
   location_y: -4
   element: Granite
-  temperature: 293.15097
+  temperature: 299.447052
 - id: TilePOI
   location_x: 7
   location_y: -4
   element: Granite
-  temperature: 293.143524
+  temperature: 294.310883
 - id: TilePOI
   location_x: 6
   location_y: -4
   element: Granite
-  temperature: 293.150238
+  temperature: 298.111389
 - id: TilePOI
   location_y: -4
   element: Granite
-  temperature: 293.147552
+  temperature: 278.231262
 - id: TilePOI
   location_x: -1
   location_y: -4
   element: Granite
-  temperature: 293.150238
+  temperature: 279.449005
 - id: TilePOI
   location_x: -2
   location_y: -4
   element: Granite
-  temperature: 293.154816
+  temperature: 282.716949
 - id: TilePOI
   location_x: -3
   location_y: -4
   element: Granite
-  temperature: 293.154846
+  temperature: 290.867554
 - id: TilePOI
   location_x: -4
   location_y: -4
   element: Granite
-  temperature: 293.20224
+  temperature: 284.486359
 - id: TilePOI
   location_x: -5
   location_y: -4
   element: Granite
-  temperature: 293.147278
+  temperature: 283.719757
 - id: TilePOI
   location_x: -6
   location_y: -4
   element: Granite
-  temperature: 293.105133
+  temperature: 290.810425
 - id: PropGravitasWall
   location_x: 3
   element: Granite
-  temperature: 293.151184
+  temperature: 293.141663
 - id: TilePOI
   location_x: -6
   location_y: -3
   element: Granite
-  temperature: 293.105133
+  temperature: 299.890564
 - id: TilePOI
   location_x: -6
   location_y: 1
   element: Granite
-  temperature: 293.105133
+  temperature: 294.381683
 - id: TilePOI
   location_x: -6
   location_y: 2
   element: Granite
-  temperature: 293.105133
+  temperature: 293.709076
 - id: TilePOI
   location_x: 7
   location_y: -3
   element: Granite
-  temperature: 293.113312
+  temperature: 296.930267
 - id: TilePOI
   location_x: 7
   location_y: 1
   element: Granite
-  temperature: 293.105133
+  temperature: 286.875885
 - id: TilePOI
   location_x: 7
   location_y: 2
   element: Granite
-  temperature: 293.105133
+  temperature: 287.802216
 - id: TilePOI
   location_x: 7
   location_y: 3
   element: Granite
-  temperature: 293.105133
+  temperature: 288.803558
 - id: TilePOI
   location_x: -6
   location_y: 3
   element: Granite
-  temperature: 293.105133
+  temperature: 293.287689
 - id: TilePOI
   location_x: -5
   location_y: 3
   element: Granite
-  temperature: 293.105133
+  temperature: 293.107819
 - id: TilePOI
   location_x: -4
   location_y: 3
   element: Granite
-  temperature: 293.105133
+  temperature: 293.129303
 - id: TilePOI
   location_x: 6
   location_y: 3
   element: Granite
-  temperature: 293.105133
+  temperature: 290.00116
 - id: TilePOI
   location_x: 4
   location_y: 3
   element: Granite
-  temperature: 293.105133
+  temperature: 291.186066
 - id: TilePOI
   location_x: 5
   location_y: 3
   element: Granite
-  temperature: 293.105133
+  temperature: 291.00116
 - id: TilePOI
   location_x: -3
   location_y: 4
   element: Granite
-  temperature: 293.105133
+  temperature: 294.693481
 - id: TilePOI
   location_x: -2
   location_y: 4
   element: Granite
-  temperature: 293.105133
+  temperature: 295.42691
 - id: TilePOI
   location_x: -1
   location_y: 4
   element: Granite
-  temperature: 293.105133
+  temperature: 295.447083
 - id: TilePOI
   location_y: 4
   element: Granite
-  temperature: 293.105133
+  temperature: 294.504883
 - id: TilePOI
   location_x: 2
   location_y: 4
   element: Granite
-  temperature: 293.105133
+  temperature: 292.512268
 - id: TilePOI
   location_x: 1
   location_y: 4
   element: Granite
-  temperature: 293.105133
+  temperature: 293.504791
 - id: TilePOI
   location_x: 3
   location_y: 4
   element: Granite
-  temperature: 293.105133
+  temperature: 291.510651
 - id: TilePOI
   location_x: 4
   location_y: 4
   element: Granite
-  temperature: 293.105133
+  temperature: 290.518127
 - id: TilePOI
   location_x: -3
   location_y: 3
   element: Granite
-  temperature: 293.105133
+  temperature: 293.846954
 - id: PropGravitasWall
   location_x: -5
   element: Granite
-  temperature: 293.137299
+  temperature: 293.15863
 - id: PropGravitasWall
   location_x: -5
   location_y: -2
   element: Granite
-  temperature: 293.141296
+  temperature: 293.05838
 - id: PropGravitasWall
   location_x: -5
   location_y: -1
   element: Granite
-  temperature: 293.103149
+  temperature: 292.732483
 - id: PropGravitasWall
   location_x: -5
   location_y: -3
   element: Granite
-  temperature: 293.151245
+  temperature: 309.858704
 - id: PropGravitasWall
   location_x: 6
   location_y: -3
   element: Granite
-  temperature: 293.150818
+  temperature: 310.244171
 - id: PropGravitasWall
   location_x: 6
   location_y: -2
   element: Granite
-  temperature: 293.140137
+  temperature: 293.022034
 - id: PropGravitasWall
   location_x: 6
   location_y: 2
   element: Granite
-  temperature: 293.137299
+  temperature: 291.774628
 - id: PropGravitasWall
   location_x: 6
   element: Granite
-  temperature: 293.141327
+  temperature: 292.928314
 - id: PropGravitasWall
   location_x: 6
   location_y: 1
   element: Granite
-  temperature: 293.103149
+  temperature: 291.912994
 - id: PropGravitasWall
   location_x: 6
   location_y: -1
   element: Granite
-  temperature: 293.150055
+  temperature: 293.122925
 - id: PropGravitasWall
   location_x: 3
   location_y: 3
   element: Granite
-  temperature: 293.137299
+  temperature: 292.615387
 - id: PropGravitasWall
   location_x: 3
   location_y: 1
   element: Granite
-  temperature: 293.141388
+  temperature: 293.153381
 - id: PropGravitasWall
   location_x: 3
   location_y: 2
   element: Granite
-  temperature: 293.103149
+  temperature: 293.100769
 - id: PropGravitasWall
   location_x: 2
   location_y: 3
   element: Granite
-  temperature: 293.137299
+  temperature: 293.132324
 - id: PropGravitasWall
   location_x: 2
   location_y: 1
   element: Granite
-  temperature: 293.141327
+  temperature: 293.156311
 - id: PropGravitasWall
   location_x: 2
   location_y: 2
   element: Granite
-  temperature: 293.103149
+  temperature: 293.113525
 - id: PropGravitasWall
   location_x: 2
   element: Granite
-  temperature: 293.151245
+  temperature: 293.151489
 - id: PropGravitasWall
   location_x: 1
   location_y: 3
   element: Granite
-  temperature: 293.137299
+  temperature: 293.145172
 - id: PropGravitasWall
   location_x: -3
   location_y: 2
   element: Granite
-  temperature: 293.141266
+  temperature: 293.151093
 - id: PropGravitasWall
   location_x: -4
   location_y: 1
   element: Granite
-  temperature: 293.141357
+  temperature: 293.156799
 - id: PropGravitasWall
   location_x: -5
   location_y: 2
   element: Granite
-  temperature: 293.141357
+  temperature: 293.146576
 - id: PropGravitasWall
   location_y: 3
   element: Granite
-  temperature: 293.137299
+  temperature: 293.149231
 - id: PropGravitasWall
   location_x: -4
   location_y: 2
   element: Granite
-  temperature: 293.141357
+  temperature: 293.148804
 - id: PropGravitasWall
   location_x: -3
   location_y: 1
   element: Granite
-  temperature: 293.141357
+  temperature: 293.158539
 - id: PropGravitasWall
   location_x: -5
   location_y: 1
   element: Granite
-  temperature: 293.141357
+  temperature: 293.153931
 - id: PropGravitasWall
   location_x: -1
   location_y: 3
   element: Granite
-  temperature: 293.137299
+  temperature: 293.152496
 - id: PropGravitasWall
   location_x: 1
   location_y: 1
   element: Granite
-  temperature: 293.141357
+  temperature: 293.158447
 - id: PropGravitasWall
   location_x: -1
   location_y: 2
   element: Granite
-  temperature: 293.103149
+  temperature: 293.118622
 - id: PropGravitasWall
   location_x: -1
   element: Granite
-  temperature: 293.151306
+  temperature: 293.168335
 - id: PropGravitasWall
   location_x: -2
   location_y: 3
   element: Granite
-  temperature: 293.137299
+  temperature: 293.150391
 - id: PropGravitasWall
   location_x: -2
   location_y: 1
   element: Granite
-  temperature: 293.141388
+  temperature: 293.159698
 - id: PropGravitasWall
   location_x: -2
   location_y: 2
   element: Granite
-  temperature: 293.103149
+  temperature: 293.117188
 - id: PropGravitasWall
   location_x: -2
   element: Granite
-  temperature: 293.151276
+  temperature: 293.156799
 - id: PropGravitasWall
   location_x: 4
   element: Granite
-  temperature: 293.141357
+  temperature: 293.132355
 - id: PropGravitasWall
   location_x: 5
   element: Granite
-  temperature: 293.141357
+  temperature: 293.118988
 - id: PropGravitasWall
   location_x: 5
   location_y: 1
   element: Granite
-  temperature: 293.141296
+  temperature: 293.066132
 - id: PropGravitasWall
   location_x: 4
   location_y: 1
   element: Granite
-  temperature: 293.141357
+  temperature: 293.139954
 - id: PropGravitasWall
   location_x: 4
   location_y: 2
   element: Granite
-  temperature: 293.141327
+  temperature: 292.859711
 - id: PropGravitasWall
   location_x: 5
   location_y: 2
   element: Granite
-  temperature: 293.141357
+  temperature: 292.940887
 - id: PropGravitasWall
   location_x: -3
   element: Granite
-  temperature: 293.141357
+  temperature: 293.158325
 - id: PropGravitasWall
   location_x: -4
   element: Granite
-  temperature: 293.141357
+  temperature: 293.163422
 - id: PropGravitasWall
   location_x: 1
   element: Granite
-  temperature: 293.141357
+  temperature: 293.153259
 - id: PropGravitasWall
   location_y: 2
   element: Granite
-  temperature: 293.141357
+  temperature: 293.154968
 - id: GravitasDoor
   location_x: -6
   location_y: -2
   element: Steel
-  temperature: 293.188751
+  temperature: 293.289337
 - id: GravitasDoor
   location_x: 7
   location_y: -2
   element: Steel
-  temperature: 293.188751
+  temperature: 292.245087
 - id: PropGravitasWall
   element: Granite
-  temperature: 293.141357
+  temperature: 293.158997
 - id: PropGravitasWall
   location_x: -1
   location_y: 1
   element: Granite
-  temperature: 293.141357
+  temperature: 293.160828
 - id: PropGravitasWall
   location_y: 1
   element: Granite
-  temperature: 293.141357
+  temperature: 293.159698
 - id: PropGravitasWall
   location_x: 1
   location_y: 2
   element: Granite
-  temperature: 293.141357
+  temperature: 293.153259
 - id: PropGravitasLabWall
   location_x: -4
   location_y: -3
   element: Granite
-  temperature: 292.834747
+  temperature: 311.366913
 - id: BaseP1
   location_y: -3
   element: Unobtanium
-  temperature: 293.149994
+  temperature: 310.888062
 elementalOres:
 - id: Unobtanium
   location_x: 1
@@ -894,3 +1060,4 @@ elementalOres:
   element: Unobtanium
   temperature: 286.197845
   units: 100
+  type: Ore

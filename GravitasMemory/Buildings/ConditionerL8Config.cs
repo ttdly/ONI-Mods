@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using TUNING;
 using UnityEngine;
 
-public class ConditionerL8 : IBuildingConfig {
+public class ConditionerL8Config : IBuildingConfig {
     public const string ID = "ConditionerL8";
     private static readonly List<Storage.StoredItemModifier> StoredItemModifiers = new List<Storage.StoredItemModifier>()
     {
@@ -56,7 +56,7 @@ public class ConditionerL8 : IBuildingConfig {
         Storage defaultStorage = BuildingTemplates.CreateDefaultStorage(go);
         defaultStorage.showInUI = true;
         defaultStorage.capacityKg = 2f * conduitConsumer.consumptionRate;
-        defaultStorage.SetDefaultStoredItemModifiers(ConditionerL8.StoredItemModifiers);
+        defaultStorage.SetDefaultStoredItemModifiers(ConditionerL8Config.StoredItemModifiers);
     }
 
     public override void DoPostConfigureComplete(GameObject go) {

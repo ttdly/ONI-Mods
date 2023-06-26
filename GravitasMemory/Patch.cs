@@ -18,11 +18,13 @@ namespace GravitasMemory {
                 ModUtil.AddBuildingToPlanScreen("Equipment", OverriderConfig.ID);
                 Db.Get().Techs.Get("Acoustics").unlockedItemIDs.Add(OverriderConfig.ID);
                 ModUtil.AddBuildingToPlanScreen("Equipment", GeyserV2Config.ID);
-                Db.Get().Techs.Get("Acoustics").unlockedItemIDs.Add(GeyserV2Config.ID);
+                Db.Get().Techs.Get("RenewableEnergy").unlockedItemIDs.Add(GeyserV2Config.ID);
                 ModUtil.AddBuildingToPlanScreen("Equipment", GeyserC4Config.ID);
-                Db.Get().Techs.Get("Acoustics").unlockedItemIDs.Add(GeyserC4Config.ID);
-                ModUtil.AddBuildingToPlanScreen("Equipment", ConditionerL8.ID);
-                Db.Get().Techs.Get("Acoustics").unlockedItemIDs.Add(ConditionerL8.ID);
+                Db.Get().Techs.Get("ImprovedCombustion").unlockedItemIDs.Add(GeyserC4Config.ID);
+                ModUtil.AddBuildingToPlanScreen("Utilities", ConditionerL8Config.ID);
+                Db.Get().Techs.Get("LiquidTemperature").unlockedItemIDs.Add(ConditionerL8Config.ID);
+                ModUtil.AddBuildingToPlanScreen("Refining", PressD16Config.ID);
+                Db.Get().Techs.Get("Catalytics").unlockedItemIDs.Add(PressD16Config.ID);
                 LocString.CreateLocStringKeys(typeof(BUILDINGS), "STRINGS.");
             }
         }

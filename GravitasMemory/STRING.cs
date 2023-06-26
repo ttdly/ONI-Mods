@@ -26,8 +26,14 @@ namespace GravitasMemory {
             }
             public class CONDITIONERL8 {
                 public static LocString NAME = UI.FormatAsLink("实验机L8", "CONDITIONERL8");
-                public static LocString DESC = (LocString)("得益于中子物质外壳，热量不会外泄，但是内部产生的微弱电量还是需要及时排出");
+                public static LocString DESC = (LocString)("得益于中子物质外壳，热量不会外泄，而且会有微弱电量排出。");
                 public static LocString EFFECT = (LocString)("冷却液体");
+            }
+            public class PRESSD16 {
+                public static LocString NAME = UI.FormatAsLink("实验机D16", "PRESSD16");
+                public static LocString DESC = (LocString)("中子物质本身十分稳定，但是这混合成的水晶却十分不稳定。");
+                public static LocString EFFECT = (LocString)("将矿物原料和中子物质结合，生成水晶。");
+                public static LocString RECIPE_DESCRIPTION = ("将{0}和中子物质结合，生成水晶。");
             }
         }
     }

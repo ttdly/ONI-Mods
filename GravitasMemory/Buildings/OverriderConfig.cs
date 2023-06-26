@@ -10,7 +10,7 @@ public class OverriderConfig : IBuildingConfig {
     private const int RANGEX = 10;
     private const int RANGEY = 4;
     private string[] materials = new string[2] {"Special", "Crystal" };
-    private float[] mass = new float[2] { 25f, 50f };
+    private float[] mass = new float[2] { 100f, 50f };
     
     public override BuildingDef CreateBuildingDef() {
         BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef("Overrider", 1, 1, "overrider_kanim", 30, 30f, mass, materials, 1600f, BuildLocationRule.OnFoundationRotatable, TUNING.BUILDINGS.DECOR.PENALTY.TIER0, NOISE_POLLUTION.NOISY.TIER4);

@@ -1,4 +1,5 @@
-﻿using TUNING;
+﻿using GravitasMemory;
+using TUNING;
 using UnityEngine;
 
 public class GeyserV2Config : IBuildingConfig {
@@ -37,11 +38,11 @@ public class GeyserV2Config : IBuildingConfig {
         ElementConverter elementConverter = go.AddOrGet<ElementConverter>();
         elementConverter.consumedElements = new ElementConverter.ConsumedElement[1]
         {
-            new ElementConverter.ConsumedElement(GameTags.BuildableRaw, 1f)
+            new ElementConverter.ConsumedElement(Crystal.TAG, 1f)
         };
         elementConverter.outputElements = new ElementConverter.OutputElement[1]
         {
-            new ElementConverter.OutputElement(2.0f, SimHashes.Magma, 2156f, outputElementOffsetx: (float) cellOffset.x, outputElementOffsety: (float) cellOffset.y)
+            new ElementConverter.OutputElement(2.0f, SimHashes.Magma, 2558f, outputElementOffsetx: (float) cellOffset.x, outputElementOffsety: (float) cellOffset.y)
         };
         ManualDeliveryKG manualDeliveryKg = go.AddOrGet<ManualDeliveryKG>();
         manualDeliveryKg.SetStorage(storage);

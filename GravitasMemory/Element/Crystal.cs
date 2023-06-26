@@ -10,6 +10,7 @@ namespace GravitasMemory {
     public static class Crystal {
         public static readonly Color32 CRYSTAL_COLOR = new Color32((byte)201, (byte)201, (byte)195, byte.MaxValue);
         public const string SOLID_ID = "Crystal";
+        public static readonly Tag TAG = new Tag("Crystal");
         public static readonly SimHashes SolidSimHash = (SimHashes)Hash.SDBMLower("Crystal");
 
         private static Texture2D TintTextureZincColor(Texture sourceTexture, string name) {
