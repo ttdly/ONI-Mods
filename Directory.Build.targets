@@ -74,12 +74,14 @@ staticID: CalYu.$(AssemblyName)
       <TranslationFiles Include="$(ProjectDir)\translations\*.po" />
       <WorldGenFiles Include="$(ProjectDir)\worldgen\**\*.*" />
       <WorldGenTemplates Include="$(ProjectDir)\templates\**\*.*" />
+	  <ElementFiles Include="$(ProjectDir)\elements\**\*.*" />
       <YamlFiles Include="$(ProjectDir)\*.yaml" />
     </ItemGroup>  
 
     <Copy SourceFiles="@(AnimFiles)" DestinationFiles="@(AnimFiles->'$(InstallFolder)\anim\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(TranslationFiles)" DestinationFolder="$(InstallFolder)\translations" />
-    <Copy SourceFiles="@(WorldGenFiles)" DestinationFiles="@(WorldGenFiles->'$(InstallFolder)\worldgen\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(ElementFiles)" DestinationFiles="@(ElementFiles->'$(InstallFolder)\elements\%(RecursiveDir)%(Filename)%(Extension)')" />
+	<Copy SourceFiles="@(WorldGenFiles)" DestinationFiles="@(WorldGenFiles->'$(InstallFolder)\worldgen\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(WorldGenTemplates)" DestinationFiles="@(WorldGenTemplates->'$(InstallFolder)\templates\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="@(YamlFiles)" DestinationFolder="$(InstallFolder)" />
     <Copy SourceFiles="$(ModInfoFile)" DestinationFolder="$(InstallFolder)" />

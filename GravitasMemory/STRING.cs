@@ -31,6 +31,12 @@ namespace GravitasMemory {
             }
         }
     }
+    public class ELEMENTS {
+        public class CRYSTAL {
+            public static string NAME = (LocString)"水晶";
+            public static string DESC = (LocString)"由微量中子物质和其他矿物加工而成的物质，蕴含极大能量，非常不稳定。";
+        }
+    }
     public class CODEX {
         public class STORY_TRAITS {
             public class GRAVITAS_MEMORY {

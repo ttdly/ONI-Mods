@@ -9,7 +9,7 @@ public class OverriderConfig : IBuildingConfig {
     public const string ID = "Overrider";
     private const int RANGEX = 10;
     private const int RANGEY = 4;
-    private string[] materials = new string[2] {"Special","Other"};
+    private string[] materials = new string[2] {"Special", "Crystal" };
     private float[] mass = new float[2] { 25f, 50f };
     
     public override BuildingDef CreateBuildingDef() {
