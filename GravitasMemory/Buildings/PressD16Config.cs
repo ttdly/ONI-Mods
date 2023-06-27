@@ -27,7 +27,7 @@ public class PressD16Config : IBuildingConfig {
         EffectorValues tieR6 = NOISE_POLLUTION.NOISY.TIER6;
         EffectorValues tieR2 = TUNING.BUILDINGS.DECOR.PENALTY.TIER2;
         EffectorValues noise = tieR6;
-        BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef("PressD16", 3, 4, "pressd16_kanim", 30, 60f, tieR5, allMinerals, 2400f, BuildLocationRule.OnFloor, tieR2, noise);
+        BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef("PressD16", 3, 6, "pressd16_kanim", 30, 60f, tieR5, allMinerals, 2400f, BuildLocationRule.OnFloor, tieR2, noise);
         buildingDef.RequiresPowerInput = true;
         buildingDef.EnergyConsumptionWhenActive = 2000f;
         buildingDef.SelfHeatKilowattsWhenActive = 0f;
@@ -50,6 +50,7 @@ public class PressD16Config : IBuildingConfig {
         ComplexFabricatorWorkable fabricatorWorkable = go.AddOrGet<ComplexFabricatorWorkable>();
         BuildingTemplates.CreateComplexFabricatorStorage(go, (ComplexFabricator)fabricator);
         fabricator.outStorage.capacityKg = 2000f;
+        fabricator.inStorage.capacityKg = 2002f;
         fabricator.inStorage.SetDefaultStoredItemModifiers(PressD16Config.RefineryStoredItemModifiers);
         fabricator.buildStorage.SetDefaultStoredItemModifiers(PressD16Config.RefineryStoredItemModifiers);
         fabricator.outStorage.SetDefaultStoredItemModifiers(PressD16Config.RefineryStoredItemModifiers);
@@ -97,6 +98,15 @@ public class PressD16Config : IBuildingConfig {
             component.AttributeExperienceMultiplier = DUPLICANTSTATS.ATTRIBUTE_LEVELING.PART_DAY_EXPERIENCE;
             component.SkillExperienceSkillGroup = Db.Get().SkillGroups.Technicals.Id;
             component.SkillExperienceMultiplier = SKILLS.PART_DAY_EXPERIENCE;
+            MeterController meter = new MeterController((KAnimControllerBase)component.GetComponent<KBatchedAnimController>(), "meter_target", "meter", Meter.Offset.Infront, Grid.SceneLayer.NoLayer, new string[4]{
+                "meter_target",
+                "meter_fill",
+                "meter_frame",
+                "meter_OL"
+            });
+            ComplexFabricator fabricator = component.GetComponent<ComplexFabricator>();
+            component.Subscribe(-1697596308, (Action<object>)(data => meter.SetPositionPercent(Mathf.Clamp01(fabricator.inStorage.MassStored() / fabricator.inStorage.capacityKg))));
+            meter.SetPositionPercent(fabricator.inStorage.MassStored() / fabricator.inStorage.capacityKg);
         });
     }
 }

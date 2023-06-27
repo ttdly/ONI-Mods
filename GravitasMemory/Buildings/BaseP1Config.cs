@@ -41,6 +41,7 @@ public class BaseP1Config : IBuildingConfig {
         go.AddOrGet<CopyBuildingSettings>();
         BuildingTemplates.CreateComplexFabricatorStorage(go, fabricator);
         fabricator.outStorage.capacityKg = 2000f;
+        fabricator.inStorage.capacityKg = 200f;
         fabricator.inStorage.SetDefaultStoredItemModifiers(BaseP1Config.RefineryStoredItemModifiers);
         fabricator.buildStorage.SetDefaultStoredItemModifiers(BaseP1Config.RefineryStoredItemModifiers);
         fabricator.outStorage.SetDefaultStoredItemModifiers(BaseP1Config.RefineryStoredItemModifiers);
@@ -59,7 +60,7 @@ public class BaseP1Config : IBuildingConfig {
                     string obsolete_id = ComplexRecipeManager.MakeObsoleteRecipeID("BaseP1", lowTempTransition.tag);
                     string str = ComplexRecipeManager.MakeRecipeID("BaseP1", (IList<ComplexRecipe.RecipeElement>)recipeElementArray1, (IList<ComplexRecipe.RecipeElement>)recipeElementArray2);
                     ComplexRecipe complexRecipe = new ComplexRecipe(str, recipeElementArray1, recipeElementArray2) {
-                        time = 100f,
+                        time = 20f,
                         description = string.Format((string)GravitasMemory.BUILDINGS.PREFABS.BASEP1.RECIPE_DESCRIPTION, (object)element.name, (object)lowTempTransition.name),
                         nameDisplay = ComplexRecipe.RecipeNameDisplay.IngredientToResult,
                         fabricators = new List<Tag>(){
@@ -82,5 +83,16 @@ public class BaseP1Config : IBuildingConfig {
 
     public override void DoPostConfigureComplete(GameObject go) {
         SymbolOverrideControllerUtil.AddToPrefab(go);
+        go.GetComponent<KPrefabID>().prefabSpawnFn += (KPrefabID.PrefabFn)(game_object => {
+            ComplexFabricator component = game_object.AddOrGet<ComplexFabricator>();
+            MeterController meter = new MeterController((KAnimControllerBase)component.GetComponent<KBatchedAnimController>(), "meter_target", "meter", Meter.Offset.Behind, Grid.SceneLayer.NoLayer, new string[4]{
+                "meter_target",
+                "meter_fill",
+                "meter_frame",
+                "meter_OL"
+            });
+            component.Subscribe(-1697596308, (Action<object>)(data => meter.SetPositionPercent(Mathf.Clamp01(component.inStorage.MassStored() / component.inStorage.capacityKg))));
+            meter.SetPositionPercent(component.inStorage.MassStored() / component.inStorage.capacityKg);
+        });
     }
 }
