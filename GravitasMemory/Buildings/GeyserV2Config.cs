@@ -6,10 +6,10 @@ public class GeyserV2Config : IBuildingConfig {
     public const string ID = "GeyserV2";
 
     public override BuildingDef CreateBuildingDef() {
-        float[] tieR3_1 = BUILDINGS.CONSTRUCTION_MASS_KG.TIER5;
+        float[] tieR3_1 = TUNING.BUILDINGS.CONSTRUCTION_MASS_KG.TIER5;
         string[] allMetals = { "Special" };
         EffectorValues tieR3_2 = NOISE_POLLUTION.NOISY.TIER3;
-        EffectorValues tieR1 = BUILDINGS.DECOR.PENALTY.TIER1;
+        EffectorValues tieR1 = TUNING.BUILDINGS.DECOR.PENALTY.TIER1;
         EffectorValues noise = tieR3_2;
         BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef("GeyserV2", 4, 3, "geyserv2_kanim", 30, 30f, tieR3_1, allMetals, 800f, BuildLocationRule.OnFloor, tieR1, noise);
         buildingDef.RequiresPowerInput = true;
@@ -36,12 +36,10 @@ public class GeyserV2Config : IBuildingConfig {
         storage.capacityKg = 330f;
         storage.showInUI = true;
         ElementConverter elementConverter = go.AddOrGet<ElementConverter>();
-        elementConverter.consumedElements = new ElementConverter.ConsumedElement[1]
-        {
+        elementConverter.consumedElements = new ElementConverter.ConsumedElement[1]{
             new ElementConverter.ConsumedElement(Crystal.TAG, 1f)
         };
-        elementConverter.outputElements = new ElementConverter.OutputElement[1]
-        {
+        elementConverter.outputElements = new ElementConverter.OutputElement[1]{
             new ElementConverter.OutputElement(2.0f, SimHashes.Magma, 2558f, outputElementOffsetx: (float) cellOffset.x, outputElementOffsety: (float) cellOffset.y)
         };
         ManualDeliveryKG manualDeliveryKg = go.AddOrGet<ManualDeliveryKG>();

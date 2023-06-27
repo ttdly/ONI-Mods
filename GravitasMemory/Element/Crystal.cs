@@ -36,7 +36,6 @@ namespace GravitasMemory {
         public static void RegisterCrystalSubstance() {
             Substance substance = Assets.instance.substanceTable.GetSubstance(SimHashes.Diamond);
             ElementUtil.CreateRegisteredSubstance("Crystal", Element.State.Solid, ElementUtil.FindAnim("crystal_kanim"), Crystal.CreateSolidZincMaterial(substance.material), Crystal.CRYSTAL_COLOR);
-            PUtil.LogDebug("都完了");
         }
     }
 }

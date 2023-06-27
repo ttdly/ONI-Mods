@@ -12,35 +12,35 @@ namespace GravitasMemory {
             public class OVERRIDER {
                 public static LocString NAME = UI.FormatAsLink("覆写器", "OVERRIDER");
                 public static LocString DESC = (LocString)("这下就有更多时间干其他事了。");
-                public static LocString EFFECT = (LocString)("对一些需要复制人操作的机器进行干扰。" );
+                public static LocString EFFECT = (LocString)("对一些需要复制人操作的机器进行干扰。");
             }
             public class GEYSERV2 {
                 public static LocString NAME = UI.FormatAsLink("实验机V2", "GEYSERV2");
                 public static LocString DESC = (LocString)("对火山的一次模拟，还有待改进。");
-                public static LocString EFFECT = (LocString)("将水晶转换为岩浆喷出");
+                public static LocString EFFECT = (LocString)("将" + UI.FormatAsLink("水晶", "CRYSTAL") + "转化为" + UI.FormatAsLink("岩浆", "MAGMA") + "喷出。");
             }
             public class GEYSERC4 {
                 public static LocString NAME = UI.FormatAsLink("实验机C4", "GEYSERC4");
                 public static LocString DESC = (LocString)("完美的复刻。");
-                public static LocString EFFECT = (LocString)("原油转为天然气。");
+                public static LocString EFFECT = (LocString)("将" + UI.FormatAsLink("原油", "CRUDEOIL") + "转化为" + UI.FormatAsLink("天然气", "METHANE") + "。");
             }
             public class CONDITIONERL8 {
                 public static LocString NAME = UI.FormatAsLink("实验机L8", "CONDITIONERL8");
-                public static LocString DESC = (LocString)("得益于中子物质外壳，热量不会外泄，而且会有微弱电量排出。");
-                public static LocString EFFECT = (LocString)("冷却液体");
+                public static LocString DESC = (LocString)("得益于中子物质外壳，热量不会外泄，而且会输出一些电量。");
+                public static LocString EFFECT = (LocString)("冷却输入的" + UI.FormatAsLink("液体", "ELEMENTS_LIQUID") + "但不会向外释放" + UI.FormatAsLink("热量", "HEAT") + "。");
             }
             public class PRESSD16 {
                 public static LocString NAME = UI.FormatAsLink("实验机D16", "PRESSD16");
-                public static LocString DESC = (LocString)("中子物质本身十分稳定，但是这混合成的水晶却十分不稳定。");
-                public static LocString EFFECT = (LocString)("将矿物原料和中子物质结合，生成水晶。");
-                public static LocString RECIPE_DESCRIPTION = ("将{0}和中子物质结合，生成水晶。");
+                public static LocString DESC = (LocString)(UI.FormatAsLink("中子物质", "UNOBTANIUM") + "本身十分稳定，但是这合成的水晶却十分不稳定。");
+                public static LocString EFFECT = (LocString)("将" + UI.FormatAsLink("矿物原料", "RAWMINERAL") + "和" + UI.FormatAsLink("中子物质", "UNOBTANIUM") + "结合，生成水晶。\n\n " + UI.FormatAsLink("水晶", "CRYSTAL") + "可以为其他实验机提供材料");
+                public static LocString RECIPE_DESCRIPTION = (LocString)("将{0}和" + UI.FormatAsLink("中子物质", "UNOBTANIUM") + "结合，生成" + UI.FormatAsLink("水晶", "CRYSTAL") + "。");
             }
         }
     }
     public class ELEMENTS {
         public class CRYSTAL {
             public static string NAME = (LocString)"水晶";
-            public static string DESC = (LocString)"由微量中子物质和其他矿物加工而成的物质，蕴含极大能量，非常不稳定。";
+            public static string DESC = (LocString)"由少量" + UI.FormatAsLink("中子物质", "UNOBTANIUM") + "和其他" + UI.FormatAsLink("矿物原料", "RAWMINERAL") + "加工而成的物质，蕴含极大能量，非常不稳定。";
         }
     }
     public class CODEX {
@@ -48,7 +48,7 @@ namespace GravitasMemory {
             public class GRAVITAS_MEMORY {
                 public static LocString NAME = (LocString)("庄严旧事");
                 public static LocString DESCRIPTION = (LocString)("中子物质！");
-                public static LocString DESCRIPTION_SHORT = (LocString)"将打印舱和时间之弓集合，这个机型还是有中子物质的产出。";
+                public static LocString DESCRIPTION_SHORT = (LocString)"将打印舱和时间之弓结合，这个机型还是有中子物质的产出。";
 
                 public class BEGIN_POPUP {
                     public static LocString NAME = (LocString)"故事特质：庄严旧事";

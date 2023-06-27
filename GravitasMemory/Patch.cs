@@ -13,10 +13,8 @@ namespace GravitasMemory {
         [HarmonyPatch(typeof(GeneratedBuildings), nameof(GeneratedBuildings.LoadGeneratedBuildings))]
         public class GeneratedBuildings_LoadGeneratedBuildings_Patch {
             public static void Prefix() {
-                ModUtil.AddBuildingToPlanScreen("Refining", BaseP1Config.ID);
-                Db.Get().Techs.Get("Catalytics").unlockedItemIDs.Add(BaseP1Config.ID);
                 ModUtil.AddBuildingToPlanScreen("Equipment", OverriderConfig.ID);
-                Db.Get().Techs.Get("Acoustics").unlockedItemIDs.Add(OverriderConfig.ID);
+                Db.Get().Techs.Get("RoboticTools").unlockedItemIDs.Add(OverriderConfig.ID);
                 ModUtil.AddBuildingToPlanScreen("Equipment", GeyserV2Config.ID);
                 Db.Get().Techs.Get("RenewableEnergy").unlockedItemIDs.Add(GeyserV2Config.ID);
                 ModUtil.AddBuildingToPlanScreen("Equipment", GeyserC4Config.ID);
