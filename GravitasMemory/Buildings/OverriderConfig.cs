@@ -9,7 +9,7 @@ public class OverriderConfig : IBuildingConfig {
     public const string ID = "Overrider";
     private const int RANGEX = 10;
     private const int RANGEY = 4;
-    private string[] materials = new string[2] {"Special", "Crystal" };
+    private string[] materials = new string[2] {"Special", "Other" };
     private float[] mass = new float[2] { 100f, 50f };
     
     public override BuildingDef CreateBuildingDef() {
@@ -44,5 +44,10 @@ public class OverriderConfig : IBuildingConfig {
         rangeVisualizer.RangeMax.x = (RANGEX / 2);
         rangeVisualizer.RangeMax.y = RANGEY;
         rangeVisualizer.BlockingTileVisible = true;
+    }
+
+    public override void DoPostConfigureUnderConstruction(GameObject go) {
+        base.DoPostConfigureUnderConstruction(go);
+        go.GetComponent<Constructable>().requiredSkillPerk = Db.Get().SkillPerks.ConveyorBuild.Id;
     }
 }

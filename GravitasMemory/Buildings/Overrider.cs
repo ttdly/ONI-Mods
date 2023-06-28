@@ -21,8 +21,21 @@ public class Overrider : KMonoBehaviour{
         new Tag("RockCrusher"),
         new Tag("SuitFabricator"),
         new Tag("MicrobeMusher"),
-        new Tag("SupermaterialRefinery")
-
+        new Tag("SupermaterialRefinery"),
+        new Tag("SludgePress"),
+        new Tag("DiamondPress"),
+        new Tag("EggCracker"),
+        new Tag("GlassForge"),
+        new Tag("GourmetCookingStation"),
+        new Tag("ManualHighEnergyParticleSpawner"),
+        new Tag("MissileFabricator"),
+        new Tag("UraniumCentrifuge"),
+        new Tag("ClothingAlterationStation"),
+        new Tag("ClothingFabricator"),
+        new Tag("CookingStation"),
+        new Tag("CraftingTable"),
+        new Tag("FossilDig"),
+        new Tag("OrbitalResearchCenter")
     };
     private HandleVector<int>.Handle buildingsChangedEntry;
     private HandleVector<int>.Handle buildingsChange;
@@ -91,7 +104,7 @@ public class Overrider : KMonoBehaviour{
         if (go.activeSelf) {
             if (buildings.Contains(go)) return;
             OverrideThisTarget(go);
-            if (buildings.Count > 0) return;
+            if (buildings.Count > 1) return;
             wasOn = true;
             UpdateVisualState();
         } else {

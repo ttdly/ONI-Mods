@@ -95,4 +95,10 @@ public class BaseP1Config : IBuildingConfig {
             meter.SetPositionPercent(component.inStorage.MassStored() / component.inStorage.capacityKg);
         });
     }
+
+    public override void DoPostConfigureUnderConstruction(GameObject go) {
+        base.DoPostConfigureUnderConstruction(go);
+        go.GetComponent<Constructable>().requiredSkillPerk = Db.Get().SkillPerks.ConveyorBuild.Id;
+    }
+
 }
