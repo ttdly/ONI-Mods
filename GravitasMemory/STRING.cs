@@ -1,4 +1,5 @@
 ﻿using STRINGS;
+using static STRINGS.BUILDING.STATUSITEMS;
 
 namespace GravitasMemory {
     public class BUILDINGS {
@@ -21,7 +22,7 @@ namespace GravitasMemory {
             }
             public class GEYSERC4 {
                 public static LocString NAME = UI.FormatAsLink("实验机C4", "GEYSERC4");
-                public static LocString DESC = (LocString)("完美的复刻。");
+                public static LocString DESC = (LocString)("完美的机器。");
                 public static LocString EFFECT = (LocString)("将" + UI.FormatAsLink("原油", "CRUDEOIL") + "转化为" + UI.FormatAsLink("天然气", "METHANE") + "。");
             }
             public class CONDITIONERL8 {
@@ -34,6 +35,16 @@ namespace GravitasMemory {
                 public static LocString DESC = (LocString)(UI.FormatAsLink("中子物质", "UNOBTANIUM") + "本身十分稳定，但是这合成的水晶却十分不稳定。");
                 public static LocString EFFECT = (LocString)("将" + UI.FormatAsLink("矿物原料", "RAWMINERAL") + "和" + UI.FormatAsLink("中子物质", "UNOBTANIUM") + "结合，生成水晶。\n\n " + UI.FormatAsLink("水晶", "CRYSTAL") + "可以为其他实验机提供材料");
                 public static LocString RECIPE_DESCRIPTION = (LocString)("将{0}和" + UI.FormatAsLink("中子物质", "UNOBTANIUM") + "结合，生成" + UI.FormatAsLink("水晶", "CRYSTAL") + "。");
+            }
+            public class SEEDFERMENTER {
+                public static LocString NAME = UI.FormatAsLink("种子酿造机", "SEEDFERMENTER");
+                public static LocString DESC = (LocString)("这些乙醇还是太少了。");
+                public static LocString EFFECT = (LocString)("将投入的种子发酵，产生"+UI.FormatAsLink("乙醇", "ETHANOL") +"和"+ UI.FormatAsLink("泥土", "Dirt") + "。");
+            }
+            public class ELECTRICCOOLINGFAN {
+                public static LocString NAME = UI.FormatAsLink("电动冰冷风扇", "ELECTRICCOOLINGFAN");
+                public static LocString DESC = (LocString)("得益于中子物质外壳，热量不会外泄，而且会输出一些电量。");
+                public static LocString EFFECT = (LocString)("吸收周围空气，经过冰块降温之后排出。");
             }
         }
     }

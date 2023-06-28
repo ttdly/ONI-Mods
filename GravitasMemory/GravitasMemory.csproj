@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <AssemblyTitle>GravitasMemory 庄严旧事</AssemblyTitle>
+    <AssemblyTitle>秃头的建筑包</AssemblyTitle>
     <FileVersion>0.0.1</FileVersion>
     <RootNamespace>GravitasMemory</RootNamespace>
-    <Description>这是描述</Description>
+    <Description>新增一些建筑</Description>
     <AssemblyVersion>1.0.1</AssemblyVersion>
     <LastWorkingBuild>526233</LastWorkingBuild>
     <Platforms>Vanilla;Mergedown</Platforms>

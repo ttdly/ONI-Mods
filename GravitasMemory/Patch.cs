@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using Database;
+using HarmonyLib;
 using PeterHan.PLib.Core;
 using PeterHan.PLib.Options;
 using ProcGen;
@@ -21,6 +22,10 @@ namespace GravitasMemory {
                 Db.Get().Techs.Get("ImprovedCombustion").unlockedItemIDs.Add(GeyserC4Config.ID);
                 ModUtil.AddBuildingToPlanScreen("Utilities", ConditionerL8Config.ID);
                 Db.Get().Techs.Get("LiquidTemperature").unlockedItemIDs.Add(ConditionerL8Config.ID);
+                ModUtil.AddBuildingToPlanScreen("Utilities", SeedFermenterConfig.ID);
+                Db.Get().Techs.Get("FoodRepurposing").unlockedItemIDs.Add(SeedFermenterConfig.ID);
+                //ModUtil.AddBuildingToPlanScreen("Utilities", ElectricCoolingFanConfig.ID);
+                //Db.Get().Techs.Get("LiquidTemperature").unlockedItemIDs.Add(ElectricCoolingFanConfig.ID);
                 //ModUtil.AddBuildingToPlanScreen("Refining", PressD16Config.ID);
                 //Db.Get().Techs.Get("Catalytics").unlockedItemIDs.Add(PressD16Config.ID);
                 LocString.CreateLocStringKeys(typeof(BUILDINGS), "STRINGS.");
