@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <AssemblyTitle>秃头的建筑包</AssemblyTitle>
-    <FileVersion>0.0.1</FileVersion>
+    <AssemblyTitle>秃头的建筑包(CalYu's Building Pack)</AssemblyTitle>
+    <FileVersion>0.0.2</FileVersion>
     <RootNamespace>GravitasMemory</RootNamespace>
     <Description>新增一些建筑</Description>
     <AssemblyVersion>1.0.1</AssemblyVersion>
@@ -14,15 +14,5 @@
     <Compile Remove="Properties\**" />
     <EmbeddedResource Remove="Properties\**" />
     <None Remove="Properties\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="images\GravitasMemory_icon.png" />
-    <None Remove="images\GravitasMemory_image.png" />
-    <None Remove="images\gravitas_memory_codex_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="images\GravitasMemory_icon.png" />
-    <EmbeddedResource Include="images\GravitasMemory_image.png" />
-    <EmbeddedResource Include="images\gravitas_memory_codex_icon.png" />
   </ItemGroup>
 </Project>

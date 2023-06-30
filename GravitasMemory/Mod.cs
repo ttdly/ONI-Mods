@@ -10,12 +10,6 @@ namespace GravitasMemory
             base.OnLoad(harmony);
             PUtil.InitLibrary();
             new PVersionCheck().Register(this, new SteamVersionChecker());
-            new PPatchManager(harmony).RegisterPatchClass(typeof(Mod));
-        }
-
-        [PLibMethod(RunAt.BeforeDbInit)]
-        internal static void BeforeDbInit() {
-            ModAssets.LoadStoryIcons();
         }
     }
 }

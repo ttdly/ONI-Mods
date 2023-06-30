@@ -1,9 +1,5 @@
-﻿
-
-using HarmonyLib;
-using TUNING;
+﻿using TUNING;
 using UnityEngine;
-using static STRINGS.ELEMENTS;
 
 public class GeyserC4Config: IBuildingConfig {
     public const string ID = "GeyserC4";

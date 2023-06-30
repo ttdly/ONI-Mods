@@ -1,10 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: AirFilter
-// Assembly: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 2BFC01D3-C011-441F-99ED-A7DA2F70C2DC
-// Assembly location: C:\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\Assembly-CSharp.dll
-
-using KSerialization;
+﻿using KSerialization;
 using System.Collections.Generic;
 using UnityEngine;
 

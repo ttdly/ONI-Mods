@@ -1,5 +1,4 @@
 ﻿using STRINGS;
-using static STRINGS.BUILDING.STATUSITEMS;
 
 namespace GravitasMemory {
     public class BUILDINGS {
