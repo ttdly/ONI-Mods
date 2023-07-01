@@ -3,7 +3,6 @@ using HarmonyLib;
 using PeterHan.PLib.AVC;
 using PeterHan.PLib.Core;
 using PeterHan.PLib.Options;
-using PeterHan.PLib.PatchManager;
 
 namespace FixPack {
     public sealed class Mod : KMod.UserMod2 {
@@ -13,11 +12,11 @@ namespace FixPack {
             PUtil.InitLibrary();
             new PVersionCheck().Register(this, new SteamVersionChecker());
             RegisterSting();
-            new POptions().RegisterOptions(this,typeof(FixPack.Option));
+            new POptions().RegisterOptions(this,typeof(Option));
         }
 
         public static void RegisterSting() {
-            LocString.CreateLocStringKeys(typeof(FixPack.String.UI));
+            LocString.CreateLocStringKeys(typeof(String.UI));
             DestructibleStrings.AddStrings();
         }
 

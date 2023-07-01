@@ -28,5 +28,9 @@ namespace FixPack {
         [Limit(100.0, 3600.0)]
         [JsonProperty]
         public float DeconstructTime { get; set; } = 1800;
+
+        [Option("STRINGS.UI.FIX_PACK.GENERAL.ACTIVE", "STRINGS.UI.FIX_PACK.DECONSTRUCTABLE_PROPS.DESC", "STRINGS.UI.FIX_PACK.DECONSTRUCTABLE_PROPS.TITLE")]
+        [JsonProperty]
+        public bool ActiveDeconstructableProps { get; set; } = false;
     }
 }
