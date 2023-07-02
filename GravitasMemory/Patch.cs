@@ -16,6 +16,8 @@ namespace GravitasMemory {
                 Db.Get().Techs.Get("LiquidTemperature").unlockedItemIDs.Add(ConditionerL8Config.ID);
                 ModUtil.AddBuildingToPlanScreen("Utilities", SeedFermenterConfig.ID);
                 Db.Get().Techs.Get("FoodRepurposing").unlockedItemIDs.Add(SeedFermenterConfig.ID);
+                ModUtil.AddBuildingToPlanScreen("Utilities", SongMachineConfig.ID);
+                Db.Get().Techs.Get("FoodRepurposing").unlockedItemIDs.Add(SongMachineConfig.ID);
                 LocString.CreateLocStringKeys(typeof(BUILDINGS), "STRINGS.");
             }
         }

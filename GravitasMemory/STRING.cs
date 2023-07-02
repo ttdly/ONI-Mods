@@ -9,16 +9,13 @@ namespace GravitasMemory {
                 public static LocString EFFECT = (LocString)("将殖民地的" + UI.FormatAsLink("精炼金属", "REFINEDMETAL") + "还原为" + UI.FormatAsLink("金属矿石", "RAWMETAL") + "。\n\n由于技术原因，它也会产出少量" + UI.FormatAsLink("中子物质", "UNOBTANIUM") + ".");
                 public static LocString RECIPE_DESCRIPTION = ("将{1}还原为{0}。");
             }
+
             public class OVERRIDER {
                 public static LocString NAME = UI.FormatAsLink("覆写器", "OVERRIDER");
                 public static LocString DESC = (LocString)("这下就有更多时间干其他事了。");
                 public static LocString EFFECT = (LocString)("对一些需要复制人操作的机器进行干扰。");
             }
-            public class GEYSERV2 {
-                public static LocString NAME = UI.FormatAsLink("实验机V2", "GEYSERV2");
-                public static LocString DESC = (LocString)("对火山的一次模拟，还有待改进。");
-                public static LocString EFFECT = (LocString)("将" + UI.FormatAsLink("水晶", "CRYSTAL") + "转化为" + UI.FormatAsLink("岩浆", "MAGMA") + "喷出。");
-            }
+
             public class GEYSERC4 {
                 public static LocString NAME = UI.FormatAsLink("实验机C4", "GEYSERC4");
                 public static LocString DESC = (LocString)("完美的机器。");
@@ -29,21 +26,17 @@ namespace GravitasMemory {
                 public static LocString DESC = (LocString)("得益于中子物质外壳，热量不会外泄，而且会输出一些电量。");
                 public static LocString EFFECT = (LocString)("冷却输入的" + UI.FormatAsLink("液体", "ELEMENTS_LIQUID") + "但不会向外释放" + UI.FormatAsLink("热量", "HEAT") + "。");
             }
-            public class PRESSD16 {
-                public static LocString NAME = UI.FormatAsLink("实验机D16", "PRESSD16");
-                public static LocString DESC = (LocString)(UI.FormatAsLink("中子物质", "UNOBTANIUM") + "本身十分稳定，但是这合成的水晶却十分不稳定。");
-                public static LocString EFFECT = (LocString)("将" + UI.FormatAsLink("矿物原料", "RAWMINERAL") + "和" + UI.FormatAsLink("中子物质", "UNOBTANIUM") + "结合，生成水晶。\n\n " + UI.FormatAsLink("水晶", "CRYSTAL") + "可以为其他实验机提供材料");
-                public static LocString RECIPE_DESCRIPTION = (LocString)("将{0}和" + UI.FormatAsLink("中子物质", "UNOBTANIUM") + "结合，生成" + UI.FormatAsLink("水晶", "CRYSTAL") + "。");
-            }
+
             public class SEEDFERMENTER {
                 public static LocString NAME = UI.FormatAsLink("种子酿造机", "SEEDFERMENTER");
                 public static LocString DESC = (LocString)("这些乙醇还是太少了。");
                 public static LocString EFFECT = (LocString)("将投入的种子发酵，产生"+UI.FormatAsLink("乙醇", "ETHANOL") +"和"+ UI.FormatAsLink("泥土", "Dirt") + "。");
             }
-            public class ELECTRICCOOLINGFAN {
-                public static LocString NAME = UI.FormatAsLink("电动冰冷风扇", "ELECTRICCOOLINGFAN");
-                public static LocString DESC = (LocString)("得益于中子物质外壳，热量不会外泄，而且会输出一些电量。");
-                public static LocString EFFECT = (LocString)("吸收周围空气，经过冰块降温之后排出。");
+
+            public class SONGMACHINE {
+                public static LocString NAME = UI.FormatAsLink("摇篮曲", "SONGMACHINE");
+                public static LocString DESC = (LocString)("也许这是处理过剩动物蛋的另一种选择。");
+                public static LocString EFFECT = (LocString)("加快周围动物蛋的孵化速度。");
             }
         }
     }
