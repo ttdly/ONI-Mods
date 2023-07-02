@@ -29,8 +29,28 @@ namespace FixPack {
         [JsonProperty]
         public float DeconstructTime { get; set; } = 1800;
 
+        //------------------------------------------------
+        
         [Option("STRINGS.UI.FIX_PACK.GENERAL.ACTIVE", "STRINGS.UI.FIX_PACK.DECONSTRUCTABLE_PROPS.DESC", "STRINGS.UI.FIX_PACK.DECONSTRUCTABLE_PROPS.TITLE")]
         [JsonProperty]
         public bool ActiveDeconstructableProps { get; set; } = false;
+
+        //------------------------------------------------
+
+        [Option("STRINGS.UI.FIX_PACK.GENERAL.ACTIVE", "STRINGS.UI.FIX_PACK.FLUID_SHIPPING.DESC", "STRINGS.UI.FIX_PACK.FLUID_SHIPPING.TITLE")]
+        [JsonProperty]
+        public bool ActiveFluidShipping { get; set; } = false;
+
+        [Option("STRINGS.UI.FIX_PACK.FLUID_SHIPPING.OPTION1", "Internal storage volume of Canister Inserter (Kg).", "STRINGS.UI.FIX_PACK.FLUID_SHIPPING.TITLE")]
+        [JsonProperty]
+        public float CanisterVolume { get; set; } = 10;
+
+        [Option("STRINGS.UI.FIX_PACK.FLUID_SHIPPING.OPTION2", "Internal storage volume of Bottle Inserter (Kg).", "STRINGS.UI.FIX_PACK.FLUID_SHIPPING.TITLE")]
+        [JsonProperty]
+        public float BottleVolume { get; set; } = 200;
+
+        [Option("STRINGS.UI.FIX_PACK.FLUID_SHIPPING.OPTION3", "Internal storage volume of Bottle Filler(Kg).", "STRINGS.UI.FIX_PACK.FLUID_SHIPPING.TITLE")]
+        [JsonProperty]
+        public float BottleFillerVolume { get; set; } = 200;
     }
 }
