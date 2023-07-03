@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AssemblyTitle>秃头的建筑包(CalYu's Building Pack)</AssemblyTitle>
-    <FileVersion>0.0.2</FileVersion>
+    <FileVersion>0.1.2</FileVersion>
     <RootNamespace>GravitasMemory</RootNamespace>
     <Description>新增一些建筑</Description>
     <AssemblyVersion>1.0.1</AssemblyVersion>

@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-
+using Klei.AI;
 
 namespace GravitasMemory {
     internal class Patch {
@@ -16,6 +16,8 @@ namespace GravitasMemory {
                 Db.Get().Techs.Get("LiquidTemperature").unlockedItemIDs.Add(ConditionerL8Config.ID);
                 ModUtil.AddBuildingToPlanScreen("Utilities", SeedFermenterConfig.ID);
                 Db.Get().Techs.Get("FoodRepurposing").unlockedItemIDs.Add(SeedFermenterConfig.ID);
+                ModUtil.AddBuildingToPlanScreen("Utilities", SongMachineConfig.ID);
+                Db.Get().Techs.Get("FoodRepurposing").unlockedItemIDs.Add(SongMachineConfig.ID);
                 LocString.CreateLocStringKeys(typeof(BUILDINGS), "STRINGS.");
             }
         }
@@ -23,10 +25,10 @@ namespace GravitasMemory {
         [HarmonyPatch(typeof(Db), nameof(Db.Initialize))]
         public class Db_Initialize_Patch {
             static void Postfix() {
-                Database.Story GravitasMemory = new Database.Story("GravitasMemory", "storytraits/GravitasMemory", -1);
-                Db.Get().Stories.AddStoryMod(GravitasMemory);
-                GameTags.MaterialCategories.Add(TagManager.Create("Memory"));
-                LocString.CreateLocStringKeys(typeof(CODEX), "STRINGS.");
+                LocString.CreateLocStringKeys(typeof(CREATURES));
+                Effect resource = new Effect("EggCrazy", (string)CREATURES.MODIFIERS.EGGCRAZY.NAME, (string)CREATURES.MODIFIERS.EGGCRAZY.DESC, 1200f, true, true, false);
+                resource.Add(new AttributeModifier(Db.Get().Amounts.Incubation.deltaAttribute.Id, 600f, (string)CREATURES.MODIFIERS.EGGCRAZY.NAME, true));
+                Db.Get().effects.Add(resource);
             }
         }
     }
