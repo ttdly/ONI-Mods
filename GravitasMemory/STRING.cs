@@ -35,7 +35,7 @@ namespace GravitasMemory {
 
             public class SONGMACHINE {
                 public static LocString NAME = UI.FormatAsLink("摇篮曲", "SONGMACHINE");
-                public static LocString DESC = (LocString)("也许这是处理过剩动物蛋的另一种选择。");
+                public static LocString DESC = (LocString)("也许它播放的并不是摇篮曲。");
                 public static LocString EFFECT = (LocString)("加快周围动物蛋的孵化速度。");
             }
         }
@@ -46,27 +46,11 @@ namespace GravitasMemory {
             public static string DESC = (LocString)"由少量" + UI.FormatAsLink("中子物质", "UNOBTANIUM") + "和其他" + UI.FormatAsLink("矿物原料", "RAWMINERAL") + "加工而成的物质，蕴含极大能量，非常不稳定。";
         }
     }
-    public class CODEX {
-        public class STORY_TRAITS {
-            public class GRAVITAS_MEMORY {
-                public static LocString NAME = (LocString)("庄严旧事");
-                public static LocString DESCRIPTION = (LocString)("中子物质！");
-                public static LocString DESCRIPTION_SHORT = (LocString)"将打印舱和时间之弓结合，这个机型还是有中子物质的产出。";
-
-                public class BEGIN_POPUP {
-                    public static LocString NAME = (LocString)"故事特质：庄严旧事";
-                    public static LocString CODEX_NAME = (LocString)"初遇";
-                    public static LocString DESCRIPTION = (LocString)"我发现了另一个打印舱，这是添加了时间之弓的实验机型。\n\n它能把精炼金属恢复成金属矿石，但是会有部分转化成中子物质。\n\n我想这些中子物质可以制作其他的机型。";
-                }
-            }
-        }
-    }
-    public class CUSTOM {
-        public class STORY_TRAITS {
-            public class GRAVITAS_MEMORY {
-                public static string ICON_NAME = "GravitasMemory_icon";
-                public static string IMAGE_NAME = "GravitasMemory_image";
-                public static string CDOEX_NAME = "gravitas_memory_codex_icon";
+    public class CREATURES {
+        public class MODIFIERS {
+            public class EGGCRAZY {
+                public static LocString NAME = "疯狂";
+                public static LocString DESC = "机器发出的频率让它焦躁不安，它想快点破壳而出。";
             }
         }
     }

@@ -5,10 +5,10 @@ using UnityEngine;
 public class SongMachineConfig : IBuildingConfig {
     
     public const string ID = "SongMachine";
-    private const int RANGEX = 10;
-    private const int RANGEY = 1;
-    private string[] materials = new string[2] {"Special", "Other" };
-    private float[] mass = new float[2] { 100f, 50f };
+    private const int RANGEX = 4;
+    private const int RANGEY = 0;
+    private string[] materials = new string[1] {"Special"};
+    private float[] mass = new float[1] { 200f };
     
     public override BuildingDef CreateBuildingDef() {
         BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef("SongMachine", 1, 1, "song_machine_kanim", 30, 30f, mass, materials, 1600f, BuildLocationRule.OnFloor, TUNING.BUILDINGS.DECOR.PENALTY.TIER0, NOISE_POLLUTION.NOISY.TIER4);
