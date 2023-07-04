@@ -52,5 +52,23 @@ namespace FixPack {
         [Option("STRINGS.UI.FIX_PACK.FLUID_SHIPPING.OPTION3", "Internal storage volume of Bottle Filler(Kg).", "STRINGS.UI.FIX_PACK.FLUID_SHIPPING.TITLE")]
         [JsonProperty]
         public float BottleFillerVolume { get; set; } = 200;
+
+        //------------------------------------------------
+
+        [Option("STRINGS.UI.FIX_PACK.GENERAL.ACTIVE", "STRINGS.UI.FIX_PACK.STORAGE_POD.DESC", "STRINGS.UI.FIX_PACK.STORAGE_POD.TITLE")]
+        [JsonProperty]
+        public bool ActiveStoragePod { get; set; } = false;
+
+        [Option("STRINGS.UI.FIX_PACK.STORAGE_POD.OPTION1", "How many kg of Solids a Storage Pod can store.", "STRINGS.UI.FIX_PACK.STORAGE_POD.TITLE", Format = "F0")]
+        [JsonProperty]
+        public float podCapacity { get; set; } = 5000f;
+
+        [Option("STRINGS.UI.FIX_PACK.STORAGE_POD.OPTION2", "How many kg of Solids a Cool Pod can store.", "STRINGS.UI.FIX_PACK.STORAGE_POD.TITLE", Format = "F0")]
+        [JsonProperty]
+        public float coolPodCapacity { get; set; } = 50f;
+
+        [Option("STRINGS.UI.FIX_PACK.STORAGE_POD.OPTION3", "Can you store food in a Storage Pod?", "STRINGS.UI.FIX_PACK.STORAGE_POD.TITLE")]
+        [JsonProperty]
+        public bool podStoresFood { get; set; } = false;
     }
 }
