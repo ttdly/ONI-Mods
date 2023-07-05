@@ -12,6 +12,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="FluidShipping\" />
+    <Folder Include="StoragePod\" />
   </ItemGroup>
 
 </Project>

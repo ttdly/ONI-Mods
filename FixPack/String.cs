@@ -23,11 +23,19 @@ namespace FixPack {
                 }
 
                 public class FLUID_SHIPPING {
-                    public static LocString TITLE = (LocString)"FluidShipping";
+                    public static LocString TITLE = (LocString)"Fluid Shipping";
                     public static LocString DESC = (LocString)"Mopping and plumbing left you with more bottled and canistered fluids than you know what to do with? Never fear - fluid shipping is here!";
                     public static LocString OPTION1 = (LocString)"Canister Inserter Volume";
                     public static LocString OPTION2 = (LocString)"Bottle Inserter Volume";
                     public static LocString OPTION3 = (LocString)"Bottle Filler Volume";
+                }
+
+                public class STORAGE_POD {
+                    public static LocString TITLE = (LocString)"Storage Pod";
+                    public static LocString DESC = (LocString)"";
+                    public static LocString OPTION1 = (LocString)"Pod Capacity";
+                    public static LocString OPTION2 = (LocString)"Cool Pod Capacity";
+                    public static LocString OPTION3 = (LocString)"Pod Stores Food";
                 }
             }
         }
