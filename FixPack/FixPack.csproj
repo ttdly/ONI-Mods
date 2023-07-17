@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyTitle>秃头的修复包 (CalYu's Fix Pack)</AssemblyTitle>
+    <FileVersion>1.2.0</FileVersion>
+    <RootNamespace>FixPack</RootNamespace>
+    <Description>修复长久没更新的模组</Description>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <LastWorkingBuild>526233</LastWorkingBuild>
+    <Platforms>Vanilla;Mergedown</Platforms>
+	<DebugType>portable</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="StoragePod\" />
+  </ItemGroup>
+
+</Project>

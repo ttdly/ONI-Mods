@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{DD48872E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GravitasMemory", "GravitasMemory\GravitasMemory.csproj", "{F15FC183-3908-4EBE-B443-45945E8DC673}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoveGeyers", "MoveGeysers\MoveGeyers.csproj", "{A22B7B8E-AD2C-412E-BAD2-A6E442C55BCC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mergedown = Debug|Mergedown
@@ -28,6 +30,14 @@ Global
 		{F15FC183-3908-4EBE-B443-45945E8DC673}.Release|Mergedown.Build.0 = Release|Mergedown
 		{F15FC183-3908-4EBE-B443-45945E8DC673}.Release|Vanilla.ActiveCfg = Release|Vanilla
 		{F15FC183-3908-4EBE-B443-45945E8DC673}.Release|Vanilla.Build.0 = Release|Vanilla
+		{A22B7B8E-AD2C-412E-BAD2-A6E442C55BCC}.Debug|Mergedown.ActiveCfg = Debug|Mergedown
+		{A22B7B8E-AD2C-412E-BAD2-A6E442C55BCC}.Debug|Mergedown.Build.0 = Debug|Mergedown
+		{A22B7B8E-AD2C-412E-BAD2-A6E442C55BCC}.Debug|Vanilla.ActiveCfg = Debug|Vanilla
+		{A22B7B8E-AD2C-412E-BAD2-A6E442C55BCC}.Debug|Vanilla.Build.0 = Debug|Vanilla
+		{A22B7B8E-AD2C-412E-BAD2-A6E442C55BCC}.Release|Mergedown.ActiveCfg = Release|Mergedown
+		{A22B7B8E-AD2C-412E-BAD2-A6E442C55BCC}.Release|Mergedown.Build.0 = Release|Mergedown
+		{A22B7B8E-AD2C-412E-BAD2-A6E442C55BCC}.Release|Vanilla.ActiveCfg = Release|Vanilla
+		{A22B7B8E-AD2C-412E-BAD2-A6E442C55BCC}.Release|Vanilla.Build.0 = Release|Vanilla
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
