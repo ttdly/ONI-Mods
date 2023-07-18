@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyTitle>More Movable</AssemblyTitle>
+    <FileVersion>1.0.0</FileVersion>
+    <RootNamespace>MoreMovable</RootNamespace>
+    <Description>More Movable</Description>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <LastWorkingBuild>526233</LastWorkingBuild>
+    <Platforms>Vanilla;Mergedown</Platforms>
+  </PropertyGroup>
+</Project>
