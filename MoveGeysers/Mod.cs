@@ -2,6 +2,7 @@
 using PeterHan.PLib.AVC;
 using PeterHan.PLib.Core;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MoveGeysers {
     public class Mod :KMod.UserMod2{
@@ -18,7 +19,22 @@ namespace MoveGeysers {
             Pickupable pickupable = __result.AddOrGet<Pickupable>();
             pickupable.SetWorkTime(50f);
             pickupable.sortOrder = 0;
-            __result.AddOrGet<Movable>();
+            Movable movable = __result.AddOrGet<Movable>();
+            movable.requiredSkillPerk = Db.Get().SkillPerks.IncreaseCarryAmountMedium.Id;
+            __result.GetComponent<KPrefabID>().RemoveTag(GameTags.Other);
+
         }
     }
+
+    //[HarmonyPatch(typeof(OilWellConfig), nameof(OilWellConfig.CreatePrefab))]
+    //public class OilWellConfig_CreatePrefab_Patch {
+    //    public static void Postfix(GameObject __result) {
+    //        Pickupable pickupable = __result.AddOrGet<Pickupable>();
+    //        pickupable.SetWorkTime(50f);
+    //        pickupable.sortOrder = 0;
+    //        pickupable.deleteOffGrid = false;
+    //        __result.AddOrGet<Movable>();
+    //        __result.GetComponent<KPrefabID>().RemoveTag(GameTags.BuildableRaw);
+    //    }
+    //}
 }
