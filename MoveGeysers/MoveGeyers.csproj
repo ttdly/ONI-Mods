@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <AssemblyTitle>Geysers Movable (泉可移动)</AssemblyTitle>
-    <FileVersion>1.1.0</FileVersion>
+    <AssemblyTitle>Geysers Movable (移泉)</AssemblyTitle>
+    <FileVersion>1.1.1</FileVersion>
     <RootNamespace>MoveGeysers</RootNamespace>
-    <Description>Geysers Movable (泉可移动)</Description>
-    <AssemblyVersion>1.1.0</AssemblyVersion>
+    <Description>Geysers Movable (移泉)</Description>
+    <AssemblyVersion>1.1.1</AssemblyVersion>
     <LastWorkingBuild>526233</LastWorkingBuild>
     <Platforms>Vanilla;Mergedown</Platforms>
   </PropertyGroup>
