@@ -17,9 +17,8 @@ namespace MoveGeysers {
     public static class GeyserGenericConfig_CreateGeyser_Patch {
         public static void Postfix(GameObject __result) {
             __result.AddOrGet<Pickupable>();
-            Movable movable = __result.AddOrGet<Movable>();
-            movable.requiredSkillPerk = Db.Get().SkillPerks.IncreaseCarryAmountMedium.Id;
-            __result.GetComponent<KPrefabID>().RemoveTag(GameTags.Other);
+            __result.AddOrGet<Movable>();
+            //__result.GetComponent<KPrefabID>().RemoveTag(GameTags.Other);
             __result.AddOrGet<DoPost>();
         }
     }

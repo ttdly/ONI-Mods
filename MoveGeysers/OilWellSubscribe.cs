@@ -22,6 +22,7 @@ namespace MoveGeysers {
         public void OnOilWellCapBuild(object data) {
             if (gameObject.GetComponent<BuildingAttachPoint>().points[0].attachedBuilding != null) {
                 hasCap = true;
+                gameObject.RemoveTag(GameTags.Pickupable);
                 gameObject.SetActive(false);
             }
         }
@@ -29,6 +30,7 @@ namespace MoveGeysers {
         public void OnOilWellCapDestory(object data) {
             if (hasCap) {
                 gameObject.SetActive(true);
+                gameObject.AddTag(GameTags.Pickupable);
                 hasCap = false;
             }
         }

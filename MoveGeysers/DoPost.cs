@@ -3,7 +3,7 @@
         
         protected override void OnSpawn() {
             base.OnSpawn();
-            Destroy(gameObject.GetComponent<Clearable>());
+            gameObject.GetComponent<Clearable>().isClearable = false;
             Pickupable pickupable = gameObject.GetComponent<Pickupable>();
             pickupable.SetWorkTime(10f);
         }
