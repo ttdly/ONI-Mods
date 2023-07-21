@@ -1,20 +1,18 @@
 ﻿using HarmonyLib;
-using PackAnything;
 using PeterHan.PLib.AVC;
 using PeterHan.PLib.Core;
 using PeterHan.PLib.Database;
-using PeterHan.PLib.PatchManager;
 using System.Collections.Generic;
 
 
-namespace MoveGeysers {
+namespace PackAnything {
     public class Mod : KMod.UserMod2 {
         public override void OnLoad(Harmony harmony) {
             base.OnLoad(harmony);
             PUtil.InitLibrary();
             new PVersionCheck().Register(this, new SteamVersionChecker());
-            LocString.CreateLocStringKeys(typeof(PackAnythingString), "");
             new PLocalization().Register();
+            LocString.CreateLocStringKeys(typeof(PackAnythingString), "");
             this.ManualPatchs(harmony);
         }
 

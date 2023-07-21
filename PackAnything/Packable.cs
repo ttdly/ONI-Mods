@@ -18,13 +18,13 @@ namespace PackAnything {
 
         protected override void OnPrefabInit() {
             base.OnPrefabInit();
-            //this.requiredSkillPerk = Db.Get().SkillPerks.IncreaseCarryAmountMedium.Id;
+            this.requiredSkillPerk = Db.Get().SkillPerks.IncreaseCarryAmountMedium.Id;
             this.shouldShowSkillPerkStatusItem = false;
             this.alwaysShowProgressBar = false;
             this.faceTargetWhenWorking = false;
             this.multitoolContext = (HashedString)"capture";
             this.multitoolHitEffectTag = (Tag)"fx_capture_splash";
-            this.SetWorkTime(1f);
+            this.SetWorkTime(20f);
         }
 
         protected override void OnSpawn() {

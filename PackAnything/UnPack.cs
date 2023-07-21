@@ -23,7 +23,7 @@ namespace PackAnything {
             this.multitoolHitEffectTag = (Tag)EffectConfigs.BuildSplashId;
             //this.overrideAnims = new KAnimFile[1] { Assets.GetAnim((HashedString)"anim_use_machine_kanim") };
             this.faceTargetWhenWorking = true;
-            this.SetWorkTime(1f);
+            this.SetWorkTime(20f);
         }
 
         protected override void OnSpawn() {
@@ -100,7 +100,7 @@ namespace PackAnything {
             }
             Util.KDestroyGameObject(this.gameObject);
             if (worker.HasTag(GameTags.Minion)) {
-                RegisterReactEmotePair("ResearchComplete", Db.Get().Emotes.Minion.ResearchComplete, 3f, worker);
+                RegisterReactEmotePair("WorkPasserbyAcknowledgement", Db.Get().Emotes.Minion.ThumbsUp, 3f, worker);
             }
         }
 
@@ -139,7 +139,7 @@ namespace PackAnything {
             if (smi == null)
                 return;
             EmoteChore emoteChore = new EmoteChore((IStateMachineTarget)worker.gameObject.GetComponent<ChoreProvider>(), Db.Get().ChoreTypes.EmoteIdle, emote);
-            SelfEmoteReactable reactable = new SelfEmoteReactable(worker.gameObject, (HashedString)reactable_id, Db.Get().ChoreTypes.Cough, max_trigger_time);
+            SelfEmoteReactable reactable = new SelfEmoteReactable(worker.gameObject, (HashedString)reactable_id, Db.Get().ChoreTypes.Emote);
             emoteChore.PairReactable(reactable);
             reactable.SetEmote(emote);
             reactable.PairEmote(emoteChore);
