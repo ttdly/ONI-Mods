@@ -16,6 +16,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoveGeyers", "MoveGeysers\M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoreMovable", "MoreMovable\MoreMovable.csproj", "{A53AF349-CA2D-4ABD-9FEF-E5BA43C154BA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PackAnything", "PackAnything\PackAnything.csproj", "{58D02FE3-4D30-433B-8D4E-91846CBF1757}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mergedown = Debug|Mergedown
@@ -48,6 +50,14 @@ Global
 		{A53AF349-CA2D-4ABD-9FEF-E5BA43C154BA}.Release|Mergedown.Build.0 = Release|Mergedown
 		{A53AF349-CA2D-4ABD-9FEF-E5BA43C154BA}.Release|Vanilla.ActiveCfg = Release|Vanilla
 		{A53AF349-CA2D-4ABD-9FEF-E5BA43C154BA}.Release|Vanilla.Build.0 = Release|Vanilla
+		{58D02FE3-4D30-433B-8D4E-91846CBF1757}.Debug|Mergedown.ActiveCfg = Debug|Mergedown
+		{58D02FE3-4D30-433B-8D4E-91846CBF1757}.Debug|Mergedown.Build.0 = Debug|Mergedown
+		{58D02FE3-4D30-433B-8D4E-91846CBF1757}.Debug|Vanilla.ActiveCfg = Debug|Vanilla
+		{58D02FE3-4D30-433B-8D4E-91846CBF1757}.Debug|Vanilla.Build.0 = Debug|Vanilla
+		{58D02FE3-4D30-433B-8D4E-91846CBF1757}.Release|Mergedown.ActiveCfg = Release|Mergedown
+		{58D02FE3-4D30-433B-8D4E-91846CBF1757}.Release|Mergedown.Build.0 = Release|Mergedown
+		{58D02FE3-4D30-433B-8D4E-91846CBF1757}.Release|Vanilla.ActiveCfg = Release|Vanilla
+		{58D02FE3-4D30-433B-8D4E-91846CBF1757}.Release|Vanilla.Build.0 = Release|Vanilla
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
