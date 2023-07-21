@@ -1,0 +1,60 @@
+msgid ""
+msgstr ""
+"Application: Oxygen Not Included"
+"POT Version: 2.0"
+
+#. PackAnything.PackAnythingString.MISC.MAGIC_PACK.DESC
+msgctxt "PackAnything.PackAnythingString.MISC.MAGIC_PACK.DESC"
+msgid "Inside it, there are some things. Open it."
+msgstr ""
+
+#. PackAnything.PackAnythingString.MISC.MAGIC_PACK.NAME
+msgctxt "PackAnything.PackAnythingString.MISC.MAGIC_PACK.NAME"
+msgid "Magic Pack"
+msgstr ""
+
+#. PackAnything.PackAnythingString.UI.PACK_IT.NAME
+msgctxt "PackAnything.PackAnythingString.UI.PACK_IT.NAME"
+msgid "Pack"
+msgstr ""
+
+#. PackAnything.PackAnythingString.UI.PACK_IT.NAME_OFF
+msgctxt "PackAnything.PackAnythingString.UI.PACK_IT.NAME_OFF"
+msgid "Cancel Pack"
+msgstr ""
+
+#. PackAnything.PackAnythingString.UI.PACK_IT.TOOLTIP
+msgctxt "PackAnything.PackAnythingString.UI.PACK_IT.TOOLTIP"
+msgid "Pack this object for move."
+msgstr ""
+
+#. PackAnything.PackAnythingString.UI.PACK_IT.TOOLTIP_OFF
+msgctxt "PackAnything.PackAnythingString.UI.PACK_IT.TOOLTIP_OFF"
+msgid "Cancel order to pack this object."
+msgstr ""
+
+#. PackAnything.PackAnythingString.UI.STATUS.MARK_FOR_PACK
+msgctxt "PackAnything.PackAnythingString.UI.STATUS.MARK_FOR_PACK"
+msgid "Mark for pack"
+msgstr ""
+
+#. PackAnything.PackAnythingString.UI.UNPACK_IT.NAME
+msgctxt "PackAnything.PackAnythingString.UI.UNPACK_IT.NAME"
+msgid "UnPack"
+msgstr ""
+
+#. PackAnything.PackAnythingString.UI.UNPACK_IT.NAME_OFF
+msgctxt "PackAnything.PackAnythingString.UI.UNPACK_IT.NAME_OFF"
+msgid "Cancel UnPack"
+msgstr ""
+
+#. PackAnything.PackAnythingString.UI.UNPACK_IT.TOOLTIP
+msgctxt "PackAnything.PackAnythingString.UI.UNPACK_IT.TOOLTIP"
+msgid "UnPacks Magic Pack packed by Duplicants."
+msgstr ""
+
+#. PackAnything.PackAnythingString.UI.UNPACK_IT.TOOLTIP_OFF
+msgctxt "PackAnything.PackAnythingString.UI.UNPACK_IT.TOOLTIP_OFF"
+msgid "Cancel order to unpack this object"
+msgstr ""
+

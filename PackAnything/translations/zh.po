@@ -1,0 +1,69 @@
+msgid ""
+msgstr ""
+"Application: Oxygen Not IncludedPOT Version: 2.0\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#. PackAnything.PackAnythingString.MISC.MAGIC_PACK.DESC
+msgctxt "PackAnything.PackAnythingString.MISC.MAGIC_PACK.DESC"
+msgid "Inside it, there are some things. Open it."
+msgstr "这个包裹里面有些东西，打开就能看到。"
+
+#. PackAnything.PackAnythingString.MISC.MAGIC_PACK.NAME
+msgctxt "PackAnything.PackAnythingString.MISC.MAGIC_PACK.NAME"
+msgid "Magic Pack"
+msgstr "神奇包裹"
+
+#. PackAnything.PackAnythingString.UI.PACK_IT.NAME
+msgctxt "PackAnything.PackAnythingString.UI.PACK_IT.NAME"
+msgid "Pack"
+msgstr "打包"
+
+#. PackAnything.PackAnythingString.UI.PACK_IT.NAME_OFF
+msgctxt "PackAnything.PackAnythingString.UI.PACK_IT.NAME_OFF"
+msgid "Cancel Pack"
+msgstr "取消打包"
+
+#. PackAnything.PackAnythingString.UI.PACK_IT.TOOLTIP
+msgctxt "PackAnything.PackAnythingString.UI.PACK_IT.TOOLTIP"
+msgid "Pack this object for move."
+msgstr "打包这个物品。"
+
+#. PackAnything.PackAnythingString.UI.PACK_IT.TOOLTIP_OFF
+msgctxt "PackAnything.PackAnythingString.UI.PACK_IT.TOOLTIP_OFF"
+msgid "Cancel order to pack this object."
+msgstr "取消对这个物品的打包。"
+
+#. PackAnything.PackAnythingString.UI.STATUS.MARK_FOR_PACK
+msgctxt "PackAnything.PackAnythingString.UI.STATUS.MARK_FOR_PACK"
+msgid "Mark for pack"
+msgstr "被标记为需要打包"
+
+#. PackAnything.PackAnythingString.UI.UNPACK_IT.NAME
+msgctxt "PackAnything.PackAnythingString.UI.UNPACK_IT.NAME"
+msgid "UnPack"
+msgstr "拆开"
+
+#. PackAnything.PackAnythingString.UI.UNPACK_IT.NAME_OFF
+msgctxt "PackAnything.PackAnythingString.UI.UNPACK_IT.NAME_OFF"
+msgid "Cancel UnPack"
+msgstr "取消拆开"
+
+#. PackAnything.PackAnythingString.UI.UNPACK_IT.TOOLTIP
+msgctxt "PackAnything.PackAnythingString.UI.UNPACK_IT.TOOLTIP"
+msgid "UnPacks Magic Pack packed by Duplicants."
+msgstr "打开由复制人打包的包裹。"
+
+#. PackAnything.PackAnythingString.UI.UNPACK_IT.TOOLTIP_OFF
+msgctxt "PackAnything.PackAnythingString.UI.UNPACK_IT.TOOLTIP_OFF"
+msgid "Cancel order to unpack this object"
+msgstr "取消拆开这个包裹。"

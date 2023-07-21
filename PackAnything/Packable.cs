@@ -18,12 +18,13 @@ namespace PackAnything {
 
         protected override void OnPrefabInit() {
             base.OnPrefabInit();
-            this.requiredSkillPerk = Db.Get().SkillPerks.IncreaseCarryAmountMedium.Id;
+            //this.requiredSkillPerk = Db.Get().SkillPerks.IncreaseCarryAmountMedium.Id;
+            this.shouldShowSkillPerkStatusItem = false;
             this.alwaysShowProgressBar = false;
             this.faceTargetWhenWorking = false;
             this.multitoolContext = (HashedString)"capture";
             this.multitoolHitEffectTag = (Tag)"fx_capture_splash";
-            this.SetWorkTime(1.5f);
+            this.SetWorkTime(1f);
         }
 
         protected override void OnSpawn() {
@@ -40,7 +41,8 @@ namespace PackAnything {
 
         // 自定义的方法
         public void OnRefreshUserMenu(object data) {
-            Game.Instance.userMenu.AddButton(this.gameObject, this.isMarkFroPack ? new KIconButtonMenu.ButtonInfo("action_capture", (string)PackAnythingString.UI.PACK_IT.NAME_OFF, new System.Action(this.OnClickCancel), tooltipText: (string)PackAnythingString.UI.PACK_IT.TOOLTIP_OFF) : new KIconButtonMenu.ButtonInfo("action_capture", (string)PackAnythingString.UI.PACK_IT.NAME, new System.Action(this.OnClickPack), tooltipText: (string)PackAnythingString.UI.PACK_IT.TOOLTIP));
+            if (this.gameObject.HasTag("OilWell") && this.gameObject.GetComponent<BuildingAttachPoint>()?.points[0].attachedBuilding != null) return;
+            Game.Instance.userMenu.AddButton(this.gameObject, this.isMarkFroPack ? new KIconButtonMenu.ButtonInfo("action_capture", PackAnythingString.UI.PACK_IT.NAME_OFF, new System.Action(this.OnClickCancel), tooltipText: PackAnythingString.UI.PACK_IT.TOOLTIP_OFF) : new KIconButtonMenu.ButtonInfo("action_capture", PackAnythingString.UI.PACK_IT.NAME, new System.Action(this.OnClickPack), tooltipText: PackAnythingString.UI.PACK_IT.TOOLTIP));
         }
 
         public void OnClickCancel() {
@@ -81,7 +83,7 @@ namespace PackAnything {
         }
 
         public void PackIt() {
-            GameObject go = GameUtil.KInstantiate(Assets.GetPrefab((Tag)MagicPackConfig.ID), Grid.CellToPos(Grid.PosToCell(this.gameObject)), Grid.SceneLayer.Creatures);
+            GameObject go = GameUtil.KInstantiate(Assets.GetPrefab((Tag)MagicPackConfig.ID), Grid.CellToPos(Grid.PosToCell(this.gameObject)), Grid.SceneLayer.Creatures, name: this.gameObject.name );
             go.SetActive(true);
             MagicPack magicPack = go.AddOrGet<MagicPack>();
             magicPack.storedObject = this.gameObject;
@@ -90,8 +92,8 @@ namespace PackAnything {
                 DealWithNeutronium(this.NaturalBuildingCell());
             }
             go.GetComponent<KBatchedAnimController>().Queue((HashedString)"ui");
+            go.FindOrAddComponent<UserNameable>().savedName = this.gameObject.name;
             this.gameObject.SetActive(false);
-            PUtil.LogDebug("Work Complete");
         }
 
         public void DealWithNeutronium(int cell) {

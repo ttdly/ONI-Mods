@@ -24,7 +24,7 @@ namespace PackAnything {
         public class MISC{
             public class MAGIC_PACK {
                 public static LocString NAME = (LocString)"Magic Pack";
-                public static LocString DESC = (LocString)"Can pack something.";
+                public static LocString DESC = (LocString)"Inside it, there are some things. Open it.";
             }
         }
     }

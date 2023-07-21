@@ -1,4 +1,5 @@
-﻿using KSerialization;
+﻿using Klei.AI;
+using KSerialization;
 using PeterHan.PLib.Core;
 using System;
 using UnityEngine;
@@ -16,12 +17,13 @@ namespace PackAnything {
 
         protected override void OnPrefabInit() {
             base.OnPrefabInit();
-            //this.requiredSkillPerk = Db.Get().SkillPerks.IncreaseCarryAmountMedium.Id;
             this.alwaysShowProgressBar = false;
             this.faceTargetWhenWorking = false;
             this.multitoolContext = (HashedString)"build";
             this.multitoolHitEffectTag = (Tag)EffectConfigs.BuildSplashId;
-            this.SetWorkTime(1.5f);
+            //this.overrideAnims = new KAnimFile[1] { Assets.GetAnim((HashedString)"anim_use_machine_kanim") };
+            this.faceTargetWhenWorking = true;
+            this.SetWorkTime(1f);
         }
 
         protected override void OnSpawn() {
@@ -38,8 +40,9 @@ namespace PackAnything {
 
         // 自定义的方法
         public void OnRefreshUserMenu(object data) {
+            this.gameObject.name = this.gameObject.GetComponent<MagicPack>().storedObject.name; 
             if (gameObject.HasTag(GameTags.Stored)) return;
-            Game.Instance.userMenu.AddButton(this.gameObject, this.isMarkFroUnPack ? new KIconButtonMenu.ButtonInfo("action_deconstruct", (string)PackAnythingString.UI.UNPACK_IT.NAME_OFF, new System.Action(this.OnClickCancel), tooltipText: (string)PackAnythingString.UI.UNPACK_IT.TOOLTIP_OFF) : new KIconButtonMenu.ButtonInfo("action_deconstruct", (string)PackAnythingString.UI.UNPACK_IT.NAME, new System.Action(this.OnClickPack), tooltipText: (string)PackAnythingString.UI.UNPACK_IT.TOOLTIP));
+            Game.Instance.userMenu.AddButton(this.gameObject, this.isMarkFroUnPack ? new KIconButtonMenu.ButtonInfo("action_deconstruct", PackAnythingString.UI.UNPACK_IT.NAME_OFF, new System.Action(this.OnClickCancel), tooltipText: PackAnythingString.UI.UNPACK_IT.TOOLTIP_OFF) : new KIconButtonMenu.ButtonInfo("action_deconstruct", PackAnythingString.UI.UNPACK_IT.NAME, new System.Action(this.OnClickPack), tooltipText: PackAnythingString.UI.UNPACK_IT.TOOLTIP));
         }
 
         public void OnClickCancel() {
@@ -80,9 +83,6 @@ namespace PackAnything {
         }
 
         public void UnPackIt(Worker worker) {
-            if (worker.HasTag(GameTags.Minion)) {
-                PUtil.LogDebug("Minion");
-            }
             KBatchedAnimController animController = this.gameObject.GetComponent<KBatchedAnimController>();
             MagicPack magicPack = this.gameObject.GetComponent<MagicPack>();
             GameObject storedObject = magicPack.storedObject;
@@ -92,17 +92,20 @@ namespace PackAnything {
                     this.CreateNeutronium(cell);
                     cell = Grid.CellAbove(cell);
                 }
-                GameObject go = GameUtil.KInstantiate(storedObject, Grid.CellToPos(cell), Grid.SceneLayer.BuildingBack);
-                go.SetActive(true);
-                Util.KDestroyGameObject(storedObject);
+                Vector3 posCbc = Grid.CellToPosCBC(cell, storedObject.GetComponent<KBatchedAnimController>().sceneLayer);
+                float num = -0.15f;
+                posCbc.z += num;
+                storedObject.transform.SetPosition(posCbc);
+                storedObject.SetActive(true);
             }
             Util.KDestroyGameObject(this.gameObject);
-            PUtil.LogDebug("Work Complete");
+            if (worker.HasTag(GameTags.Minion)) {
+                RegisterReactEmotePair("ResearchComplete", Db.Get().Emotes.Minion.ResearchComplete, 3f, worker);
+            }
         }
 
         public void CreateNeutronium(int cell) {
             int[] cells = new[]{
-                Grid.CellLeft(Grid.CellLeft(cell)),
                 Grid.CellLeft(cell),
                 cell,
                 Grid.CellRight(cell),
@@ -127,6 +130,20 @@ namespace PackAnything {
                     callbackIdx: -1
                     );
             }
+        }
+
+        private void RegisterReactEmotePair(string reactable_id, Emote emote, float max_trigger_time, Worker worker) {
+            if ((UnityEngine.Object)worker.gameObject == (UnityEngine.Object)null)
+                return;
+            ReactionMonitor.Instance smi = worker.gameObject.GetSMI<ReactionMonitor.Instance>();
+            if (smi == null)
+                return;
+            EmoteChore emoteChore = new EmoteChore((IStateMachineTarget)worker.gameObject.GetComponent<ChoreProvider>(), Db.Get().ChoreTypes.EmoteIdle, emote);
+            SelfEmoteReactable reactable = new SelfEmoteReactable(worker.gameObject, (HashedString)reactable_id, Db.Get().ChoreTypes.Cough, max_trigger_time);
+            emoteChore.PairReactable(reactable);
+            reactable.SetEmote(emote);
+            reactable.PairEmote(emoteChore);
+            smi.AddOneshotReactable(reactable);
         }
     }
 }
