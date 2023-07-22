@@ -36,27 +36,27 @@ msgstr "取消打包"
 #. PackAnything.PackAnythingString.UI.PACK_IT.TOOLTIP
 msgctxt "PackAnything.PackAnythingString.UI.PACK_IT.TOOLTIP"
 msgid "Pack this object for move."
-msgstr "打包这个物品，然后移动。"
+msgstr "将这个物品打包以便移动。"
 
 #. PackAnything.PackAnythingString.UI.PACK_IT.TOOLTIP_OFF
 msgctxt "PackAnything.PackAnythingString.UI.PACK_IT.TOOLTIP_OFF"
 msgid "Cancel order to pack this object."
-msgstr "取消对这个物品的打包。"
+msgstr "取消打包此物品的命令。"
 
 #. PackAnything.PackAnythingString.UI.UNPACK_IT.NAME
 msgctxt "PackAnything.PackAnythingString.UI.UNPACK_IT.NAME"
-msgid "UnPack"
-msgstr "拆开"
+msgid "Open"
+msgstr "打开"
 
 #. PackAnything.PackAnythingString.UI.UNPACK_IT.NAME_OFF
 msgctxt "PackAnything.PackAnythingString.UI.UNPACK_IT.NAME_OFF"
-msgid "Cancel UnPack"
-msgstr "取消拆开"
+msgid "Cancel Open"
+msgstr "取消打开"
 
 #. PackAnything.PackAnythingString.UI.UNPACK_IT.TOOLTIP
 msgctxt "PackAnything.PackAnythingString.UI.UNPACK_IT.TOOLTIP"
-msgid "UnPacks Magic Pack packed by Duplicants."
-msgstr "打开由复制人打包的包裹。"
+msgid "Open the Magic Pack packed by Duplicants."
+msgstr "打开由复制人包装的魔法包裹。"
 
 #. PackAnything.PackAnythingString.UI.UNPACK_IT.TOOLTIP_OFF
 msgctxt "PackAnything.PackAnythingString.UI.UNPACK_IT.TOOLTIP_OFF"
@@ -81,64 +81,64 @@ msgstr "前往打包"
 #. PackAnything.STRINGS.DUPLICANTS.CHORES.PACK.TOOLTIP
 msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.PACK.TOOLTIP"
 msgid "This Duplicant is attempting to pack the item."
-msgstr "复制人正准备去打包物品。"
+msgstr "复制人正前往打包物品。"
 
 #. PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.NAME
 msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.NAME"
 msgid "Unpack"
-msgstr "拆开"
+msgstr "拆包"
 
 #. PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.REPORT_NAME
 msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.REPORT_NAME"
 msgid "Unpack {0}"
-msgstr "拆开 {0}"
+msgstr "打开 {0}"
 
 #. PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.STATUS
 msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.STATUS"
 msgid "Unpacking"
-msgstr "前往拆开包裹"
+msgstr "前往拆包"
 
 #. PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.TOOLTIP
 msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.TOOLTIP"
 msgid "This Duplicant is attempting to unpack a magic pack."
-msgstr "复制人正准备去拆开包裹。"
+msgstr "复制人正前往拆开包裹。"
 
-#. STRINGS.DUPLICANTS.STATUSITEMS.PACKINGITEM.NAME
-msgctxt "STRINGS.DUPLICANTS.STATUSITEMS.PACKINGITEM.NAME"
+#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.PACKINGITEM.NAME
+msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.PACKINGITEM.NAME"
 msgid "Packing"
-msgstr "打包中"
+msgstr "正在打包"
 
-#. STRINGS.DUPLICANTS.STATUSITEMS.PACKINGITEM.TOOLTIP
-msgctxt "STRINGS.DUPLICANTS.STATUSITEMS.PACKINGITEM.TOOLTIP"
+#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.PACKINGITEM.TOOLTIP
+msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.PACKINGITEM.TOOLTIP"
 msgid "This Duplicant is attempting to pack the item."
-msgstr "复制人正在打包。"
+msgstr "复制人正在打包物品。"
 
-#. STRINGS.DUPLICANTS.STATUSITEMS.UNPACKINGITEM.NAME
-msgctxt "STRINGS.DUPLICANTS.STATUSITEMS.UNPACKINGITEM.NAME"
+#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.UNPACKINGITEM.NAME
+msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.UNPACKINGITEM.NAME"
 msgid "Unpacking"
-msgstr "拆开包裹中"
+msgstr "正在拆包"
 
-#. STRINGS.DUPLICANTS.STATUSITEMS.UNPACKINGITEM.TOOLTIP
-msgctxt "STRINGS.DUPLICANTS.STATUSITEMS.UNPACKINGITEM.TOOLTIP"
+#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.UNPACKINGITEM.TOOLTIP
+msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.UNPACKINGITEM.TOOLTIP"
 msgid "This Duplicant is attempting to unpack a magic pack."
 msgstr "复制人正在拆开包裹。"
 
-#. STRINGS.MISC.STATUSITEMS.WAITINGPACK.NAME
-msgctxt "STRINGS.MISC.STATUSITEMS.WAITINGPACK.NAME"
+#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGPACK.NAME
+msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGPACK.NAME"
 msgid "Pack Pending"
-msgstr "等待打包"
+msgstr "待打包"
 
-#. STRINGS.MISC.STATUSITEMS.WAITINGPACK.TOOLTIP
-msgctxt "STRINGS.MISC.STATUSITEMS.WAITINGPACK.TOOLTIP"
+#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGPACK.TOOLTIP
+msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGPACK.TOOLTIP"
 msgid "A Duplicant is in the process of packing this item."
 msgstr "复制人有空就会来打包。"
 
-#. STRINGS.MISC.STATUSITEMS.WAITINGUNPACK.NAME
-msgctxt "STRINGS.MISC.STATUSITEMS.WAITINGUNPACK.NAME"
+#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGUNPACK.NAME
+msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGUNPACK.NAME"
 msgid "Unpack Pending"
-msgstr "等待拆开"
+msgstr "待拆开"
 
-#. STRINGS.MISC.STATUSITEMS.WAITINGUNPACK.TOOLTIP
-msgctxt "STRINGS.MISC.STATUSITEMS.WAITINGUNPACK.TOOLTIP"
+#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGUNPACK.TOOLTIP
+msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGUNPACK.TOOLTIP"
 msgid "A Duplicant is in the process of unpacking this magic pack."
-msgstr "复制人有空就会来拆开包裹。"
+msgstr "复制人正在拆开包裹。"

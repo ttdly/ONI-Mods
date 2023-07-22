@@ -13,6 +13,18 @@ namespace PackAnything {
         private bool isMarkFroUnPack;
         private Guid statusItemGuid;
         public bool MarkFroPack => this.isMarkFroUnPack;
+        private CellOffset[] placementOffsets {
+            get {
+                Building component1 = this.GetComponent<Building>();
+                if ((UnityEngine.Object)component1 != (UnityEngine.Object)null)
+                    return component1.Def.PlacementOffsets;
+                OccupyArea component2 = this.GetComponent<OccupyArea>();
+                if ((UnityEngine.Object)component2 != (UnityEngine.Object)null)
+                    return component2.OccupiedCellsOffsets;
+                Debug.Assert(false, (object)"Ack! We put a Packable on something that's neither a Building nor OccupyArea!", (UnityEngine.Object)this);
+                return (CellOffset[])null;
+            }
+        }
 
         private static readonly EventSystem.IntraObjectHandler<UnPack> OnRefreshUserMenuDelegate = new EventSystem.IntraObjectHandler<UnPack>((Action<UnPack, object>)((component, data) => component.OnRefreshUserMenu(data)));
 
@@ -34,6 +46,10 @@ namespace PackAnything {
         protected override void OnSpawn() {
             base.OnSpawn();
             this.Subscribe<UnPack>((int)GameHashes.RefreshUserMenu, UnPack.OnRefreshUserMenuDelegate);
+            this.Subscribe<UnPack>((int)GameHashes.StatusChange, UnPack.OnRefreshUserMenuDelegate);
+            CellOffset[][] table = OffsetGroups.InvertedStandardTable;
+            CellOffset[] filter = (CellOffset[])null;
+            this.SetOffsetTable(OffsetGroups.BuildReachabilityTable(this.placementOffsets, table, filter));
         }
 
         protected override void OnCompleteWork(Worker worker) {
@@ -44,14 +60,14 @@ namespace PackAnything {
 
         protected override void OnStartWork(Worker worker) {
             base.OnStartWork(worker);
-            this.progressBar.barColor = new Color(126f, 22f, 113f);
+            this.progressBar.barColor = new Color(0.5f, 0.7f, 1.0f, 1f);
         }
 
         // 自定义的方法
         public void OnRefreshUserMenu(object data) {
             this.gameObject.name = this.gameObject.GetComponent<MagicPack>().storedObject.name; 
             if (gameObject.HasTag(GameTags.Stored)) return;
-            Game.Instance.userMenu.AddButton(this.gameObject, this.isMarkFroUnPack ? new KIconButtonMenu.ButtonInfo("action_deconstruct", PackAnythingString.UI.UNPACK_IT.NAME_OFF, new System.Action(this.OnClickCancel), tooltipText: PackAnythingString.UI.UNPACK_IT.TOOLTIP_OFF) : new KIconButtonMenu.ButtonInfo("action_deconstruct", PackAnythingString.UI.UNPACK_IT.NAME, new System.Action(this.OnClickUnpack), tooltipText: PackAnythingString.UI.UNPACK_IT.TOOLTIP));
+            Game.Instance.userMenu.AddButton(this.gameObject, this.isMarkFroUnPack ? new KIconButtonMenu.ButtonInfo("action_empty_contents", PackAnythingString.UI.UNPACK_IT.NAME_OFF, new System.Action(this.OnClickCancel), tooltipText: PackAnythingString.UI.UNPACK_IT.TOOLTIP_OFF) : new KIconButtonMenu.ButtonInfo("action_empty_contents", PackAnythingString.UI.UNPACK_IT.NAME, new System.Action(this.OnClickUnpack), tooltipText: PackAnythingString.UI.UNPACK_IT.TOOLTIP));
         }
 
         public void OnClickCancel() {
@@ -74,7 +90,6 @@ namespace PackAnything {
         }
 
         public void UnPackIt(Worker worker) {
-            KBatchedAnimController animController = this.gameObject.GetComponent<KBatchedAnimController>();
             MagicPack magicPack = this.gameObject.GetComponent<MagicPack>();
             GameObject storedObject = magicPack.storedObject;
             if (storedObject != null) {
@@ -88,10 +103,11 @@ namespace PackAnything {
                 posCbc.z += num;
                 storedObject.transform.SetPosition(posCbc);
                 storedObject.SetActive(true);
+                storedObject.FindOrAddComponent<OccupyArea>().ApplyToCells = true;
             }
             Util.KDestroyGameObject(this.gameObject);
             if (worker.HasTag(GameTags.Minion)) {
-                RegisterReactEmotePair("WorkPasserbyAcknowledgement", Db.Get().Emotes.Minion.ThumbsUp, 3f, worker);
+                RegisterReactEmotePair("WorkPasserbyAcknowledgement", Db.Get().Emotes.Minion.ResearchComplete, 3f, worker);
             }
         }
 

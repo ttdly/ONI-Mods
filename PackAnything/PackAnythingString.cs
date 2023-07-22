@@ -9,9 +9,9 @@ namespace PackAnything {
                 public static LocString TOOLTIP_OFF = (LocString)"Cancel order to pack this object.";
             }
             public class UNPACK_IT {
-                public static LocString NAME = (LocString)"UnPack";
-                public static LocString TOOLTIP = (LocString)"UnPacks Magic Pack packed by Duplicants.";
-                public static LocString NAME_OFF = (LocString)"Cancel UnPack";
+                public static LocString NAME = (LocString)"Open";
+                public static LocString TOOLTIP = (LocString)"Open the Magic Pack packed by Duplicants.";
+                public static LocString NAME_OFF = (LocString)"Cancel Open";
                 public static LocString TOOLTIP_OFF = (LocString)"Cancel order to unpack this item.";
             }
         }
@@ -66,6 +66,6 @@ namespace PackAnything {
             }
         }
 
-        
+
     }
 }

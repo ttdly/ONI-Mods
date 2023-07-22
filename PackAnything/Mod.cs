@@ -13,9 +13,7 @@ namespace PackAnything {
             new PVersionCheck().Register(this, new SteamVersionChecker());
             new PLocalization().Register();
             LocString.CreateLocStringKeys(typeof(PackAnything.PackAnythingString), "");
-            LocString.CreateLocStringKeys(typeof(PackAnything.STRINGS),"");
             ModUtil.RegisterForTranslation(typeof(STRINGS));
-            PUtil.LogDebug("测试" + STRINGS.DUPLICANTS.STATUSITEMS.PACKINGITEM.NAME);
             this.ManualPatchs(harmony);
         }
 
@@ -45,7 +43,10 @@ namespace PackAnything {
                 { typeof(PropFacilityStatueConfig), nameof(PropFacilityStatueConfig.CreatePrefab) },
                 { typeof(PropFacilityChandelierConfig), nameof(PropFacilityChandelierConfig.CreatePrefab) },
                 { typeof(PropTallPlantConfig), nameof(PropTallPlantConfig.CreatePrefab) },
-                { typeof(PropFacilityHangingLightConfig), nameof(PropFacilityHangingLightConfig.CreatePrefab) }
+                { typeof(PropFacilityHangingLightConfig), nameof(PropFacilityHangingLightConfig.CreatePrefab) },
+                { typeof(WarpPortalConfig), nameof(WarpPortalConfig.CreatePrefab) },
+                { typeof(WarpReceiverConfig), nameof(WarpReceiverConfig.CreatePrefab) },
+                { typeof(CryoTankConfig), nameof(CryoTankConfig.CreatePrefab) },
 
             };
             foreach (KeyValuePair<System.Type, string> pair in entityPatchMap) {
@@ -59,6 +60,9 @@ namespace PackAnything {
                 { typeof(FossilDigSiteConfig), nameof(FossilDigSiteConfig.DoPostConfigureComplete)},
                 { typeof(GravitasCreatureManipulatorConfig), nameof(GravitasCreatureManipulatorConfig.DoPostConfigureComplete) },
                 { typeof(GravitasContainerConfig), nameof(GravitasContainerConfig.DoPostConfigureComplete) },
+                { typeof(TemporalTearOpenerConfig), nameof(TemporalTearOpenerConfig.DoPostConfigureComplete) },
+                { typeof(WarpConduitSenderConfig), nameof(WarpConduitSenderConfig.DoPostConfigureComplete) },
+                { typeof(WarpConduitReceiverConfig), nameof(WarpConduitReceiverConfig.DoPostConfigureComplete) },
             };
             foreach (KeyValuePair<System.Type, string> pair1 in buildingPatchMap) {
                 harmony.Patch(pair1.Key.GetMethod(pair1.Value), postfix: new HarmonyMethod(buildingPostfix));

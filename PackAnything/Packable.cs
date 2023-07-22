@@ -51,12 +51,16 @@ namespace PackAnything {
 
         protected override void OnStartWork(Worker worker) {
             base.OnStartWork(worker);
-            this.progressBar.barColor = new Color(126f,22f,113f);
+            this.progressBar.barColor = new Color(0.5f, 0.7f, 1.0f, 1f);
         }
 
         protected override void OnCompleteWork(Worker worker) {
             base.OnCompleteWork(worker);
             this.PackIt();
+            SimCellOccupier component2 = this.GetComponent<SimCellOccupier>();
+            if ((UnityEngine.Object)DetailsScreen.Instance != (UnityEngine.Object)null && DetailsScreen.Instance.CompareTargetWith(this.gameObject))
+                DetailsScreen.Instance.Show(false);
+            this.gameObject.FindOrAddComponent<OccupyArea>().ApplyToCells = false;
             this.OnClickCancel();
         }
 
