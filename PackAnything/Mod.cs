@@ -12,7 +12,10 @@ namespace PackAnything {
             PUtil.InitLibrary();
             new PVersionCheck().Register(this, new SteamVersionChecker());
             new PLocalization().Register();
-            LocString.CreateLocStringKeys(typeof(PackAnythingString), "");
+            LocString.CreateLocStringKeys(typeof(PackAnything.PackAnythingString), "");
+            LocString.CreateLocStringKeys(typeof(PackAnything.STRINGS),"");
+            ModUtil.RegisterForTranslation(typeof(STRINGS));
+            
             this.ManualPatchs(harmony);
         }
 

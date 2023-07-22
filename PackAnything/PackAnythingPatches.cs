@@ -27,12 +27,17 @@ namespace PackAnything {
             }
         }
 
-
-        //[HarmonyPatch(typeof(MegaBrainTankConfig), nameof(MegaBrainTankConfig.ConfigureBuildingTemplate))]
-        //public class MegaBrainTankConfig_DoPostConfigureComplete_Patch {
-        //    public static void Prefix(GameObject go) {
-        //        go.AddOrGet<Packable>();
-        //    }
-        //}
-    }
+        [HarmonyPatch(typeof(GeneratedBuildings), "LoadGeneratedBuildings")]
+        public class GeneratedBuildings_LoadGeneratedBuildings_Patch {
+            public static void Prefix() {
+                new MixStatusItem(Db.Get().Root);
+            }
+        }
+            //[HarmonyPatch(typeof(MegaBrainTankConfig), nameof(MegaBrainTankConfig.ConfigureBuildingTemplate))]
+            //public class MegaBrainTankConfig_DoPostConfigureComplete_Patch {
+            //    public static void Prefix(GameObject go) {
+            //        go.AddOrGet<Packable>();
+            //    }
+            //}
+        }
 }

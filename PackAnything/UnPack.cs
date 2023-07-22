@@ -2,6 +2,7 @@
 using KSerialization;
 using PeterHan.PLib.Core;
 using System;
+using TUNING;
 using UnityEngine;
 
 namespace PackAnything {
@@ -17,11 +18,14 @@ namespace PackAnything {
 
         protected override void OnPrefabInit() {
             base.OnPrefabInit();
-            this.alwaysShowProgressBar = false;
+            this.workerStatusItem = MixStatusItem.UnpackingItem;
             this.faceTargetWhenWorking = false;
+            this.attributeConverter = Db.Get().AttributeConverters.ConstructionSpeed;
+            this.attributeExperienceMultiplier = DUPLICANTSTATS.ATTRIBUTE_LEVELING.MOST_DAY_EXPERIENCE;
+            this.skillExperienceSkillGroup = Db.Get().SkillGroups.Building.Id;
+            this.skillExperienceMultiplier = SKILLS.MOST_DAY_EXPERIENCE;
             this.multitoolContext = (HashedString)"build";
             this.multitoolHitEffectTag = (Tag)EffectConfigs.BuildSplashId;
-            //this.overrideAnims = new KAnimFile[1] { Assets.GetAnim((HashedString)"anim_use_machine_kanim") };
             this.faceTargetWhenWorking = true;
             this.SetWorkTime(20f);
         }
@@ -37,12 +41,16 @@ namespace PackAnything {
             this.OnClickCancel();
         }
 
+        protected override void OnStartWork(Worker worker) {
+            base.OnStartWork(worker);
+            this.progressBar.barColor = new Color(126f, 22f, 113f);
+        }
 
         // 自定义的方法
         public void OnRefreshUserMenu(object data) {
             this.gameObject.name = this.gameObject.GetComponent<MagicPack>().storedObject.name; 
             if (gameObject.HasTag(GameTags.Stored)) return;
-            Game.Instance.userMenu.AddButton(this.gameObject, this.isMarkFroUnPack ? new KIconButtonMenu.ButtonInfo("action_deconstruct", PackAnythingString.UI.UNPACK_IT.NAME_OFF, new System.Action(this.OnClickCancel), tooltipText: PackAnythingString.UI.UNPACK_IT.TOOLTIP_OFF) : new KIconButtonMenu.ButtonInfo("action_deconstruct", PackAnythingString.UI.UNPACK_IT.NAME, new System.Action(this.OnClickPack), tooltipText: PackAnythingString.UI.UNPACK_IT.TOOLTIP));
+            Game.Instance.userMenu.AddButton(this.gameObject, this.isMarkFroUnPack ? new KIconButtonMenu.ButtonInfo("action_deconstruct", PackAnythingString.UI.UNPACK_IT.NAME_OFF, new System.Action(this.OnClickCancel), tooltipText: PackAnythingString.UI.UNPACK_IT.TOOLTIP_OFF) : new KIconButtonMenu.ButtonInfo("action_deconstruct", PackAnythingString.UI.UNPACK_IT.NAME, new System.Action(this.OnClickUnpack), tooltipText: PackAnythingString.UI.UNPACK_IT.TOOLTIP));
         }
 
         public void OnClickCancel() {
@@ -52,34 +60,16 @@ namespace PackAnything {
             this.isMarkFroUnPack = false;
             this.chore.Cancel("UnPack.CancelChore");
             this.chore = null;
+            KSelectable kSelectable = this.GetComponent<KSelectable>();
+            if (kSelectable != null) this.statusItemGuid = kSelectable.RemoveStatusItem(this.statusItemGuid);
         }
 
-        public void OnClickPack() {
-            KSelectable kSelectable = this.GetComponent<KSelectable>();
+        public void OnClickUnpack() {
             this.isMarkFroUnPack = true;
-            if (chore == null) {
-                chore = new WorkChore<UnPack>(
-                    chore_type: Db.Get().ChoreTypes.EmptyStorage,
-                    target: this,
-                    chore_provider: null,
-                    run_until_complete: true,
-                    on_complete: null,
-                    on_begin: null,
-                    on_end: null,
-                    allow_in_red_alert: true,
-                    schedule_block: null,
-                    ignore_schedule_block: false,
-                    only_when_operational: false,
-                    override_anims: null,
-                    is_preemptable: false,
-                    allow_in_context_menu: true,
-                    allow_prioritization: true,
-                    priority_class: PriorityScreen.PriorityClass.basic,
-                    priority_class_value: 5,
-                    ignore_building_assignment: false,
-                    add_to_daily_report: true
-                    );
-            }
+            if (this.chore != null) return;
+            this.chore = new WorkChore<UnPack>(Db.Get().ChoreTypes.EmptyStorage, this, only_when_operational: false);
+            KSelectable kSelectable = this.GetComponent<KSelectable>();
+            if (kSelectable != null) this.statusItemGuid = kSelectable.ReplaceStatusItem(this.statusItemGuid, MixStatusItem.WaitingUnpack);
         }
 
         public void UnPackIt(Worker worker) {
@@ -119,16 +109,7 @@ namespace PackAnything {
                 }
                 Element e = Grid.Element[x];
                 if (!Grid.IsValidCell(x)) continue;
-                SimMessages.ReplaceElement(
-                    gameCell: x,
-                    new_element: SimHashes.Unobtanium,
-                    ev: CellEventLogger.Instance.DebugTool,
-                    mass: 100f,
-                    temperature: 293f,
-                    diseaseIdx: byte.MaxValue,
-                    diseaseCount: 0,
-                    callbackIdx: -1
-                    );
+                SimMessages.ReplaceElement( gameCell: x, new_element: SimHashes.Unobtanium, ev: CellEventLogger.Instance.DebugTool, mass: 100f);
             }
         }
 

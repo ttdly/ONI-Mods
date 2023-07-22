@@ -10,7 +10,6 @@ namespace PackAnything {
         public GameObject CreatePrefab() {
             string name = PackAnythingString.MISC.MAGIC_PACK.NAME;
             string desc = PackAnythingString.MISC.MAGIC_PACK.DESC;
-            PUtil.LogDebug("测试翻译" + PackAnythingString.MISC.MAGIC_PACK.NAME);
             EffectorValues dector = TUNING.BUILDINGS.DECOR.BONUS.TIER1;
             EffectorValues noisy = NOISE_POLLUTION.NOISY.TIER6;
             KAnimFile anim = Assets.GetAnim((HashedString)"magic_pack_kanim");

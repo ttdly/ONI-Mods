@@ -1,9 +1,6 @@
 ﻿using KSerialization;
-using PeterHan.PLib.Core;
-using PeterHan.PLib.Options;
 using System;
 using UnityEngine;
-using static STRINGS.UI.NEWBUILDCATEGORIES;
 
 namespace PackAnything {
     [AddComponentMenu("KMonoBehaviour/Workable/Packable")]
@@ -18,7 +15,10 @@ namespace PackAnything {
 
         protected override void OnPrefabInit() {
             base.OnPrefabInit();
+            this.faceTargetWhenWorking = true;
+            this.synchronizeAnims = false;
             this.requiredSkillPerk = Db.Get().SkillPerks.IncreaseCarryAmountMedium.Id;
+            this.workerStatusItem = MixStatusItem.PackingItem;
             this.shouldShowSkillPerkStatusItem = false;
             this.alwaysShowProgressBar = false;
             this.faceTargetWhenWorking = false;
@@ -30,6 +30,11 @@ namespace PackAnything {
         protected override void OnSpawn() {
             base.OnSpawn();
             this.Subscribe<Packable>((int)GameHashes.RefreshUserMenu, Packable.OnRefreshUserMenuDelegate);
+        }
+
+        protected override void OnStartWork(Worker worker) {
+            base.OnStartWork(worker);
+            this.progressBar.barColor = new Color(126f,22f,113f);
         }
 
         protected override void OnCompleteWork(Worker worker) {
@@ -46,40 +51,23 @@ namespace PackAnything {
         }
 
         public void OnClickCancel() {
+            KSelectable kSelectable = this.GetComponent<KSelectable>();
             if (this.chore == null && !this.isMarkFroPack) {
                 return;
             }
             this.isMarkFroPack = false;
             this.chore.Cancel("Packable.CancelChore");
             this.chore = null;
+            if (kSelectable != null) this.statusItemGuid = kSelectable.RemoveStatusItem(this.statusItemGuid);
         }
 
         public void OnClickPack() {
             KSelectable kSelectable = this.GetComponent<KSelectable>();
             this.isMarkFroPack = true;
-            if (chore == null) {
-                chore = new WorkChore<Packable>(
-                    chore_type: Db.Get().ChoreTypes.StorageFetch,
-                    target: this,
-                    chore_provider: null,
-                    run_until_complete: true,
-                    on_complete: null,
-                    on_begin: null,
-                    on_end: null,
-                    allow_in_red_alert: true,
-                    schedule_block: null,
-                    ignore_schedule_block: false,
-                    only_when_operational: false,
-                    override_anims: null,
-                    is_preemptable: false,
-                    allow_in_context_menu: true,
-                    allow_prioritization: true,
-                    priority_class: PriorityScreen.PriorityClass.basic,
-                    priority_class_value: 5,
-                    ignore_building_assignment: false,
-                    add_to_daily_report: true
-                    );
-            }
+            if (this.chore != null) return;
+            chore = new WorkChore<Packable>(Db.Get().ChoreTypes.StorageFetch, this, only_when_operational: false);
+            if (kSelectable != null) this.statusItemGuid = kSelectable.ReplaceStatusItem(this.statusItemGuid, MixStatusItem.WaitingPack);
+
         }
 
         public void PackIt() {
@@ -110,16 +98,7 @@ namespace PackAnything {
                 }
                 Element e = Grid.Element[x];
                 if (!e.IsSolid && !e.id.ToString().ToUpperInvariant().Equals("UNOBTANIUM")) continue;
-                SimMessages.ReplaceElement(
-                    gameCell: x,
-                    new_element: SimHashes.Vacuum,
-                    ev: CellEventLogger.Instance.DebugTool,
-                    mass: 100f,
-                    temperature: 293f,
-                    diseaseIdx: byte.MaxValue,
-                    diseaseCount: 0,
-                    callbackIdx: -1
-                    );
+                SimMessages.ReplaceElement(gameCell: x, new_element: SimHashes.Vacuum, ev: CellEventLogger.Instance.DebugTool,mass: 100f);
             }
         }
     }
