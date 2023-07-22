@@ -19,7 +19,8 @@ namespace PackAnything {
         protected override void OnPrefabInit() {
             base.OnPrefabInit();
             this.workerStatusItem = MixStatusItem.UnpackingItem;
-            this.faceTargetWhenWorking = false;
+            this.faceTargetWhenWorking = true;
+            this.synchronizeAnims = false;
             this.attributeConverter = Db.Get().AttributeConverters.ConstructionSpeed;
             this.attributeExperienceMultiplier = DUPLICANTSTATS.ATTRIBUTE_LEVELING.MOST_DAY_EXPERIENCE;
             this.skillExperienceSkillGroup = Db.Get().SkillGroups.Building.Id;
@@ -67,7 +68,7 @@ namespace PackAnything {
         public void OnClickUnpack() {
             this.isMarkFroUnPack = true;
             if (this.chore != null) return;
-            this.chore = new WorkChore<UnPack>(Db.Get().ChoreTypes.EmptyStorage, this, only_when_operational: false);
+            this.chore = new WorkChore<UnPack>(PackAnythingChoreTypes.Unpack, this, only_when_operational: false);
             KSelectable kSelectable = this.GetComponent<KSelectable>();
             if (kSelectable != null) this.statusItemGuid = kSelectable.ReplaceStatusItem(this.statusItemGuid, MixStatusItem.WaitingUnpack);
         }

@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using PeterHan.PLib.Core;
 using UnityEngine;
 
 namespace PackAnything {
@@ -30,7 +31,9 @@ namespace PackAnything {
         [HarmonyPatch(typeof(GeneratedBuildings), "LoadGeneratedBuildings")]
         public class GeneratedBuildings_LoadGeneratedBuildings_Patch {
             public static void Prefix() {
+                PUtil.LogDebug("测试" + STRINGS.DUPLICANTS.STATUSITEMS.PACKINGITEM.NAME);
                 new MixStatusItem(Db.Get().Root);
+                new PackAnythingChoreTypes(Db.Get().Root);
             }
         }
             //[HarmonyPatch(typeof(MegaBrainTankConfig), nameof(MegaBrainTankConfig.ConfigureBuildingTemplate))]

@@ -1,4 +1,5 @@
 ﻿using KSerialization;
+using ProcGen.Noise;
 using System;
 using UnityEngine;
 
@@ -10,6 +11,18 @@ namespace PackAnything {
         private bool isMarkFroPack;
         private Guid statusItemGuid;
         public bool MarkFroPack => this.isMarkFroPack;
+        private CellOffset[] placementOffsets {
+            get {
+                Building component1 = this.GetComponent<Building>();
+                if ((UnityEngine.Object)component1 != (UnityEngine.Object)null)
+                    return component1.Def.PlacementOffsets;
+                OccupyArea component2 = this.GetComponent<OccupyArea>();
+                if ((UnityEngine.Object)component2 != (UnityEngine.Object)null)
+                    return component2.OccupiedCellsOffsets;
+                Debug.Assert(false, (object)"Ack! We put a Packable on something that's neither a Building nor OccupyArea!", (UnityEngine.Object)this);
+                return (CellOffset[])null;
+            }
+        }
 
         private static readonly EventSystem.IntraObjectHandler<Packable> OnRefreshUserMenuDelegate = new EventSystem.IntraObjectHandler<Packable>((Action<Packable, object>)((component, data) => component.OnRefreshUserMenu(data)));
 
@@ -30,6 +43,10 @@ namespace PackAnything {
         protected override void OnSpawn() {
             base.OnSpawn();
             this.Subscribe<Packable>((int)GameHashes.RefreshUserMenu, Packable.OnRefreshUserMenuDelegate);
+            this.Subscribe<Packable>((int)GameHashes.StatusChange, Packable.OnRefreshUserMenuDelegate);
+            CellOffset[][] table = OffsetGroups.InvertedStandardTable;
+            CellOffset[] filter = (CellOffset[])null;
+            this.SetOffsetTable(OffsetGroups.BuildReachabilityTable(this.placementOffsets, table, filter));
         }
 
         protected override void OnStartWork(Worker worker) {
@@ -65,7 +82,7 @@ namespace PackAnything {
             KSelectable kSelectable = this.GetComponent<KSelectable>();
             this.isMarkFroPack = true;
             if (this.chore != null) return;
-            chore = new WorkChore<Packable>(Db.Get().ChoreTypes.StorageFetch, this, only_when_operational: false);
+            chore = new WorkChore<Packable>(PackAnythingChoreTypes.Pack, this, only_when_operational: false);
             if (kSelectable != null) this.statusItemGuid = kSelectable.ReplaceStatusItem(this.statusItemGuid, MixStatusItem.WaitingPack);
 
         }

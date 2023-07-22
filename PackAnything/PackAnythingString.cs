@@ -27,17 +27,9 @@ namespace PackAnything {
     public class STRINGS {
         public class MISC {
             public class STATUSITEMS {
-                public class PACKINGITEM {
-                    public static LocString NAME = (LocString)"Packing";
-                    public static LocString TOOLTIP = (LocString)"This Duplicant is attempting to pack the item.";
-                }
                 public class WAITINGPACK {
                     public static LocString NAME = (LocString)"Pack Pending";
                     public static LocString TOOLTIP = (LocString)"A Duplicant is in the process of packing this item.";
-                }
-                public class UNPACKINGITEM {
-                    public static LocString NAME = (LocString)"Unpacking";
-                    public static LocString TOOLTIP = (LocString)"This Duplicant is attempting to unpack a magic pack.";
                 }
                 public class WAITINGUNPACK {
                     public static LocString NAME = (LocString)"Unpack Pending";
@@ -45,5 +37,35 @@ namespace PackAnything {
                 }
             }
         }
+
+        public class DUPLICANTS {
+            public class STATUSITEMS {
+                public class PACKINGITEM {
+                    public static LocString NAME = (LocString)"Packing";
+                    public static LocString TOOLTIP = (LocString)"This Duplicant is attempting to pack the item.";
+                }
+                public class UNPACKINGITEM {
+                    public static LocString NAME = (LocString)"Unpacking";
+                    public static LocString TOOLTIP = (LocString)"This Duplicant is attempting to unpack a magic pack.";
+                }
+            }
+
+            public class CHORES {
+                public class PACK {
+                    public static LocString NAME = (LocString)"Pack";
+                    public static LocString STATUS = (LocString)"Packing";
+                    public static LocString TOOLTIP = (LocString)"This Duplicant is attempting to pack the item.";
+                    public static LocString REPORT_NAME = (LocString)"Pack {0}";
+                }
+                public class UNPACK {
+                    public static LocString NAME = (LocString)"Unpack";
+                    public static LocString STATUS = (LocString)"Unpacking";
+                    public static LocString TOOLTIP = (LocString)"This Duplicant is attempting to unpack a magic pack.";
+                    public static LocString REPORT_NAME = (LocString)"Unpack {0}";
+                }
+            }
+        }
+
+        
     }
 }
