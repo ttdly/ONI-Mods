@@ -23,6 +23,21 @@ msgctxt "PackAnything.PackAnythingString.MISC.MAGIC_PACK.NAME"
 msgid "Magic Pack"
 msgstr "魔法包裹"
 
+#. PackAnything.PackAnythingString.MISC.PACK.DESCRIPTION
+msgctxt "PackAnything.PackAnythingString.MISC.PACK.DESCRIPTION"
+msgid "Teaches the most basic level of pack skill"
+msgstr "教导最基本的打包技能"
+
+#. PackAnything.PackAnythingString.MISC.PACK.NAME
+msgctxt "PackAnything.PackAnythingString.MISC.PACK.NAME"
+msgid "Package Magic"
+msgstr "包装魔法"
+
+#. PackAnything.PackAnythingString.MISC.SKILL.PERK_DESC
+msgctxt "PackAnything.PackAnythingString.MISC.SKILL.PERK_DESC"
+msgid "Magic Pack Usage"
+msgstr "神奇包裹的使用"
+
 #. PackAnything.PackAnythingString.UI.PACK_IT.NAME
 msgctxt "PackAnything.PackAnythingString.UI.PACK_IT.NAME"
 msgid "Pack"

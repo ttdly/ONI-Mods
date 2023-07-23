@@ -1,11 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AssemblyTitle>[Beta] Magic Pack 魔法包裹测试版</AssemblyTitle>
-    <FileVersion>1.0.2</FileVersion>
+    <FileVersion>1.0.3</FileVersion>
     <RootNamespace>PackAnything</RootNamespace>
     <Description>Pack Anything</Description>
-    <AssemblyVersion>1.0.2</AssemblyVersion>
+    <AssemblyVersion>1.0.3</AssemblyVersion>
     <LastWorkingBuild>526233</LastWorkingBuild>
     <Platforms>Vanilla;Mergedown</Platforms>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="images\skillbadge_role_building4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="images\skillbadge_role_building4.png" />
+  </ItemGroup>
 </Project>

@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using PeterHan.PLib.Core;
+using PeterHan.PLib.UI;
 using UnityEngine;
 
 namespace PackAnything {
@@ -34,6 +35,9 @@ namespace PackAnything {
                 LocString.CreateLocStringKeys(typeof(PackAnything.STRINGS), "");
                 new MixStatusItem(Db.Get().Root);
                 new PackAnythingChoreTypes(Db.Get().Root);
+                Sprite skillbadge_role_building4 = PUIUtils.LoadSprite("PackAnything.images.skillbadge_role_building4.png");
+                Assets.Sprites.Add("skillbadge_role_building4", skillbadge_role_building4);
+                PackAnythingSkill.Init();
             }
         }
 

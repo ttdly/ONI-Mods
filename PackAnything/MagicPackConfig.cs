@@ -23,7 +23,9 @@ namespace PackAnything {
             placedEntity.AddOrGet<Movable>();
             placedEntity.AddOrGet<UnPack>();
             placedEntity.AddOrGet<UserNameable>();
+            placedEntity.AddOrGet<MagicPack>();
             placedEntity.AddOrGet<OccupyArea>().objectLayers = new ObjectLayer[1] { ObjectLayer.Pickupables };
+            Prioritizable.AddRef(placedEntity);
             return placedEntity;
         }
 

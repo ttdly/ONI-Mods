@@ -33,6 +33,7 @@ namespace PackAnything {
             this.workerStatusItem = MixStatusItem.UnpackingItem;
             this.faceTargetWhenWorking = true;
             this.synchronizeAnims = false;
+            this.requiredSkillPerk = PackAnythingSkill.CanPack.Id;
             this.attributeConverter = Db.Get().AttributeConverters.ConstructionSpeed;
             this.attributeExperienceMultiplier = DUPLICANTSTATS.ATTRIBUTE_LEVELING.MOST_DAY_EXPERIENCE;
             this.skillExperienceSkillGroup = Db.Get().SkillGroups.Building.Id;
@@ -40,7 +41,7 @@ namespace PackAnything {
             this.multitoolContext = (HashedString)"build";
             this.multitoolHitEffectTag = (Tag)EffectConfigs.BuildSplashId;
             this.faceTargetWhenWorking = true;
-            this.SetWorkTime(20f);
+            this.SetWorkTime(50f);
         }
 
         protected override void OnSpawn() {
@@ -65,7 +66,6 @@ namespace PackAnything {
 
         // 自定义的方法
         public void OnRefreshUserMenu(object data) {
-            this.gameObject.name = this.gameObject.GetComponent<MagicPack>().storedObject.name; 
             if (gameObject.HasTag(GameTags.Stored)) return;
             Game.Instance.userMenu.AddButton(this.gameObject, this.isMarkFroUnPack ? new KIconButtonMenu.ButtonInfo("action_empty_contents", PackAnythingString.UI.UNPACK_IT.NAME_OFF, new System.Action(this.OnClickCancel), tooltipText: PackAnythingString.UI.UNPACK_IT.TOOLTIP_OFF) : new KIconButtonMenu.ButtonInfo("action_empty_contents", PackAnythingString.UI.UNPACK_IT.NAME, new System.Action(this.OnClickUnpack), tooltipText: PackAnythingString.UI.UNPACK_IT.TOOLTIP));
         }

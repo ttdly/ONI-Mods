@@ -1,9 +1,11 @@
 ﻿using KSerialization;
-using ProcGen.Noise;
 using System;
+using TUNING;
 using UnityEngine;
 
+
 namespace PackAnything {
+    [RequireComponent(typeof(Prioritizable))]
     [AddComponentMenu("KMonoBehaviour/Workable/Packable")]
     public class Packable : Workable {
         private Chore chore;
@@ -28,16 +30,20 @@ namespace PackAnything {
 
         protected override void OnPrefabInit() {
             base.OnPrefabInit();
-            this.faceTargetWhenWorking = true;
+            this.faceTargetWhenWorking = false;
             this.synchronizeAnims = false;
-            this.requiredSkillPerk = Db.Get().SkillPerks.IncreaseCarryAmountMedium.Id;
+            this.requiredSkillPerk = PackAnythingSkill.CanPack.Id;
             this.workerStatusItem = MixStatusItem.PackingItem;
             this.shouldShowSkillPerkStatusItem = false;
+            this.attributeConverter = Db.Get().AttributeConverters.ConstructionSpeed;
+            this.attributeExperienceMultiplier = DUPLICANTSTATS.ATTRIBUTE_LEVELING.MOST_DAY_EXPERIENCE;
+            this.skillExperienceSkillGroup = Db.Get().SkillGroups.Building.Id;
+            this.skillExperienceMultiplier = SKILLS.MOST_DAY_EXPERIENCE;
             this.alwaysShowProgressBar = false;
             this.faceTargetWhenWorking = false;
             this.multitoolContext = (HashedString)"capture";
             this.multitoolHitEffectTag = (Tag)"fx_capture_splash";
-            this.SetWorkTime(20f);
+            this.SetWorkTime(50f);
         }
 
         protected override void OnSpawn() {
@@ -83,25 +89,33 @@ namespace PackAnything {
         }
 
         public void OnClickPack() {
+            Prioritizable.AddRef(this.gameObject);
             KSelectable kSelectable = this.GetComponent<KSelectable>();
             this.isMarkFroPack = true;
             if (this.chore != null) return;
             chore = new WorkChore<Packable>(PackAnythingChoreTypes.Pack, this, only_when_operational: false);
             if (kSelectable != null) this.statusItemGuid = kSelectable.ReplaceStatusItem(this.statusItemGuid, MixStatusItem.WaitingPack);
-
         }
 
         public void PackIt() {
-            GameObject go = GameUtil.KInstantiate(Assets.GetPrefab((Tag)MagicPackConfig.ID), Grid.CellToPos(Grid.PosToCell(this.gameObject)), Grid.SceneLayer.Creatures, name: this.gameObject.name );
+            GameObject go = GameUtil.KInstantiate(Assets.GetPrefab((Tag)MagicPackConfig.ID), Grid.CellToPos(Grid.PosToCell(this.gameObject)), Grid.SceneLayer.Creatures, name: this.gameObject.name);
             go.SetActive(true);
-            MagicPack magicPack = go.AddOrGet<MagicPack>();
+            
+            GameObject goo= Grid.Objects[Grid.PosToCell(this.gameObject), 1];
+            MagicPack magicPack = go.GetComponent<MagicPack>();
             magicPack.storedObject = this.gameObject;
             if (this.gameObject.HasTag(GameTags.GeyserFeature)) {
                 magicPack.isGeyser = true;
-                DealWithNeutronium(this.NaturalBuildingCell());
+                DealWithNeutronium(this.NaturalBuildingCell()); 
             }
+            string name;
             go.GetComponent<KBatchedAnimController>().Queue((HashedString)"ui");
-            go.FindOrAddComponent<UserNameable>().savedName = this.gameObject.name;
+            if (magicPack.isGeyser) {
+                name = this.gameObject.name;
+            } else {
+                name = Strings.Get("STRINGS.BUILDINGS.PREFABS." + this.gameObject.name.Replace("Complete", "").ToUpper() + ".NAME");
+            }
+            go.FindOrAddComponent<UserNameable>().savedName = name;
             this.gameObject.SetActive(false);
         }
 
@@ -119,7 +133,7 @@ namespace PackAnything {
                 }
                 Element e = Grid.Element[x];
                 if (!e.IsSolid && !e.id.ToString().ToUpperInvariant().Equals("UNOBTANIUM")) continue;
-                SimMessages.ReplaceElement(gameCell: x, new_element: SimHashes.Vacuum, ev: CellEventLogger.Instance.DebugTool,mass: 100f);
+                SimMessages.ReplaceElement(gameCell: x, new_element: SimHashes.Vacuum, ev: CellEventLogger.Instance.DebugTool, mass: 100f);
             }
         }
     }
