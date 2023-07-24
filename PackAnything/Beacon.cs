@@ -6,13 +6,18 @@ using TUNING;
 using UnityEngine;
 
 namespace PackAnything {
+    [SerializationConfig(MemberSerialization.OptIn)]
     [AddComponentMenu("KMonoBehaviour/Workable/UnPack")]
-    public class UnPack : Workable {
+    public class Beacon : Workable {
         private Chore chore;
         [Serialize]
-        private bool isMarkFroUnPack;
+        private bool isMarkForActive;
+        [Serialize]
+        public bool isGeyser = false;
+        [Serialize]
+        public int originCell;
         private Guid statusItemGuid;
-        public bool MarkFroPack => this.isMarkFroUnPack;
+        public bool MarkFroPack => this.isMarkForActive;
         private CellOffset[] placementOffsets {
             get {
                 Building component1 = this.GetComponent<Building>();
@@ -26,28 +31,28 @@ namespace PackAnything {
             }
         }
 
-        private static readonly EventSystem.IntraObjectHandler<UnPack> OnRefreshUserMenuDelegate = new EventSystem.IntraObjectHandler<UnPack>((Action<UnPack, object>)((component, data) => component.OnRefreshUserMenu(data)));
+        private static readonly EventSystem.IntraObjectHandler<Beacon> OnRefreshUserMenuDelegate = new EventSystem.IntraObjectHandler<Beacon>((Action<Beacon, object>)((component, data) => component.OnRefreshUserMenu(data)));
 
         protected override void OnPrefabInit() {
             base.OnPrefabInit();
             this.workerStatusItem = MixStatusItem.UnpackingItem;
             this.faceTargetWhenWorking = true;
             this.synchronizeAnims = false;
-            this.requiredSkillPerk = PackAnythingSkill.CanPack.Id;
+            this.requiredSkillPerk = PackAnythingStaticVars.CanPack.Id;
             this.attributeConverter = Db.Get().AttributeConverters.ConstructionSpeed;
             this.attributeExperienceMultiplier = DUPLICANTSTATS.ATTRIBUTE_LEVELING.MOST_DAY_EXPERIENCE;
             this.skillExperienceSkillGroup = Db.Get().SkillGroups.Building.Id;
             this.skillExperienceMultiplier = SKILLS.MOST_DAY_EXPERIENCE;
-            this.multitoolContext = (HashedString)"build";
-            this.multitoolHitEffectTag = (Tag)EffectConfigs.BuildSplashId;
+            this.multitoolContext = (HashedString)"demolish";
+            this.multitoolHitEffectTag = (Tag)EffectConfigs.DemolishSplashId;
             this.faceTargetWhenWorking = true;
             this.SetWorkTime(50f);
         }
 
         protected override void OnSpawn() {
             base.OnSpawn();
-            this.Subscribe<UnPack>((int)GameHashes.RefreshUserMenu, UnPack.OnRefreshUserMenuDelegate);
-            this.Subscribe<UnPack>((int)GameHashes.StatusChange, UnPack.OnRefreshUserMenuDelegate);
+            this.Subscribe<Beacon>((int)GameHashes.RefreshUserMenu, Beacon.OnRefreshUserMenuDelegate);
+            this.Subscribe<Beacon>((int)GameHashes.StatusChange, Beacon.OnRefreshUserMenuDelegate);
             CellOffset[][] table = OffsetGroups.InvertedStandardTable;
             CellOffset[] filter = (CellOffset[])null;
             this.SetOffsetTable(OffsetGroups.BuildReachabilityTable(this.placementOffsets, table, filter));
@@ -55,59 +60,66 @@ namespace PackAnything {
 
         protected override void OnCompleteWork(Worker worker) {
             base.OnCompleteWork(worker);
-            this.UnPackIt(worker);
+            this.ActiveIt(worker);
             this.OnClickCancel();
         }
 
         protected override void OnStartWork(Worker worker) {
             base.OnStartWork(worker);
             this.progressBar.barColor = new Color(0.5f, 0.7f, 1.0f, 1f);
+            KSelectable kSelectable = this.GetComponent<KSelectable>();
+            if (kSelectable != null) this.statusItemGuid = kSelectable.RemoveStatusItem(this.statusItemGuid);
         }
 
         // 自定义的方法
         public void OnRefreshUserMenu(object data) {
             if (gameObject.HasTag(GameTags.Stored)) return;
-            Game.Instance.userMenu.AddButton(this.gameObject, this.isMarkFroUnPack ? new KIconButtonMenu.ButtonInfo("action_empty_contents", PackAnythingString.UI.UNPACK_IT.NAME_OFF, new System.Action(this.OnClickCancel), tooltipText: PackAnythingString.UI.UNPACK_IT.TOOLTIP_OFF) : new KIconButtonMenu.ButtonInfo("action_empty_contents", PackAnythingString.UI.UNPACK_IT.NAME, new System.Action(this.OnClickUnpack), tooltipText: PackAnythingString.UI.UNPACK_IT.TOOLTIP));
+            Game.Instance.userMenu.AddButton(this.gameObject, this.isMarkForActive ? new KIconButtonMenu.ButtonInfo("action_empty_contents", PackAnythingString.UI.ACTIVATE.NAME_OFF, new System.Action(this.OnClickCancel), tooltipText: PackAnythingString.UI.ACTIVATE.TOOLTIP_OFF) : new KIconButtonMenu.ButtonInfo("action_empty_contents", PackAnythingString.UI.ACTIVATE.NAME, new System.Action(this.OnClickActive), tooltipText: PackAnythingString.UI.ACTIVATE.TOOLTIP));
         }
 
         public void OnClickCancel() {
-            if (this.chore == null && !this.isMarkFroUnPack) {
+            if (this.chore == null && !this.isMarkForActive) {
                 return;
             }
-            this.isMarkFroUnPack = false;
-            this.chore.Cancel("UnPack.CancelChore");
+            this.isMarkForActive = false;
+            this.chore.Cancel("Active.CancelChore");
             this.chore = null;
             KSelectable kSelectable = this.GetComponent<KSelectable>();
             if (kSelectable != null) this.statusItemGuid = kSelectable.RemoveStatusItem(this.statusItemGuid);
         }
 
-        public void OnClickUnpack() {
-            this.isMarkFroUnPack = true;
+        public void OnClickActive() {
+            this.isMarkForActive = true;
             if (this.chore != null) return;
-            this.chore = new WorkChore<UnPack>(PackAnythingChoreTypes.Unpack, this, only_when_operational: false);
+            this.chore = new WorkChore<Beacon>(PackAnythingChoreTypes.Active, this, only_when_operational: false);
             KSelectable kSelectable = this.GetComponent<KSelectable>();
             if (kSelectable != null) this.statusItemGuid = kSelectable.ReplaceStatusItem(this.statusItemGuid, MixStatusItem.WaitingUnpack);
         }
 
-        public void UnPackIt(Worker worker) {
-            MagicPack magicPack = this.gameObject.GetComponent<MagicPack>();
-            GameObject storedObject = magicPack.storedObject;
-            if (storedObject != null) {
+        public void ActiveIt(Worker worker) {
+            GameObject originObject = null;
+            foreach ( Surveyable surveyable in PackAnythingStaticVars.Surveyables.Items) {
+                if (Grid.PosToCell(surveyable) == this.originCell) {
+                    originObject = surveyable.gameObject;
+                }
+            }
+            if (originObject != null) {
                 int cell = Grid.PosToCell(this.gameObject);
-                if (magicPack.isGeyser) {
+                if (this.isGeyser) {
+                    this.DeleteNeutronium(Grid.PosToCell(originObject));
                     this.CreateNeutronium(cell);
                     cell = Grid.CellAbove(cell);
                 }
-                Vector3 posCbc = Grid.CellToPosCBC(cell, storedObject.GetComponent<KBatchedAnimController>().sceneLayer);
+                Vector3 posCbc = Grid.CellToPosCBC(cell, originObject.GetComponent<KBatchedAnimController>().sceneLayer);
                 float num = -0.15f;
                 posCbc.z += num;
-                storedObject.transform.SetPosition(posCbc);
-                storedObject.SetActive(true);
-                storedObject.FindOrAddComponent<OccupyArea>().ApplyToCells = true;
+                originObject.transform.SetPosition(posCbc);
+                originObject.SetActive(true);
+                originObject.FindOrAddComponent<OccupyArea>().ApplyToCells = true;
             }
             Util.KDestroyGameObject(this.gameObject);
             if (worker.HasTag(GameTags.Minion)) {
-                RegisterReactEmotePair("WorkPasserbyAcknowledgement", Db.Get().Emotes.Minion.ResearchComplete, 3f, worker);
+                RegisterReactEmotePair("ActiveBecaon", Db.Get().Emotes.Minion.ResearchComplete, 3f, worker);
             }
         }
 
@@ -127,6 +139,24 @@ namespace PackAnything {
                 Element e = Grid.Element[x];
                 if (!Grid.IsValidCell(x)) continue;
                 SimMessages.ReplaceElement( gameCell: x, new_element: SimHashes.Unobtanium, ev: CellEventLogger.Instance.DebugTool, mass: 100f);
+            }
+        }
+
+        public void DeleteNeutronium(int cell) {
+            int[] cells = new[]{
+                Grid.CellDownLeft(cell),
+                Grid.CellBelow(cell),
+                Grid.CellDownRight(cell),
+                Grid.CellRight(Grid.CellDownRight(cell))
+            };
+            foreach (int x in cells) {
+                if (Grid.Element.Length < x || Grid.Element[x] == null) {
+                    new IndexOutOfRangeException();
+                    return;
+                }
+                Element e = Grid.Element[x];
+                if (!e.IsSolid && !e.id.ToString().ToUpperInvariant().Equals("UNOBTANIUM")) continue;
+                SimMessages.ReplaceElement(gameCell: x, new_element: SimHashes.Vacuum, ev: CellEventLogger.Instance.DebugTool, mass: 100f);
             }
         }
 

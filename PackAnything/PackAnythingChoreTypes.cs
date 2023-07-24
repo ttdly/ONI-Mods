@@ -2,8 +2,8 @@
 
 namespace PackAnything {
     public class PackAnythingChoreTypes : ResourceSet<ChoreType> {
-        public static ChoreType Pack;
-        public static ChoreType Unpack;
+        public static ChoreType Survey;
+        public static ChoreType Active;
         private int nextImplicitPriority = 10000;
         private const int INVALID_PRIORITY = -1;
 
@@ -34,8 +34,8 @@ namespace PackAnything {
         }
 
         public PackAnythingChoreTypes(ResourceSet parent) : base(nameof(PackAnythingChoreTypes), parent) {
-            PackAnythingChoreTypes.Pack = this.Add(nameof(PackAnythingChoreTypes.Pack), new string[1] { "Storage" }, "", new string[0], STRINGS.DUPLICANTS.CHORES.PACK.NAME, STRINGS.DUPLICANTS.CHORES.PACK.STATUS, STRINGS.DUPLICANTS.CHORES.PACK.TOOLTIP, true, 5000, STRINGS.DUPLICANTS.CHORES.PACK.REPORT_NAME);
-            PackAnythingChoreTypes.Unpack = this.Add(nameof(PackAnythingChoreTypes.Unpack), new string[1] { "Hauling" }, "", new string[0], STRINGS.DUPLICANTS.CHORES.UNPACK.NAME, STRINGS.DUPLICANTS.CHORES.UNPACK.STATUS, STRINGS.DUPLICANTS.CHORES.UNPACK.TOOLTIP, true, 5000, STRINGS.DUPLICANTS.CHORES.UNPACK.REPORT_NAME);
+            PackAnythingChoreTypes.Survey = this.Add(nameof(PackAnythingChoreTypes.Survey), new string[1] { "Storage" }, "", new string[0], STRINGS.DUPLICANTS.CHORES.SURVEY.NAME, STRINGS.DUPLICANTS.CHORES.SURVEY.STATUS, STRINGS.DUPLICANTS.CHORES.SURVEY.TOOLTIP, true, 5000, STRINGS.DUPLICANTS.CHORES.SURVEY.REPORT_NAME);
+            PackAnythingChoreTypes.Active = this.Add(nameof(PackAnythingChoreTypes.Active), new string[1] { "Hauling" }, "", new string[0], STRINGS.DUPLICANTS.CHORES.ACTIVE.NAME, STRINGS.DUPLICANTS.CHORES.ACTIVE.STATUS, STRINGS.DUPLICANTS.CHORES.ACTIVE.TOOLTIP, true, 5000, STRINGS.DUPLICANTS.CHORES.ACTIVE.REPORT_NAME);
         }
     }
 }

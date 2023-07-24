@@ -41,10 +41,10 @@ namespace PackAnything {
         }
 
         private void CreateStatusItems() {
-            MixStatusItem.PackingItem = this.CreateDuplicantStatus("PackingItem",Duplicants,"",StatusItem.IconType.Info,NotificationType.Neutral,false,OverlayModes.None.ID);
-            MixStatusItem.UnpackingItem = this.CreateDuplicantStatus("UnpackingItem", Duplicants, "", StatusItem.IconType.Info, NotificationType.Neutral, false, OverlayModes.None.ID);
-            MixStatusItem.WaitingPack = this.CreateDuplicantStatus("WaitingPack", Misc, "", StatusItem.IconType.Info, NotificationType.Neutral, false, OverlayModes.None.ID);
-            MixStatusItem.WaitingUnpack = this.CreateDuplicantStatus("WaitingUnpack", Misc, "", StatusItem.IconType.Info, NotificationType.Neutral, false, OverlayModes.None.ID);
+            MixStatusItem.PackingItem = this.CreateDuplicantStatus("SurveyItem",Duplicants,"",StatusItem.IconType.Info,NotificationType.Neutral,false,OverlayModes.None.ID);
+            MixStatusItem.UnpackingItem = this.CreateDuplicantStatus("ActiveBeacon", Duplicants, "", StatusItem.IconType.Info, NotificationType.Neutral, false, OverlayModes.None.ID);
+            MixStatusItem.WaitingPack = this.CreateDuplicantStatus("WaitingSurvey", Misc, "status_item_needs_furniture", StatusItem.IconType.Custom, NotificationType.Neutral, false, OverlayModes.None.ID);
+            MixStatusItem.WaitingUnpack = this.CreateDuplicantStatus("WaitingActive", Misc, "status_item_need_supply_out", StatusItem.IconType.Custom, NotificationType.Neutral, false, OverlayModes.None.ID);
         }
     }
 

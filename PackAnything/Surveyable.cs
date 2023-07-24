@@ -1,4 +1,5 @@
 ﻿using KSerialization;
+using PeterHan.PLib.Core;
 using System;
 using TUNING;
 using UnityEngine;
@@ -7,13 +8,13 @@ using UnityEngine;
 namespace PackAnything {
     [RequireComponent(typeof(Prioritizable))]
     [AddComponentMenu("KMonoBehaviour/Workable/Packable")]
-    public class Packable : Workable {
+    public class Surveyable : Workable {
         private Chore chore;
         [Serialize]
-        private bool isMarkFroPack;
+        private bool isMarkForSurvey;
         private Guid statusItemGuid;
-        public bool MarkFroPack => this.isMarkFroPack;
-        private CellOffset[] placementOffsets {
+        public bool MarkFroPack => this.isMarkForSurvey;
+        private CellOffset[] PlacementOffsets {
             get {
                 Building component1 = this.GetComponent<Building>();
                 if ((UnityEngine.Object)component1 != (UnityEngine.Object)null)
@@ -26,13 +27,13 @@ namespace PackAnything {
             }
         }
 
-        private static readonly EventSystem.IntraObjectHandler<Packable> OnRefreshUserMenuDelegate = new EventSystem.IntraObjectHandler<Packable>((Action<Packable, object>)((component, data) => component.OnRefreshUserMenu(data)));
+        private static readonly EventSystem.IntraObjectHandler<Surveyable> OnRefreshUserMenuDelegate = new EventSystem.IntraObjectHandler<Surveyable>((Action<Surveyable, object>)((component, data) => component.OnRefreshUserMenu(data)));
 
         protected override void OnPrefabInit() {
             base.OnPrefabInit();
-            this.faceTargetWhenWorking = false;
+            this.faceTargetWhenWorking = true;
             this.synchronizeAnims = false;
-            this.requiredSkillPerk = PackAnythingSkill.CanPack.Id;
+            this.requiredSkillPerk = PackAnythingStaticVars.CanPack.Id;
             this.workerStatusItem = MixStatusItem.PackingItem;
             this.shouldShowSkillPerkStatusItem = false;
             this.attributeConverter = Db.Get().AttributeConverters.ConstructionSpeed;
@@ -41,82 +42,86 @@ namespace PackAnything {
             this.skillExperienceMultiplier = SKILLS.MOST_DAY_EXPERIENCE;
             this.alwaysShowProgressBar = false;
             this.faceTargetWhenWorking = false;
-            this.multitoolContext = (HashedString)"capture";
-            this.multitoolHitEffectTag = (Tag)"fx_capture_splash";
+            this.multitoolContext = (HashedString)"build";
+            this.multitoolHitEffectTag = (Tag)EffectConfigs.BuildSplashId;
             this.SetWorkTime(50f);
         }
 
         protected override void OnSpawn() {
             base.OnSpawn();
-            this.Subscribe<Packable>((int)GameHashes.RefreshUserMenu, Packable.OnRefreshUserMenuDelegate);
-            this.Subscribe<Packable>((int)GameHashes.StatusChange, Packable.OnRefreshUserMenuDelegate);
+            PackAnythingStaticVars.Surveyables.Add(this);
+            this.Subscribe<Surveyable>((int)GameHashes.RefreshUserMenu, Surveyable.OnRefreshUserMenuDelegate);
+            this.Subscribe<Surveyable>((int)GameHashes.StatusChange, Surveyable.OnRefreshUserMenuDelegate);
             CellOffset[][] table = OffsetGroups.InvertedStandardTable;
             CellOffset[] filter = (CellOffset[])null;
-            this.SetOffsetTable(OffsetGroups.BuildReachabilityTable(this.placementOffsets, table, filter));
+            this.SetOffsetTable(OffsetGroups.BuildReachabilityTable(this.PlacementOffsets, table, filter));
         }
 
         protected override void OnStartWork(Worker worker) {
             base.OnStartWork(worker);
             this.progressBar.barColor = new Color(0.5f, 0.7f, 1.0f, 1f);
+            KSelectable kSelectable = this.GetComponent<KSelectable>();
+            if (kSelectable != null) this.statusItemGuid = kSelectable.RemoveStatusItem(this.statusItemGuid);
         }
 
         protected override void OnCompleteWork(Worker worker) {
             base.OnCompleteWork(worker);
-            this.PackIt();
-            SimCellOccupier component2 = this.GetComponent<SimCellOccupier>();
+            this.CreateBeacon();
             if ((UnityEngine.Object)DetailsScreen.Instance != (UnityEngine.Object)null && DetailsScreen.Instance.CompareTargetWith(this.gameObject))
                 DetailsScreen.Instance.Show(false);
-            this.gameObject.FindOrAddComponent<OccupyArea>().ApplyToCells = false;
+            this.gameObject.AddTag("Surveyed");
             this.OnClickCancel();
+        }
+
+        protected override void OnCleanUp() {
+            base.OnCleanUp();
+            PackAnythingStaticVars.Surveyables.Remove(this);
         }
 
 
         // 自定义的方法
         public void OnRefreshUserMenu(object data) {
+            if (this.gameObject.HasTag("Surveyed")) return;
             if (this.gameObject.HasTag("OilWell") && this.gameObject.GetComponent<BuildingAttachPoint>()?.points[0].attachedBuilding != null) return;
-            Game.Instance.userMenu.AddButton(this.gameObject, this.isMarkFroPack ? new KIconButtonMenu.ButtonInfo("action_capture", PackAnythingString.UI.PACK_IT.NAME_OFF, new System.Action(this.OnClickCancel), tooltipText: PackAnythingString.UI.PACK_IT.TOOLTIP_OFF) : new KIconButtonMenu.ButtonInfo("action_capture", PackAnythingString.UI.PACK_IT.NAME, new System.Action(this.OnClickPack), tooltipText: PackAnythingString.UI.PACK_IT.TOOLTIP));
+            Game.Instance.userMenu.AddButton(this.gameObject, this.isMarkForSurvey ? new KIconButtonMenu.ButtonInfo("action_follow_cam", PackAnythingString.UI.SURVEY.NAME_OFF, new System.Action(this.OnClickCancel), tooltipText: PackAnythingString.UI.SURVEY.TOOLTIP_OFF) : new KIconButtonMenu.ButtonInfo("action_follow_cam", PackAnythingString.UI.SURVEY.NAME, new System.Action(this.OnClickSurvey), tooltipText: PackAnythingString.UI.SURVEY.TOOLTIP));
         }
 
         public void OnClickCancel() {
-            KSelectable kSelectable = this.GetComponent<KSelectable>();
-            if (this.chore == null && !this.isMarkFroPack) {
+            if (this.chore == null && !this.isMarkForSurvey) {
                 return;
             }
-            this.isMarkFroPack = false;
-            this.chore.Cancel("Packable.CancelChore");
+            this.isMarkForSurvey = false;
+            this.chore.Cancel("Surveyable.CancelChore");
             this.chore = null;
+            KSelectable kSelectable = this.GetComponent<KSelectable>();
             if (kSelectable != null) this.statusItemGuid = kSelectable.RemoveStatusItem(this.statusItemGuid);
         }
 
-        public void OnClickPack() {
+        public void OnClickSurvey() {
             Prioritizable.AddRef(this.gameObject);
             KSelectable kSelectable = this.GetComponent<KSelectable>();
-            this.isMarkFroPack = true;
+            this.isMarkForSurvey = true;
             if (this.chore != null) return;
-            chore = new WorkChore<Packable>(PackAnythingChoreTypes.Pack, this, only_when_operational: false);
+            chore = new WorkChore<Surveyable>(PackAnythingChoreTypes.Survey, this, only_when_operational: false, is_preemptable: true);
             if (kSelectable != null) this.statusItemGuid = kSelectable.ReplaceStatusItem(this.statusItemGuid, MixStatusItem.WaitingPack);
         }
 
-        public void PackIt() {
-            GameObject go = GameUtil.KInstantiate(Assets.GetPrefab((Tag)MagicPackConfig.ID), Grid.CellToPos(Grid.PosToCell(this.gameObject)), Grid.SceneLayer.Creatures, name: this.gameObject.name);
+        public void CreateBeacon() {
+            GameObject go = GameUtil.KInstantiate(Assets.GetPrefab((Tag)BeaconConfig.ID), Grid.CellToPos(Grid.PosToCell(this.gameObject)), Grid.SceneLayer.Creatures, name: this.gameObject.name);
             go.SetActive(true);
-            
-            GameObject goo= Grid.Objects[Grid.PosToCell(this.gameObject), 1];
-            MagicPack magicPack = go.GetComponent<MagicPack>();
-            magicPack.storedObject = this.gameObject;
+            Beacon becaon = go.GetComponent<Beacon>();
+            becaon.originCell = Grid.PosToCell(this.gameObject);
+            GameObject originGo = Grid.Objects[becaon.originCell, 1];
             if (this.gameObject.HasTag(GameTags.GeyserFeature)) {
-                magicPack.isGeyser = true;
-                DealWithNeutronium(this.NaturalBuildingCell()); 
+                becaon.isGeyser = true;
             }
             string name;
-            go.GetComponent<KBatchedAnimController>().Queue((HashedString)"ui");
-            if (magicPack.isGeyser) {
+            if (becaon.isGeyser) {
                 name = this.gameObject.name;
             } else {
                 name = Strings.Get("STRINGS.BUILDINGS.PREFABS." + this.gameObject.name.Replace("Complete", "").ToUpper() + ".NAME");
             }
             go.FindOrAddComponent<UserNameable>().savedName = name;
-            this.gameObject.SetActive(false);
         }
 
         public void DealWithNeutronium(int cell) {
@@ -132,7 +137,7 @@ namespace PackAnything {
                     return;
                 }
                 Element e = Grid.Element[x];
-                if (!e.IsSolid && !e.id.ToString().ToUpperInvariant().Equals("UNOBTANIUM")) continue;
+                if (!e.IsSolid || !e.id.ToString().ToUpperInvariant().Equals("UNOBTANIUM")) continue;
                 SimMessages.ReplaceElement(gameCell: x, new_element: SimHashes.Vacuum, ev: CellEventLogger.Instance.DebugTool, mass: 100f);
             }
         }

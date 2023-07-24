@@ -15,13 +15,13 @@ msgstr ""
 
 #. PackAnything.PackAnythingString.MISC.MAGIC_PACK.DESC
 msgctxt "PackAnything.PackAnythingString.MISC.MAGIC_PACK.DESC"
-msgid "Inside it, there are some things. Open it."
-msgstr "包裹里有些东西，拆开包裹就能释放。"
+msgid "It records the information of an object. When opened, the recorded object will move to that location."
+msgstr "记录着一个物体的信息，打开它，被记录的物体会移动到这个位置。"
 
 #. PackAnything.PackAnythingString.MISC.MAGIC_PACK.NAME
 msgctxt "PackAnything.PackAnythingString.MISC.MAGIC_PACK.NAME"
 msgid "Magic Pack"
-msgstr "魔法包裹"
+msgstr "神奇包裹"
 
 #. PackAnything.PackAnythingString.MISC.PACK.DESCRIPTION
 msgctxt "PackAnything.PackAnythingString.MISC.PACK.DESCRIPTION"
