@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace PackAnything {
     [RequireComponent(typeof(Prioritizable))]
-    [AddComponentMenu("KMonoBehaviour/Workable/Packable")]
+    [AddComponentMenu("KMonoBehaviour/Workable/Surveyable")]
     public class Surveyable : Workable {
         private Chore chore;
         [Serialize]
@@ -22,7 +22,7 @@ namespace PackAnything {
                 OccupyArea component2 = this.GetComponent<OccupyArea>();
                 if ((UnityEngine.Object)component2 != (UnityEngine.Object)null)
                     return component2.OccupiedCellsOffsets;
-                Debug.Assert(false, (object)"Ack! We put a Packable on something that's neither a Building nor OccupyArea!", (UnityEngine.Object)this);
+                Debug.Assert(false, (object)"Ack! We put a Surveyable on something that's neither a Building nor OccupyArea!", (UnityEngine.Object)this);
                 return (CellOffset[])null;
             }
         }
@@ -34,7 +34,8 @@ namespace PackAnything {
             this.faceTargetWhenWorking = true;
             this.synchronizeAnims = false;
             this.requiredSkillPerk = PackAnythingStaticVars.CanPack.Id;
-            this.workerStatusItem = MixStatusItem.PackingItem;
+            this.workerStatusItem = PackAnythingStaticVars.SurveyingItem;
+            //this.workerStatusItem = MixStatusItem.PackingItem;
             this.shouldShowSkillPerkStatusItem = false;
             this.attributeConverter = Db.Get().AttributeConverters.ConstructionSpeed;
             this.attributeExperienceMultiplier = DUPLICANTSTATS.ATTRIBUTE_LEVELING.MOST_DAY_EXPERIENCE;
@@ -60,8 +61,14 @@ namespace PackAnything {
         protected override void OnStartWork(Worker worker) {
             base.OnStartWork(worker);
             this.progressBar.barColor = new Color(0.5f, 0.7f, 1.0f, 1f);
-            KSelectable kSelectable = this.GetComponent<KSelectable>();
-            if (kSelectable != null) this.statusItemGuid = kSelectable.RemoveStatusItem(this.statusItemGuid);
+            this.RemoveStatus();
+        }
+
+        protected override void OnAbortWork(Worker worker) {
+            base.OnAbortWork(worker);
+            if (this.MarkFroPack) {
+                this.AddStatus();
+            }
         }
 
         protected override void OnCompleteWork(Worker worker) {
@@ -93,17 +100,19 @@ namespace PackAnything {
             this.isMarkForSurvey = false;
             this.chore.Cancel("Surveyable.CancelChore");
             this.chore = null;
-            KSelectable kSelectable = this.GetComponent<KSelectable>();
-            if (kSelectable != null) this.statusItemGuid = kSelectable.RemoveStatusItem(this.statusItemGuid);
+            this.RemoveStatus();
         }
 
         public void OnClickSurvey() {
             Prioritizable.AddRef(this.gameObject);
-            KSelectable kSelectable = this.GetComponent<KSelectable>();
             this.isMarkForSurvey = true;
             if (this.chore != null) return;
-            chore = new WorkChore<Surveyable>(PackAnythingChoreTypes.Survey, this, only_when_operational: false, is_preemptable: true);
-            if (kSelectable != null) this.statusItemGuid = kSelectable.ReplaceStatusItem(this.statusItemGuid, MixStatusItem.WaitingPack);
+            //chore = new WorkChore<Surveyable>(PackAnythingChoreTypes.Survey, this, only_when_operational: false, is_preemptable: true);
+            chore = new WorkChore<Surveyable>(Db.Get().ChoreTypes.Build, this, only_when_operational: false);
+            chore.choreType.statusItem = PackAnythingStaticVars.Survey.statusItem;
+            chore.choreType.Name = PackAnythingStaticVars.Survey.Name;
+            chore.choreType.reportName = PackAnythingStaticVars.Survey.reportName;
+            this.AddStatus();
         }
 
         public void CreateBeacon() {
@@ -140,6 +149,16 @@ namespace PackAnything {
                 if (!e.IsSolid || !e.id.ToString().ToUpperInvariant().Equals("UNOBTANIUM")) continue;
                 SimMessages.ReplaceElement(gameCell: x, new_element: SimHashes.Vacuum, ev: CellEventLogger.Instance.DebugTool, mass: 100f);
             }
+        }
+
+        private void AddStatus() {
+            KSelectable kSelectable = this.GetComponent<KSelectable>();
+            if (kSelectable != null) this.statusItemGuid = kSelectable.ReplaceStatusItem(this.statusItemGuid, PackAnything.PackAnythingStaticVars.WaitingSurvey);
+        }
+
+        private void RemoveStatus() {
+            KSelectable kSelectable = this.GetComponent<KSelectable>();
+            if (kSelectable != null) this.statusItemGuid = kSelectable.RemoveStatusItem(this.statusItemGuid);
         }
     }
 }

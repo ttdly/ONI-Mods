@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace PackAnything {
     [SerializationConfig(MemberSerialization.OptIn)]
-    [AddComponentMenu("KMonoBehaviour/Workable/UnPack")]
+    [AddComponentMenu("KMonoBehaviour/Workable/Becaon")]
     public class Beacon : Workable {
         private Chore chore;
         [Serialize]
@@ -35,7 +35,7 @@ namespace PackAnything {
 
         protected override void OnPrefabInit() {
             base.OnPrefabInit();
-            this.workerStatusItem = MixStatusItem.UnpackingItem;
+            this.workerStatusItem = PackAnythingStaticVars.ActivingBecaon;
             this.faceTargetWhenWorking = true;
             this.synchronizeAnims = false;
             this.requiredSkillPerk = PackAnythingStaticVars.CanPack.Id;
@@ -64,11 +64,17 @@ namespace PackAnything {
             this.OnClickCancel();
         }
 
+        protected override void OnAbortWork(Worker worker) {
+            base.OnAbortWork(worker);
+            if (this.isMarkForActive) {
+                this.AddStatus();
+            }
+        }
+
         protected override void OnStartWork(Worker worker) {
             base.OnStartWork(worker);
             this.progressBar.barColor = new Color(0.5f, 0.7f, 1.0f, 1f);
-            KSelectable kSelectable = this.GetComponent<KSelectable>();
-            if (kSelectable != null) this.statusItemGuid = kSelectable.RemoveStatusItem(this.statusItemGuid);
+            this.RemoveStatus();
         }
 
         // 自定义的方法
@@ -84,16 +90,17 @@ namespace PackAnything {
             this.isMarkForActive = false;
             this.chore.Cancel("Active.CancelChore");
             this.chore = null;
-            KSelectable kSelectable = this.GetComponent<KSelectable>();
-            if (kSelectable != null) this.statusItemGuid = kSelectable.RemoveStatusItem(this.statusItemGuid);
+            this.RemoveStatus();
         }
 
         public void OnClickActive() {
             this.isMarkForActive = true;
             if (this.chore != null) return;
-            this.chore = new WorkChore<Beacon>(PackAnythingChoreTypes.Active, this, only_when_operational: false);
-            KSelectable kSelectable = this.GetComponent<KSelectable>();
-            if (kSelectable != null) this.statusItemGuid = kSelectable.ReplaceStatusItem(this.statusItemGuid, MixStatusItem.WaitingUnpack);
+            this.chore = new WorkChore<Beacon>(Db.Get().ChoreTypes.Deconstruct, this, only_when_operational: false);
+            chore.choreType.statusItem = PackAnythingStaticVars.Active.statusItem;
+            chore.choreType.Name = PackAnythingStaticVars.Active.Name;
+            chore.choreType.reportName = PackAnythingStaticVars.Active.reportName;
+            AddStatus();
         }
 
         public void ActiveIt(Worker worker) {
@@ -110,7 +117,7 @@ namespace PackAnything {
                     this.CreateNeutronium(cell);
                     cell = Grid.CellAbove(cell);
                 }
-                Vector3 posCbc = Grid.CellToPosCBC(cell, originObject.GetComponent<KBatchedAnimController>().sceneLayer);
+                Vector3 posCbc = Grid.CellToPosCBC(cell, Grid.SceneLayer.Move);
                 float num = -0.15f;
                 posCbc.z += num;
                 originObject.transform.SetPosition(posCbc);
@@ -172,6 +179,16 @@ namespace PackAnything {
             reactable.SetEmote(emote);
             reactable.PairEmote(emoteChore);
             smi.AddOneshotReactable(reactable);
+        }
+
+        private void AddStatus() {
+            KSelectable kSelectable = this.GetComponent<KSelectable>();
+            if (kSelectable != null) this.statusItemGuid = kSelectable.ReplaceStatusItem(this.statusItemGuid, PackAnythingStaticVars.WaitingActive);
+        }
+
+        private void RemoveStatus() {
+            KSelectable kSelectable = this.GetComponent<KSelectable>();
+            if (kSelectable != null) this.statusItemGuid = kSelectable.RemoveStatusItem(this.statusItemGuid);
         }
     }
 }
