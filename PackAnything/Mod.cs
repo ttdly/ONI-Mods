@@ -44,10 +44,9 @@ namespace PackAnything {
                 { typeof(PropFacilityChandelierConfig), nameof(PropFacilityChandelierConfig.CreatePrefab) },
                 { typeof(PropTallPlantConfig), nameof(PropTallPlantConfig.CreatePrefab) },
                 { typeof(PropFacilityHangingLightConfig), nameof(PropFacilityHangingLightConfig.CreatePrefab) },
-                { typeof(WarpPortalConfig), nameof(WarpPortalConfig.CreatePrefab) },
                 { typeof(WarpReceiverConfig), nameof(WarpReceiverConfig.CreatePrefab) },
                 { typeof(CryoTankConfig), nameof(CryoTankConfig.CreatePrefab) },
-
+                { typeof(BaseBeeHiveConfig), nameof(BaseBeeHiveConfig.CreatePrefab)},
             };
             foreach (KeyValuePair<System.Type, string> pair in entityPatchMap) {
                 harmony.Patch(pair.Key.GetMethod(pair.Value), postfix: new HarmonyMethod(entityPostfix));
@@ -63,6 +62,8 @@ namespace PackAnything {
                 { typeof(TemporalTearOpenerConfig), nameof(TemporalTearOpenerConfig.DoPostConfigureComplete) },
                 { typeof(WarpConduitSenderConfig), nameof(WarpConduitSenderConfig.DoPostConfigureComplete) },
                 { typeof(WarpConduitReceiverConfig), nameof(WarpConduitReceiverConfig.DoPostConfigureComplete) },
+                { typeof(HeadquartersConfig), nameof(HeadquartersConfig.DoPostConfigureComplete) },
+                { typeof(MassiveHeatSinkConfig), nameof(MassiveHeatSinkConfig.DoPostConfigureComplete)}
             };
             foreach (KeyValuePair<System.Type, string> pair1 in buildingPatchMap) {
                 harmony.Patch(pair1.Key.GetMethod(pair1.Value), postfix: new HarmonyMethod(buildingPostfix));

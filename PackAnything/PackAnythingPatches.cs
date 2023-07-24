@@ -39,6 +39,13 @@ namespace PackAnything {
             }
         }
 
+        [HarmonyPatch(typeof(WarpPortalConfig),nameof(WarpPortalConfig.CreatePrefab))]
+        public class WarpPortalConfig_CreatePrefab_Patch { 
+            public static void Postfix(GameObject __result) {
+                __result.AddComponent<Manual>();
+            }
+        }
+
         //[HarmonyPatch(typeof(MegaBrainTankConfig), nameof(MegaBrainTankConfig.ConfigureBuildingTemplate))]
         //public class MegaBrainTankConfig_DoPostConfigureComplete_Patch {
         //    public static void Prefix(GameObject go) {

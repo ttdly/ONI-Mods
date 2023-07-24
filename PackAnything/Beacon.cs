@@ -16,6 +16,7 @@ namespace PackAnything {
         public bool isGeyser = false;
         [Serialize]
         public int originCell;
+        private int unoCount;
         private Guid statusItemGuid;
         public bool MarkFroPack => this.isMarkForActive;
         private CellOffset[] placementOffsets {
@@ -97,9 +98,9 @@ namespace PackAnything {
             this.isMarkForActive = true;
             if (this.chore != null) return;
             this.chore = new WorkChore<Beacon>(Db.Get().ChoreTypes.Deconstruct, this, only_when_operational: false);
-            chore.choreType.statusItem = PackAnythingStaticVars.Active.statusItem;
-            chore.choreType.Name = PackAnythingStaticVars.Active.Name;
-            chore.choreType.reportName = PackAnythingStaticVars.Active.reportName;
+            this.chore.choreType.statusItem = PackAnythingStaticVars.Active.statusItem;
+            this.chore.choreType.Name = PackAnythingStaticVars.Active.Name;
+            this.chore.choreType.reportName = PackAnythingStaticVars.Active.reportName;
             AddStatus();
         }
 
@@ -117,12 +118,13 @@ namespace PackAnything {
                     this.CreateNeutronium(cell);
                     cell = Grid.CellAbove(cell);
                 }
-                Vector3 posCbc = Grid.CellToPosCBC(cell, Grid.SceneLayer.Move);
+                Vector3 posCbc = Grid.CellToPosCBC(cell, originObject.FindOrAddComponent<KBatchedAnimController>().sceneLayer);
                 float num = -0.15f;
                 posCbc.z += num;
                 originObject.transform.SetPosition(posCbc);
                 originObject.SetActive(true);
-                originObject.FindOrAddComponent<OccupyArea>().ApplyToCells = true;
+                originObject.FindOrAddComponent<OccupyArea>().UpdateOccupiedArea();
+                originObject.RemoveTag("Surveyed");
             }
             Util.KDestroyGameObject(this.gameObject);
             if (worker.HasTag(GameTags.Minion)) {
@@ -138,6 +140,7 @@ namespace PackAnything {
                 Grid.CellRight(Grid.CellRight(cell))
             };
             foreach (int x in cells) {
+                if (this.unoCount == 0) continue;
                 if (Grid.Element.Length < x || Grid.Element[x] == null) {
                     PUtil.LogError("Out of index.");
                     new IndexOutOfRangeException();
@@ -146,6 +149,7 @@ namespace PackAnything {
                 Element e = Grid.Element[x];
                 if (!Grid.IsValidCell(x)) continue;
                 SimMessages.ReplaceElement( gameCell: x, new_element: SimHashes.Unobtanium, ev: CellEventLogger.Instance.DebugTool, mass: 100f);
+                this.unoCount--;
             }
         }
 
@@ -156,14 +160,16 @@ namespace PackAnything {
                 Grid.CellDownRight(cell),
                 Grid.CellRight(Grid.CellDownRight(cell))
             };
+            this.unoCount = 0;
             foreach (int x in cells) {
                 if (Grid.Element.Length < x || Grid.Element[x] == null) {
                     new IndexOutOfRangeException();
                     return;
                 }
                 Element e = Grid.Element[x];
-                if (!e.IsSolid && !e.id.ToString().ToUpperInvariant().Equals("UNOBTANIUM")) continue;
+                if (!e.IsSolid || !e.id.ToString().ToUpperInvariant().Equals("UNOBTANIUM")) continue;
                 SimMessages.ReplaceElement(gameCell: x, new_element: SimHashes.Vacuum, ev: CellEventLogger.Instance.DebugTool, mass: 100f);
+                this.unoCount++;
             }
         }
 

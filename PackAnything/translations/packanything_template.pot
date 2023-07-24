@@ -33,11 +33,6 @@ msgctxt "PackAnything.PackAnythingString.UI.PACK_IT.TOOLTIP_OFF"
 msgid "Cancel order to pack this object."
 msgstr ""
 
-#. PackAnything.PackAnythingString.UI.STATUS.MARK_FOR_PACK
-msgctxt "PackAnything.PackAnythingString.UI.STATUS.MARK_FOR_PACK"
-msgid "Mark for pack"
-msgstr ""
-
 #. PackAnything.PackAnythingString.UI.UNPACK_IT.NAME
 msgctxt "PackAnything.PackAnythingString.UI.UNPACK_IT.NAME"
 msgid "UnPack"
@@ -55,6 +50,86 @@ msgstr ""
 
 #. PackAnything.PackAnythingString.UI.UNPACK_IT.TOOLTIP_OFF
 msgctxt "PackAnything.PackAnythingString.UI.UNPACK_IT.TOOLTIP_OFF"
-msgid "Cancel order to unpack this object"
+msgid "Cancel order to unpack this item."
+msgstr ""
+
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.PACK.NAME
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.PACK.NAME"
+msgid "Pack"
+msgstr ""
+
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.PACK.REPORT_NAME
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.PACK.REPORT_NAME"
+msgid "Pack {0}"
+msgstr ""
+
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.PACK.STATUS
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.PACK.STATUS"
+msgid "Packing"
+msgstr ""
+
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.PACK.TOOLTIP
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.PACK.TOOLTIP"
+msgid "This Duplicant is attempting to pack the item."
+msgstr ""
+
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.NAME
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.NAME"
+msgid "Unpack"
+msgstr ""
+
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.REPORT_NAME
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.REPORT_NAME"
+msgid "Unpack {0}"
+msgstr ""
+
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.STATUS
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.STATUS"
+msgid "Unpacking"
+msgstr ""
+
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.TOOLTIP
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.TOOLTIP"
+msgid "This Duplicant is attempting to unpack a magic pack."
+msgstr ""
+
+#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.PACKINGITEM.NAME
+msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.PACKINGITEM.NAME"
+msgid "Packing"
+msgstr ""
+
+#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.PACKINGITEM.TOOLTIP
+msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.PACKINGITEM.TOOLTIP"
+msgid "This Duplicant is attempting to pack the item."
+msgstr ""
+
+#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.UNPACKINGITEM.NAME
+msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.UNPACKINGITEM.NAME"
+msgid "Unpacking"
+msgstr ""
+
+#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.UNPACKINGITEM.TOOLTIP
+msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.UNPACKINGITEM.TOOLTIP"
+msgid "This Duplicant is attempting to unpack a magic pack."
+msgstr ""
+
+#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGPACK.NAME
+msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGPACK.NAME"
+msgid "Pack Pending"
+msgstr ""
+
+#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGPACK.TOOLTIP
+msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGPACK.TOOLTIP"
+msgid "A Duplicant is in the process of packing this item."
+msgstr ""
+
+#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGUNPACK.NAME
+msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGUNPACK.NAME"
+msgid "Unpack Pending"
+msgstr ""
+
+#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGUNPACK.TOOLTIP
+msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGUNPACK.TOOLTIP"
+msgid "A Duplicant is in the process of unpacking this magic pack."
 msgstr ""
 

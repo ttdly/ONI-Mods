@@ -35,7 +35,6 @@ namespace PackAnything {
             this.synchronizeAnims = false;
             this.requiredSkillPerk = PackAnythingStaticVars.CanPack.Id;
             this.workerStatusItem = PackAnythingStaticVars.SurveyingItem;
-            //this.workerStatusItem = MixStatusItem.PackingItem;
             this.shouldShowSkillPerkStatusItem = false;
             this.attributeConverter = Db.Get().AttributeConverters.ConstructionSpeed;
             this.attributeExperienceMultiplier = DUPLICANTSTATS.ATTRIBUTE_LEVELING.MOST_DAY_EXPERIENCE;
@@ -76,7 +75,6 @@ namespace PackAnything {
             this.CreateBeacon();
             if ((UnityEngine.Object)DetailsScreen.Instance != (UnityEngine.Object)null && DetailsScreen.Instance.CompareTargetWith(this.gameObject))
                 DetailsScreen.Instance.Show(false);
-            this.gameObject.AddTag("Surveyed");
             this.OnClickCancel();
         }
 
@@ -107,11 +105,10 @@ namespace PackAnything {
             Prioritizable.AddRef(this.gameObject);
             this.isMarkForSurvey = true;
             if (this.chore != null) return;
-            //chore = new WorkChore<Surveyable>(PackAnythingChoreTypes.Survey, this, only_when_operational: false, is_preemptable: true);
-            chore = new WorkChore<Surveyable>(Db.Get().ChoreTypes.Build, this, only_when_operational: false);
-            chore.choreType.statusItem = PackAnythingStaticVars.Survey.statusItem;
-            chore.choreType.Name = PackAnythingStaticVars.Survey.Name;
-            chore.choreType.reportName = PackAnythingStaticVars.Survey.reportName;
+            this.chore = new WorkChore<Surveyable>(Db.Get().ChoreTypes.Build, this, only_when_operational: false);
+            this.chore.choreType.statusItem = PackAnythingStaticVars.Survey.statusItem;
+            this.chore.choreType.Name = PackAnythingStaticVars.Survey.Name;
+            this.chore.choreType.reportName = PackAnythingStaticVars.Survey.reportName;
             this.AddStatus();
         }
 
@@ -120,7 +117,6 @@ namespace PackAnything {
             go.SetActive(true);
             Beacon becaon = go.GetComponent<Beacon>();
             becaon.originCell = Grid.PosToCell(this.gameObject);
-            GameObject originGo = Grid.Objects[becaon.originCell, 1];
             if (this.gameObject.HasTag(GameTags.GeyserFeature)) {
                 becaon.isGeyser = true;
             }
@@ -131,6 +127,7 @@ namespace PackAnything {
                 name = Strings.Get("STRINGS.BUILDINGS.PREFABS." + this.gameObject.name.Replace("Complete", "").ToUpper() + ".NAME");
             }
             go.FindOrAddComponent<UserNameable>().savedName = name;
+            this.gameObject.AddTag("Surveyed");
         }
 
         public void DealWithNeutronium(int cell) {
