@@ -34,6 +34,9 @@ namespace PackAnything {
     }
 
     public class STRINGS {
+
+        public static LocString GENERATE_UNOBTANIUM = (LocString)"Generate Unobtanium";
+        public static LocString GENERATE_UNOBTANIUM_DESC = (LocString)"Whether or not does moving a geyser create neutronium";
         public class MISC {
             public class STATUSITEMS {
                 public class WAITINGSURVEY {

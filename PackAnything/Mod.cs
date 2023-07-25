@@ -2,6 +2,7 @@
 using PeterHan.PLib.AVC;
 using PeterHan.PLib.Core;
 using PeterHan.PLib.Database;
+using PeterHan.PLib.Options;
 using PeterHan.PLib.UI;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace PackAnything {
             new PLocalization().Register();
             LocString.CreateLocStringKeys(typeof(PackAnything.PackAnythingString), "");
             ModUtil.RegisterForTranslation(typeof(STRINGS));
+            new POptions().RegisterOptions(this,typeof(Options));
             this.ManualPatchs(harmony);
         }
 
@@ -45,6 +47,7 @@ namespace PackAnything {
                 { typeof(PropTallPlantConfig), nameof(PropTallPlantConfig.CreatePrefab) },
                 { typeof(PropFacilityHangingLightConfig), nameof(PropFacilityHangingLightConfig.CreatePrefab) },
                 { typeof(WarpReceiverConfig), nameof(WarpReceiverConfig.CreatePrefab) },
+                { typeof(WarpPortalConfig), nameof(WarpPortalConfig.CreatePrefab)},
                 { typeof(CryoTankConfig), nameof(CryoTankConfig.CreatePrefab) },
                 { typeof(BaseBeeHiveConfig), nameof(BaseBeeHiveConfig.CreatePrefab)},
             };

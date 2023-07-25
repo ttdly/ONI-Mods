@@ -1,6 +1,7 @@
 ﻿using Klei.AI;
 using KSerialization;
 using PeterHan.PLib.Core;
+using PeterHan.PLib.Options;
 using System;
 using TUNING;
 using UnityEngine;
@@ -57,6 +58,9 @@ namespace PackAnything {
             CellOffset[][] table = OffsetGroups.InvertedStandardTable;
             CellOffset[] filter = (CellOffset[])null;
             this.SetOffsetTable(OffsetGroups.BuildReachabilityTable(this.placementOffsets, table, filter));
+            if(isMarkForActive) {
+                this.OnClickActive();
+            }
         }
 
         protected override void OnCompleteWork(Worker worker) {
@@ -115,8 +119,10 @@ namespace PackAnything {
                 int cell = Grid.PosToCell(this.gameObject);
                 if (this.isGeyser) {
                     this.DeleteNeutronium(Grid.PosToCell(originObject));
-                    this.CreateNeutronium(cell);
-                    cell = Grid.CellAbove(cell);
+                    if (SingletonOptions<Options>.Instance.GenerateUnobtanium) {
+                        this.CreateNeutronium(cell);
+                        cell = Grid.CellAbove(cell);
+                    }
                 }
                 Vector3 posCbc = Grid.CellToPosCBC(cell, originObject.FindOrAddComponent<KBatchedAnimController>().sceneLayer);
                 float num = -0.15f;

@@ -3,133 +3,158 @@ msgstr ""
 "Application: Oxygen Not Included"
 "POT Version: 2.0"
 
-#. PackAnything.PackAnythingString.MISC.MAGIC_PACK.DESC
-msgctxt "PackAnything.PackAnythingString.MISC.MAGIC_PACK.DESC"
-msgid "Inside it, there are some things. Open it."
+#. PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.DESC
+msgctxt "PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.DESC"
+msgid "Record the information of an object, activate this beacon, and the recorded object will be moved to this location."
 msgstr ""
 
-#. PackAnything.PackAnythingString.MISC.MAGIC_PACK.NAME
-msgctxt "PackAnything.PackAnythingString.MISC.MAGIC_PACK.NAME"
-msgid "Magic Pack"
+#. PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.NAME
+msgctxt "PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.NAME"
+msgid "Displacement Beacon"
 msgstr ""
 
-#. PackAnything.PackAnythingString.UI.PACK_IT.NAME
-msgctxt "PackAnything.PackAnythingString.UI.PACK_IT.NAME"
-msgid "Pack"
+#. PackAnything.PackAnythingString.MISC.SKILL.PERK_DESC
+msgctxt "PackAnything.PackAnythingString.MISC.SKILL.PERK_DESC"
+msgid "Displacement Beacon Usage"
 msgstr ""
 
-#. PackAnything.PackAnythingString.UI.PACK_IT.NAME_OFF
-msgctxt "PackAnything.PackAnythingString.UI.PACK_IT.NAME_OFF"
-msgid "Cancel Pack"
+#. PackAnything.PackAnythingString.MISC.SURVEY.DESCRIPTION
+msgctxt "PackAnything.PackAnythingString.MISC.SURVEY.DESCRIPTION"
+msgid "Allow the Duplicant to survey the items"
 msgstr ""
 
-#. PackAnything.PackAnythingString.UI.PACK_IT.TOOLTIP
-msgctxt "PackAnything.PackAnythingString.UI.PACK_IT.TOOLTIP"
-msgid "Pack this object for move."
+#. PackAnything.PackAnythingString.MISC.SURVEY.NAME
+msgctxt "PackAnything.PackAnythingString.MISC.SURVEY.NAME"
+msgid "Survey"
 msgstr ""
 
-#. PackAnything.PackAnythingString.UI.PACK_IT.TOOLTIP_OFF
-msgctxt "PackAnything.PackAnythingString.UI.PACK_IT.TOOLTIP_OFF"
-msgid "Cancel order to pack this object."
+#. PackAnything.PackAnythingString.UI.ACTIVATE.NAME
+msgctxt "PackAnything.PackAnythingString.UI.ACTIVATE.NAME"
+msgid "Active"
 msgstr ""
 
-#. PackAnything.PackAnythingString.UI.UNPACK_IT.NAME
-msgctxt "PackAnything.PackAnythingString.UI.UNPACK_IT.NAME"
-msgid "UnPack"
+#. PackAnything.PackAnythingString.UI.ACTIVATE.NAME_OFF
+msgctxt "PackAnything.PackAnythingString.UI.ACTIVATE.NAME_OFF"
+msgid "Cancel Active"
 msgstr ""
 
-#. PackAnything.PackAnythingString.UI.UNPACK_IT.NAME_OFF
-msgctxt "PackAnything.PackAnythingString.UI.UNPACK_IT.NAME_OFF"
-msgid "Cancel UnPack"
+#. PackAnything.PackAnythingString.UI.ACTIVATE.TOOLTIP
+msgctxt "PackAnything.PackAnythingString.UI.ACTIVATE.TOOLTIP"
+msgid "Active the Displacement Beacon."
 msgstr ""
 
-#. PackAnything.PackAnythingString.UI.UNPACK_IT.TOOLTIP
-msgctxt "PackAnything.PackAnythingString.UI.UNPACK_IT.TOOLTIP"
-msgid "UnPacks Magic Pack packed by Duplicants."
+#. PackAnything.PackAnythingString.UI.ACTIVATE.TOOLTIP_OFF
+msgctxt "PackAnything.PackAnythingString.UI.ACTIVATE.TOOLTIP_OFF"
+msgid "Cancel order to active this item."
 msgstr ""
 
-#. PackAnything.PackAnythingString.UI.UNPACK_IT.TOOLTIP_OFF
-msgctxt "PackAnything.PackAnythingString.UI.UNPACK_IT.TOOLTIP_OFF"
-msgid "Cancel order to unpack this item."
+#. PackAnything.PackAnythingString.UI.SURVEY.NAME
+msgctxt "PackAnything.PackAnythingString.UI.SURVEY.NAME"
+msgid "Survey"
 msgstr ""
 
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.PACK.NAME
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.PACK.NAME"
-msgid "Pack"
+#. PackAnything.PackAnythingString.UI.SURVEY.NAME_OFF
+msgctxt "PackAnything.PackAnythingString.UI.SURVEY.NAME_OFF"
+msgid "Cancel Survey"
 msgstr ""
 
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.PACK.REPORT_NAME
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.PACK.REPORT_NAME"
-msgid "Pack {0}"
+#. PackAnything.PackAnythingString.UI.SURVEY.TOOLTIP
+msgctxt "PackAnything.PackAnythingString.UI.SURVEY.TOOLTIP"
+msgid "Survey this item for move."
 msgstr ""
 
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.PACK.STATUS
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.PACK.STATUS"
-msgid "Packing"
+#. PackAnything.PackAnythingString.UI.SURVEY.TOOLTIP_OFF
+msgctxt "PackAnything.PackAnythingString.UI.SURVEY.TOOLTIP_OFF"
+msgid "Cancel order to survey this item."
 msgstr ""
 
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.PACK.TOOLTIP
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.PACK.TOOLTIP"
-msgid "This Duplicant is attempting to pack the item."
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.NAME
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.NAME"
+msgid "Active"
 msgstr ""
 
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.NAME
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.NAME"
-msgid "Unpack"
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.REPORT_NAME
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.REPORT_NAME"
+msgid "Active {0}"
 msgstr ""
 
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.REPORT_NAME
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.REPORT_NAME"
-msgid "Unpack {0}"
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.STATUS
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.STATUS"
+msgid "Going to active"
 msgstr ""
 
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.STATUS
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.STATUS"
-msgid "Unpacking"
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.TOOLTIP
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.TOOLTIP"
+msgid "This Duplicant is active a displacement beacon"
 msgstr ""
 
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.TOOLTIP
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.UNPACK.TOOLTIP"
-msgid "This Duplicant is attempting to unpack a magic pack."
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.NAME
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.NAME"
+msgid "Survey"
 msgstr ""
 
-#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.PACKINGITEM.NAME
-msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.PACKINGITEM.NAME"
-msgid "Packing"
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.REPORT_NAME
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.REPORT_NAME"
+msgid "Survey {0}"
 msgstr ""
 
-#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.PACKINGITEM.TOOLTIP
-msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.PACKINGITEM.TOOLTIP"
-msgid "This Duplicant is attempting to pack the item."
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.STATUS
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.STATUS"
+msgid "Going to Survey"
 msgstr ""
 
-#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.UNPACKINGITEM.NAME
-msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.UNPACKINGITEM.NAME"
-msgid "Unpacking"
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.TOOLTIP
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.TOOLTIP"
+msgid "This Duplicant is surving an object"
 msgstr ""
 
-#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.UNPACKINGITEM.TOOLTIP
-msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.UNPACKINGITEM.TOOLTIP"
-msgid "This Duplicant is attempting to unpack a magic pack."
+#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.ACTIVEBEACON.NAME
+msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.ACTIVEBEACON.NAME"
+msgid "Activating beacon"
 msgstr ""
 
-#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGPACK.NAME
-msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGPACK.NAME"
-msgid "Pack Pending"
+#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.ACTIVEBEACON.TOOLTIP
+msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.ACTIVEBEACON.TOOLTIP"
+msgid "This Duplicant is activing a displacement beacon."
 msgstr ""
 
-#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGPACK.TOOLTIP
-msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGPACK.TOOLTIP"
-msgid "A Duplicant is in the process of packing this item."
+#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.SURVEYITEM.NAME
+msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.SURVEYITEM.NAME"
+msgid "Surveying"
 msgstr ""
 
-#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGUNPACK.NAME
-msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGUNPACK.NAME"
-msgid "Unpack Pending"
+#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.SURVEYITEM.TOOLTIP
+msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.SURVEYITEM.TOOLTIP"
+msgid "This Duplicant is surveying an object"
 msgstr ""
 
-#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGUNPACK.TOOLTIP
-msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGUNPACK.TOOLTIP"
-msgid "A Duplicant is in the process of unpacking this magic pack."
+#. PackAnything.STRINGS.GENERATE_UNOBTANIUM
+msgctxt "PackAnything.STRINGS.GENERATE_UNOBTANIUM"
+msgid "Generate Unobtanium"
+msgstr ""
+
+#. PackAnything.STRINGS.GENERATE_UNOBTANIUM_DESC
+msgctxt "PackAnything.STRINGS.GENERATE_UNOBTANIUM_DESC"
+msgid "Whether or not does moving a geyser create neutronium"
+msgstr ""
+
+#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGACTIVE.NAME
+msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGACTIVE.NAME"
+msgid "Active Errand"
+msgstr ""
+
+#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGACTIVE.TOOLTIP
+msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGACTIVE.TOOLTIP"
+msgid "Displacement beacon will be actived once a Duplicant is available"
+msgstr ""
+
+#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.NAME
+msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.NAME"
+msgid "Survey Errand"
+msgstr ""
+
+#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.TOOLTIP
+msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.TOOLTIP"
+msgid "Item will be surveyed once a Duplicant is available"
 msgstr ""
 

@@ -159,3 +159,8 @@ msgstr "测绘任务"
 msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.TOOLTIP"
 msgid "Item will be surveyed once a Duplicant is available"
 msgstr "复制人有空就会对这个物品进行测绘"
+
+#. PackAnything.STRINGS.GENERATE_UNOBTANIUM
+msgctxt "PackAnything.STRINGS.GENERATE_UNOBTANIUM"
+msgid "Generate Unobtanium"
+msgstr "生成中子物质"

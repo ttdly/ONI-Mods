@@ -13,7 +13,7 @@ namespace PackAnything {
         [Serialize]
         private bool isMarkForSurvey;
         private Guid statusItemGuid;
-        public bool MarkFroPack => this.isMarkForSurvey;
+        public bool MarkFroSurvey => this.isMarkForSurvey;
         private CellOffset[] PlacementOffsets {
             get {
                 Building component1 = this.GetComponent<Building>();
@@ -41,7 +41,6 @@ namespace PackAnything {
             this.skillExperienceSkillGroup = Db.Get().SkillGroups.Building.Id;
             this.skillExperienceMultiplier = SKILLS.MOST_DAY_EXPERIENCE;
             this.alwaysShowProgressBar = false;
-            this.faceTargetWhenWorking = false;
             this.multitoolContext = (HashedString)"build";
             this.multitoolHitEffectTag = (Tag)EffectConfigs.BuildSplashId;
             this.SetWorkTime(50f);
@@ -55,6 +54,9 @@ namespace PackAnything {
             CellOffset[][] table = OffsetGroups.InvertedStandardTable;
             CellOffset[] filter = (CellOffset[])null;
             this.SetOffsetTable(OffsetGroups.BuildReachabilityTable(this.PlacementOffsets, table, filter));
+            if (this.isMarkForSurvey) {
+                OnClickSurvey();
+            }
         }
 
         protected override void OnStartWork(Worker worker) {
@@ -65,7 +67,7 @@ namespace PackAnything {
 
         protected override void OnAbortWork(Worker worker) {
             base.OnAbortWork(worker);
-            if (this.MarkFroPack) {
+            if (this.MarkFroSurvey) {
                 this.AddStatus();
             }
         }
@@ -86,7 +88,7 @@ namespace PackAnything {
 
         // 自定义的方法
         public void OnRefreshUserMenu(object data) {
-            if (this.gameObject.HasTag("Surveyed")) return;
+            if (this.gameObject.HasTag("Surveyed") || this.gameObject.HasTag("DontShowPack")) return;
             if (this.gameObject.HasTag("OilWell") && this.gameObject.GetComponent<BuildingAttachPoint>()?.points[0].attachedBuilding != null) return;
             Game.Instance.userMenu.AddButton(this.gameObject, this.isMarkForSurvey ? new KIconButtonMenu.ButtonInfo("action_follow_cam", PackAnythingString.UI.SURVEY.NAME_OFF, new System.Action(this.OnClickCancel), tooltipText: PackAnythingString.UI.SURVEY.TOOLTIP_OFF) : new KIconButtonMenu.ButtonInfo("action_follow_cam", PackAnythingString.UI.SURVEY.NAME, new System.Action(this.OnClickSurvey), tooltipText: PackAnythingString.UI.SURVEY.TOOLTIP));
         }
@@ -128,24 +130,6 @@ namespace PackAnything {
             }
             go.FindOrAddComponent<UserNameable>().savedName = name;
             this.gameObject.AddTag("Surveyed");
-        }
-
-        public void DealWithNeutronium(int cell) {
-            int[] cells = new[]{
-                Grid.CellDownLeft(cell),
-                Grid.CellBelow(cell),
-                Grid.CellDownRight(cell),
-                Grid.CellRight(Grid.CellDownRight(cell))
-            };
-            foreach (int x in cells) {
-                if (Grid.Element.Length < x || Grid.Element[x] == null) {
-                    new IndexOutOfRangeException();
-                    return;
-                }
-                Element e = Grid.Element[x];
-                if (!e.IsSolid || !e.id.ToString().ToUpperInvariant().Equals("UNOBTANIUM")) continue;
-                SimMessages.ReplaceElement(gameCell: x, new_element: SimHashes.Vacuum, ev: CellEventLogger.Instance.DebugTool, mass: 100f);
-            }
         }
 
         private void AddStatus() {
