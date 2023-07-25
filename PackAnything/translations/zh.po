@@ -13,57 +13,154 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Language: zh_CN\n"
 
-#. PackAnything.PackAnythingString.MISC.MAGIC_PACK.DESC
-msgctxt "PackAnything.PackAnythingString.MISC.MAGIC_PACK.DESC"
-msgid "Inside it, there are some things. Open it."
-msgstr "这个包裹里面有些东西，打开就能看到。"
+#. PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.DESC
+msgctxt "PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.DESC"
+msgid ""
+"Record the information of an object, activate this beacon, and the recorded "
+"object will be moved to this location."
+msgstr "记录一个物体的信息，激活该信标，记录的物体就会被移动到这个位置。"
 
-#. PackAnything.PackAnythingString.MISC.MAGIC_PACK.NAME
-msgctxt "PackAnything.PackAnythingString.MISC.MAGIC_PACK.NAME"
-msgid "Magic Pack"
-msgstr "神奇包裹"
+#. PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.NAME
+msgctxt "PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.NAME"
+msgid "Displacement Beacon"
+msgstr "位移信标"
 
-#. PackAnything.PackAnythingString.UI.PACK_IT.NAME
-msgctxt "PackAnything.PackAnythingString.UI.PACK_IT.NAME"
-msgid "Pack"
-msgstr "打包"
+#. PackAnything.PackAnythingString.MISC.SKILL.PERK_DESC
+msgctxt "PackAnything.PackAnythingString.MISC.SKILL.PERK_DESC"
+msgid "Displacement Beacon Usage"
+msgstr "位移信标的使用"
 
-#. PackAnything.PackAnythingString.UI.PACK_IT.NAME_OFF
-msgctxt "PackAnything.PackAnythingString.UI.PACK_IT.NAME_OFF"
-msgid "Cancel Pack"
-msgstr "取消打包"
+#. PackAnything.PackAnythingString.MISC.SURVEY.DESCRIPTION
+msgctxt "PackAnything.PackAnythingString.MISC.SURVEY.DESCRIPTION"
+msgid "Allow the Duplicant to survey the items"
+msgstr "允许复制人对物品进行测绘"
 
-#. PackAnything.PackAnythingString.UI.PACK_IT.TOOLTIP
-msgctxt "PackAnything.PackAnythingString.UI.PACK_IT.TOOLTIP"
-msgid "Pack this object for move."
-msgstr "打包这个物品。"
+#. PackAnything.PackAnythingString.MISC.SURVEY.NAME
+msgctxt "PackAnything.PackAnythingString.MISC.SURVEY.NAME"
+msgid "Survey"
+msgstr "测绘"
 
-#. PackAnything.PackAnythingString.UI.PACK_IT.TOOLTIP_OFF
-msgctxt "PackAnything.PackAnythingString.UI.PACK_IT.TOOLTIP_OFF"
-msgid "Cancel order to pack this object."
-msgstr "取消对这个物品的打包。"
+#. PackAnything.PackAnythingString.UI.ACTIVATE.NAME
+msgctxt "PackAnything.PackAnythingString.UI.ACTIVATE.NAME"
+msgid "Active"
+msgstr "激活"
 
-#. PackAnything.PackAnythingString.UI.STATUS.MARK_FOR_PACK
-msgctxt "PackAnything.PackAnythingString.UI.STATUS.MARK_FOR_PACK"
-msgid "Mark for pack"
-msgstr "被标记为需要打包"
+#. PackAnything.PackAnythingString.UI.ACTIVATE.NAME_OFF
+msgctxt "PackAnything.PackAnythingString.UI.ACTIVATE.NAME_OFF"
+msgid "Cancel Active"
+msgstr "取消激活"
 
-#. PackAnything.PackAnythingString.UI.UNPACK_IT.NAME
-msgctxt "PackAnything.PackAnythingString.UI.UNPACK_IT.NAME"
-msgid "UnPack"
-msgstr "拆开"
+#. PackAnything.PackAnythingString.UI.ACTIVATE.TOOLTIP
+msgctxt "PackAnything.PackAnythingString.UI.ACTIVATE.TOOLTIP"
+msgid "Active the Displacement Beacon."
+msgstr "激活位移信标"
 
-#. PackAnything.PackAnythingString.UI.UNPACK_IT.NAME_OFF
-msgctxt "PackAnything.PackAnythingString.UI.UNPACK_IT.NAME_OFF"
-msgid "Cancel UnPack"
-msgstr "取消拆开"
+#. PackAnything.PackAnythingString.UI.ACTIVATE.TOOLTIP_OFF
+msgctxt "PackAnything.PackAnythingString.UI.ACTIVATE.TOOLTIP_OFF"
+msgid "Cancel order to active this item."
+msgstr "取消位移信标的激活"
 
-#. PackAnything.PackAnythingString.UI.UNPACK_IT.TOOLTIP
-msgctxt "PackAnything.PackAnythingString.UI.UNPACK_IT.TOOLTIP"
-msgid "UnPacks Magic Pack packed by Duplicants."
-msgstr "打开由复制人打包的包裹。"
+#. PackAnything.PackAnythingString.UI.SURVEY.NAME
+msgctxt "PackAnything.PackAnythingString.UI.SURVEY.NAME"
+msgid "Survey"
+msgstr "测绘"
 
-#. PackAnything.PackAnythingString.UI.UNPACK_IT.TOOLTIP_OFF
-msgctxt "PackAnything.PackAnythingString.UI.UNPACK_IT.TOOLTIP_OFF"
-msgid "Cancel order to unpack this object"
-msgstr "取消拆开这个包裹。"
+#. PackAnything.PackAnythingString.UI.SURVEY.NAME_OFF
+msgctxt "PackAnything.PackAnythingString.UI.SURVEY.NAME_OFF"
+msgid "Cancel Survey"
+msgstr "取消测绘"
+
+#. PackAnything.PackAnythingString.UI.SURVEY.TOOLTIP
+msgctxt "PackAnything.PackAnythingString.UI.SURVEY.TOOLTIP"
+msgid "Survey this item for move."
+msgstr "测绘这个物品以便移动"
+
+#. PackAnything.PackAnythingString.UI.SURVEY.TOOLTIP_OFF
+msgctxt "PackAnything.PackAnythingString.UI.SURVEY.TOOLTIP_OFF"
+msgid "Cancel order to survey this item."
+msgstr "取消对这个物品的测绘"
+
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.NAME
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.NAME"
+msgid "Active"
+msgstr "激活"
+
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.REPORT_NAME
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.REPORT_NAME"
+msgid "Active {0}"
+msgstr "激活 {0}"
+
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.STATUS
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.STATUS"
+msgid "Going to active"
+msgstr "正在前去激活信标"
+
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.TOOLTIP
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.TOOLTIP"
+msgid "This Duplicant is active a displacement beacon"
+msgstr "这名复制人正在激活位移信标"
+
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.NAME
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.NAME"
+msgid "Survey"
+msgstr "测绘"
+
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.REPORT_NAME
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.REPORT_NAME"
+msgid "Survey {0}"
+msgstr "测绘 {0}"
+
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.STATUS
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.STATUS"
+msgid "Going to Survey"
+msgstr "正在前去测绘"
+
+#. PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.TOOLTIP
+msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.TOOLTIP"
+msgid "This Duplicant is surving an object"
+msgstr "这名复制人正在测绘物品"
+
+#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.ACTIVEBEACON.NAME
+msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.ACTIVEBEACON.NAME"
+msgid "Activating beacon"
+msgstr "激活信标"
+
+#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.ACTIVEBEACON.TOOLTIP
+msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.ACTIVEBEACON.TOOLTIP"
+msgid "This Duplicant is activing a displacement beacon."
+msgstr "这名复制人正在激活信标"
+
+#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.SURVEYITEM.NAME
+msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.SURVEYITEM.NAME"
+msgid "Surveying"
+msgstr "测绘"
+
+#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.SURVEYITEM.TOOLTIP
+msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.SURVEYITEM.TOOLTIP"
+msgid "This Duplicant is surveying an object"
+msgstr "这名复制人正在测绘物品"
+
+#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGACTIVE.NAME
+msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGACTIVE.NAME"
+msgid "Active Errand"
+msgstr "激活任务"
+
+#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGACTIVE.TOOLTIP
+msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGACTIVE.TOOLTIP"
+msgid "Displacement beacon will be actived once a Duplicant is available"
+msgstr "复制人有空就会来激活这个位移信标"
+
+#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.NAME
+msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.NAME"
+msgid "Survey Errand"
+msgstr "测绘任务"
+
+#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.TOOLTIP
+msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.TOOLTIP"
+msgid "Item will be surveyed once a Duplicant is available"
+msgstr "复制人有空就会对这个物品进行测绘"
+
+#. PackAnything.STRINGS.GENERATE_UNOBTANIUM
+msgctxt "PackAnything.STRINGS.GENERATE_UNOBTANIUM"
+msgid "Generate Unobtanium"
+msgstr "生成中子物质"

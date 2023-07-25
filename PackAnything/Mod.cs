@@ -2,8 +2,10 @@
 using PeterHan.PLib.AVC;
 using PeterHan.PLib.Core;
 using PeterHan.PLib.Database;
+using PeterHan.PLib.Options;
+using PeterHan.PLib.UI;
 using System.Collections.Generic;
-
+using UnityEngine;
 
 namespace PackAnything {
     public class Mod : KMod.UserMod2 {
@@ -12,10 +14,11 @@ namespace PackAnything {
             PUtil.InitLibrary();
             new PVersionCheck().Register(this, new SteamVersionChecker());
             new PLocalization().Register();
-            LocString.CreateLocStringKeys(typeof(PackAnythingString), "");
+            LocString.CreateLocStringKeys(typeof(PackAnything.PackAnythingString), "");
+            ModUtil.RegisterForTranslation(typeof(STRINGS));
+            new POptions().RegisterOptions(this,typeof(Options));
             this.ManualPatchs(harmony);
         }
-
 
         public void ManualPatchs(Harmony harmony) {
 
@@ -42,8 +45,11 @@ namespace PackAnything {
                 { typeof(PropFacilityStatueConfig), nameof(PropFacilityStatueConfig.CreatePrefab) },
                 { typeof(PropFacilityChandelierConfig), nameof(PropFacilityChandelierConfig.CreatePrefab) },
                 { typeof(PropTallPlantConfig), nameof(PropTallPlantConfig.CreatePrefab) },
-                { typeof(PropFacilityHangingLightConfig), nameof(PropFacilityHangingLightConfig.CreatePrefab) }
-
+                { typeof(PropFacilityHangingLightConfig), nameof(PropFacilityHangingLightConfig.CreatePrefab) },
+                { typeof(WarpReceiverConfig), nameof(WarpReceiverConfig.CreatePrefab) },
+                { typeof(WarpPortalConfig), nameof(WarpPortalConfig.CreatePrefab)},
+                { typeof(CryoTankConfig), nameof(CryoTankConfig.CreatePrefab) },
+                { typeof(BaseBeeHiveConfig), nameof(BaseBeeHiveConfig.CreatePrefab)},
             };
             foreach (KeyValuePair<System.Type, string> pair in entityPatchMap) {
                 harmony.Patch(pair.Key.GetMethod(pair.Value), postfix: new HarmonyMethod(entityPostfix));
@@ -56,6 +62,11 @@ namespace PackAnything {
                 { typeof(FossilDigSiteConfig), nameof(FossilDigSiteConfig.DoPostConfigureComplete)},
                 { typeof(GravitasCreatureManipulatorConfig), nameof(GravitasCreatureManipulatorConfig.DoPostConfigureComplete) },
                 { typeof(GravitasContainerConfig), nameof(GravitasContainerConfig.DoPostConfigureComplete) },
+                { typeof(TemporalTearOpenerConfig), nameof(TemporalTearOpenerConfig.DoPostConfigureComplete) },
+                { typeof(WarpConduitSenderConfig), nameof(WarpConduitSenderConfig.DoPostConfigureComplete) },
+                { typeof(WarpConduitReceiverConfig), nameof(WarpConduitReceiverConfig.DoPostConfigureComplete) },
+                { typeof(HeadquartersConfig), nameof(HeadquartersConfig.DoPostConfigureComplete) },
+                { typeof(MassiveHeatSinkConfig), nameof(MassiveHeatSinkConfig.DoPostConfigureComplete)}
             };
             foreach (KeyValuePair<System.Type, string> pair1 in buildingPatchMap) {
                 harmony.Patch(pair1.Key.GetMethod(pair1.Value), postfix: new HarmonyMethod(buildingPostfix));
