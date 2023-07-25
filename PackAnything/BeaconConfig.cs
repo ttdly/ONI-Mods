@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using TUNING;
 using UnityEngine;
-using static STRINGS.ITEMS;
 
 namespace PackAnything {
     public class BeaconConfig : IEntityConfig {
@@ -24,7 +23,7 @@ namespace PackAnything {
             placeEntity.AddOrGet<Movable>();
             placeEntity.AddOrGet<Beacon>();
             placeEntity.AddOrGet<UserNameable>();
-            Prioritizable.AddRef(placeEntity);
+            placeEntity.AddOrGet<Prioritizable>();
             return placeEntity;
         }
 

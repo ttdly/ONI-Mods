@@ -67,6 +67,7 @@ namespace PackAnything {
             base.OnCompleteWork(worker);
             this.ActiveIt(worker);
             this.OnClickCancel();
+           
         }
 
         protected override void OnAbortWork(Worker worker) {
@@ -96,9 +97,11 @@ namespace PackAnything {
             this.chore.Cancel("Active.CancelChore");
             this.chore = null;
             this.RemoveStatus();
+            Prioritizable.RemoveRef(this.gameObject);
         }
 
         public void OnClickActive() {
+            Prioritizable.AddRef(this.gameObject);
             this.isMarkForActive = true;
             if (this.chore != null) return;
             this.chore = new WorkChore<Beacon>(Db.Get().ChoreTypes.Deconstruct, this, only_when_operational: false);

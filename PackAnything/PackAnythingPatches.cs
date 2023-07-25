@@ -53,12 +53,5 @@ namespace PackAnything {
                 __result.AddTag("DontShowPack");
             }
         }
-
-        //[HarmonyPatch(typeof(MegaBrainTankConfig), nameof(MegaBrainTankConfig.ConfigureBuildingTemplate))]
-        //public class MegaBrainTankConfig_DoPostConfigureComplete_Patch {
-        //    public static void Prefix(GameObject go) {
-        //        go.AddOrGet<Packable>();
-        //    }
-        //}
     }
 }
