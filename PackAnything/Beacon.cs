@@ -20,18 +20,6 @@ namespace PackAnything {
         private int unoCount;
         private Guid statusItemGuid;
         public bool MarkFroPack => this.isMarkForActive;
-        private CellOffset[] placementOffsets {
-            get {
-                Building component1 = this.GetComponent<Building>();
-                if ((UnityEngine.Object)component1 != (UnityEngine.Object)null)
-                    return component1.Def.PlacementOffsets;
-                OccupyArea component2 = this.GetComponent<OccupyArea>();
-                if ((UnityEngine.Object)component2 != (UnityEngine.Object)null)
-                    return component2.OccupiedCellsOffsets;
-                Debug.Assert(false, (object)"Ack! We put a Packable on something that's neither a Building nor OccupyArea!", (UnityEngine.Object)this);
-                return (CellOffset[])null;
-            }
-        }
 
         private static readonly EventSystem.IntraObjectHandler<Beacon> OnRefreshUserMenuDelegate = new EventSystem.IntraObjectHandler<Beacon>((Action<Beacon, object>)((component, data) => component.OnRefreshUserMenu(data)));
 
@@ -45,8 +33,12 @@ namespace PackAnything {
             this.attributeExperienceMultiplier = DUPLICANTSTATS.ATTRIBUTE_LEVELING.MOST_DAY_EXPERIENCE;
             this.skillExperienceSkillGroup = Db.Get().SkillGroups.Building.Id;
             this.skillExperienceMultiplier = SKILLS.MOST_DAY_EXPERIENCE;
-            this.multitoolContext = (HashedString)"demolish";
-            this.multitoolHitEffectTag = (Tag)EffectConfigs.DemolishSplashId;
+            this.overrideAnims = new KAnimFile[1]{
+                Assets.GetAnim((HashedString) "anim_interacts_dumpable_kanim")
+            };
+            this.workAnims = new HashedString[1]{
+                (HashedString) "working"
+            };
             this.faceTargetWhenWorking = true;
             this.SetWorkTime(50f);
         }
@@ -55,9 +47,6 @@ namespace PackAnything {
             base.OnSpawn();
             this.Subscribe<Beacon>((int)GameHashes.RefreshUserMenu, Beacon.OnRefreshUserMenuDelegate);
             this.Subscribe<Beacon>((int)GameHashes.StatusChange, Beacon.OnRefreshUserMenuDelegate);
-            CellOffset[][] table = OffsetGroups.InvertedStandardTable;
-            CellOffset[] filter = (CellOffset[])null;
-            this.SetOffsetTable(OffsetGroups.BuildReachabilityTable(this.placementOffsets, table, filter));
             if(isMarkForActive) {
                 this.OnClickActive();
             }
