@@ -18,6 +18,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoreMovable", "MoreMovable\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PackAnything", "PackAnything\PackAnything.csproj", "{58D02FE3-4D30-433B-8D4E-91846CBF1757}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuckyChallenge", "LuckyChallenge\LuckyChallenge.csproj", "{88DB0B00-248F-4B6D-BBDA-9A9D5007911D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mergedown = Debug|Mergedown
@@ -58,6 +60,14 @@ Global
 		{58D02FE3-4D30-433B-8D4E-91846CBF1757}.Release|Mergedown.Build.0 = Release|Mergedown
 		{58D02FE3-4D30-433B-8D4E-91846CBF1757}.Release|Vanilla.ActiveCfg = Release|Vanilla
 		{58D02FE3-4D30-433B-8D4E-91846CBF1757}.Release|Vanilla.Build.0 = Release|Vanilla
+		{88DB0B00-248F-4B6D-BBDA-9A9D5007911D}.Debug|Mergedown.ActiveCfg = Debug|Mergedown
+		{88DB0B00-248F-4B6D-BBDA-9A9D5007911D}.Debug|Mergedown.Build.0 = Debug|Mergedown
+		{88DB0B00-248F-4B6D-BBDA-9A9D5007911D}.Debug|Vanilla.ActiveCfg = Debug|Vanilla
+		{88DB0B00-248F-4B6D-BBDA-9A9D5007911D}.Debug|Vanilla.Build.0 = Debug|Vanilla
+		{88DB0B00-248F-4B6D-BBDA-9A9D5007911D}.Release|Mergedown.ActiveCfg = Release|Mergedown
+		{88DB0B00-248F-4B6D-BBDA-9A9D5007911D}.Release|Mergedown.Build.0 = Release|Mergedown
+		{88DB0B00-248F-4B6D-BBDA-9A9D5007911D}.Release|Vanilla.ActiveCfg = Release|Vanilla
+		{88DB0B00-248F-4B6D-BBDA-9A9D5007911D}.Release|Vanilla.Build.0 = Release|Vanilla
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
