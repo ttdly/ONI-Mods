@@ -54,11 +54,11 @@ namespace PackAnything {
             }
         }
 
-        //[HarmonyPatch(typeof(MegaBrainTankConfig), nameof(MegaBrainTankConfig.ConfigureBuildingTemplate))]
-        //public class MegaBrainTankConfig_DoPostConfigureComplete_Patch {
-        //    public static void Prefix(GameObject go) {
-        //        go.AddOrGet<Packable>();
-        //    }
-        //}
+        [HarmonyPatch(typeof(MegaBrainTank), "OnSpawn")]
+        public class MegaBrainTank_OnSpawn_Patch { 
+            public static void Postfix(MegaBrainTank __instance) {
+                __instance.gameObject.AddOrGet<Surveyable>();
+            }
+        }
     }
 }

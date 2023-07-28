@@ -1,5 +1,4 @@
 ﻿using KSerialization;
-using PeterHan.PLib.Core;
 using System;
 using TUNING;
 using UnityEngine;
@@ -128,6 +127,7 @@ namespace PackAnything {
             } else {
                 name = Strings.Get("STRINGS.BUILDINGS.PREFABS." + this.gameObject.name.Replace("Complete", "").ToUpper() + ".NAME");
             }
+            if(name.IndexOf("MISSING") != -1) name = this.gameObject.name;
             go.FindOrAddComponent<UserNameable>().savedName = name;
             this.gameObject.AddTag("Surveyed");
         }
