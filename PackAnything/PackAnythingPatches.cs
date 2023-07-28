@@ -53,5 +53,12 @@ namespace PackAnything {
                 __result.AddTag("DontShowPack");
             }
         }
+
+        [HarmonyPatch(typeof(MegaBrainTank), "OnSpawn")]
+        public class MegaBrainTank_OnSpawn_Patch { 
+            public static void Postfix(MegaBrainTank __instance) {
+                __instance.gameObject.AddOrGet<Surveyable>();
+            }
+        }
     }
 }

@@ -5,6 +5,7 @@ using PeterHan.PLib.Options;
 using System;
 using TUNING;
 using UnityEngine;
+using static WorldGenSpawner.Spawnable;
 
 namespace PackAnything {
     [SerializationConfig(MemberSerialization.OptIn)]
@@ -34,10 +35,7 @@ namespace PackAnything {
             this.skillExperienceSkillGroup = Db.Get().SkillGroups.Building.Id;
             this.skillExperienceMultiplier = SKILLS.MOST_DAY_EXPERIENCE;
             this.overrideAnims = new KAnimFile[1]{
-                Assets.GetAnim((HashedString) "anim_interacts_dumpable_kanim")
-            };
-            this.workAnims = new HashedString[1]{
-                (HashedString) "working"
+                Assets.GetAnim((HashedString) "anim_use_machine_kanim")
             };
             this.faceTargetWhenWorking = true;
             this.SetWorkTime(50f);
@@ -54,9 +52,9 @@ namespace PackAnything {
 
         protected override void OnCompleteWork(Worker worker) {
             base.OnCompleteWork(worker);
+            if (this.gameObject.HasTag(GameTags.Stored)) return;
             this.ActiveIt(worker);
             this.OnClickCancel();
-           
         }
 
         protected override void OnAbortWork(Worker worker) {
@@ -64,12 +62,14 @@ namespace PackAnything {
             if (this.isMarkForActive) {
                 this.AddStatus();
             }
+            this.LightActive(false);
         }
 
         protected override void OnStartWork(Worker worker) {
             base.OnStartWork(worker);
             this.progressBar.barColor = new Color(0.5f, 0.7f, 1.0f, 1f);
             this.RemoveStatus();
+            this.LightActive(true);
         }
 
         // 自定义的方法
@@ -87,6 +87,7 @@ namespace PackAnything {
             this.chore = null;
             this.RemoveStatus();
             Prioritizable.RemoveRef(this.gameObject);
+            this.LightActive(false);
         }
 
         public void OnClickActive() {
@@ -98,6 +99,9 @@ namespace PackAnything {
             this.chore.choreType.Name = PackAnythingStaticVars.Active.Name;
             this.chore.choreType.reportName = PackAnythingStaticVars.Active.reportName;
             AddStatus();
+            Pickupable pickupable = gameObject.GetComponent<Pickupable>();
+            pickupable.OnTake += (Func<float, Pickupable>)(amount => this.Take(pickupable, amount));
+            gameObject.GetComponent<Pickupable>().CanAbsorb = (Pickupable other) => true;
         }
 
         public void ActiveIt(Worker worker) {
@@ -124,10 +128,18 @@ namespace PackAnything {
                 originObject.FindOrAddComponent<OccupyArea>().UpdateOccupiedArea();
                 originObject.RemoveTag("Surveyed");
             }
-            Util.KDestroyGameObject(this.gameObject);
+            
+            KBatchedAnimController kBatchedAnimController = this.gameObject.GetComponent<KBatchedAnimController>();
+            kBatchedAnimController.Play("destroy");
+            kBatchedAnimController.destroyOnAnimComplete = true;
             if (worker.HasTag(GameTags.Minion)) {
                 RegisterReactEmotePair("ActiveBecaon", Db.Get().Emotes.Minion.ResearchComplete, 3f, worker);
             }
+        }
+
+        public Pickupable Take(Pickupable pickupable, float amount) {
+            this.OnClickCancel();
+            return pickupable;
         }
 
         public void CreateNeutronium(int cell) {
@@ -193,6 +205,20 @@ namespace PackAnything {
         private void RemoveStatus() {
             KSelectable kSelectable = this.GetComponent<KSelectable>();
             if (kSelectable != null) this.statusItemGuid = kSelectable.RemoveStatusItem(this.statusItemGuid);
+        }
+
+        private void LightActive(bool on) {
+            if (on) {
+                Light2D light2D = this.gameObject.AddOrGet<Light2D>();
+                light2D.Color = new Color(0.6f, 0f, 0.6f, 1f);
+                light2D.Range = 5f;
+                light2D.Offset = new Vector2(0, 1);
+                light2D.overlayColour = new Color(0.8f, 0f, 0.8f, 1f);
+                light2D.shape = LightShape.Circle;
+                light2D.drawOverlay = true;
+            } else {
+                Destroy(this.gameObject.AddOrGet<Light2D>());
+            }
         }
     }
 }

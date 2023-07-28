@@ -64,7 +64,8 @@ namespace PackAnything {
                 { typeof(WarpConduitSenderConfig), nameof(WarpConduitSenderConfig.DoPostConfigureComplete) },
                 { typeof(WarpConduitReceiverConfig), nameof(WarpConduitReceiverConfig.DoPostConfigureComplete) },
                 { typeof(HeadquartersConfig), nameof(HeadquartersConfig.DoPostConfigureComplete) },
-                { typeof(MassiveHeatSinkConfig), nameof(MassiveHeatSinkConfig.DoPostConfigureComplete)}
+                { typeof(MassiveHeatSinkConfig), nameof(MassiveHeatSinkConfig.DoPostConfigureComplete)},
+                { typeof(ExobaseHeadquartersConfig), nameof(ExobaseHeadquartersConfig.DoPostConfigureComplete) }
             };
             foreach (KeyValuePair<System.Type, string> pair1 in buildingPatchMap) {
                 harmony.Patch(pair1.Key.GetMethod(pair1.Value), postfix: new HarmonyMethod(buildingPostfix));
