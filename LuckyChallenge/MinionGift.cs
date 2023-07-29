@@ -18,8 +18,11 @@ namespace LuckyChallenge {
         }
 
         private void OnStopSleep(object data) {
-            GameObject go = GameUtil.KInstantiate(Assets.GetPrefab((Tag)GiftConfig.ID), Grid.CellToPos(Grid.CellAbove(Grid.PosToCell(this.gameObject))), Grid.SceneLayer.Creatures, name: this.gameObject.name);
-            go.GetComponent<KBatchedAnimController>().Queue("idle_" + new System.Random().Next(1, 5));
+            Vector3 position = Grid.CellToPos(Grid.CellAbove(Grid.PosToCell(this.gameObject)));
+            GameObject go = GameUtil.KInstantiate(Assets.GetPrefab((Tag)GiftConfig.ID), position, Grid.SceneLayer.Move, name: this.gameObject.name);
+            Gift gift = go.GetComponent<Gift>();
+            gift.count = 2;
+            gift.anim = "normal_min";
             go.SetActive(true);
         }
     }

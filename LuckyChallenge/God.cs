@@ -3,7 +3,42 @@ using System.Linq;
 using UnityEngine;
 
 namespace LuckyChallenge {
+    public enum GiftType {
+        Normal,
+        Room,
+        Creature,
+        Food
+    }
+
     public class God {
+
+        public static void OpenTheGift(GiftType type, int cell = 0, int num = 0,Worker worker = null) {
+            switch (type) {
+                case GiftType.Normal: God.RandomInAllElement(cell, num); break;
+                case GiftType.Room: God.RandomRoom(cell,worker); break;
+            }
+        }
+
+        public static void RandomRoom(int cell, Worker worker) {
+            string dic = "hq";
+            TemplateContainer template = TemplateCache.GetTemplate(dic);
+            if (template == null || template.cells == null) return;
+            int workerCell = Grid.PosToCell(worker);
+            Vector2f templateSize = template.info.size;
+            int x = Mathf.FloorToInt((float)(-(double)templateSize.X / 2.0));
+            int y = Mathf.FloorToInt((float)(-(double)templateSize.Y / 2.0));
+            int cellTopLeft = Grid.OffsetCell(cell, x, y);
+            cellTopLeft = Grid.CellLeft(cellTopLeft);
+            Vector3 posCbc = Grid.CellToPosCBC(cellTopLeft, Grid.SceneLayer.Move);
+            worker.transform.SetPosition(posCbc);
+            int centerCell = Grid.OffsetCell(cell, 0, -y);
+            TemplateLoader.Stamp(template, Grid.CellToXY(centerCell), (System.Action)(() => God.TransWorker(worker,cell)));
+        }
+
+        public static void TransWorker(Worker worker, int cell) {
+            worker.transform.SetPosition(Grid.CellToPosCBC(cell, Grid.SceneLayer.Move));
+        }
+
         public static void RandomInAllElement(int cell, int num) {
             System.Random random = new System.Random();
             cell = Grid.OffsetCell(cell, 0, 1);

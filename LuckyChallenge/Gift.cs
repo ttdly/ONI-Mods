@@ -7,8 +7,11 @@ namespace LuckyChallenge {
         private bool isMarkForSurvey;
         private Worker currWorker;
         private int workerCell;
+        public int count = 10;
+        public string anim = "idle_1";
+        public GiftType type;
 
-
+        
 
         private static readonly EventSystem.IntraObjectHandler<Gift> OnRefreshUserMenuDelegate = new EventSystem.IntraObjectHandler<Gift>((Action<Gift, object>)((component, data) => component.OnRefreshUserMenu(data)));
 
@@ -31,6 +34,7 @@ namespace LuckyChallenge {
             base.OnSpawn();
             this.Subscribe<Gift>((int)GameHashes.RefreshUserMenu, Gift.OnRefreshUserMenuDelegate);
             this.Subscribe<Gift>((int)GameHashes.StatusChange, Gift.OnRefreshUserMenuDelegate);
+            this.gameObject.GetComponent<KBatchedAnimController>().Play(anim);
         }
 
         protected override void OnStartWork(Worker worker) {
@@ -44,8 +48,7 @@ namespace LuckyChallenge {
 
         protected override void OnCompleteWork(Worker worker) {
             base.OnCompleteWork(worker);
-            //this.CreateTemplate(worker);
-            God.RandomInAllElement(Grid.PosToCell(this.gameObject),30);
+            God.OpenTheGift(this.type,Grid.PosToCell(this.gameObject),this.count,this.worker);
             if ((UnityEngine.Object)DetailsScreen.Instance != (UnityEngine.Object)null && DetailsScreen.Instance.CompareTargetWith(this.gameObject))
                 DetailsScreen.Instance.Show(false);
             this.OnClickCancel();
