@@ -11,6 +11,8 @@ namespace PackAnything {
         private Chore chore;
         [Serialize]
         private bool isMarkForSurvey;
+        [Serialize]
+        public bool hasBacon = false;
         private Guid statusItemGuid;
         public bool MarkFroSurvey => this.isMarkForSurvey;
         private CellOffset[] PlacementOffsets {
@@ -76,6 +78,7 @@ namespace PackAnything {
             this.CreateBeacon();
             if ((UnityEngine.Object)DetailsScreen.Instance != (UnityEngine.Object)null && DetailsScreen.Instance.CompareTargetWith(this.gameObject))
                 DetailsScreen.Instance.Show(false);
+            this.hasBacon = true;
             this.OnClickCancel();
         }
 
@@ -87,7 +90,7 @@ namespace PackAnything {
 
         // 自定义的方法
         public void OnRefreshUserMenu(object data) {
-            if (this.gameObject.HasTag("Surveyed") || this.gameObject.HasTag("DontShowPack")) return;
+            if (this.hasBacon) return;
             if (this.gameObject.HasTag("OilWell") && this.gameObject.GetComponent<BuildingAttachPoint>()?.points[0].attachedBuilding != null) return;
             Game.Instance.userMenu.AddButton(this.gameObject, this.isMarkForSurvey ? new KIconButtonMenu.ButtonInfo("action_follow_cam", PackAnythingString.UI.SURVEY.NAME_OFF, new System.Action(this.OnClickCancel), tooltipText: PackAnythingString.UI.SURVEY.TOOLTIP_OFF) : new KIconButtonMenu.ButtonInfo("action_follow_cam", PackAnythingString.UI.SURVEY.NAME, new System.Action(this.OnClickSurvey), tooltipText: PackAnythingString.UI.SURVEY.TOOLTIP));
         }
@@ -129,7 +132,6 @@ namespace PackAnything {
             }
             if(name.IndexOf("MISSING") != -1) name = this.gameObject.name;
             go.FindOrAddComponent<UserNameable>().savedName = name;
-            this.gameObject.AddTag("Surveyed");
         }
 
         private void AddStatus() {

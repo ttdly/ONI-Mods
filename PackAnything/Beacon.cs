@@ -5,6 +5,7 @@ using PeterHan.PLib.Options;
 using System;
 using TUNING;
 using UnityEngine;
+using static STRINGS.UI.SANDBOXTOOLS.SETTINGS;
 using static WorldGenSpawner.Spawnable;
 
 namespace PackAnything {
@@ -18,6 +19,7 @@ namespace PackAnything {
         public bool isGeyser = false;
         [Serialize]
         public int originCell;
+        [Serialize]
         private int unoCount;
         private Guid statusItemGuid;
         public bool MarkFroPack => this.isMarkForActive;
@@ -113,22 +115,26 @@ namespace PackAnything {
             }
             if (originObject != null) {
                 int cell = Grid.PosToCell(this.gameObject);
+                Vector3 posCbc = Grid.CellToPosCBC(cell, Grid.SceneLayer.Building);
+                KSelectable selectable = originObject.GetComponent<KSelectable>();
+                OccupyArea occupyArea = originObject.GetComponent<OccupyArea>();
+                Building building = originObject.GetComponent<Building>();
                 if (this.isGeyser) {
                     this.DeleteNeutronium(Grid.PosToCell(originObject));
                     if (SingletonOptions<Options>.Instance.GenerateUnobtanium) {
                         this.CreateNeutronium(cell);
                         cell = Grid.CellAbove(cell);
+                        this.gameObject.transform.SetPosition(Grid.CellToPosCBC(cell, Grid.SceneLayer.Move));
                     }
+                    posCbc = Grid.CellToPosCBC(cell, originObject.FindOrAddComponent<KBatchedAnimController>().sceneLayer);
+                    float num = -0.15f;
+                    posCbc.z += num;
                 }
-                Vector3 posCbc = Grid.CellToPosCBC(cell, originObject.FindOrAddComponent<KBatchedAnimController>().sceneLayer);
-                float num = -0.15f;
-                posCbc.z += num;
-                originObject.transform.SetPosition(posCbc);
-                originObject.SetActive(true);
-                originObject.FindOrAddComponent<OccupyArea>().UpdateOccupiedArea();
-                originObject.RemoveTag("Surveyed");
+                if ((UnityEngine.Object)selectable != (UnityEngine.Object)null) selectable.transform.SetPosition(posCbc);
+                if ((UnityEngine.Object) occupyArea != (UnityEngine.Object) null) occupyArea.UpdateOccupiedArea();
+                if ((UnityEngine.Object) building != (UnityEngine.Object)null) building.UpdatePosition();
+                originObject.GetComponent<Surveyable>().hasBacon = false;
             }
-            
             KBatchedAnimController kBatchedAnimController = this.gameObject.GetComponent<KBatchedAnimController>();
             kBatchedAnimController.Play("destroy");
             kBatchedAnimController.destroyOnAnimComplete = true;
@@ -156,7 +162,6 @@ namespace PackAnything {
                     new IndexOutOfRangeException();
                     return;
                 }
-                Element e = Grid.Element[x];
                 if (!Grid.IsValidCell(x)) continue;
                 SimMessages.ReplaceElement( gameCell: x, new_element: SimHashes.Unobtanium, ev: CellEventLogger.Instance.DebugTool, mass: 100f);
                 this.unoCount--;
