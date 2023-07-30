@@ -1,0 +1,47 @@
+msgid ""
+msgstr ""
+"Application: Oxygen Not IncludedPOT Version: 2.0\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#. LuckyChallenge.STRINGS.UI.CONFIG.DESC
+msgctxt "LuckyChallenge.STRINGS.UI.CONFIG.DESC"
+msgid ""
+"The digger does not drop any material and all materials come from gifts. The "
+"geysers also need to be obtained by opening gifts."
+msgstr ""
+"挖掘不会掉落任何材料，所有材料都来自礼物。间歇泉也需要通过打开礼物获得。"
+
+#. LuckyChallenge.STRINGS.UI.CONFIG.DISABLED
+msgctxt "LuckyChallenge.STRINGS.UI.CONFIG.DISABLED"
+msgid "Disable"
+msgstr "关闭"
+
+#. LuckyChallenge.STRINGS.UI.CONFIG.DISABLED_TIP
+msgctxt "LuckyChallenge.STRINGS.UI.CONFIG.DISABLED_TIP"
+msgid "Unchecked: Lucky Challenge Mode is turned off (Default)"
+msgstr "不选中：幸运挑战模式已关闭（默认值）"
+
+#. LuckyChallenge.STRINGS.UI.CONFIG.ENABLE
+msgctxt "LuckyChallenge.STRINGS.UI.CONFIG.ENABLE"
+msgid "Enable"
+msgstr "启用"
+
+#. LuckyChallenge.STRINGS.UI.CONFIG.ENABLE_TIP
+msgctxt "LuckyChallenge.STRINGS.UI.CONFIG.ENABLE_TIP"
+msgid "Checked: Lucky Challenge Mode is turned on"
+msgstr "选中：幸运挑战模式已开启"
+
+#. LuckyChallenge.STRINGS.UI.CONFIG.NAME
+msgctxt "LuckyChallenge.STRINGS.UI.CONFIG.NAME"
+msgid "Lucky Challenge"
+msgstr "幸运挑战"
