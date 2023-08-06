@@ -122,9 +122,9 @@ namespace PackAnything {
                 if (this.isGeyser) {
                     this.DeleteNeutronium(Grid.PosToCell(originObject));
                     if (SingletonOptions<Options>.Instance.GenerateUnobtanium) {
+                        this.gameObject.transform.SetPosition(Grid.CellToPosCBC(Grid.OffsetCell(cell,1,2), Grid.SceneLayer.Move));
                         this.CreateNeutronium(cell);
                         cell = Grid.CellAbove(cell);
-                        this.gameObject.transform.SetPosition(Grid.CellToPosCBC(cell, Grid.SceneLayer.Move));
                     }
                     posCbc = Grid.CellToPosCBC(cell, originObject.FindOrAddComponent<KBatchedAnimController>().sceneLayer);
                     float num = -0.15f;
