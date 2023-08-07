@@ -20,6 +20,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PackAnything", "PackAnythin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuckyChallenge", "LuckyChallenge\LuckyChallenge.csproj", "{88DB0B00-248F-4B6D-BBDA-9A9D5007911D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Draft", "Draft", "{6C166698-42A6-4AFD-9F4C-CA6C20F55887}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Active", "Active", "{84877F02-1D2E-4A8E-BC3E-44FA8F6A417F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Discarded", "Discarded", "{EA38FED7-E861-45D1-8BCA-C29F00400F9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mergedown = Debug|Mergedown
@@ -71,6 +77,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F15FC183-3908-4EBE-B443-45945E8DC673} = {84877F02-1D2E-4A8E-BC3E-44FA8F6A417F}
+		{A22B7B8E-AD2C-412E-BAD2-A6E442C55BCC} = {EA38FED7-E861-45D1-8BCA-C29F00400F9F}
+		{A53AF349-CA2D-4ABD-9FEF-E5BA43C154BA} = {EA38FED7-E861-45D1-8BCA-C29F00400F9F}
+		{58D02FE3-4D30-433B-8D4E-91846CBF1757} = {84877F02-1D2E-4A8E-BC3E-44FA8F6A417F}
+		{88DB0B00-248F-4B6D-BBDA-9A9D5007911D} = {6C166698-42A6-4AFD-9F4C-CA6C20F55887}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {05AD4341-9C99-4998-8BEC-CFBB218B464B}
