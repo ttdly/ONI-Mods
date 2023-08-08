@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyTitle>Change Store Food Chore Group</AssemblyTitle>
+    <FileVersion>1.0.0</FileVersion>
+    <RootNamespace>ChangeChoreType</RootNamespace>
+    <Description>Change Chore Type</Description>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <LastWorkingBuild>526233</LastWorkingBuild>
+    <Platforms>Vanilla;Mergedown</Platforms>
+  </PropertyGroup>
+</Project>
