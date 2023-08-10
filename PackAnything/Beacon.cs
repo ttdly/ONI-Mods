@@ -31,7 +31,7 @@ namespace PackAnything {
             this.workerStatusItem = PackAnythingStaticVars.ActivingBecaon;
             this.faceTargetWhenWorking = true;
             this.synchronizeAnims = false;
-            this.requiredSkillPerk = PackAnythingStaticVars.CanPack.Id;
+            this.requiredSkillPerk = PackAnythingStaticVars.CanSurvey.Id;
             this.attributeConverter = Db.Get().AttributeConverters.ConstructionSpeed;
             this.attributeExperienceMultiplier = DUPLICANTSTATS.ATTRIBUTE_LEVELING.MOST_DAY_EXPERIENCE;
             this.skillExperienceSkillGroup = Db.Get().SkillGroups.Building.Id;
@@ -97,9 +97,6 @@ namespace PackAnything {
             this.isMarkForActive = true;
             if (this.chore != null) return;
             this.chore = new WorkChore<Beacon>(Db.Get().ChoreTypes.Deconstruct, this, only_when_operational: false);
-            this.chore.choreType.statusItem = PackAnythingStaticVars.Active.statusItem;
-            this.chore.choreType.Name = PackAnythingStaticVars.Active.Name;
-            this.chore.choreType.reportName = PackAnythingStaticVars.Active.reportName;
             AddStatus();
             Pickupable pickupable = gameObject.GetComponent<Pickupable>();
             pickupable.OnTake += (Func<float, Pickupable>)(amount => this.Take(pickupable, amount));

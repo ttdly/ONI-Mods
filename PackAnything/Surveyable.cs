@@ -34,7 +34,7 @@ namespace PackAnything {
             base.OnPrefabInit();
             this.faceTargetWhenWorking = true;
             this.synchronizeAnims = false;
-            this.requiredSkillPerk = PackAnythingStaticVars.CanPack.Id;
+            this.requiredSkillPerk = PackAnythingStaticVars.CanSurvey.Id;
             this.workerStatusItem = PackAnythingStaticVars.SurveyingItem;
             this.shouldShowSkillPerkStatusItem = false;
             this.attributeConverter = Db.Get().AttributeConverters.ConstructionSpeed;
@@ -91,6 +91,7 @@ namespace PackAnything {
         // 自定义的方法
         public void OnRefreshUserMenu(object data) {
             if (this.hasBacon) return;
+            if (this.gameObject.HasTag("DontShowSurveyable"))
             if (this.gameObject.HasTag("OilWell") && this.gameObject.GetComponent<BuildingAttachPoint>()?.points[0].attachedBuilding != null) return;
             Game.Instance.userMenu.AddButton(this.gameObject, this.isMarkForSurvey ? new KIconButtonMenu.ButtonInfo("action_follow_cam", PackAnythingString.UI.SURVEY.NAME_OFF, new System.Action(this.OnClickCancel), tooltipText: PackAnythingString.UI.SURVEY.TOOLTIP_OFF) : new KIconButtonMenu.ButtonInfo("action_follow_cam", PackAnythingString.UI.SURVEY.NAME, new System.Action(this.OnClickSurvey), tooltipText: PackAnythingString.UI.SURVEY.TOOLTIP));
         }
@@ -110,9 +111,6 @@ namespace PackAnything {
             this.isMarkForSurvey = true;
             if (this.chore != null) return;
             this.chore = new WorkChore<Surveyable>(Db.Get().ChoreTypes.Build, this, only_when_operational: false);
-            this.chore.choreType.statusItem = PackAnythingStaticVars.Survey.statusItem;
-            this.chore.choreType.Name = PackAnythingStaticVars.Survey.Name;
-            this.chore.choreType.reportName = PackAnythingStaticVars.Survey.reportName;
             this.AddStatus();
         }
 
