@@ -34,7 +34,7 @@ namespace PackAnything {
             base.OnPrefabInit();
             this.faceTargetWhenWorking = true;
             this.synchronizeAnims = false;
-            this.requiredSkillPerk = PackAnythingStaticVars.CanSurvey.Id;
+            this.requiredSkillPerk = PackAnythingStaticVars.CanPack.Id;
             this.workerStatusItem = PackAnythingStaticVars.SurveyingItem;
             this.shouldShowSkillPerkStatusItem = false;
             this.attributeConverter = Db.Get().AttributeConverters.ConstructionSpeed;
@@ -89,7 +89,7 @@ namespace PackAnything {
 
 
         // 自定义的方法
-        public void OnRefreshUserMenu(object data) {
+        public void OnRefreshUserMenu(object _) {
             if (this.hasBacon) return;
             if (this.gameObject.HasTag("DontShowSurveyable"))
             if (this.gameObject.HasTag("OilWell") && this.gameObject.GetComponent<BuildingAttachPoint>()?.points[0].attachedBuilding != null) return;
@@ -109,8 +109,8 @@ namespace PackAnything {
         public void OnClickSurvey() {
             Prioritizable.AddRef(this.gameObject);
             this.isMarkForSurvey = true;
-            if (this.chore != null) return;
-            this.chore = new WorkChore<Surveyable>(Db.Get().ChoreTypes.Build, this, only_when_operational: false);
+            if (this.chore != null) return;          
+            this.chore = new WorkChore<Surveyable>(PackAnythingStaticVars.Survey, this, only_when_operational: false);
             this.AddStatus();
         }
 

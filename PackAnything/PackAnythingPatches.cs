@@ -1,11 +1,6 @@
-﻿using Database;
-using HarmonyLib;
-using PeterHan.PLib.Core;
+﻿using HarmonyLib;
 using PeterHan.PLib.UI;
-using System.Linq;
 using UnityEngine;
-using static STRINGS.DUPLICANTS;
-using static STRINGS.DUPLICANTS.CHORES;
 
 namespace PackAnything {
     public class PackAnythingPatches {
