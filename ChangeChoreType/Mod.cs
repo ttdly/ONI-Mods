@@ -12,7 +12,7 @@ namespace ChangeChoreType {
 [HarmonyPatch(typeof(ChoreType), MethodType.Constructor, typeof(string), typeof(ResourceSet), typeof(string[]), typeof(string), typeof(string), typeof(string), typeof(string), typeof(IEnumerable<Tag>),typeof(int), typeof(int))]
 public class ChoreType_Patch {
     public static void Prefix(string id, ref string[] chore_groups) {
-        if (id == "FoodFetch") {
+        if (id == "FoodFetch" || id == "EquipmentFetch") {
             chore_groups = new string[1] { "Storage" };
         }
     }
