@@ -42,7 +42,7 @@ namespace PackAnything {
         public class WarpPortalConfig_CreatePrefab_Patch { 
             public static void Postfix(GameObject __result) {
                 __result.AddComponent<Manual>();
-                __result.AddTag("DontShowPack");
+                __result.AddTag("DontShowSurveyable");
             }
         }
 
@@ -50,7 +50,7 @@ namespace PackAnything {
         public class GeneShufflerConfig_CreatePrefab_Patch {
             public static void Postfix(GameObject __result) {
                 __result.AddComponent<Manual>();
-                __result.AddTag("DontShowPack");
+                __result.AddTag("DontShowSurveyable");
             }
         }
 

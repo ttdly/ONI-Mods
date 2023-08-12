@@ -5,8 +5,6 @@ using PeterHan.PLib.Options;
 using System;
 using TUNING;
 using UnityEngine;
-using static STRINGS.UI.SANDBOXTOOLS.SETTINGS;
-using static WorldGenSpawner.Spawnable;
 
 namespace PackAnything {
     [SerializationConfig(MemberSerialization.OptIn)]
@@ -47,7 +45,7 @@ namespace PackAnything {
             base.OnSpawn();
             this.Subscribe<Beacon>((int)GameHashes.RefreshUserMenu, Beacon.OnRefreshUserMenuDelegate);
             this.Subscribe<Beacon>((int)GameHashes.StatusChange, Beacon.OnRefreshUserMenuDelegate);
-            if(isMarkForActive) {
+            if (isMarkForActive) {
                 this.OnClickActive();
             }
         }
@@ -96,10 +94,7 @@ namespace PackAnything {
             Prioritizable.AddRef(this.gameObject);
             this.isMarkForActive = true;
             if (this.chore != null) return;
-            this.chore = new WorkChore<Beacon>(Db.Get().ChoreTypes.Deconstruct, this, only_when_operational: false);
-            this.chore.choreType.statusItem = PackAnythingStaticVars.Active.statusItem;
-            this.chore.choreType.Name = PackAnythingStaticVars.Active.Name;
-            this.chore.choreType.reportName = PackAnythingStaticVars.Active.reportName;
+            this.chore = new WorkChore<Beacon>(PackAnythingStaticVars.Active, this, only_when_operational: false);
             AddStatus();
             Pickupable pickupable = gameObject.GetComponent<Pickupable>();
             pickupable.OnTake += (Func<float, Pickupable>)(amount => this.Take(pickupable, amount));
@@ -108,7 +103,7 @@ namespace PackAnything {
 
         public void ActiveIt(Worker worker) {
             GameObject originObject = null;
-            foreach ( Surveyable surveyable in PackAnythingStaticVars.Surveyables.Items) {
+            foreach (Surveyable surveyable in PackAnythingStaticVars.Surveyables.Items) {
                 if (Grid.PosToCell(surveyable) == this.originCell) {
                     originObject = surveyable.gameObject;
                 }
@@ -121,8 +116,8 @@ namespace PackAnything {
                 Building building = originObject.GetComponent<Building>();
                 if (this.isGeyser) {
                     this.DeleteNeutronium(Grid.PosToCell(originObject));
-                    if (SingletonOptions<Options>.Instance.GenerateUnobtanium) {
-                        this.gameObject.transform.SetPosition(Grid.CellToPosCBC(Grid.OffsetCell(cell,1,2), Grid.SceneLayer.Move));
+                    if (SingletonOptions<Options>.Instance.GenerateUnobtanium && this.unoCount > 0) {
+                        this.gameObject.transform.SetPosition(Grid.CellToPosCBC(Grid.OffsetCell(cell, 1, 2), Grid.SceneLayer.Move));
                         this.CreateNeutronium(cell);
                         cell = Grid.CellAbove(cell);
                     }
@@ -131,8 +126,8 @@ namespace PackAnything {
                     posCbc.z += num;
                 }
                 if ((UnityEngine.Object)selectable != (UnityEngine.Object)null) selectable.transform.SetPosition(posCbc);
-                if ((UnityEngine.Object) occupyArea != (UnityEngine.Object) null) occupyArea.UpdateOccupiedArea();
-                if ((UnityEngine.Object) building != (UnityEngine.Object)null) building.UpdatePosition();
+                if ((UnityEngine.Object)occupyArea != (UnityEngine.Object)null) occupyArea.UpdateOccupiedArea();
+                if ((UnityEngine.Object)building != (UnityEngine.Object)null) building.UpdatePosition();
                 originObject.GetComponent<Surveyable>().hasBacon = false;
             }
             KBatchedAnimController kBatchedAnimController = this.gameObject.GetComponent<KBatchedAnimController>();
@@ -163,7 +158,7 @@ namespace PackAnything {
                     return;
                 }
                 if (!Grid.IsValidCell(x)) continue;
-                SimMessages.ReplaceElement( gameCell: x, new_element: SimHashes.Unobtanium, ev: CellEventLogger.Instance.DebugTool, mass: 100f);
+                SimMessages.ReplaceElement(gameCell: x, new_element: SimHashes.Unobtanium, ev: CellEventLogger.Instance.DebugTool, mass: 100f);
                 this.unoCount--;
             }
         }
@@ -195,7 +190,7 @@ namespace PackAnything {
             if (smi == null)
                 return;
             EmoteChore emoteChore = new EmoteChore((IStateMachineTarget)worker.gameObject.GetComponent<ChoreProvider>(), Db.Get().ChoreTypes.EmoteIdle, emote);
-            SelfEmoteReactable reactable = new SelfEmoteReactable(worker.gameObject, (HashedString)reactable_id, Db.Get().ChoreTypes.Emote);
+            SelfEmoteReactable reactable = new SelfEmoteReactable(worker.gameObject, (HashedString)reactable_id, Db.Get().ChoreTypes.Emote, max_trigger_time);
             emoteChore.PairReactable(reactable);
             reactable.SetEmote(emote);
             reactable.PairEmote(emoteChore);
