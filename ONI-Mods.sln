@@ -28,6 +28,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Discarded", "Discarded", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChangeChoreType", "ChangeChoreType\ChangeChoreType.csproj", "{3CE9540E-6A30-4341-B9BE-45A08354FE23}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TweaksPack", "TweaksPack\TweaksPack.csproj", "{A5BE7C06-388A-4AAB-9891-DA16FA2EB29B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mergedown = Debug|Mergedown
@@ -84,6 +86,14 @@ Global
 		{3CE9540E-6A30-4341-B9BE-45A08354FE23}.Release|Mergedown.Build.0 = Release|Mergedown
 		{3CE9540E-6A30-4341-B9BE-45A08354FE23}.Release|Vanilla.ActiveCfg = Release|Vanilla
 		{3CE9540E-6A30-4341-B9BE-45A08354FE23}.Release|Vanilla.Build.0 = Release|Vanilla
+		{A5BE7C06-388A-4AAB-9891-DA16FA2EB29B}.Debug|Mergedown.ActiveCfg = Debug|Mergedown
+		{A5BE7C06-388A-4AAB-9891-DA16FA2EB29B}.Debug|Mergedown.Build.0 = Debug|Mergedown
+		{A5BE7C06-388A-4AAB-9891-DA16FA2EB29B}.Debug|Vanilla.ActiveCfg = Debug|Vanilla
+		{A5BE7C06-388A-4AAB-9891-DA16FA2EB29B}.Debug|Vanilla.Build.0 = Debug|Vanilla
+		{A5BE7C06-388A-4AAB-9891-DA16FA2EB29B}.Release|Mergedown.ActiveCfg = Release|Mergedown
+		{A5BE7C06-388A-4AAB-9891-DA16FA2EB29B}.Release|Mergedown.Build.0 = Release|Mergedown
+		{A5BE7C06-388A-4AAB-9891-DA16FA2EB29B}.Release|Vanilla.ActiveCfg = Release|Vanilla
+		{A5BE7C06-388A-4AAB-9891-DA16FA2EB29B}.Release|Vanilla.Build.0 = Release|Vanilla
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,6 +105,7 @@ Global
 		{58D02FE3-4D30-433B-8D4E-91846CBF1757} = {84877F02-1D2E-4A8E-BC3E-44FA8F6A417F}
 		{88DB0B00-248F-4B6D-BBDA-9A9D5007911D} = {6C166698-42A6-4AFD-9F4C-CA6C20F55887}
 		{3CE9540E-6A30-4341-B9BE-45A08354FE23} = {84877F02-1D2E-4A8E-BC3E-44FA8F6A417F}
+		{A5BE7C06-388A-4AAB-9891-DA16FA2EB29B} = {6C166698-42A6-4AFD-9F4C-CA6C20F55887}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {05AD4341-9C99-4998-8BEC-CFBB218B464B}
