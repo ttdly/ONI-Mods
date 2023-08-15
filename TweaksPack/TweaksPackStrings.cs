@@ -1,14 +1,17 @@
 ﻿namespace TweaksPack {
-    public class AbleStrings {
+    public class TweaksPackStrings {
         public class UI {
-            public class BUTTON_ON {
-                public static LocString NAME = (LocString)"Update";
-                public static LocString TOOLTIP = (LocString)"Update this object";
+            public class BUTTON {
+                public class ON {
+                    public static LocString NAME = (LocString)"Tweak";
+                    public static LocString TOOLTIP = (LocString)"Tweak this object";
+                }
+                public class OFF {
+                    public static LocString NAME = (LocString)"Undo Tweak";
+                    public static LocString TOOL_TIP = (LocString)"Cancel the work";
+                }
             }
-            public class BUTTON_OFF {
-                public static LocString NAME = (LocString)"Cancel";
-                public static LocString TOOL_TIP = (LocString)"Cancel the work";
-            }
+
             public class CHANGE_GEYSER_WINDOW {
                 public static LocString WINDOW_TITLE = (LocString)"Change Geyser";
                 public static class CONFIRM_BUTTON {

@@ -22,7 +22,7 @@ namespace TweaksPack {
         public GeyserChangeDialog(GameObject gyeserObject) {
             geyser = gyeserObject;
             PDialog dialog = new PDialog("GeyserChangeWindow") {
-                Title = AbleStrings.UI.CHANGE_GEYSER_WINDOW.WINDOW_TITLE,
+                Title = TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.WINDOW_TITLE,
             };
             PLabel windowTitle = new PLabel();
             dialog.DialogClosed = _ => DestroyWindow();
@@ -48,8 +48,8 @@ namespace TweaksPack {
                 DynamicSize = false
             };
             PButton confirmButton = new PButton("ConfirmButton") {
-                Text = AbleStrings.UI.CHANGE_GEYSER_WINDOW.CONFIRM_BUTTON.TITLE,
-                ToolTip = AbleStrings.UI.CHANGE_GEYSER_WINDOW.CONFIRM_BUTTON.TOOL_TIP,
+                Text = TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CONFIRM_BUTTON.TITLE,
+                ToolTip = TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CONFIRM_BUTTON.TOOL_TIP,
                 TextStyle = PUITuning.Fonts.UILightStyle.DeriveStyle(style: TMPro.FontStyles.Bold),
                 OnClick = _ => ChangeGeyser(),
                 FlexSize = new Vector2(0.8f, 1f),
@@ -87,7 +87,7 @@ namespace TweaksPack {
                 Direction = PanelDirection.Horizontal,
             };
             PLabel label = new PLabel("SelectOptionLabel") {
-                Text = AbleStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_LABEL,
+                Text = TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_LABEL,
                 TextAlignment = TextAnchor.MiddleCenter,
                 Margin = LABEL_MARGIN,
             };
@@ -117,7 +117,7 @@ namespace TweaksPack {
                     FlexSize = Vector2.left,
                 }.AddColumn(new GridColumnSpec()).AddColumn(new GridColumnSpec(0, 1));
                 panel.AddRow(new GridRowSpec(0, 1));
-                FloatOptionsEntry entry = new FloatOptionsEntry(pair.Key, new OptionAttribute(Strings.Get("AbleStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_MODIFI." + pair.Key.ToUpper() + "_NAME"), Strings.Get("AbleStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_MODIFI." + pair.Key.ToUpper() + "_TIP")), pair.Value);
+                FloatOptionsEntry entry = new FloatOptionsEntry(pair.Key, new OptionAttribute(Strings.Get("TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_MODIFI." + pair.Key.ToUpper() + "_NAME"), Strings.Get("TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_MODIFI." + pair.Key.ToUpper() + "_TIP")), pair.Value);
                 entry.CreateUIEntry(panel, ref row);
                 parent.AddChild(panel);
                 modiferFloatOptionsEntrys.Add(entry);
@@ -145,6 +145,9 @@ namespace TweaksPack {
                     yearDurationModifier = 0.0f,
                     yearPercentageModifier = (float)modiferFloatOptionsEntrys[2].Value,
                 };
+                GeyserTweakable geyserTweakable = geyser.GetComponent<GeyserTweakable>();
+                geyserTweakable.modification = geyserModification;
+                geyserTweakable.hasModification = true;
                 geyser.GetComponent<Geyser>()?.AddModification(geyserModification);
             }
             DestroyWindow();
@@ -155,7 +158,6 @@ namespace TweaksPack {
             if (!(CameraController.Instance != null)) return;
             CameraController.Instance.DisableUserCameraControl = false;
             windowObject.DeleteObject();
-            OverlayScreen.Instance?.ToggleOverlay(OverlayModes.None.ID, false);
             geyser.GetComponent<GeyserTweakable>()?.Refresh();
         }
     }
