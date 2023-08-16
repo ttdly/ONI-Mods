@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 
 
-namespace TweaksPack {
+namespace TweaksPack.Tweakable {
+    [SerializationConfig(MemberSerialization.OptIn)]
     public class GeyserTweakable : BaseTweakable {
         [Serialize]
         public Geyser.GeyserModification modification;

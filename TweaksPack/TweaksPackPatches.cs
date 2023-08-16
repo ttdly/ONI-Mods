@@ -1,10 +1,11 @@
 ﻿using HarmonyLib;
 using System;
 using System.Collections.Generic;
+using TweaksPack.Tweakable;
 using UnityEngine;
-using static MathUtil;
 
-namespace TweaksPack {
+namespace TweaksPack
+{
     public class TweaksPackPatches {
         
         public static void BuildingPostfix(GameObject go) {
@@ -72,25 +73,31 @@ namespace TweaksPack {
             }
         }
 
-        //[HarmonyPatch(typeof(RockCrusherConfig), nameof(RockCrusherConfig.ConfigureBuildingTemplate))]
-        //public class RockCrusherConfig_Patch {
-        //    public static void Postfix(GameObject go) {
-        //        go.AddOrGet<ComplexFabricatorTweakable>();
-        //    }
-        //}
-
-        [HarmonyPatch(typeof(ComplexFabricator), "OnSpawn")]
-        public class ComplexFabricator_OnSpawn_Patch {
-            public static void Postfix(ComplexFabricator __instance) {
-                __instance.gameObject.AddOrGet<ComplexFabricatorTweakable>();
-            }
-        }
-
-
         [HarmonyPatch(typeof(Db),nameof(Db.Initialize))]
         public class Db_Initialize_Patch {
             public static void Postfix() {
                 LocString.CreateLocStringKeys(typeof(TweaksPackStrings),"");
+            }
+        }
+
+        [HarmonyPatch(typeof(OilWellCapConfig), nameof(OilWellCapConfig.DoPostConfigureComplete))]
+        public class OilWellCapConfig_Patch { 
+            public static void Postfix(GameObject go) {
+                go.AddOrGet<OilWellCapTweakable>();
+            }
+        }
+
+        [HarmonyPatch(typeof(OilRefineryConfig), nameof(OilRefineryConfig.DoPostConfigureComplete))]
+        public class OilRefineryConfig_Patch {
+            public static void Postfix(GameObject go) {
+                go.AddOrGet<OilRefineryTweakable>();
+            }
+        }
+
+        [HarmonyPatch(typeof(CompostConfig), nameof(CompostConfig.DoPostConfigureComplete))]
+        public class CompostConfig_Patch {
+            public static void Postfix(GameObject go) {
+                go.AddOrGet<CompostTweakbale>();
             }
         }
     }

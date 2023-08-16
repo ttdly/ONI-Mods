@@ -2,9 +2,11 @@
 using PeterHan.PLib.UI;
 using System;
 using System.Collections.Generic;
+using TweaksPack.Tweakable;
 using UnityEngine;
 
-namespace TweaksPack {
+namespace TweaksPack
+{
     public class GeyserChangeDialog {
         public static List<EnumOption> Options = new List<EnumOption>(0);
         public static readonly RectOffset LABEL_MARGIN = new RectOffset(0, 20, 5, 5);

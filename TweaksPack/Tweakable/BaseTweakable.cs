@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using TUNING;
 
-namespace TweaksPack {
+namespace TweaksPack.Tweakable {
     [SerializationConfig(MemberSerialization.OptIn)]
-    public class BaseTweakable : Workable{
+    public class BaseTweakable : Workable {
         [Serialize]
         public bool isMarkForTweak = false;
         private Storage storage;
         private FetchList2 fetchList;
         private Chore chore;
         public Dictionary<Tag, float> materialNeeds;
-        private static readonly EventSystem.IntraObjectHandler<BaseTweakable> OnRefreshUserMenuDelegate = new EventSystem.IntraObjectHandler<BaseTweakable>(((component, data) => component.OnRefreshUserMenu(data)));
+        private static readonly EventSystem.IntraObjectHandler<BaseTweakable> OnRefreshUserMenuDelegate = new EventSystem.IntraObjectHandler<BaseTweakable>((component, data) => component.OnRefreshUserMenu(data));
         private CellOffset[] PlacementOffsets {
             get {
                 Building component1 = GetComponent<Building>();
