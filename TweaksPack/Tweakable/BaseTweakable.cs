@@ -44,6 +44,7 @@ namespace TweaksPack.Tweakable {
         protected override void OnSpawn() {
             base.OnSpawn();
             storage = gameObject.AddComponent<Storage>();
+            storage.showInUI = false;
             CellOffset[][] table = OffsetGroups.InvertedStandardTable;
             CellOffset[] filter = null;
             Building component = GetComponent<Building>();

@@ -1,11 +1,13 @@
 ﻿using TweaksPack.Auto;
 
 namespace TweaksPack.Tweakable {
-    public class CompostTweakbale : ComplexFabricatorTweakable{
+    public class CompostTweakbale : OnceTweakable{
         protected override void ToogleTweak() {
             base.ToogleTweak();
-            Destroy(GetComponent<Compost>());
-            gameObject.AddOrGet<CompostAuto>().simulatedInternalTemperature = 348.15f;
+            if (isTweaked) {
+                Destroy(GetComponent<Compost>());
+                gameObject.AddOrGet<CompostAuto>().simulatedInternalTemperature = 348.15f;
+            }
         }
     }
 }

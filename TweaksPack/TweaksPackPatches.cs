@@ -66,6 +66,15 @@ namespace TweaksPack
             }
         }
 
+        [HarmonyPatch(typeof(EntityTemplates), nameof(EntityTemplates.ExtendEntityToBasicPlant))]
+        public class EntityTemplates_Patch {
+            public static void Postfix(GameObject __result, string crop_id) {
+                if (crop_id != null) {
+                    __result.AddOrGet<PlantTweakable>();
+                }
+            }
+        }
+
         [HarmonyPatch(typeof(GeyserGenericConfig), nameof(GeyserGenericConfig.CreateGeyser))]
         partial class GeyserGenericConfig_Patch {
             public static void Postfix(GameObject __result) {
@@ -83,7 +92,14 @@ namespace TweaksPack
         [HarmonyPatch(typeof(OilWellCapConfig), nameof(OilWellCapConfig.DoPostConfigureComplete))]
         public class OilWellCapConfig_Patch { 
             public static void Postfix(GameObject go) {
+                UnityEngine.Object.Destroy(go.AddOrGet<OilWellCap>());
                 go.AddOrGet<OilWellCapTweakable>();
+                OilWellCapA oilWellCap = go.AddOrGet<OilWellCapA>();
+                oilWellCap.gasElement = SimHashes.Methane;
+                oilWellCap.gasTemperature = 573.15f;
+                oilWellCap.addGasRate = 0.0333333351f;
+                oilWellCap.maxGasPressure = 80.00001f;
+                oilWellCap.releaseGasRate = 0.444444478f;
             }
         }
 

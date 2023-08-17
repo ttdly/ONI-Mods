@@ -1,7 +1,6 @@
 ﻿using KSerialization;
 using System.Collections.Generic;
 
-
 namespace TweaksPack.Tweakable {
     [SerializationConfig(MemberSerialization.OptIn)]
     public class GeyserTweakable : BaseTweakable {
