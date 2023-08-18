@@ -1,11 +1,13 @@
-﻿namespace TweaksPack.Tweakable {
-    public class ComplexFabricatorTweakable : OnceTweakable{
+﻿
+namespace TweaksPack.Tweakable {
+    public class AutoTweakable : OnceTweakable{
         protected override void ToogleTweak() {
             base.ToogleTweak();
             if (isTweaked) {
-                if (gameObject.GetComponent<ComplexFabricator>() != null) { gameObject.GetComponent<ComplexFabricator>().duplicantOperated = false; }
+                gameObject.AddTag(TweakableStaticVars.Tags.AutoTweaked);
             }
         }
+
         protected override void OnFetchComplete() {
             base.OnFetchComplete();
             SetWorkTime(TweakableStaticVars.WorkTime.Auto);

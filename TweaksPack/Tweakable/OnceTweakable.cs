@@ -19,7 +19,7 @@ namespace TweaksPack.Tweakable {
 
         protected virtual void ToogleTweak() {
             if (isTweaked) {
-                gameObject.AddTag("NotShowTweak");
+                gameObject.AddTag(TweakableStaticVars.Tags.DontTweak);
                 KBatchedAnimController component = gameObject.GetComponent<KBatchedAnimController>();
                 if (component != null) component.TintColour = new Color32(220, 255, 220, 255);
             }

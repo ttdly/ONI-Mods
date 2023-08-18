@@ -81,7 +81,7 @@ namespace TweaksPack.Tweakable {
         }
 
         private void OnRefreshUserMenu(object _) {
-            if (gameObject.HasTag(new Tag("NotShowTweak"))) return;
+            if (gameObject.HasTag(TweakableStaticVars.Tags.DontTweak)) return;
             Game.Instance.userMenu.AddButton(gameObject, isMarkForTweak ? new KIconButtonMenu.ButtonInfo("action_cancel", TweaksPackStrings.UI.BUTTON.OFF.NAME, new System.Action(new System.Action(() => { isMarkForTweak = !isMarkForTweak; Toogle(); })), tooltipText: TweaksPackStrings.UI.BUTTON.OFF.TOOL_TIP) : new KIconButtonMenu.ButtonInfo("action_repair", TweaksPackStrings.UI.BUTTON.ON.NAME, new System.Action(() => { isMarkForTweak = !isMarkForTweak; Toogle(); }), tooltipText: TweaksPackStrings.UI.BUTTON.ON.TOOLTIP));
         }
 

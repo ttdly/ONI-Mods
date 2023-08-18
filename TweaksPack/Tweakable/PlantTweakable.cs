@@ -1,4 +1,6 @@
 ﻿
+using HarmonyLib;
+using Klei.AI;
 using System.Collections.Generic;
 
 namespace TweaksPack.Tweakable {
@@ -17,7 +19,14 @@ namespace TweaksPack.Tweakable {
 
         protected override void ToogleTweak() {
             base.ToogleTweak();
-            growing.maxAge = 10f;
+            AmountInstance oldAge = (AmountInstance)Traverse.Create(growing).Field("oldAge").GetValue();
+            oldAge.maxAttribute.ClearModifiers();
+            oldAge.maxAttribute.Add(new AttributeModifier(Db.Get().Amounts.OldAge.maxAttribute.Id, 3f));
+        }
+
+        protected override void OnFetchComplete() {
+            base.OnFetchComplete();
+            SetWorkTime(TweakableStaticVars.WorkTime.Plant);
         }
     }
 }
