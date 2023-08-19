@@ -1,27 +1,16 @@
 ﻿
-using HarmonyLib;
-using Klei.AI;
-using System.Collections.Generic;
-
-namespace TweaksPack.Tweakable {
+namespace TweaksPack.Tweakable 
+{
     public class PlantTweakable : OnceTweakable{
-        [MyCmpGet]
-        Growing growing;
 
         protected override void OnSpawn() {
-            
             base.OnSpawn();
-            materialNeeds = new Dictionary<Tag, float>() {
-                { SimHashes.Sulfur.CreateTag(), 10f },
-                { SimHashes.Algae.CreateTag(), 50f }
-            };
+            materialNeeds = TweakableStaticVars.MaterialNeeds.Plant;
         }
 
         protected override void ToogleTweak() {
             base.ToogleTweak();
-            AmountInstance oldAge = (AmountInstance)Traverse.Create(growing).Field("oldAge").GetValue();
-            oldAge.maxAttribute.ClearModifiers();
-            oldAge.maxAttribute.Add(new AttributeModifier(Db.Get().Amounts.OldAge.maxAttribute.Id, 3f));
+            gameObject.AddTag(TweakableStaticVars.Tags.AutoHarvest);
         }
 
         protected override void OnFetchComplete() {

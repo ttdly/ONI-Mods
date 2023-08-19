@@ -188,5 +188,16 @@ namespace TweaksPack
                 }
             }
         }
+
+        [HarmonyPatch(typeof(Growing.States), nameof(Growing.States.InitializeStates))]
+        public class Growing_StatesInstance_InitializeStates_Patch { 
+            public static void Postfix(Growing.States __instance) { 
+                __instance.grown.idle.Update("CheckNotGrown", delegate (Growing.StatesInstance smi, float dt) {
+                    if(smi.master.gameObject.HasTag(TweakableStaticVars.Tags.AutoHarvest)) {
+                        smi.GoTo(__instance.grown.try_self_harvest);
+                    }
+                }, UpdateRate.SIM_4000ms);
+            }
+        }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using KSerialization;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace TweaksPack.Tweakable {
+namespace TweaksPack.Tweakable 
+{
     [SerializationConfig(MemberSerialization.OptIn)]
     public class OnceTweakable : BaseTweakable {
         [Serialize]
@@ -10,10 +10,6 @@ namespace TweaksPack.Tweakable {
 
         protected override void OnSpawn() {
             base.OnSpawn();
-            materialNeeds = new Dictionary<Tag, float>() {
-                { SimHashes.Glass.CreateTag(), 200f },
-                { SimHashes.Steel.CreateTag(), 100f }
-            };
             ToogleTweak();
         }
 
@@ -33,7 +29,6 @@ namespace TweaksPack.Tweakable {
 
         protected override void OnFetchComplete() {
             base.OnFetchComplete();
-            SetWorkTime(100f);
         }
     }
 }

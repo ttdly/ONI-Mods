@@ -1,5 +1,11 @@
-﻿namespace TweaksPack.Tweakable {
+﻿namespace TweaksPack.Tweakable 
+{
     public class ComplexFabricatorTweakable : OnceTweakable{
+        protected override void OnSpawn() {
+            base.OnSpawn();
+            materialNeeds = TweakableStaticVars.MaterialNeeds.ComplexFabricator;
+        }
+
         protected override void ToogleTweak() {
             base.ToogleTweak();
             if (isTweaked) {

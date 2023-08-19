@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using TUNING;
 
-namespace TweaksPack.Tweakable {
+namespace TweaksPack.Tweakable 
+{
     [SerializationConfig(MemberSerialization.OptIn)]
     public class BaseTweakable : Workable {
         [Serialize]

@@ -1,7 +1,7 @@
 ﻿using KSerialization;
-using System.Collections.Generic;
 
-namespace TweaksPack.Tweakable {
+namespace TweaksPack.Tweakable 
+{
     [SerializationConfig(MemberSerialization.OptIn)]
     public class GeyserTweakable : BaseTweakable {
         [Serialize]
@@ -16,10 +16,7 @@ namespace TweaksPack.Tweakable {
 
         protected override void OnSpawn() {
             base.OnSpawn();
-            materialNeeds = new Dictionary<Tag, float>() {
-                { SimHashes.Katairite.CreateTag(), 100 },
-                { SimHashes.Ceramic.CreateTag(), 800 }
-            };
+            materialNeeds = TweakableStaticVars.MaterialNeeds.Geyser;
             if (hasModification) {
                 gameObject.GetComponent<Geyser>().AddModification(modification);
             }
@@ -27,7 +24,7 @@ namespace TweaksPack.Tweakable {
 
         protected override void OnFetchComplete() {
             base.OnFetchComplete();
-            SetWorkTime(100f);
+            SetWorkTime(TweakableStaticVars.WorkTime.Geyser);
         }
 
         private void ShowGeyserChangeDialog() {
