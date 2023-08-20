@@ -1,13 +1,14 @@
 ﻿using HarmonyLib;
+using Klei.AI;
+using PeterHan.PLib.Core;
 using System;
 using System.Collections.Generic;
 using TweaksPack.Tweakable;
 using UnityEngine;
 
-namespace TweaksPack
-{
+namespace TweaksPack {
     public class TweaksPackPatches {
-        
+
         public static void FabricatorBuildingPostfix(GameObject go) {
             go.AddOrGet<ComplexFabricatorTweakable>();
         }
@@ -54,8 +55,9 @@ namespace TweaksPack
                 typeof(OilRefineryConfig),
                 typeof(EggIncubatorConfig),
                 typeof(DesalinatorConfig),
+                typeof(CompostConfig)
             };
-            
+
             foreach (Type type in types) {
                 harmony.Patch(type.GetMethod("ConfigureBuildingTemplate"), prefix: new HarmonyMethod(typeof(TweaksPackPatches).GetMethod(nameof(BuildingPrefix))));
             }
@@ -83,14 +85,14 @@ namespace TweaksPack
             }
         }
 
-        [HarmonyPatch(typeof(EntityTemplates), nameof(EntityTemplates.ExtendEntityToBasicPlant))]
-        public class EntityTemplates_Patch {
-            public static void Postfix(GameObject __result, string crop_id) {
-                if (crop_id != null) {
-                    __result.AddOrGet<PlantTweakable>();
-                }
-            }
-        }
+        //[HarmonyPatch(typeof(EntityTemplates), nameof(EntityTemplates.ExtendEntityToBasicPlant))]
+        //public class EntityTemplates_Patch {
+        //    public static void Postfix(GameObject __result, string crop_id) {
+        //        if (crop_id != null) {
+        //            __result.AddOrGet<PlantTweakable>();
+        //        }
+        //    }
+        //}
 
         [HarmonyPatch(typeof(GeyserGenericConfig), nameof(GeyserGenericConfig.CreateGeyser))]
         partial class GeyserGenericConfig_Patch {
@@ -98,11 +100,11 @@ namespace TweaksPack
                 __result.AddOrGet<GeyserTweakable>();
             }
         }
-        
-        [HarmonyPatch(typeof(Db),nameof(Db.Initialize))]
+
+        [HarmonyPatch(typeof(Db), nameof(Db.Initialize))]
         public class Db_Initialize_Patch {
             public static void Postfix() {
-                LocString.CreateLocStringKeys(typeof(TweaksPackStrings),"");
+                LocString.CreateLocStringKeys(typeof(TweaksPackStrings), "");
             }
         }
 
@@ -123,11 +125,13 @@ namespace TweaksPack
         [HarmonyPatch(typeof(OilRefinery.States), nameof(OilRefinery.States.InitializeStates))]
         public class OilRefinery_States_InitializeStateMachine_Patch {
             public static void Postfix(OilRefinery.States __instance) {
+                __instance.disabled.ClearTransitions();
                 __instance.disabled.EventTransition(GameHashes.OperationalChanged, __instance.needResources, (OilRefinery.StatesInstance smi) => smi.master.gameObject.AddOrGet<Operational>().IsOperational).Enter(delegate (OilRefinery.StatesInstance smi) {
                     if (smi.master.gameObject.HasTag(TweakableStaticVars.Tags.AutoTweaked)) {
                         smi.master.GetComponent<KBatchedAnimController>().Play("on");
                     }
                 });
+                __instance.needResources.ClearTransitions();
                 __instance.needResources.EventTransition(GameHashes.OnStorageChange, __instance.ready, (OilRefinery.StatesInstance smi) => smi.master.GetComponent<ElementConverter>().HasEnoughMassToStartConverting()).Enter(delegate (OilRefinery.StatesInstance smi) {
                     if (smi.master.gameObject.HasTag(TweakableStaticVars.Tags.AutoTweaked)) {
                         smi.master.gameObject.AddOrGet<Operational>().SetActive(false);
@@ -145,6 +149,9 @@ namespace TweaksPack
         [HarmonyPatch(typeof(Compost.States), nameof(Compost.States.InitializeStates))]
         public class Compost_States_InitializeStates_Patch {
             public static void Postfix(Compost.States __instance) {
+                __instance.inert.ClearTransitions();
+                __instance.inert.ClearEnterActions();
+                __instance.inert.ClearExitActions();
                 __instance.inert.EventTransition(GameHashes.OperationalChanged, __instance.disabled, smi => !smi.GetComponent<Operational>().IsOperational).PlayAnim("on").ToggleStatusItem(Db.Get().BuildingStatusItems.AwaitingCompostFlip).Enter(delegate (Compost.StatesInstance smi) {
                     if (smi.master.gameObject.HasTag(TweakableStaticVars.Tags.AutoTweaked)) {
                         smi.GoTo(__instance.composting);
@@ -189,15 +196,19 @@ namespace TweaksPack
             }
         }
 
-        [HarmonyPatch(typeof(Growing.States), nameof(Growing.States.InitializeStates))]
-        public class Growing_StatesInstance_InitializeStates_Patch { 
-            public static void Postfix(Growing.States __instance) { 
-                __instance.grown.idle.Update("CheckNotGrown", delegate (Growing.StatesInstance smi, float dt) {
-                    if(smi.master.gameObject.HasTag(TweakableStaticVars.Tags.AutoHarvest)) {
-                        smi.GoTo(__instance.grown.try_self_harvest);
-                    }
-                }, UpdateRate.SIM_4000ms);
-            }
-        }
+        //[HarmonyPatch(typeof(Growing.States), nameof(Growing.States.InitializeStates))]
+        //public class Growing_StatesInstance_InitializeStates_Patch {
+        //    public static void Postfix(Growing.States __instance) {
+        //        __instance.grown.idle.updateActions.Clear();
+        //        __instance.grown.idle.Update("CheckNotGrown", delegate (Growing.StatesInstance smi, float dt) {
+        //            if (smi.master.shouldGrowOld) {
+        //                AmountInstance oldAge = (AmountInstance)Traverse.Create(smi.master).Field("oldAge").GetValue();
+        //                if (oldAge.value >= oldAge.GetMax() || smi.master.gameObject.HasTag(TweakableStaticVars.Tags.AutoHarvest)) {
+        //                    smi.GoTo(__instance.grown.try_self_harvest);
+        //                }
+        //            }
+        //        }, UpdateRate.SIM_4000ms);
+        //    }
+        //}
     }
 }
