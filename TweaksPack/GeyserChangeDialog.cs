@@ -57,9 +57,9 @@ namespace TweaksPack
                 FlexSize = new Vector2(0.8f, 1f),
                 Margin = new RectOffset(10, 10, 13, 13),
             };
-            confirmPanel.AddChild(confirmButton);
+            confirmPanel.AddChild(confirmPanel);
             CreateSelecteOption(scrollBody);
-            CreateModiferOptions(scrollBody);
+            //CreateModiferOptions(scrollBody);
             dialog.Body.AddChild(scrollPane);
             dialog.Body.AddChild(confirmPanel);
             windowObject = dialog.Build();
@@ -148,8 +148,12 @@ namespace TweaksPack
                     yearPercentageModifier = (float)modiferFloatOptionsEntrys[2].Value,
                 };
                 GeyserTweakable geyserTweakable = geyser.GetComponent<GeyserTweakable>();
-                geyserTweakable.modification = geyserModification;
-                geyserTweakable.hasModification = true;
+                if (geyserTweakable.hasModification) {
+                    geyserTweakable.modification.AddValues(geyserModification);
+                } else {
+                    geyserTweakable.hasModification = true;
+                    geyserTweakable.modification = geyserModification;
+                }
                 geyser.GetComponent<Geyser>()?.AddModification(geyserModification);
             }
             DestroyWindow();

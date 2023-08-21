@@ -70,6 +70,8 @@ namespace TweaksPack.Tweakable
             skillExperienceSkillGroup = Db.Get().SkillGroups.Building.Id;
             skillExperienceMultiplier = SKILLS.MOST_DAY_EXPERIENCE;
             Prioritizable.AddRef(gameObject);
+            requiredSkillPerk = Db.Get().SkillPerks.ConveyorBuild.Id;
+            shouldShowSkillPerkStatusItem = false;
             synchronizeAnims = false;
             multitoolContext = (HashedString)"build";
             multitoolHitEffectTag = (Tag)EffectConfigs.BuildSplashId;

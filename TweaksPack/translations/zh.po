@@ -1,0 +1,100 @@
+msgid ""
+msgstr ""
+"Application: Oxygen Not IncludedPOT Version: 2.0\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#. TweaksPack.TweaksPackStrings.UI.BUTTON.OFF.NAME
+msgctxt "TweaksPack.TweaksPackStrings.UI.BUTTON.OFF.NAME"
+msgid "Undo Tweak"
+msgstr "取消调整"
+
+#. TweaksPack.TweaksPackStrings.UI.BUTTON.OFF.TOOL_TIP
+msgctxt "TweaksPack.TweaksPackStrings.UI.BUTTON.OFF.TOOL_TIP"
+msgid "Cancel the work"
+msgstr "取消对这个目标的调整"
+
+#. TweaksPack.TweaksPackStrings.UI.BUTTON.ON.NAME
+msgctxt "TweaksPack.TweaksPackStrings.UI.BUTTON.ON.NAME"
+msgid "Tweak"
+msgstr "调整"
+
+#. TweaksPack.TweaksPackStrings.UI.BUTTON.ON.TOOLTIP
+msgctxt "TweaksPack.TweaksPackStrings.UI.BUTTON.ON.TOOLTIP"
+msgid "Tweak this object"
+msgstr "对这个目标进行一些调整"
+
+#. TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_LABEL
+msgctxt "TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_LABEL"
+msgid "Target: "
+msgstr "目标："
+
+#. TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_MODIFI.MASS_NAME
+msgctxt ""
+"TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_MODIFI.MASS_NAME"
+msgid "Add Mass Pre Cycel"
+msgstr "增加每周期质量"
+
+#. TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_MODIFI.MASS_TIP
+msgctxt ""
+"TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_MODIFI.MASS_TIP"
+msgid "Multiple (1.0 = Current mass pre cycel * 2)"
+msgstr "倍数"
+
+#. TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_MODIFI.PRESSURE_NAME
+msgctxt ""
+"TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_MODIFI."
+"PRESSURE_NAME"
+msgid "Add Max Pressure"
+msgstr "增加最大压力"
+
+#. TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_MODIFI.PRESSURE_TIP
+msgctxt ""
+"TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_MODIFI."
+"PRESSURE_TIP"
+msgid "Addition"
+msgstr "直接增加"
+
+#. TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_MODIFI.TEMPERATURE_NAME
+msgctxt ""
+"TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_MODIFI."
+"TEMPERATURE_NAME"
+msgid "Add Temperature"
+msgstr "增加温度"
+
+#. TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_MODIFI.TEMPERATURE_TIP
+msgctxt ""
+"TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_MODIFI."
+"TEMPERATURE_TIP"
+msgid "Addition"
+msgstr "直接增加"
+
+#. TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CONFIRM_BUTTON.TITLE
+msgctxt ""
+"TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CONFIRM_BUTTON.TITLE"
+msgid "Change"
+msgstr "应用"
+
+#. TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CONFIRM_BUTTON.TOOL_TIP
+msgctxt ""
+"TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CONFIRM_BUTTON.TOOL_TIP"
+msgid ""
+"You can only change type or value once, when you cancel, it will not return "
+"materials."
+msgstr ""
+"你只能在一次修改内修改类型或是数据，如果取消这个对话框，不会做任何更改也不会"
+"返回材料。"
+
+#. TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.WINDOW_TITLE
+msgctxt "TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.WINDOW_TITLE"
+msgid "Change Geyser"
+msgstr "更改间歇泉"
