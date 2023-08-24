@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using PeterHan.PLib.Core;
+using PeterHan.PLib.Options;
 using STRINGS;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +8,8 @@ namespace PlantPulverizerEnhancement {
     public class Mod : KMod.UserMod2 {
         public override void OnLoad(Harmony harmony) {
             base.OnLoad(harmony);
+            new POptions().RegisterOptions(this, typeof(Options));
+            LocString.CreateLocStringKeys(typeof(Strings), "");
         }
     }
 
@@ -37,6 +39,7 @@ namespace PlantPulverizerEnhancement {
         [HarmonyPatch(typeof(EntityTemplates), nameof(EntityTemplates.CreateAndRegisterSeedForPlant))]
         public class EntityTemplates_CreateAndRegisterSeedForPlant_Patch {
             public static void Postfix(string id) {
+                if (!SingletonOptions<Options>.Instance.AddRecipe) return;
                 if (id != "ColdWheatSeed" && id != "BeanPlantSeed") {
                     ComplexRecipe.RecipeElement[] array = new ComplexRecipe.RecipeElement[2]{
                         new ComplexRecipe.RecipeElement(id, 10f),
@@ -47,7 +50,7 @@ namespace PlantPulverizerEnhancement {
                     };
                     new ComplexRecipe(ComplexRecipeManager.MakeRecipeID("MilkPress", array, array2), array, array2, 0, 0) {
                         time = 40f,
-                        description = string.Format(STRINGS.BUILDINGS.PREFABS.MILKPRESS.WHEAT_MILK_RECIPE_DESCRIPTION, ITEMS.FOOD.COLDWHEATSEED.NAME, SimHashes.Milk.CreateTag().ProperName()),
+                        description = string.Format(BUILDINGS.PREFABS.MILKPRESS.WHEAT_MILK_RECIPE_DESCRIPTION, ITEMS.FOOD.COLDWHEATSEED.NAME, SimHashes.Milk.CreateTag().ProperName()),
                         nameDisplay = ComplexRecipe.RecipeNameDisplay.IngredientToResult,
                         fabricators = new List<Tag> { TagManager.Create("MilkPress") }
                     };
