@@ -15,10 +15,10 @@ namespace TweaksPack {
             public static float Plant = debug;
             public static float Geyser = debug;
 #else
-            public static float Auto = 300f;
-            public static float ComplexFabricator = 200f;
-            public static float Plant = 50f;
-            public static float Geyser = 1800f;
+            public static float Auto = 100f;
+            public static float ComplexFabricator = 100f;
+            public static float Plant = 100f;
+            public static float Geyser = 100f;
 #endif
         }
 

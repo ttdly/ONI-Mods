@@ -57,7 +57,7 @@ namespace TweaksPack
                 FlexSize = new Vector2(0.8f, 1f),
                 Margin = new RectOffset(10, 10, 13, 13),
             };
-            confirmPanel.AddChild(confirmPanel);
+            confirmPanel.AddChild(confirmButton);
             CreateSelecteOption(scrollBody);
             //CreateModiferOptions(scrollBody);
             dialog.Body.AddChild(scrollPane);
