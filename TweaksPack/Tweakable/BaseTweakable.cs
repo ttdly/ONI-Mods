@@ -8,6 +8,8 @@ namespace TweaksPack.Tweakable
     public class BaseTweakable : Workable {
         [Serialize]
         public bool isMarkForTweak = false;
+        [Serialize]
+        public bool fetched = false;
         private Storage storage;
         private FetchList2 fetchList;
         private Chore chore;
@@ -80,6 +82,7 @@ namespace TweaksPack.Tweakable
         }
 
         protected virtual void OnFetchComplete() {
+            fetched = true;
             chore = new WorkChore<BaseTweakable>(Db.Get().ChoreTypes.Build, this, only_when_operational: false);
         }
 
@@ -89,14 +92,16 @@ namespace TweaksPack.Tweakable
         }
 
         private void ActiveWork() {
-            if (fetchList == null) {
+            if (fetchList == null && !fetched) {
                 fetchList = new FetchList2(storage, Db.Get().ChoreTypes.BuildFetch);
                 foreach (KeyValuePair<Tag, float> kvp in materialNeeds) {
                     fetchList.Add(kvp.Key, amount: kvp.Value);
                     MaterialNeeds.UpdateNeed(kvp.Key, kvp.Value, gameObject.GetMyWorldId());
                 }
                 fetchList.Submit(new System.Action(OnFetchComplete), true);
-            };
+            } else {
+                OnFetchComplete();
+            }
         }
 
         private void DestroyWork() {
@@ -112,6 +117,7 @@ namespace TweaksPack.Tweakable
                 fetchList = null;
             }
             if (isMarkForTweak) isMarkForTweak = false;
+            if (fetched) fetched = false;
         }
 
         private void Toogle() {

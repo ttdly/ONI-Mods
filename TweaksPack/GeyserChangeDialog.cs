@@ -59,7 +59,9 @@ namespace TweaksPack
             };
             confirmPanel.AddChild(confirmButton);
             CreateSelecteOption(scrollBody);
-            //CreateModiferOptions(scrollBody);
+#if DEBUG
+            CreateModiferOptions(scrollBody);
+#endif
             dialog.Body.AddChild(scrollPane);
             dialog.Body.AddChild(confirmPanel);
             windowObject = dialog.Build();
@@ -138,23 +140,6 @@ namespace TweaksPack
                 geyser = null;
                 geyser = go;
                 CameraController.Instance?.CameraGoTo(geyser.transform.GetPosition());
-            } else {
-                Geyser.GeyserModification geyserModification = new Geyser.GeyserModification() {
-                    massPerCycleModifier = (float)modiferFloatOptionsEntrys[0].Value,
-                    temperatureModifier = (float)modiferFloatOptionsEntrys[1].Value,
-                    iterationDurationModifier = 0.0f,
-                    iterationPercentageModifier = 0.0f,
-                    yearDurationModifier = 0.0f,
-                    yearPercentageModifier = (float)modiferFloatOptionsEntrys[2].Value,
-                };
-                GeyserTweakable geyserTweakable = geyser.GetComponent<GeyserTweakable>();
-                if (geyserTweakable.hasModification) {
-                    geyserTweakable.modification.AddValues(geyserModification);
-                } else {
-                    geyserTweakable.hasModification = true;
-                    geyserTweakable.modification = geyserModification;
-                }
-                geyser.GetComponent<Geyser>()?.AddModification(geyserModification);
             }
             DestroyWindow();
         }

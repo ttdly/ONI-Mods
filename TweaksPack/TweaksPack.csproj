@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AssemblyTitle>Tweaks Pack</AssemblyTitle>
-    <FileVersion>1.0.1-beta</FileVersion>
+    <FileVersion>1.0.3</FileVersion>
     <RootNamespace>TweaksPack</RootNamespace>
     <Description>Update some objects</Description>
     <AssemblyVersion>1.0.0</AssemblyVersion>

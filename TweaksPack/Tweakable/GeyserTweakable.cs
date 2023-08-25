@@ -4,11 +4,6 @@ namespace TweaksPack.Tweakable
 {
     [SerializationConfig(MemberSerialization.OptIn)]
     public class GeyserTweakable : BaseTweakable {
-        [Serialize]
-        public Geyser.GeyserModification modification;
-        [Serialize]
-        public bool hasModification = false;
-
         protected override void OnCompleteWork(Worker worker) {
             base.OnCompleteWork(worker);
             ShowGeyserChangeDialog();
@@ -17,9 +12,6 @@ namespace TweaksPack.Tweakable
         protected override void OnSpawn() {
             base.OnSpawn();
             materialNeeds = TweakableStaticVars.MaterialNeeds.Geyser;
-            if (hasModification) {
-                gameObject.GetComponent<Geyser>().AddModification(modification);
-            }
         }
 
         protected override void OnFetchComplete() {
