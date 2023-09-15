@@ -4,7 +4,7 @@ namespace TweaksPack.Tweakable
     public class AutoTweakable : OnceTweakable{
         protected override void OnSpawn() {
             base.OnSpawn();
-            materialNeeds = TweakableStaticVars.MaterialNeeds.Auto;
+            SetWorkTime(TweakableStaticVars.WorkTime.Auto);
         }
 
         protected override void ToogleTweak() {
@@ -12,11 +12,6 @@ namespace TweaksPack.Tweakable
             if (isTweaked) {
                 gameObject.AddTag(TweakableStaticVars.Tags.AutoTweaked);
             }
-        }
-
-        protected override void OnFetchComplete() {
-            base.OnFetchComplete();
-            SetWorkTime(TweakableStaticVars.WorkTime.Auto);
         }
     }
 }

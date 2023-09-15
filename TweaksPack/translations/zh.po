@@ -40,13 +40,15 @@ msgstr "目标："
 
 #. TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_MODIFI.MASS_NAME
 msgctxt ""
-"TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_MODIFI.MASS_NAME"
+"TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_MODIFI."
+"MASS_NAME"
 msgid "Add Mass Pre Cycel"
 msgstr "增加每周期质量"
 
 #. TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_MODIFI.MASS_TIP
 msgctxt ""
-"TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_MODIFI.MASS_TIP"
+"TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CHANGE_MODIFI."
+"MASS_TIP"
 msgid "Multiple (1.0 = Current mass pre cycel * 2)"
 msgstr "倍数"
 
@@ -86,13 +88,10 @@ msgstr "应用"
 
 #. TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CONFIRM_BUTTON.TOOL_TIP
 msgctxt ""
-"TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CONFIRM_BUTTON.TOOL_TIP"
-msgid ""
-"You can only change type or value once, when you cancel, it will not return "
-"materials."
-msgstr ""
-"你只能在一次修改内修改类型或是数据，如果取消这个对话框，不会做任何更改也不会"
-"返回材料。"
+"TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.CONFIRM_BUTTON."
+"TOOL_TIP"
+msgid "You can only change type or value."
+msgstr "你只能在一次调整内修改类型或是数据"
 
 #. TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.WINDOW_TITLE
 msgctxt "TweaksPack.TweaksPackStrings.UI.CHANGE_GEYSER_WINDOW.WINDOW_TITLE"

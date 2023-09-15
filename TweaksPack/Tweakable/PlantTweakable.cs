@@ -13,9 +13,5 @@ namespace TweaksPack.Tweakable
             gameObject.AddTag(TweakableStaticVars.Tags.AutoHarvest);
         }
 
-        protected override void OnFetchComplete() {
-            base.OnFetchComplete();
-            SetWorkTime(TweakableStaticVars.WorkTime.Plant);
-        }
     }
 }

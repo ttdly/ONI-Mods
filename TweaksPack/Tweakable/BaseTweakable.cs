@@ -11,7 +11,6 @@ namespace TweaksPack.Tweakable
         [Serialize]
         public bool fetched = false;
         private Storage storage;
-        private FetchList2 fetchList;
         private Chore chore;
         public Dictionary<Tag, float> materialNeeds;
         private static readonly EventSystem.IntraObjectHandler<BaseTweakable> OnRefreshUserMenuDelegate = new EventSystem.IntraObjectHandler<BaseTweakable>((component, data) => component.OnRefreshUserMenu(data));
@@ -81,48 +80,26 @@ namespace TweaksPack.Tweakable
             workingPstFailed = null;
         }
 
-        protected virtual void OnFetchComplete() {
-            fetched = true;
-            chore = new WorkChore<BaseTweakable>(Db.Get().ChoreTypes.Build, this, only_when_operational: false);
-        }
-
         private void OnRefreshUserMenu(object _) {
             if (gameObject.HasTag(TweakableStaticVars.Tags.DontTweak)) return;
             Game.Instance.userMenu.AddButton(gameObject, isMarkForTweak ? new KIconButtonMenu.ButtonInfo("action_cancel", TweaksPackStrings.UI.BUTTON.OFF.NAME, new System.Action(new System.Action(() => { isMarkForTweak = !isMarkForTweak; Toogle(); })), tooltipText: TweaksPackStrings.UI.BUTTON.OFF.TOOL_TIP) : new KIconButtonMenu.ButtonInfo("action_repair", TweaksPackStrings.UI.BUTTON.ON.NAME, new System.Action(() => { isMarkForTweak = !isMarkForTweak; Toogle(); }), tooltipText: TweaksPackStrings.UI.BUTTON.ON.TOOLTIP));
         }
 
         private void ActiveWork() {
-            if (fetchList == null && !fetched) {
-                fetchList = new FetchList2(storage, Db.Get().ChoreTypes.BuildFetch);
-                foreach (KeyValuePair<Tag, float> kvp in materialNeeds) {
-                    fetchList.Add(kvp.Key, amount: kvp.Value);
-                    MaterialNeeds.UpdateNeed(kvp.Key, kvp.Value, gameObject.GetMyWorldId());
-                }
-                fetchList.Submit(new System.Action(OnFetchComplete), true);
-            } else {
-                OnFetchComplete();
-            }
+            chore = new WorkChore<BaseTweakable>(Db.Get().ChoreTypes.Build, this, only_when_operational: false);
         }
 
         private void DestroyWork() {
-            if (storage.Count > 0) {
-                storage.DropAll();
-            }
             if (chore != null) {
                 chore.Cancel("Cancel Tweak");
                 chore = null;
             }
-            if (fetchList != null) {
-                fetchList.Cancel("Cancle Fetch");
-                fetchList = null;
-            }
             if (isMarkForTweak) isMarkForTweak = false;
-            if (fetched) fetched = false;
         }
 
         private void Toogle() {
             if (isMarkForTweak) {
-                if (chore != null || fetchList != null) return;
+                if (chore != null) return;
                 ActiveWork();
             } else {
                 DestroyWork();

@@ -3,7 +3,7 @@
     public class ComplexFabricatorTweakable : OnceTweakable{
         protected override void OnSpawn() {
             base.OnSpawn();
-            materialNeeds = TweakableStaticVars.MaterialNeeds.ComplexFabricator;
+            SetWorkTime(TweakableStaticVars.WorkTime.Auto);
         }
 
         protected override void ToogleTweak() {
@@ -11,10 +11,6 @@
             if (isTweaked) {
                 if (gameObject.GetComponent<ComplexFabricator>() != null) { gameObject.GetComponent<ComplexFabricator>().duplicantOperated = false; }
             }
-        }
-        protected override void OnFetchComplete() {
-            base.OnFetchComplete();
-            SetWorkTime(TweakableStaticVars.WorkTime.Auto);
         }
     }
 }

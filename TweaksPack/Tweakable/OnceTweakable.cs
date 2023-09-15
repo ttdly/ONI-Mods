@@ -27,8 +27,5 @@ namespace TweaksPack.Tweakable
             ToogleTweak();
         }
 
-        protected override void OnFetchComplete() {
-            base.OnFetchComplete();
-        }
     }
 }

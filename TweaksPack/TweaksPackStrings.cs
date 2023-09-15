@@ -16,7 +16,7 @@
                 public static LocString WINDOW_TITLE = (LocString)"Change Geyser";
                 public static class CONFIRM_BUTTON {
                     public static LocString TITLE = (LocString)"Change";
-                    public static LocString TOOL_TIP = (LocString)"You can only change type or value once, when you cancel, it will not return materials.";
+                    public static LocString TOOL_TIP = (LocString)"You can only change type or value.";
                 }
                 public static LocString CHANGE_LABEL = (LocString)"Target: ";
                 public static class CHANGE_MODIFI{

@@ -11,11 +11,6 @@ namespace TweaksPack.Tweakable
 
         protected override void OnSpawn() {
             base.OnSpawn();
-            materialNeeds = TweakableStaticVars.MaterialNeeds.Geyser;
-        }
-
-        protected override void OnFetchComplete() {
-            base.OnFetchComplete();
             SetWorkTime(TweakableStaticVars.WorkTime.Geyser);
         }
 
