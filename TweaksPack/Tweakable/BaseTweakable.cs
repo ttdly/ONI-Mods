@@ -8,9 +8,6 @@ namespace TweaksPack.Tweakable
     public class BaseTweakable : Workable {
         [Serialize]
         public bool isMarkForTweak = false;
-        [Serialize]
-        public bool fetched = false;
-        private Storage storage;
         private Chore chore;
         public Dictionary<Tag, float> materialNeeds;
         private static readonly EventSystem.IntraObjectHandler<BaseTweakable> OnRefreshUserMenuDelegate = new EventSystem.IntraObjectHandler<BaseTweakable>((component, data) => component.OnRefreshUserMenu(data));
@@ -39,23 +36,14 @@ namespace TweaksPack.Tweakable
 
         protected override void OnCompleteWork(Worker worker) {
             base.OnCompleteWork(worker);
-            storage.ConsumeAllIgnoringDisease();
             DestroyWork();
         }
 
         protected override void OnSpawn() {
             base.OnSpawn();
-            storage = gameObject.AddComponent<Storage>();
-            storage.showInUI = false;
             CellOffset[][] table = OffsetGroups.InvertedStandardTable;
             CellOffset[] filter = null;
-            Building component = GetComponent<Building>();
-            if (component != null && component.Def.IsTilePiece) {
-                table = OffsetGroups.InvertedStandardTableWithCorners;
-                filter = component.Def.ConstructionOffsetFilter;
-            }
             SetOffsetTable(OffsetGroups.BuildReachabilityTable(PlacementOffsets, table, filter));
-            storage.SetOffsetTable(OffsetGroups.BuildReachabilityTable(PlacementOffsets, table, filter));
             Subscribe((int)GameHashes.RefreshUserMenu, OnRefreshUserMenuDelegate);
             Subscribe((int)GameHashes.StatusChange, OnRefreshUserMenuDelegate);
             Toogle();
@@ -74,10 +62,9 @@ namespace TweaksPack.Tweakable
             requiredSkillPerk = Db.Get().SkillPerks.ConveyorBuild.Id;
             shouldShowSkillPerkStatusItem = false;
             synchronizeAnims = false;
+            faceTargetWhenWorking = true;
             multitoolContext = (HashedString)"build";
             multitoolHitEffectTag = (Tag)EffectConfigs.BuildSplashId;
-            workingPstComplete = null;
-            workingPstFailed = null;
         }
 
         private void OnRefreshUserMenu(object _) {
