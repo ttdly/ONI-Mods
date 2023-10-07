@@ -174,7 +174,7 @@ namespace TweaksPack {
         [HarmonyPatch(typeof(OilWellCap), nameof(OilWellCap.ReleaseGasPressure))]
         public class OilWellCap_ReleaseGasPressure_Patch {
             public static void Postfix(OilWellCap __instance) {
-                if (__instance.gameObject.HasTag(TweakableStaticVars.Tags.AutoTweaked) && !__instance.NeedsDepressurizing()) {
+                if (__instance.gameObject.HasTag(TweakableStaticVars.Tags.AutoTweaked) && __instance.GetSMI<OilWellCap.StatesInstance>().GetPressurePercent() == 0f) {
                     __instance.GetSMI<OilWellCap.StatesInstance>()?.sm.working.Set(false, __instance.GetSMI<OilWellCap.StatesInstance>());
                 }
             }
