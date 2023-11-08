@@ -14,72 +14,72 @@ namespace PackAnything {
         [Serialize]
         public bool hasBacon = false;
         private Guid statusItemGuid;
-        public bool MarkFroSurvey => this.isMarkForSurvey;
+        public bool MarkFroSurvey => isMarkForSurvey;
         private CellOffset[] PlacementOffsets {
             get {
-                Building component1 = this.GetComponent<Building>();
-                if ((UnityEngine.Object)component1 != (UnityEngine.Object)null)
+                Building component1 = GetComponent<Building>();
+                if (component1 != null)
                     return component1.Def.PlacementOffsets;
-                OccupyArea component2 = this.GetComponent<OccupyArea>();
-                if ((UnityEngine.Object)component2 != (UnityEngine.Object)null)
+                OccupyArea component2 = GetComponent<OccupyArea>();
+                if (component2 != null)
                     return component2.OccupiedCellsOffsets;
-                Debug.Assert(false, (object)"Ack! We put a Surveyable on something that's neither a Building nor OccupyArea!", (UnityEngine.Object)this);
-                return (CellOffset[])null;
+                Debug.Assert(false, "Ack! We put a Surveyable on something that's neither a Building nor OccupyArea!", this);
+                return null;
             }
         }
 
-        private static readonly EventSystem.IntraObjectHandler<Surveyable> OnRefreshUserMenuDelegate = new EventSystem.IntraObjectHandler<Surveyable>((Action<Surveyable, object>)((component, data) => component.OnRefreshUserMenu(data)));
+        private static readonly EventSystem.IntraObjectHandler<Surveyable> OnRefreshUserMenuDelegate = new EventSystem.IntraObjectHandler<Surveyable>((component, data) => component.OnRefreshUserMenu(data));
 
         protected override void OnPrefabInit() {
             base.OnPrefabInit();
-            this.faceTargetWhenWorking = true;
-            this.synchronizeAnims = false;
-            this.requiredSkillPerk = PackAnythingStaticVars.CanPack.Id;
-            this.workerStatusItem = PackAnythingStaticVars.SurveyingItem;
-            this.shouldShowSkillPerkStatusItem = false;
-            this.attributeConverter = Db.Get().AttributeConverters.ConstructionSpeed;
-            this.attributeExperienceMultiplier = DUPLICANTSTATS.ATTRIBUTE_LEVELING.MOST_DAY_EXPERIENCE;
-            this.skillExperienceSkillGroup = Db.Get().SkillGroups.Building.Id;
-            this.skillExperienceMultiplier = SKILLS.MOST_DAY_EXPERIENCE;
-            this.alwaysShowProgressBar = false;
-            this.multitoolContext = (HashedString)"build";
-            this.multitoolHitEffectTag = (Tag)EffectConfigs.BuildSplashId;
-            this.SetWorkTime(50f);
+            faceTargetWhenWorking = true;
+            synchronizeAnims = false;
+            requiredSkillPerk = PackAnythingStaticVars.CanPack.Id;
+            workerStatusItem = PackAnythingStaticVars.SurveyingItem;
+            shouldShowSkillPerkStatusItem = false;
+            attributeConverter = Db.Get().AttributeConverters.ConstructionSpeed;
+            attributeExperienceMultiplier = DUPLICANTSTATS.ATTRIBUTE_LEVELING.MOST_DAY_EXPERIENCE;
+            skillExperienceSkillGroup = Db.Get().SkillGroups.Building.Id;
+            skillExperienceMultiplier = SKILLS.MOST_DAY_EXPERIENCE;
+            alwaysShowProgressBar = false;
+            multitoolContext = (HashedString)"build";
+            multitoolHitEffectTag = (Tag)EffectConfigs.BuildSplashId;
+            SetWorkTime(50f);
         }
 
         protected override void OnSpawn() {
             base.OnSpawn();
             PackAnythingStaticVars.Surveyables.Add(this);
-            this.Subscribe<Surveyable>((int)GameHashes.RefreshUserMenu, Surveyable.OnRefreshUserMenuDelegate);
-            this.Subscribe<Surveyable>((int)GameHashes.StatusChange, Surveyable.OnRefreshUserMenuDelegate);
+            Subscribe<Surveyable>((int)GameHashes.RefreshUserMenu, OnRefreshUserMenuDelegate);
+            Subscribe<Surveyable>((int)GameHashes.StatusChange, OnRefreshUserMenuDelegate);
             CellOffset[][] table = OffsetGroups.InvertedStandardTable;
-            CellOffset[] filter = (CellOffset[])null;
-            this.SetOffsetTable(OffsetGroups.BuildReachabilityTable(this.PlacementOffsets, table, filter));
-            if (this.isMarkForSurvey) {
+            CellOffset[] filter = null;
+            SetOffsetTable(OffsetGroups.BuildReachabilityTable(PlacementOffsets, table, filter));
+            if (isMarkForSurvey) {
                 OnClickSurvey();
             }
         }
 
         protected override void OnStartWork(Worker worker) {
             base.OnStartWork(worker);
-            this.progressBar.barColor = new Color(0.5f, 0.7f, 1.0f, 1f);
-            this.RemoveStatus();
+            progressBar.barColor = new Color(0.5f, 0.7f, 1.0f, 1f);
+            RemoveStatus();
         }
 
         protected override void OnAbortWork(Worker worker) {
             base.OnAbortWork(worker);
-            if (this.MarkFroSurvey) {
-                this.AddStatus();
+            if (MarkFroSurvey) {
+                AddStatus();
             }
         }
 
         protected override void OnCompleteWork(Worker worker) {
             base.OnCompleteWork(worker);
-            this.CreateBeacon();
-            if ((UnityEngine.Object)DetailsScreen.Instance != (UnityEngine.Object)null && DetailsScreen.Instance.CompareTargetWith(this.gameObject))
+            CreateBeacon();
+            if (DetailsScreen.Instance != null && DetailsScreen.Instance.CompareTargetWith(gameObject))
                 DetailsScreen.Instance.Show(false);
-            this.hasBacon = true;
-            this.OnClickCancel();
+            hasBacon = true;
+            OnClickCancel();
         }
 
         protected override void OnCleanUp() {
@@ -90,56 +90,56 @@ namespace PackAnything {
 
         // 自定义的方法
         public void OnRefreshUserMenu(object _) {
-            if (this.hasBacon) return;
-            if (this.gameObject.HasTag("DontShowSurveyable"))
-            if (this.gameObject.HasTag("OilWell") && this.gameObject.GetComponent<BuildingAttachPoint>()?.points[0].attachedBuilding != null) return;
-            Game.Instance.userMenu.AddButton(this.gameObject, this.isMarkForSurvey ? new KIconButtonMenu.ButtonInfo("action_follow_cam", PackAnythingString.UI.SURVEY.NAME_OFF, new System.Action(this.OnClickCancel), tooltipText: PackAnythingString.UI.SURVEY.TOOLTIP_OFF) : new KIconButtonMenu.ButtonInfo("action_follow_cam", PackAnythingString.UI.SURVEY.NAME, new System.Action(this.OnClickSurvey), tooltipText: PackAnythingString.UI.SURVEY.TOOLTIP));
+            if (hasBacon) return;
+            if (gameObject.HasTag("DontShowSurveyable"))
+            if (gameObject.HasTag("OilWell") && gameObject.GetComponent<BuildingAttachPoint>()?.points[0].attachedBuilding != null) return;
+            Game.Instance.userMenu.AddButton(gameObject, isMarkForSurvey ? new KIconButtonMenu.ButtonInfo("action_follow_cam", PackAnythingString.UI.SURVEY.NAME_OFF, new System.Action(OnClickCancel), tooltipText: PackAnythingString.UI.SURVEY.TOOLTIP_OFF) : new KIconButtonMenu.ButtonInfo("action_follow_cam", PackAnythingString.UI.SURVEY.NAME, new System.Action(OnClickSurvey), tooltipText: PackAnythingString.UI.SURVEY.TOOLTIP));
         }
 
         public void OnClickCancel() {
-            if (this.chore == null && !this.isMarkForSurvey) {
+            if (chore == null && !isMarkForSurvey) {
                 return;
             }
-            this.isMarkForSurvey = false;
-            this.chore.Cancel("Surveyable.CancelChore");
-            this.chore = null;
-            this.RemoveStatus();
+            isMarkForSurvey = false;
+            chore.Cancel("Surveyable.CancelChore");
+            chore = null;
+            RemoveStatus();
         }
 
         public void OnClickSurvey() {
-            Prioritizable.AddRef(this.gameObject);
-            this.isMarkForSurvey = true;
-            if (this.chore != null) return;          
-            this.chore = new WorkChore<Surveyable>(PackAnythingStaticVars.Survey, this, only_when_operational: false);
-            this.AddStatus();
+            Prioritizable.AddRef(gameObject);
+            isMarkForSurvey = true;
+            if (chore != null) return;          
+            chore = new WorkChore<Surveyable>(PackAnythingStaticVars.Survey, this, only_when_operational: false);
+            AddStatus();
         }
 
         public void CreateBeacon() {
-            GameObject go = GameUtil.KInstantiate(Assets.GetPrefab((Tag)BeaconConfig.ID), Grid.CellToPos(Grid.PosToCell(this.gameObject)), Grid.SceneLayer.Creatures, name: this.gameObject.name);
+            GameObject go = GameUtil.KInstantiate(Assets.GetPrefab((Tag)BeaconConfig.ID), Grid.CellToPos(Grid.PosToCell(gameObject)), Grid.SceneLayer.Creatures, name: gameObject.name);
             go.SetActive(true);
             Beacon becaon = go.GetComponent<Beacon>();
-            becaon.originCell = Grid.PosToCell(this.gameObject);
-            if (this.gameObject.HasTag(GameTags.GeyserFeature)) {
+            becaon.originCell = Grid.PosToCell(gameObject);
+            if (gameObject.HasTag(GameTags.GeyserFeature)) {
                 becaon.isGeyser = true;
             }
             string name;
             if (becaon.isGeyser) {
-                name = this.gameObject.name;
+                name = gameObject.name;
             } else {
-                name = Strings.Get("STRINGS.BUILDINGS.PREFABS." + this.gameObject.name.Replace("Complete", "").ToUpper() + ".NAME");
+                name = Strings.Get("STRINGS.BUILDINGS.PREFABS." + gameObject.name.Replace("Complete", "").ToUpper() + ".NAME");
             }
-            if(name.IndexOf("MISSING") != -1) name = this.gameObject.name;
+            if(name.IndexOf("MISSING") != -1) name = gameObject.name;
             go.FindOrAddComponent<UserNameable>().savedName = name;
         }
 
         private void AddStatus() {
-            KSelectable kSelectable = this.GetComponent<KSelectable>();
-            if (kSelectable != null) this.statusItemGuid = kSelectable.ReplaceStatusItem(this.statusItemGuid, PackAnything.PackAnythingStaticVars.WaitingSurvey);
+            KSelectable kSelectable = GetComponent<KSelectable>();
+            if (kSelectable != null) statusItemGuid = kSelectable.ReplaceStatusItem(statusItemGuid, PackAnythingStaticVars.WaitingSurvey);
         }
 
         private void RemoveStatus() {
-            KSelectable kSelectable = this.GetComponent<KSelectable>();
-            if (kSelectable != null) this.statusItemGuid = kSelectable.RemoveStatusItem(this.statusItemGuid);
+            KSelectable kSelectable = GetComponent<KSelectable>();
+            if (kSelectable != null) statusItemGuid = kSelectable.RemoveStatusItem(statusItemGuid);
         }
     }
 }

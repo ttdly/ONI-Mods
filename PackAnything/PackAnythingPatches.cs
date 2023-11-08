@@ -18,8 +18,8 @@ namespace PackAnything {
             public static void Postfix(Geyser __instance) {
                 if (__instance.GetType() != typeof(Geyser)) {
                     Surveyable packable = __instance.GetComponent<Surveyable>();
-                    if ((UnityEngine.Object)packable != (UnityEngine.Object)null) {
-                        UnityEngine.Object.Destroy(__instance.GetComponent<Surveyable>());
+                    if (packable != null) {
+                        Object.Destroy(__instance.GetComponent<Surveyable>());
                     }
                     return;
                 } else {

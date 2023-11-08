@@ -15,7 +15,7 @@ namespace PackAnything {
             LocString.CreateLocStringKeys(typeof(PackAnything.PackAnythingString), "");
             ModUtil.RegisterForTranslation(typeof(STRINGS));
             new POptions().RegisterOptions(this,typeof(Options));
-            this.ManualPatchs(harmony);
+            ManualPatchs(harmony);
         }
 
         public void ManualPatchs(Harmony harmony) {

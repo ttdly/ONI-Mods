@@ -9,7 +9,7 @@ namespace PackAnything {
         public GameObject CreatePrefab() {
             string name = PackAnythingString.MISC.DISPLACEMENT_BEACON.NAME;
             string desc = PackAnythingString.MISC.DISPLACEMENT_BEACON.DESC;
-            EffectorValues dector = TUNING.BUILDINGS.DECOR.BONUS.TIER1;
+            EffectorValues dector = BUILDINGS.DECOR.BONUS.TIER1;
             EffectorValues noisy = NOISE_POLLUTION.NOISY.TIER6;
             KAnimFile anim = Assets.GetAnim((HashedString)"displacement_beacon_kanim");
             GameObject placeEntity = EntityTemplates.CreatePlacedEntity(ID, name, desc, mass, anim, "object", Grid.SceneLayer.Front, 1, 2, dector, noisy, additionalTags: new List<Tag>() { GameTags.IndustrialProduct });

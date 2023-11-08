@@ -10,7 +10,7 @@ namespace PackAnything {
         string ISidescreenButtonControl.SidescreenButtonTooltip => ButtonToolTip();
 
         private string ButtonText() {
-            if (this.isMarkForSurvey) {
+            if (isMarkForSurvey) {
                 return PackAnythingString.UI.SURVEY.NAME_OFF;
             } else {
                 return PackAnythingString.UI.SURVEY.NAME;
@@ -18,7 +18,7 @@ namespace PackAnything {
         }
 
         private string ButtonToolTip() {
-            if (this.isMarkForSurvey) {
+            if (isMarkForSurvey) {
                 return PackAnythingString.UI.SURVEY.TOOLTIP_OFF;
             } else {
                 return PackAnythingString.UI.SURVEY.TOOLTIP;
@@ -30,48 +30,48 @@ namespace PackAnything {
         int ISidescreenButtonControl.HorizontalGroupID() => -1;
 
         void ISidescreenButtonControl.OnSidescreenButtonPressed() {
-            this.Toggle();
+            Toggle();
         }
 
         void ISidescreenButtonControl.SetButtonTextOverride(ButtonMenuTextOverride textOverride) {
             throw new System.NotImplementedException();
         }
 
-        bool ISidescreenButtonControl.SidescreenButtonInteractable() => !this.gameObject.HasTag("Surveyed");
+        bool ISidescreenButtonControl.SidescreenButtonInteractable() => !gameObject.HasTag("Surveyed");
         
 
         bool ISidescreenButtonControl.SidescreenEnabled() => true;
 
         private void Toggle() {
-            this.isMarkForSurvey = !this.isMarkForSurvey;
-            this.Refresh();
+            isMarkForSurvey = !isMarkForSurvey;
+            Refresh();
         }
 
         private void Refresh() {
-            if (KMonoBehaviour.isLoadingScene)
+            if (isLoadingScene)
                 return;
-            if (this.isMarkForSurvey) {
+            if (isMarkForSurvey) {
                 CreateBeacon();
             }
         }
 
         private void CreateBeacon() {
-            GameObject go = GameUtil.KInstantiate(Assets.GetPrefab((Tag)BeaconConfig.ID), Grid.CellToPos(Grid.PosToCell(this.gameObject)), Grid.SceneLayer.Creatures, name: this.gameObject.name);
+            GameObject go = GameUtil.KInstantiate(Assets.GetPrefab((Tag)BeaconConfig.ID), Grid.CellToPos(Grid.PosToCell(gameObject)), Grid.SceneLayer.Creatures, name: gameObject.name);
             go.SetActive(true);
             Beacon becaon = go.GetComponent<Beacon>();
-            becaon.originCell = Grid.PosToCell(this.gameObject);
-            if (this.gameObject.HasTag(GameTags.GeyserFeature)) {
+            becaon.originCell = Grid.PosToCell(gameObject);
+            if (gameObject.HasTag(GameTags.GeyserFeature)) {
                 becaon.isGeyser = true;
             }
             string name;
             if (becaon.isGeyser) {
-                name = this.gameObject.name;
+                name = gameObject.name;
             } else {
-                name = Strings.Get("STRINGS.BUILDINGS.PREFABS." + this.gameObject.name.Replace("Complete", "").ToUpper() + ".NAME");
+                name = Strings.Get("STRINGS.BUILDINGS.PREFABS." + gameObject.name.Replace("Complete", "").ToUpper() + ".NAME");
             }
             go.FindOrAddComponent<UserNameable>().savedName = name;
-            this.gameObject.AddTag("Surveyed");
-            this.Toggle();
+            gameObject.AddTag("Surveyed");
+            Toggle();
         }
     }
 }
