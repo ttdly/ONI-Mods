@@ -31,7 +31,7 @@ namespace PackAnything {
         [HarmonyPatch(typeof(GeneratedBuildings), "LoadGeneratedBuildings")]
         public class GeneratedBuildings_LoadGeneratedBuildings_Patch {
             public static void Prefix() {
-                LocString.CreateLocStringKeys(typeof(PackAnything.STRINGS), "");
+                LocString.CreateLocStringKeys(typeof(STRINGS), "");
                 Sprite skillbadge_role_building4 = PUIUtils.LoadSprite("PackAnything.images.skillbadge_role_building4.png");
                 Assets.Sprites.Add("skillbadge_role_building4", skillbadge_role_building4);
                 PackAnythingStaticVars.Init();

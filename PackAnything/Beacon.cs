@@ -8,7 +8,6 @@ using UnityEngine;
 
 namespace PackAnything {
     [SerializationConfig(MemberSerialization.OptIn)]
-    [AddComponentMenu("KMonoBehaviour/Workable/Becaon")]
     public class Beacon : Workable {
         private Chore chore;
         [Serialize]
@@ -35,7 +34,7 @@ namespace PackAnything {
             skillExperienceSkillGroup = Db.Get().SkillGroups.Building.Id;
             skillExperienceMultiplier = SKILLS.MOST_DAY_EXPERIENCE;
             overrideAnims = new KAnimFile[1]{
-                Assets.GetAnim((HashedString) "anim_use_machine_kanim")
+                Assets.GetAnim((HashedString) "anim_use_remote_kanim")
             };
             faceTargetWhenWorking = true;
             SetWorkTime(50f);
@@ -43,8 +42,8 @@ namespace PackAnything {
 
         protected override void OnSpawn() {
             base.OnSpawn();
-            Subscribe<Beacon>((int)GameHashes.RefreshUserMenu, OnRefreshUserMenuDelegate);
-            Subscribe<Beacon>((int)GameHashes.StatusChange, OnRefreshUserMenuDelegate);
+            Subscribe((int)GameHashes.RefreshUserMenu, OnRefreshUserMenuDelegate);
+            Subscribe((int)GameHashes.StatusChange, OnRefreshUserMenuDelegate);
             if (isMarkForActive) {
                 OnClickActive();
             }
@@ -73,7 +72,7 @@ namespace PackAnything {
         }
 
         // 自定义的方法
-        public void OnRefreshUserMenu(object data) {
+        public void OnRefreshUserMenu(object _) {
             if (gameObject.HasTag(GameTags.Stored)) return;
             Game.Instance.userMenu.AddButton(gameObject, isMarkForActive ? new KIconButtonMenu.ButtonInfo("action_empty_contents", PackAnythingString.UI.ACTIVATE.NAME_OFF, new System.Action(OnClickCancel), tooltipText: PackAnythingString.UI.ACTIVATE.TOOLTIP_OFF) : new KIconButtonMenu.ButtonInfo("action_empty_contents", PackAnythingString.UI.ACTIVATE.NAME, new System.Action(OnClickActive), tooltipText: PackAnythingString.UI.ACTIVATE.TOOLTIP));
         }
@@ -102,12 +101,8 @@ namespace PackAnything {
         }
 
         public void ActiveIt(Worker worker) {
-            GameObject originObject = null;
-            foreach (Surveyable surveyable in PackAnythingStaticVars.Surveyables.Items) {
-                if (Grid.PosToCell(surveyable) == originCell) {
-                    originObject = surveyable.gameObject;
-                }
-            }
+            Surveyable surveyable = (Surveyable)PackAnythingStaticVars.SurveableCmps[originCell];
+            GameObject originObject = surveyable.gameObject;
             if (originObject != null) {
                 int cell = Grid.PosToCell(gameObject);
                 Vector3 posCbc = Grid.CellToPosCBC(cell, Grid.SceneLayer.Building);
@@ -125,9 +120,9 @@ namespace PackAnything {
                     float num = -0.15f;
                     posCbc.z += num;
                 }
-                if (selectable != null) selectable.transform.SetPosition(posCbc);
-                if (occupyArea != null) occupyArea.UpdateOccupiedArea();
-                if (building != null) building.UpdatePosition();
+                selectable?.transform.SetPosition(posCbc);
+                occupyArea?.UpdateOccupiedArea();
+                building?.UpdatePosition();
                 originObject.GetComponent<Surveyable>().hasBacon = false;
             }
             KBatchedAnimController kBatchedAnimController = gameObject.GetComponent<KBatchedAnimController>();
@@ -138,7 +133,7 @@ namespace PackAnything {
             }
         }
 
-        public Pickupable Take(Pickupable pickupable, float amount) {
+        public Pickupable Take(Pickupable pickupable, float _) {
             OnClickCancel();
             return pickupable;
         }

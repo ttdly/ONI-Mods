@@ -6,7 +6,6 @@ using UnityEngine;
 
 namespace PackAnything {
     [RequireComponent(typeof(Prioritizable))]
-    [AddComponentMenu("KMonoBehaviour/Workable/Surveyable")]
     public class Surveyable : Workable {
         private Chore chore;
         [Serialize]
@@ -49,9 +48,9 @@ namespace PackAnything {
 
         protected override void OnSpawn() {
             base.OnSpawn();
-            PackAnythingStaticVars.Surveyables.Add(this);
-            Subscribe<Surveyable>((int)GameHashes.RefreshUserMenu, OnRefreshUserMenuDelegate);
-            Subscribe<Surveyable>((int)GameHashes.StatusChange, OnRefreshUserMenuDelegate);
+            PackAnythingStaticVars.SurveableCmps.Add(Grid.PosToCell(gameObject), this);
+            Subscribe((int)GameHashes.RefreshUserMenu, OnRefreshUserMenuDelegate);
+            Subscribe((int)GameHashes.StatusChange, OnRefreshUserMenuDelegate);
             CellOffset[][] table = OffsetGroups.InvertedStandardTable;
             CellOffset[] filter = null;
             SetOffsetTable(OffsetGroups.BuildReachabilityTable(PlacementOffsets, table, filter));
@@ -84,7 +83,7 @@ namespace PackAnything {
 
         protected override void OnCleanUp() {
             base.OnCleanUp();
-            PackAnythingStaticVars.Surveyables.Remove(this);
+            PackAnythingStaticVars.SurveableCmps.Remove(Grid.PosToCell(gameObject));
         }
 
 

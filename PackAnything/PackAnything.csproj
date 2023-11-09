@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AssemblyTitle>Movable Features 位移信标</AssemblyTitle>
-    <FileVersion>1.1.0</FileVersion>
+    <FileVersion>1.1.1</FileVersion>
     <RootNamespace>PackAnything</RootNamespace>
     <Description>Move something that can't move.</Description>
     <AssemblyVersion>1.1.0</AssemblyVersion>
