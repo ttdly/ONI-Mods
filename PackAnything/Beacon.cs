@@ -95,9 +95,10 @@ namespace PackAnything {
             if (chore != null) return;
             chore = new WorkChore<Beacon>(PackAnythingStaticVars.Active, this, only_when_operational: false);
             AddStatus();
-            Pickupable pickupable = gameObject.GetComponent<Pickupable>();
-            pickupable.OnTake += amount => Take(pickupable, amount);
-            gameObject.GetComponent<Pickupable>().CanAbsorb = (Pickupable other) => true;
+            // 代码可用，但是考虑到激活的时候最有可能出现毛病的地方是这里，所以先弃用
+            //Pickupable pickupable = gameObject.GetComponent<Pickupable>();
+            //pickupable.OnTake += (_, amount) => Take(pickupable, amount);
+            //gameObject.GetComponent<Pickupable>().CanAbsorb = (Pickupable other) => true;
         }
 
         public void ActiveIt(Worker worker) {
@@ -123,6 +124,8 @@ namespace PackAnything {
                 selectable?.transform.SetPosition(posCbc);
                 occupyArea?.UpdateOccupiedArea();
                 building?.UpdatePosition();
+                PackAnythingStaticVars.SurveableCmps.Remove(originCell);
+                PackAnythingStaticVars.SurveableCmps.Add(cell, surveyable);
                 originObject.GetComponent<Surveyable>().hasBacon = false;
             }
             KBatchedAnimController kBatchedAnimController = gameObject.GetComponent<KBatchedAnimController>();
@@ -133,10 +136,10 @@ namespace PackAnything {
             }
         }
 
-        public Pickupable Take(Pickupable pickupable, float _) {
-            OnClickCancel();
-            return pickupable;
-        }
+        //public Pickupable Take(Pickupable pickupable, float _) {
+        //    OnClickCancel();
+        //    return pickupable;
+        //}
 
         public void CreateNeutronium(int cell) {
             int[] cells = new[]{
