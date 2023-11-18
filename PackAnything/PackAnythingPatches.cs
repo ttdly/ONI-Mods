@@ -60,5 +60,12 @@ namespace PackAnything {
                 __instance.gameObject.AddOrGet<Surveyable>();
             }
         }
+
+        [HarmonyPatch(typeof(Game), nameof(Game.Load))]
+        public class Game_OnLoad_Patch {
+            public static void Prefix() {
+                PackAnythingStaticVars.SurveableCmps.Clear();
+            }
+        }
     }
 }
