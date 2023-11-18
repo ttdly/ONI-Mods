@@ -1,4 +1,5 @@
 ﻿using KSerialization;
+using PeterHan.PLib.Core;
 using System;
 using TUNING;
 using UnityEngine;
@@ -48,7 +49,8 @@ namespace PackAnything {
 
         protected override void OnSpawn() {
             base.OnSpawn();
-            PackAnythingStaticVars.SurveableCmps.Add(Grid.PosToCell(gameObject), this);
+            PackAnythingStaticVars.SurveableCmps.Add(this);
+            PUtil.LogDebug($"{gameObject.name} &&& {gameObject.activeInHierarchy}");
             Subscribe((int)GameHashes.RefreshUserMenu, OnRefreshUserMenuDelegate);
             Subscribe((int)GameHashes.StatusChange, OnRefreshUserMenuDelegate);
             CellOffset[][] table = OffsetGroups.InvertedStandardTable;
@@ -83,7 +85,7 @@ namespace PackAnything {
 
         protected override void OnCleanUp() {
             base.OnCleanUp();
-            PackAnythingStaticVars.SurveableCmps.Remove(Grid.PosToCell(gameObject));
+            PackAnythingStaticVars.SurveableCmps.Remove(this);
         }
 
 

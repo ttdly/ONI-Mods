@@ -102,8 +102,12 @@ namespace PackAnything {
         }
 
         public void ActiveIt(Worker worker) {
-            Surveyable surveyable = (Surveyable)PackAnythingStaticVars.SurveableCmps[originCell];
-            GameObject originObject = surveyable.gameObject;
+            GameObject originObject = null;
+            foreach (Surveyable surveyable in PackAnythingStaticVars.SurveableCmps){
+                if (Grid.PosToCell(surveyable) == originCell) {
+                    originObject = surveyable.gameObject;
+                }
+            }
             if (originObject != null) {
                 int cell = Grid.PosToCell(gameObject);
                 Vector3 posCbc = Grid.CellToPosCBC(cell, Grid.SceneLayer.Building);
@@ -124,8 +128,6 @@ namespace PackAnything {
                 selectable?.transform.SetPosition(posCbc);
                 occupyArea?.UpdateOccupiedArea();
                 building?.UpdatePosition();
-                PackAnythingStaticVars.SurveableCmps.Remove(originCell);
-                PackAnythingStaticVars.SurveableCmps.Add(cell, surveyable);
                 originObject.GetComponent<Surveyable>().hasBacon = false;
             }
             KBatchedAnimController kBatchedAnimController = gameObject.GetComponent<KBatchedAnimController>();

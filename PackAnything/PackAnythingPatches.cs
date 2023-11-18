@@ -13,18 +13,10 @@ namespace PackAnything {
             go.AddOrGet<Surveyable>();
         }
 
-        [HarmonyPatch(typeof(Geyser), "OnSpawn")]
-        public static class Geyser_OnSpawn_Patch {
-            public static void Postfix(Geyser __instance) {
-                if (__instance.GetType() != typeof(Geyser)) {
-                    Surveyable packable = __instance.GetComponent<Surveyable>();
-                    if (packable != null) {
-                        Object.Destroy(__instance.GetComponent<Surveyable>());
-                    }
-                    return;
-                } else {
-                    __instance.FindOrAddComponent<Surveyable>();
-                }
+        [HarmonyPatch(typeof(GeyserGenericConfig), nameof(GeyserGenericConfig.CreateGeyser))]
+        partial class GeyserGenericConfig_Patch {
+            public static void Postfix(GameObject __result) {
+                __result.AddOrGet<Surveyable>();
             }
         }
 
@@ -41,7 +33,7 @@ namespace PackAnything {
         [HarmonyPatch(typeof(WarpPortalConfig),nameof(WarpPortalConfig.CreatePrefab))]
         public class WarpPortalConfig_CreatePrefab_Patch { 
             public static void Postfix(GameObject __result) {
-                __result.AddComponent<Manual>();
+                __result.AddOrGet<Manual>();
                 __result.AddTag("DontShowSurveyable");
             }
         }
@@ -49,7 +41,7 @@ namespace PackAnything {
         [HarmonyPatch(typeof(GeneShufflerConfig), nameof(GeneShufflerConfig.CreatePrefab))]
         public class GeneShufflerConfig_CreatePrefab_Patch {
             public static void Postfix(GameObject __result) {
-                __result.AddComponent<Manual>();
+                __result.AddOrGet<Manual>();
                 __result.AddTag("DontShowSurveyable");
             }
         }
