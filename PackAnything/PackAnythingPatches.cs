@@ -1,8 +1,11 @@
 ﻿using HarmonyLib;
 using PeterHan.PLib.UI;
+using System.Collections.Generic;
 using UnityEngine;
+using static DetailsScreen;
 
-namespace PackAnything {
+namespace PackAnything
+{
     public class PackAnythingPatches {
 
         public static void EntityPostfix(GameObject __result) {
@@ -24,6 +27,8 @@ namespace PackAnything {
         public class GeneratedBuildings_LoadGeneratedBuildings_Patch {
             public static void Prefix() {
                 LocString.CreateLocStringKeys(typeof(STRINGS), "");
+                ModUtil.AddBuildingToPlanScreen("Equipment", WorldModifierConfig.ID);
+                Db.Get().Techs.Get("RoboticTools").unlockedItemIDs.Add(WorldModifierConfig.ID);
                 Sprite skillbadge_role_building4 = PUIUtils.LoadSprite("PackAnything.images.skillbadge_role_building4.png");
                 Assets.Sprites.Add("skillbadge_role_building4", skillbadge_role_building4);
                 PackAnythingStaticVars.Init();
@@ -54,10 +59,46 @@ namespace PackAnything {
         }
 
         [HarmonyPatch(typeof(Game), nameof(Game.Load))]
-        public class Game_OnLoad_Patch {
+        public class Game_Load_Patch {
             public static void Prefix() {
                 PackAnythingStaticVars.SurveableCmps.Clear();
             }
         }
+
+        [HarmonyPatch(typeof(PlayerController), "OnPrefabInit")]
+        public static class PlayerController_OnPrefabInit_Patch {
+            internal static void Postfix(PlayerController __instance) {
+                var interfaceTools = new List<InterfaceTool>(__instance.tools);
+                var moveBeaconTool = new GameObject("MoveBeacon");
+                var tool = moveBeaconTool.AddComponent<MoveTargetTool>();
+                moveBeaconTool.transform.SetParent(__instance.gameObject.transform);
+                moveBeaconTool.SetActive(true);
+                moveBeaconTool.SetActive(false);
+                interfaceTools.Add(tool);
+                __instance.tools = interfaceTools.ToArray();
+            }
+        }
+
+        [HarmonyPatch(typeof(DetailsScreen), "OnPrefabInit")]
+        public static class DetailsScreen_OnPrefabInit_Patch {
+            internal static void Postfix(List<SideScreenRef> ___sideScreens, GameObject ___sideScreenContentBody) {
+                //WorldModifierSideScreen.AddSideScreen(___sideScreens, ___sideScreenContentBody);
+                ModifierSideScreen.AddSideScreen(___sideScreens, ___sideScreenContentBody);
+            }
+        }
+
+        //[HarmonyPatch(typeof(Game), "OnCleanUp")]
+        //public class Game_OnCleanUp_Patch {
+        //    public static void Prefix() {
+        //        MoveBeaconTool.DestroyInstance();
+        //    }
+        //}
+
+        //[HarmonyPatch(typeof(Game), nameof(Game.OnDestroy))]
+        //public class Game_OnDestroy_Patch {
+        //    public static void Prefix() {
+        //        MoveBeaconTool.DestroyInstance();
+        //    }
+        //}
     }
 }

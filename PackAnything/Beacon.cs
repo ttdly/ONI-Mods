@@ -66,7 +66,7 @@ namespace PackAnything {
 
         protected override void OnStartWork(Worker worker) {
             base.OnStartWork(worker);
-            progressBar.barColor = new Color(0.5f, 0.7f, 1.0f, 1f);
+            progressBar.barColor = PackAnythingStaticVars.PrimaryColor;
             RemoveStatus();
             LightActive(true);
         }

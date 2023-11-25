@@ -34,7 +34,8 @@ namespace PackAnything {
             base.OnPrefabInit();
             faceTargetWhenWorking = true;
             synchronizeAnims = false;
-            requiredSkillPerk = PackAnythingStaticVars.CanPack.Id;
+            requiredSkillPerk = Db.Get().SkillPerks.CanArtGreat.Id;
+            //requiredSkillPerk = PackAnythingStaticVars.CanPack.Id;
             workerStatusItem = PackAnythingStaticVars.SurveyingItem;
             shouldShowSkillPerkStatusItem = false;
             attributeConverter = Db.Get().AttributeConverters.ConstructionSpeed;
@@ -50,7 +51,6 @@ namespace PackAnything {
         protected override void OnSpawn() {
             base.OnSpawn();
             PackAnythingStaticVars.SurveableCmps.Add(this);
-            PUtil.LogDebug($"{gameObject.name} &&& {gameObject.activeInHierarchy}");
             Subscribe((int)GameHashes.RefreshUserMenu, OnRefreshUserMenuDelegate);
             Subscribe((int)GameHashes.StatusChange, OnRefreshUserMenuDelegate);
             CellOffset[][] table = OffsetGroups.InvertedStandardTable;
@@ -63,7 +63,7 @@ namespace PackAnything {
 
         protected override void OnStartWork(Worker worker) {
             base.OnStartWork(worker);
-            progressBar.barColor = new Color(0.5f, 0.7f, 1.0f, 1f);
+            progressBar.barColor = PackAnythingStaticVars.PrimaryColor;
             RemoveStatus();
         }
 
@@ -108,11 +108,12 @@ namespace PackAnything {
         }
 
         public void OnClickSurvey() {
-            Prioritizable.AddRef(gameObject);
-            isMarkForSurvey = true;
-            if (chore != null) return;          
-            chore = new WorkChore<Surveyable>(PackAnythingStaticVars.Survey, this, only_when_operational: false);
-            AddStatus();
+            MoveTargetTool.Instance.Acitvate(this);
+            //Prioritizable.AddRef(gameObject);
+            //isMarkForSurvey = true;
+            //if (chore != null) return;          
+            //chore = new WorkChore<Surveyable>(PackAnythingStaticVars.Survey, this, only_when_operational: false);
+            //AddStatus();
         }
 
         public void CreateBeacon() {
