@@ -13,9 +13,11 @@ namespace PackAnything {
         private bool isMarkForSurvey;
         [Serialize]
         public bool hasBacon = false;
+        [Serialize]
+        public bool isSurveyed = false;
         private Guid statusItemGuid;
         public bool MarkFroSurvey => isMarkForSurvey;
-        private CellOffset[] PlacementOffsets {
+        public CellOffset[] PlacementOffsets {
             get {
                 Building component1 = GetComponent<Building>();
                 if (component1 != null)
@@ -35,7 +37,6 @@ namespace PackAnything {
             faceTargetWhenWorking = true;
             synchronizeAnims = false;
             requiredSkillPerk = Db.Get().SkillPerks.CanArtGreat.Id;
-            //requiredSkillPerk = PackAnythingStaticVars.CanPack.Id;
             workerStatusItem = PackAnythingStaticVars.SurveyingItem;
             shouldShowSkillPerkStatusItem = false;
             attributeConverter = Db.Get().AttributeConverters.ConstructionSpeed;
@@ -50,12 +51,15 @@ namespace PackAnything {
 
         protected override void OnSpawn() {
             base.OnSpawn();
-            PackAnythingStaticVars.SurveableCmps.Add(this);
             Subscribe((int)GameHashes.RefreshUserMenu, OnRefreshUserMenuDelegate);
             Subscribe((int)GameHashes.StatusChange, OnRefreshUserMenuDelegate);
             CellOffset[][] table = OffsetGroups.InvertedStandardTable;
             CellOffset[] filter = null;
             SetOffsetTable(OffsetGroups.BuildReachabilityTable(PlacementOffsets, table, filter));
+            if (isSurveyed) {
+                PackAnythingStaticVars.SurveableCmps.Add(this);
+                return;
+            }
             if (isMarkForSurvey) {
                 OnClickSurvey();
             }
@@ -76,10 +80,12 @@ namespace PackAnything {
 
         protected override void OnCompleteWork(Worker worker) {
             base.OnCompleteWork(worker);
-            CreateBeacon();
             if (DetailsScreen.Instance != null && DetailsScreen.Instance.CompareTargetWith(gameObject))
                 DetailsScreen.Instance.Show(false);
             hasBacon = true;
+            isSurveyed = true;
+            OnRefreshUserMenu(null);
+            PackAnythingStaticVars.SurveableCmps.Add(this);
             OnClickCancel();
         }
 
@@ -91,8 +97,7 @@ namespace PackAnything {
 
         // 自定义的方法
         public void OnRefreshUserMenu(object _) {
-            if (hasBacon) return;
-            if (gameObject.HasTag("DontShowSurveyable")) return;
+            if (isSurveyed || hasBacon || gameObject.HasTag("DontShowSurveyable")) return;
             if (gameObject.HasTag("OilWell") && gameObject.GetComponent<BuildingAttachPoint>()?.points[0].attachedBuilding != null) return;
             Game.Instance.userMenu.AddButton(gameObject, isMarkForSurvey ? new KIconButtonMenu.ButtonInfo("action_follow_cam", PackAnythingString.UI.SURVEY.NAME_OFF, new System.Action(OnClickCancel), tooltipText: PackAnythingString.UI.SURVEY.TOOLTIP_OFF) : new KIconButtonMenu.ButtonInfo("action_follow_cam", PackAnythingString.UI.SURVEY.NAME, new System.Action(OnClickSurvey), tooltipText: PackAnythingString.UI.SURVEY.TOOLTIP));
         }
@@ -108,12 +113,11 @@ namespace PackAnything {
         }
 
         public void OnClickSurvey() {
-            MoveTargetTool.Instance.Acitvate(this);
-            //Prioritizable.AddRef(gameObject);
-            //isMarkForSurvey = true;
-            //if (chore != null) return;          
-            //chore = new WorkChore<Surveyable>(PackAnythingStaticVars.Survey, this, only_when_operational: false);
-            //AddStatus();
+            Prioritizable.AddRef(gameObject);
+            isMarkForSurvey = true;
+            if (chore != null) return;
+            chore = new WorkChore<Surveyable>(PackAnythingStaticVars.Survey, this, only_when_operational: false);
+            AddStatus();
         }
 
         public void CreateBeacon() {

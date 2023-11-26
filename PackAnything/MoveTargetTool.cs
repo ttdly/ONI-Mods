@@ -31,7 +31,6 @@ namespace PackAnything {
             visualizer.SetActive(false);
         }
 
-
         public override void OnLeftClickDown(Vector3 cursor_pos) {
             base.OnLeftClickDown(cursor_pos);
             if ( !(targetSurveyable != null))
@@ -71,18 +70,6 @@ namespace PackAnything {
             GameObject gameObject = Util.KInstantiate(Assets.GetPrefab((Tag)BeaconPlacerConfig.ID), posCbc);
             gameObject.AddOrGet<DelayMove>().cell = mouseCell;
             gameObject.SetActive(true);
-            
-
-            //if (targetSurveyable != null) {
-            //    GameObject originObject = targetSurveyable.gameObject; 
-            //    Vector3 posCbc = Grid.CellToPosCBC(mouseCell, Grid.SceneLayer.Building);
-            //    KSelectable selectable = originObject.GetComponent<KSelectable>();
-            //    OccupyArea occupyArea = originObject.GetComponent<OccupyArea>();
-            //    Building building = originObject.GetComponent<Building>();
-            //    selectable?.transform.SetPosition(posCbc);
-            //    occupyArea?.UpdateOccupiedArea();
-            //    building?.UpdatePosition();
-            //}
         }
 
         private void RefreshColor() {
@@ -91,7 +78,6 @@ namespace PackAnything {
                 c = Color.white;
             PlaserSpriteRenderer.color = c;
         }
-
 
         private bool SurveyableCanMoveTo(int cell) {
             return !Grid.Solid[cell];

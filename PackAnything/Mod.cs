@@ -15,11 +15,10 @@ namespace PackAnything {
             LocString.CreateLocStringKeys(typeof(PackAnythingString), "");
             ModUtil.RegisterForTranslation(typeof(STRINGS));
             new POptions().RegisterOptions(this,typeof(Options));
-            //ManualPatchs(harmony);
+            ManualPatchs(harmony);
         }
 
         public void ManualPatchs(Harmony harmony) {
-
             var entityPostfix = typeof(PackAnythingPatches).GetMethod(nameof(PackAnythingPatches.EntityPostfix));
             Dictionary<System.Type, string> entityPatchMap = new Dictionary<System.Type, string> {
                 { typeof(OilWellConfig), nameof(OilWellConfig.CreatePrefab) },

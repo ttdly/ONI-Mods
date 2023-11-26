@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using STRINGS;
 using UnityEngine.UI;
-using System;
 
 namespace PackAnything {
 
@@ -14,24 +13,26 @@ namespace PackAnything {
         private static readonly IDetouredField<ArtableSelectionSideScreen, KButton> CLEAR_BUTTON = PDetours.DetourField<ArtableSelectionSideScreen, KButton>(nameof(clearButton));
         private static readonly IDetouredField<ArtableSelectionSideScreen, GameObject> STATE_BUTTON_PREFAB = PDetours.DetourField<ArtableSelectionSideScreen, GameObject>(nameof(stateButtonPrefab));
         private static readonly IDetouredField<ArtableSelectionSideScreen, RectTransform> BUTTON_CONTAINER = PDetours.DetourField<ArtableSelectionSideScreen, RectTransform>(nameof(buttonContainer));
-        
         private KButton applyButton;
         private KButton clearButton;
         public GameObject stateButtonPrefab;
         [SerializeField]
-        private RectTransform scrollTransoform;
-        [SerializeField]
         private RectTransform buttonContainer;
-        private Dictionary<int, MultiToggle> buttons = new Dictionary<int, MultiToggle>();
+        private readonly Dictionary<int, MultiToggle> buttons = new Dictionary<int, MultiToggle>();
         private WorldModifier targetBuilding;
         private Surveyable targetSurveyable;
-        private int currCount;
 
         protected override void OnSpawn() {
             base.OnSpawn();
             applyButton.onClick += delegate {
-                PackAnythingStaticVars.targetSurveyable = targetSurveyable;
-                ActiveMoveTool(targetSurveyable);
+                if (targetSurveyable != null) {
+                    PackAnythingStaticVars.targetSurveyable = targetSurveyable;
+                    PackAnythingStaticVars.targetModifier = targetBuilding;
+                    ActiveMoveTool(targetSurveyable);
+                    targetSurveyable = null;
+                } else {
+                    PlaySound(GlobalAssets.GetSound("Negative"));
+                }
             };
         }
 
@@ -54,6 +55,17 @@ namespace PackAnything {
             }
             int count = 0;
             buttons.Clear();
+
+            if (PackAnythingStaticVars.SurveableCmps.Count == 0 || PackAnythingStaticVars.targetMove != null) {
+                GameObject obj = Util.KInstantiateUI(stateButtonPrefab, buttonContainer.gameObject, force_active: true);
+                Sprite sprite = Assets.GetSprite((HashedString)"action_building_disabled");
+                MultiToggle component = obj.GetComponent<MultiToggle>();
+                component.GetComponent<ToolTip>().SetSimpleTooltip(PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP);
+                component.GetComponent<HierarchyReferences>().GetReference<Image>("Icon").sprite = sprite;
+                buttons.Add(count++, component);
+                return;
+            }
+
             foreach(Surveyable surveyable in PackAnythingStaticVars.SurveableCmps) {
                 if(surveyable != null) {
                     GameObject obj = Util.KInstantiateUI(stateButtonPrefab, buttonContainer.gameObject, force_active: true);
@@ -132,7 +144,7 @@ namespace PackAnything {
                     var newScreen = new DetailsScreen.SideScreenRef();
                     var ours = CreateScreen(sideScreen);
                     found = true;
-                    newScreen.name = nameof(WorldModifierSideScreen);
+                    newScreen.name = nameof(ModeSelectScreen);
                     newScreen.screenPrefab = ours;
                     newScreen.screenInstance = ours;
                     var ssTransform = ours.gameObject.transform;

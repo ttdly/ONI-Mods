@@ -16,8 +16,8 @@ msgstr ""
 #. PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.DESC
 msgctxt "PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.DESC"
 msgid ""
-"Record the information of an object, activate this beacon, and the recorded "
-"object will be moved to this location."
+"Record the information of an object, activate this beacon, and the recorded object "
+"will be moved to this location."
 msgstr "记录一个物体的信息，激活该信标，记录的物体就会被移动到这个位置。"
 
 #. PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.NAME
@@ -164,3 +164,41 @@ msgstr "复制人有空就会对这个物品进行测绘"
 msgctxt "PackAnything.STRINGS.GENERATE_UNOBTANIUM"
 msgid "Generate Unobtanium"
 msgstr "生成中子物质"
+
+#. PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.DESC
+msgctxt "PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.DESC"
+msgid "The magical machine that can alter this world."
+msgstr "神奇的机器，可以改变这个世界。"
+
+#. PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.EFFECT
+msgctxt "PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.EFFECT"
+msgid "Move the object surveyed."
+msgstr "移动测绘后的物体。"
+
+#. PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.NAME
+msgctxt "PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.NAME"
+msgid "<link=\"MOVABLEBEACON\">Displacement Beacon</link>"
+msgstr "<link=\"MOVABLEBEACON\">位移信标</link>"
+
+#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TEXT
+msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TEXT"
+msgid "Move It"
+msgstr "移动"
+
+#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TOOL_TIP
+msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TOOL_TIP"
+msgid "Move this object to a specific location \n\n It's best not to have your Duplicant stand where the object is about to be moved"
+msgstr ""
+"将选中的物体移动到指定位置\n"
+"\n"
+"最好不要让你的复制人站在将要移动的物体那里"
+
+#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.NAME
+msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.NAME"
+msgid "Survyed List"
+msgstr "已测绘物体"
+
+#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP
+msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP"
+msgid "There is no object being surveyed, or alternatively, there is an object in motion"
+msgstr "没有测绘任何物体或有物品正在移动"

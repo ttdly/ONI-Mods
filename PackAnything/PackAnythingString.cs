@@ -17,8 +17,9 @@ namespace PackAnything {
 
             public class SIDE_SCREEN {
                 public static LocString NAME = (LocString)"Survyed List";
+                public static LocString TOOL_TIP = (LocString)"There is no object being surveyed, or alternatively, there is an object in motion";
                 public static LocString APPLY_BUTTON_TEXT = (LocString)"Move It";
-                public static LocString APPLY_BUTTON_TOOL_TIP = (LocString)"Move this object to a specific location.";
+                public static LocString APPLY_BUTTON_TOOL_TIP = (LocString)"Move this object to a specific location \n\n It's best not to have your Duplicant stand where the object is about to be moved";
             }
         }
 
@@ -46,10 +47,9 @@ namespace PackAnything {
         public class BUILDINGS {
             public class PREFABS {
                 public class MOVABLEBEACON {
-                    public static LocString NAME = UI.FormatAsLink("实验机P1", "MOVABLEBEACON");
-                    public static LocString DESC = (LocString)("利用“时间之弓”做出来的机器，但对于" + UI.FormatAsLink("中子物质", "UNOBTANIUM") + "的产出，我想那位博士还没有找到解决方案。");
-                    public static LocString EFFECT = (LocString)("将殖民地的" + UI.FormatAsLink("精炼金属", "REFINEDMETAL") + "还原为" + UI.FormatAsLink("金属矿石", "RAWMETAL") + "。\n\n由于技术原因，它也会产出少量" + UI.FormatAsLink("中子物质", "UNOBTANIUM") + ".");
-                    public static LocString RECIPE_DESCRIPTION = ("将{1}还原为{0}。");
+                    public static LocString NAME = UI.FormatAsLink("Displacement Beacon", "MOVABLEBEACON");
+                    public static LocString DESC = (LocString)"The magical machine that can alter this world.";
+                    public static LocString EFFECT = (LocString)"Move the object surveyed.";
                 }
             }
         }

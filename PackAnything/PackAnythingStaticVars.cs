@@ -1,6 +1,5 @@
 ﻿using Database;
 using PeterHan.PLib.UI;
-using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
@@ -20,6 +19,7 @@ namespace PackAnything {
         public static Color PrimaryColor;
         public static Surveyable targetSurveyable;
         public static WorldModifier targetModifier;
+        public static DelayMove targetMove;
 
         public static void Init() {
             CanPack = Db.Get().SkillPerks.Add(new SimpleSkillPerk(nameof(CanPack), PackAnythingString.MISC.SKILL.PERK_DESC));

@@ -26,8 +26,11 @@ namespace PackAnything
         [HarmonyPatch(typeof(GeneratedBuildings), "LoadGeneratedBuildings")]
         public class GeneratedBuildings_LoadGeneratedBuildings_Patch {
             public static void Prefix() {
+#if DEBUG
                 LocString.CreateLocStringKeys(typeof(STRINGS), "");
+#endif
                 ModUtil.AddBuildingToPlanScreen("Equipment", WorldModifierConfig.ID);
+                TUNING.BUILDINGS.PLANSUBCATEGORYSORTING.Add(WorldModifierConfig.ID, "World Modifier");
                 Db.Get().Techs.Get("RoboticTools").unlockedItemIDs.Add(WorldModifierConfig.ID);
                 Sprite skillbadge_role_building4 = PUIUtils.LoadSprite("PackAnything.images.skillbadge_role_building4.png");
                 Assets.Sprites.Add("skillbadge_role_building4", skillbadge_role_building4);
@@ -82,23 +85,8 @@ namespace PackAnything
         [HarmonyPatch(typeof(DetailsScreen), "OnPrefabInit")]
         public static class DetailsScreen_OnPrefabInit_Patch {
             internal static void Postfix(List<SideScreenRef> ___sideScreens, GameObject ___sideScreenContentBody) {
-                //WorldModifierSideScreen.AddSideScreen(___sideScreens, ___sideScreenContentBody);
                 ModifierSideScreen.AddSideScreen(___sideScreens, ___sideScreenContentBody);
             }
         }
-
-        //[HarmonyPatch(typeof(Game), "OnCleanUp")]
-        //public class Game_OnCleanUp_Patch {
-        //    public static void Prefix() {
-        //        MoveBeaconTool.DestroyInstance();
-        //    }
-        //}
-
-        //[HarmonyPatch(typeof(Game), nameof(Game.OnDestroy))]
-        //public class Game_OnDestroy_Patch {
-        //    public static void Prefix() {
-        //        MoveBeaconTool.DestroyInstance();
-        //    }
-        //}
     }
 }
