@@ -26,12 +26,10 @@ namespace PackAnything
         [HarmonyPatch(typeof(GeneratedBuildings), "LoadGeneratedBuildings")]
         public class GeneratedBuildings_LoadGeneratedBuildings_Patch {
             public static void Prefix() {
-#if DEBUG
                 LocString.CreateLocStringKeys(typeof(STRINGS), "");
-#endif
                 ModUtil.AddBuildingToPlanScreen("Equipment", WorldModifierConfig.ID);
                 TUNING.BUILDINGS.PLANSUBCATEGORYSORTING.Add(WorldModifierConfig.ID, "World Modifier");
-                Db.Get().Techs.Get("RoboticTools").unlockedItemIDs.Add(WorldModifierConfig.ID);
+                Db.Get().Techs.Get("AdvancedResearch").unlockedItemIDs.Add(WorldModifierConfig.ID);
                 Sprite skillbadge_role_building4 = PUIUtils.LoadSprite("PackAnything.images.skillbadge_role_building4.png");
                 Assets.Sprites.Add("skillbadge_role_building4", skillbadge_role_building4);
                 PackAnythingStaticVars.Init();
@@ -57,6 +55,13 @@ namespace PackAnything
         [HarmonyPatch(typeof(MegaBrainTank), "OnSpawn")]
         public class MegaBrainTank_OnSpawn_Patch { 
             public static void Postfix(MegaBrainTank __instance) {
+                __instance.gameObject.AddOrGet<Surveyable>();
+            }
+        }
+
+        [HarmonyPatch(typeof(MorbRoverMakerWorkable), "OnSpawn")]
+        public class MorbRoverMakerWorkable_OnSpawn_Patch {
+            public static void Postfix(MorbRoverMakerWorkable __instance) {
                 __instance.gameObject.AddOrGet<Surveyable>();
             }
         }

@@ -13,7 +13,9 @@ namespace PackAnything {
             new PVersionCheck().Register(this, new SteamVersionChecker());
             new PLocalization().Register();
             LocString.CreateLocStringKeys(typeof(PackAnythingString), "");
+#if DEBUG
             ModUtil.RegisterForTranslation(typeof(STRINGS));
+#endif
             new POptions().RegisterOptions(this,typeof(Options));
             ManualPatchs(harmony);
         }
@@ -63,8 +65,8 @@ namespace PackAnything {
                 { typeof(WarpConduitSenderConfig), nameof(WarpConduitSenderConfig.DoPostConfigureComplete) },
                 { typeof(WarpConduitReceiverConfig), nameof(WarpConduitReceiverConfig.DoPostConfigureComplete) },
                 { typeof(HeadquartersConfig), nameof(HeadquartersConfig.DoPostConfigureComplete) },
-                { typeof(MassiveHeatSinkConfig), nameof(MassiveHeatSinkConfig.DoPostConfigureComplete)},
-                { typeof(ExobaseHeadquartersConfig), nameof(ExobaseHeadquartersConfig.DoPostConfigureComplete) }
+                { typeof(MassiveHeatSinkConfig), nameof(MassiveHeatSinkConfig.DoPostConfigureComplete) },
+                { typeof(ExobaseHeadquartersConfig), nameof(ExobaseHeadquartersConfig.DoPostConfigureComplete) },
             };
             foreach (KeyValuePair<System.Type, string> pair1 in buildingPatchMap) {
                 harmony.Patch(pair1.Key.GetMethod(pair1.Value), postfix: new HarmonyMethod(buildingPostfix));
