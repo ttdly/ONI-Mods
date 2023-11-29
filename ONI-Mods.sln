@@ -32,6 +32,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TweaksPack", "TweaksPack\Tw
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlantPulverizerEnhancement", "PlantPulverizerEnhancement\PlantPulverizerEnhancement.csproj", "{3941339F-559C-4EDC-9F18-DB5778AC348B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChangeBlueprints", "ChangeBlueprints\ChangeBlueprints.csproj", "{DEC645EE-78E9-4009-8690-1F712D428AAA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mergedown = Debug|Mergedown
@@ -104,6 +106,14 @@ Global
 		{3941339F-559C-4EDC-9F18-DB5778AC348B}.Release|Mergedown.Build.0 = Release|Mergedown
 		{3941339F-559C-4EDC-9F18-DB5778AC348B}.Release|Vanilla.ActiveCfg = Release|Vanilla
 		{3941339F-559C-4EDC-9F18-DB5778AC348B}.Release|Vanilla.Build.0 = Release|Vanilla
+		{DEC645EE-78E9-4009-8690-1F712D428AAA}.Debug|Mergedown.ActiveCfg = Debug|Mergedown
+		{DEC645EE-78E9-4009-8690-1F712D428AAA}.Debug|Mergedown.Build.0 = Debug|Mergedown
+		{DEC645EE-78E9-4009-8690-1F712D428AAA}.Debug|Vanilla.ActiveCfg = Debug|Vanilla
+		{DEC645EE-78E9-4009-8690-1F712D428AAA}.Debug|Vanilla.Build.0 = Debug|Vanilla
+		{DEC645EE-78E9-4009-8690-1F712D428AAA}.Release|Mergedown.ActiveCfg = Release|Mergedown
+		{DEC645EE-78E9-4009-8690-1F712D428AAA}.Release|Mergedown.Build.0 = Release|Mergedown
+		{DEC645EE-78E9-4009-8690-1F712D428AAA}.Release|Vanilla.ActiveCfg = Release|Vanilla
+		{DEC645EE-78E9-4009-8690-1F712D428AAA}.Release|Vanilla.Build.0 = Release|Vanilla
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -117,6 +127,7 @@ Global
 		{3CE9540E-6A30-4341-B9BE-45A08354FE23} = {84877F02-1D2E-4A8E-BC3E-44FA8F6A417F}
 		{A5BE7C06-388A-4AAB-9891-DA16FA2EB29B} = {84877F02-1D2E-4A8E-BC3E-44FA8F6A417F}
 		{3941339F-559C-4EDC-9F18-DB5778AC348B} = {84877F02-1D2E-4A8E-BC3E-44FA8F6A417F}
+		{DEC645EE-78E9-4009-8690-1F712D428AAA} = {6C166698-42A6-4AFD-9F4C-CA6C20F55887}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {05AD4341-9C99-4998-8BEC-CFBB218B464B}
