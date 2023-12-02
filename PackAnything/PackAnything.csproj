@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AssemblyTitle>Movable Features 位移信标</AssemblyTitle>
-    <FileVersion>1.1.3</FileVersion>
+    <FileVersion>2.0.0</FileVersion>
     <RootNamespace>PackAnything</RootNamespace>
     <Description>Move something that can't move.</Description>
     <AssemblyVersion>1.1.3</AssemblyVersion>
@@ -10,8 +10,10 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="images\skillbadge_role_building4.png" />
+    <None Remove="images\tooIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="images\skillbadge_role_building4.png" />
+    <EmbeddedResource Include="images\tooIcon.png" />
   </ItemGroup>
 </Project>

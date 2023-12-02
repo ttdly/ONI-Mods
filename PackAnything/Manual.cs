@@ -1,10 +1,17 @@
 ﻿using KSerialization;
-using UnityEngine;
 
 namespace PackAnything {
-    public class Manual : KMonoBehaviour, ISidescreenButtonControl {
+    public class Manual : Surveyable, ISidescreenButtonControl {
         [Serialize]
         private bool isMarkForSurvey;
+
+        protected override void OnSpawn() {
+            base.OnSpawn();
+            if (isSurveyed) {
+                PackAnythingStaticVars.SurveableCmps.Add(this);
+            }
+        }
+
         string ISidescreenButtonControl.SidescreenButtonText => ButtonText();
 
         string ISidescreenButtonControl.SidescreenButtonTooltip => ButtonToolTip();
@@ -37,8 +44,7 @@ namespace PackAnything {
             throw new System.NotImplementedException();
         }
 
-        bool ISidescreenButtonControl.SidescreenButtonInteractable() => !gameObject.HasTag("Surveyed");
-        
+        bool ISidescreenButtonControl.SidescreenButtonInteractable() => !isSurveyed;
 
         bool ISidescreenButtonControl.SidescreenEnabled() => true;
 
@@ -51,27 +57,10 @@ namespace PackAnything {
             if (isLoadingScene)
                 return;
             if (isMarkForSurvey) {
-                CreateBeacon();
+                isSurveyed = true;
+                PackAnythingStaticVars.SurveableCmps.Add(this);
             }
         }
 
-        private void CreateBeacon() {
-            GameObject go = GameUtil.KInstantiate(Assets.GetPrefab((Tag)BeaconConfig.ID), Grid.CellToPos(Grid.PosToCell(gameObject)), Grid.SceneLayer.Creatures, name: gameObject.name);
-            go.SetActive(true);
-            Beacon becaon = go.GetComponent<Beacon>();
-            becaon.originCell = Grid.PosToCell(gameObject);
-            if (gameObject.HasTag(GameTags.GeyserFeature)) {
-                becaon.isGeyser = true;
-            }
-            string name;
-            if (becaon.isGeyser) {
-                name = gameObject.name;
-            } else {
-                name = Strings.Get("STRINGS.BUILDINGS.PREFABS." + gameObject.name.Replace("Complete", "").ToUpper() + ".NAME");
-            }
-            go.FindOrAddComponent<UserNameable>().savedName = name;
-            gameObject.AddTag("Surveyed");
-            Toggle();
-        }
     }
 }
