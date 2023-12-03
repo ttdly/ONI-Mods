@@ -27,18 +27,18 @@ msgstr "位移信标"
 
 #. PackAnything.PackAnythingString.MISC.SKILL.PERK_DESC
 msgctxt "PackAnything.PackAnythingString.MISC.SKILL.PERK_DESC"
-msgid "Displacement Beacon Usage"
-msgstr "位移信标的使用"
+msgid "THIS SKILL WILL BE DELETED IN THE FUTURE. \n\n Learn Masterwork"
+msgstr "这个技能已弃用 \n\n 学习大师技艺就行"
 
 #. PackAnything.PackAnythingString.MISC.SURVEY.DESCRIPTION
 msgctxt "PackAnything.PackAnythingString.MISC.SURVEY.DESCRIPTION"
-msgid "Allow the Duplicant to survey the items"
-msgstr "允许复制人对物品进行测绘"
+msgid "Learn Masterwork"
+msgstr "学习大师技艺"
 
 #. PackAnything.PackAnythingString.MISC.SURVEY.NAME
 msgctxt "PackAnything.PackAnythingString.MISC.SURVEY.NAME"
-msgid "Survey"
-msgstr "测绘"
+msgid "Don't learn"
+msgstr "不要学习"
 
 #. PackAnything.PackAnythingString.UI.ACTIVATE.NAME
 msgctxt "PackAnything.PackAnythingString.UI.ACTIVATE.NAME"

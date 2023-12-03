@@ -32,12 +32,12 @@ namespace PackAnything {
             }
 
             public class SKILL {
-                public static LocString PERK_DESC = (LocString)"THIS SKILL WILL BE DELETED IN THE FUTURE.";
+                public static LocString PERK_DESC = (LocString)"THIS SKILL WILL BE DELETED IN THE FUTURE. \n\n Learn Masterwork";
             }
 
             public class SURVEY {
-                public static LocString NAME = (LocString)"Survey";
-                public static LocString DESCRIPTION = (LocString)"Allow the Duplicant to survey the items";
+                public static LocString NAME = (LocString)"Don't learn";
+                public static LocString DESCRIPTION = (LocString)"Learn Masterwork";
             }
         }
     }

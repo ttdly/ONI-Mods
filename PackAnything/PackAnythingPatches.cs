@@ -1,8 +1,10 @@
 ﻿using HarmonyLib;
 using PeterHan.PLib.UI;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static DetailsScreen;
+using STRINGS;
 
 namespace PackAnything
 {
@@ -30,8 +32,6 @@ namespace PackAnything
                 ModUtil.AddBuildingToPlanScreen("Equipment", WorldModifierConfig.ID);
                 TUNING.BUILDINGS.PLANSUBCATEGORYSORTING.Add(WorldModifierConfig.ID, "World Modifier");
                 Db.Get().Techs.Get("AdvancedResearch").unlockedItemIDs.Add(WorldModifierConfig.ID);
-                Sprite skillbadge_role_building4 = PUIUtils.LoadSprite("PackAnything.images.skillbadge_role_building4.png");
-                Assets.Sprites.Add("skillbadge_role_building4", skillbadge_role_building4);
                 PackAnythingStaticVars.Init();
             }
         }
@@ -93,5 +93,6 @@ namespace PackAnything
                 ModifierSideScreen.AddSideScreen(___sideScreens, ___sideScreenContentBody);
             }
         }
+
     }
 }
