@@ -125,24 +125,6 @@ namespace PackAnything {
             PUtil.LogDebug(PackAnythingStaticVars.SurveableCmps.Remove(this));
         }
 
-        public void CreateBeacon() {
-            GameObject go = GameUtil.KInstantiate(Assets.GetPrefab((Tag)BeaconConfig.ID), Grid.CellToPos(Grid.PosToCell(gameObject)), Grid.SceneLayer.Creatures, name: gameObject.name);
-            go.SetActive(true);
-            Beacon becaon = go.GetComponent<Beacon>();
-            becaon.originCell = Grid.PosToCell(gameObject);
-            if (gameObject.HasTag(GameTags.GeyserFeature)) {
-                becaon.isGeyser = true;
-            }
-            string name;
-            if (becaon.isGeyser) {
-                name = gameObject.name;
-            } else {
-                name = Strings.Get("STRINGS.BUILDINGS.PREFABS." + gameObject.name.Replace("Complete", "").ToUpper() + ".NAME");
-            }
-            if(name.IndexOf("MISSING") != -1) name = gameObject.name;
-            go.FindOrAddComponent<UserNameable>().savedName = name;
-        }
-
         private void AddStatus() {
             KSelectable kSelectable = GetComponent<KSelectable>();
             if (kSelectable != null) statusItemGuid = kSelectable.ReplaceStatusItem(statusItemGuid, PackAnythingStaticVars.WaitingSurvey);
