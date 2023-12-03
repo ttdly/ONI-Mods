@@ -12,7 +12,7 @@ namespace PackAnything {
 #if DEBUG
         public float delay = 0.5f;
 #else
-        public float delay = 0.05f;
+        public float delay = 0.5f;
 #endif
         public int Handler;
         [SerializeField]
@@ -29,7 +29,7 @@ namespace PackAnything {
             base.OnSpawn();
             Handler = Subscribe(GameHashes.RefreshUserMenu.GetHashCode(), OnRefreshUserMenu);
             PackAnythingStaticVars.targetMove = this;
-            CoverTargetWithUno();
+            //CoverTargetWithUno();
             LightActive(true);
         }
 
@@ -106,7 +106,7 @@ namespace PackAnything {
             }
             PackAnythingStaticVars.targetSurveyable = null;
             PackAnythingStaticVars.targetMove = null;
-            RemoverTargetUno();
+            //RemoverTargetUno();
             if(m_Progress != null) {
                 m_Progress.gameObject.DeleteObject();
                 m_Progress = null;
@@ -161,37 +161,37 @@ namespace PackAnything {
             }
         }
 
-        private void CoverTargetWithUno() {
-            originCell = Grid.PosToCell(PackAnythingStaticVars.targetSurveyable);
-            cellOffsets = PackAnythingStaticVars.targetSurveyable.PlacementOffsets;
-            elements = new SimHashes[cellOffsets.Length];
-            mass = new float[cellOffsets.Length];
-            for (int i = 0; i < cellOffsets.Length; i++) {
-                int cell = Grid.OffsetCell(originCell, cellOffsets[i]);
-                if (Grid.Element.Length < cell || Grid.Element[cell] == null) {
-                    PUtil.LogError("Out of index.");
-                    new IndexOutOfRangeException();
-                    return;
-                }
-                if (!Grid.IsValidCell(cell)) continue;
-                elements[i] = Grid.Element[cell].id;
-                mass[i] = Grid.Mass[cell];
-                SimMessages.ReplaceElement(gameCell: cell, new_element: SimHashes.Unobtanium, ev: CellEventLogger.Instance.DebugTool, mass: 100f);
-            }
-        }
+        //private void CoverTargetWithUno() {
+        //    originCell = Grid.PosToCell(PackAnythingStaticVars.targetSurveyable);
+        //    cellOffsets = PackAnythingStaticVars.targetSurveyable.PlacementOffsets;
+        //    elements = new SimHashes[cellOffsets.Length];
+        //    mass = new float[cellOffsets.Length];
+        //    for (int i = 0; i < cellOffsets.Length; i++) {
+        //        int cell = Grid.OffsetCell(originCell, cellOffsets[i]);
+        //        if (Grid.Element.Length < cell || Grid.Element[cell] == null) {
+        //            PUtil.LogError("Out of index.");
+        //            new IndexOutOfRangeException();
+        //            return;
+        //        }
+        //        if (!Grid.IsValidCell(cell)) continue;
+        //        elements[i] = Grid.Element[cell].id;
+        //        mass[i] = Grid.Mass[cell];
+        //        SimMessages.ReplaceElement(gameCell: cell, new_element: SimHashes.Unobtanium, ev: CellEventLogger.Instance.DebugTool, mass: 100f);
+        //    }
+        //}
 
-        private void RemoverTargetUno() {
-            for(int i = 0; i < cellOffsets.Length; i++) {
-                int cell = Grid.OffsetCell(originCell, cellOffsets[i]);
-                if (Grid.Element.Length < cell || Grid.Element[cell] == null) {
-                    PUtil.LogError("Out of index.");
-                    new IndexOutOfRangeException();
-                    return;
-                }
-                if (!Grid.IsValidCell(cell)) continue;
-                SimMessages.ReplaceElement(gameCell: cell, new_element: elements[i], ev: CellEventLogger.Instance.DebugTool, mass: mass[i]);
-            }
-        }
+        //private void RemoverTargetUno() {
+        //    for(int i = 0; i < cellOffsets.Length; i++) {
+        //        int cell = Grid.OffsetCell(originCell, cellOffsets[i]);
+        //        if (Grid.Element.Length < cell || Grid.Element[cell] == null) {
+        //            PUtil.LogError("Out of index.");
+        //            new IndexOutOfRangeException();
+        //            return;
+        //        }
+        //        if (!Grid.IsValidCell(cell)) continue;
+        //        SimMessages.ReplaceElement(gameCell: cell, new_element: elements[i], ev: CellEventLogger.Instance.DebugTool, mass: mass[i]);
+        //    }
+        //}
 
         private void OnRefreshUserMenu(object data) {
             Game.Instance.userMenu.AddButton(base.gameObject, new KIconButtonMenu.ButtonInfo("action_control", UI.USERMENUACTIONS.PICKUPABLEMOVE.NAME_OFF, CancelAll, Action.NumActions, null, null, null, UI.USERMENUACTIONS.PICKUPABLEMOVE.TOOLTIP_OFF));

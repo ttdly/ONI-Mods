@@ -34,6 +34,15 @@ namespace PackAnything {
                     PlaySound(GlobalAssets.GetSound("Negative"));
                 }
             };
+            clearButton.onClick += () => {
+                if (targetSurveyable != null) {
+                    targetSurveyable.RemoveThisFromList();
+                    targetSurveyable = null;
+                    GenerateStateButtons();
+                } else {
+                    PlaySound(GlobalAssets.GetSound("Negative"));
+                }
+            };
         }
 
         public override void SetTarget(GameObject target) {
@@ -71,7 +80,11 @@ namespace PackAnything {
                     GameObject obj = Util.KInstantiateUI(stateButtonPrefab, buttonContainer.gameObject, force_active: true);
                     Sprite sprite = Def.GetUISprite(surveyable.gameObject).first;
                     MultiToggle component = obj.GetComponent<MultiToggle>();
-                    component.GetComponent<ToolTip>().SetSimpleTooltip(UI.StripLinkFormatting(surveyable.GetProperName()));
+                    if(PackAnythingStaticVars.targetSurveyable != null && PackAnythingStaticVars.targetSurveyable == surveyable) {
+                        component.ChangeState(1);
+                        targetSurveyable = surveyable;
+                    }
+                    component.GetComponent<ToolTip>().SetSimpleTooltip(UI.StripLinkFormatting(surveyable.GetProperName()) + PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_OBJ);
                     component.GetComponent<HierarchyReferences>().GetReference<Image>("Icon").sprite = sprite;
                     component.onClick = delegate {
                         if (PackAnythingStaticVars.targetSurveyable != surveyable) {
@@ -113,7 +126,7 @@ namespace PackAnything {
             TryChangeText(ours.applyButton.gameObject.transform,"Label", PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TEXT);
             ours.buttonContainer = BUTTON_CONTAINER.Get(oldScreen);
             ours.clearButton = CLEAR_BUTTON.Get(oldScreen);
-            ours.clearButton.gameObject.SetActive(false);
+            ours.clearButton.GetComponent<ToolTip>().SetSimpleTooltip(PackAnythingString.UI.SIDE_SCREEN.CANCEL_BUTTON_TOOL_TIP);
             DestroyImmediate(oldScreen);
             template.SetActive(active);
             return ours;

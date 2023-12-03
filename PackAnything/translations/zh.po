@@ -165,6 +165,11 @@ msgctxt "PackAnything.STRINGS.GENERATE_UNOBTANIUM"
 msgid "Generate Unobtanium"
 msgstr "生成中子物质"
 
+#. PackAnything.STRINGS.GENERATE_UNOBTANIUM_DESC
+msgctxt "PackAnything.STRINGS.GENERATE_UNOBTANIUM_DESC"
+msgid "Whether or not does moving a geyser create neutronium"
+msgstr "是否在移动间歇泉的时候一起移动中子物质"
+
 #. PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.DESC
 msgctxt "PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.DESC"
 msgid "The magical machine that can alter this world."
@@ -187,11 +192,18 @@ msgstr "移动"
 
 #. PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TOOL_TIP
 msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TOOL_TIP"
-msgid "Move this object to a specific location \n\n It's best not to have your Duplicant stand where the object is about to be moved"
-msgstr ""
-"将选中的物体移动到指定位置\n"
-"\n"
-"最好不要让你的复制人站在将要移动的物体那里"
+msgid "Move this object to a specific location"
+msgstr "讲这个物体移动到指定位置"
+
+#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.CANCEL_BUTTON_TOOL_TIP
+msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.CANCEL_BUTTON_TOOL_TIP"
+msgid "Cancel survey for this item"
+msgstr "取消对这个物品的测绘"
+
+#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_OBJ
+msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_OBJ"
+msgid "\n\nDouble-click to view this object"
+msgstr "\n\n双击查看这个物体的位置"
 
 #. PackAnything.PackAnythingString.UI.SIDE_SCREEN.NAME
 msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.NAME"

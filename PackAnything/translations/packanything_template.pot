@@ -15,7 +15,7 @@ msgstr ""
 
 #. PackAnything.PackAnythingString.MISC.SKILL.PERK_DESC
 msgctxt "PackAnything.PackAnythingString.MISC.SKILL.PERK_DESC"
-msgid "Displacement Beacon Usage"
+msgid "THIS SKILL WILL BE DELETED IN THE FUTURE."
 msgstr ""
 
 #. PackAnything.PackAnythingString.MISC.SURVEY.DESCRIPTION
@@ -55,7 +55,12 @@ msgstr ""
 
 #. PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TOOL_TIP
 msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TOOL_TIP"
-msgid "Move this object to a specific location \n\n It's best not to have your Duplicant stand where the object is about to be moved"
+msgid "Move this object to a specific location"
+msgstr ""
+
+#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.CANCEL_BUTTON_TOOL_TIP
+msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.CANCEL_BUTTON_TOOL_TIP"
+msgid "Cancel survey for this item."
 msgstr ""
 
 #. PackAnything.PackAnythingString.UI.SIDE_SCREEN.NAME
@@ -66,6 +71,11 @@ msgstr ""
 #. PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP
 msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP"
 msgid "There is no object being surveyed, or alternatively, there is an object in motion"
+msgstr ""
+
+#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_OBJ
+msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_OBJ"
+msgid "\n\nDouble-click to view this object."
 msgstr ""
 
 #. PackAnything.PackAnythingString.UI.SURVEY.NAME
