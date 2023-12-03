@@ -39,13 +39,13 @@ namespace PackAnything {
             requiredSkillPerk = Db.Get().SkillPerks.CanArtGreat.Id;
             workerStatusItem = PackAnythingStaticVars.SurveyingItem;
             shouldShowSkillPerkStatusItem = false;
-            attributeConverter = Db.Get().AttributeConverters.ConstructionSpeed;
+            attributeConverter = Db.Get().AttributeConverters.ArtSpeed;
             attributeExperienceMultiplier = DUPLICANTSTATS.ATTRIBUTE_LEVELING.MOST_DAY_EXPERIENCE;
-            skillExperienceSkillGroup = Db.Get().SkillGroups.Building.Id;
+            skillExperienceSkillGroup = Db.Get().SkillGroups.Art.Id;
             skillExperienceMultiplier = SKILLS.MOST_DAY_EXPERIENCE;
             alwaysShowProgressBar = false;
-            multitoolContext = (HashedString)"build";
-            multitoolHitEffectTag = (Tag)EffectConfigs.BuildSplashId;
+            multitoolContext = (HashedString)"paint";
+            multitoolHitEffectTag = (Tag)"fx_paint_splash";
             SetWorkTime(50f);
         }
 
@@ -97,7 +97,7 @@ namespace PackAnything {
 
         // 自定义的方法
         public void OnRefreshUserMenu(object _) {
-            if (isSurveyed || hasBacon || gameObject.HasTag("DontShowSurveyable")) return;
+            if (isSurveyed || gameObject.HasTag("DontShowSurveyable")) return;
             if (gameObject.HasTag("OilWell") && gameObject.GetComponent<BuildingAttachPoint>()?.points[0].attachedBuilding != null) return;
             Game.Instance.userMenu.AddButton(gameObject, isMarkForSurvey ? new KIconButtonMenu.ButtonInfo("action_follow_cam", PackAnythingString.UI.SURVEY.NAME_OFF, new System.Action(OnClickCancel), tooltipText: PackAnythingString.UI.SURVEY.TOOLTIP_OFF) : new KIconButtonMenu.ButtonInfo("action_follow_cam", PackAnythingString.UI.SURVEY.NAME, new System.Action(OnClickSurvey), tooltipText: PackAnythingString.UI.SURVEY.TOOLTIP));
         }
@@ -118,6 +118,11 @@ namespace PackAnything {
             if (chore != null) return;
             chore = new WorkChore<Surveyable>(PackAnythingStaticVars.Survey, this, only_when_operational: false);
             AddStatus();
+        }
+
+        public void RemoveThisFromList() {
+            isSurveyed = false;
+            PUtil.LogDebug(PackAnythingStaticVars.SurveableCmps.Remove(this));
         }
 
         public void CreateBeacon() {

@@ -18,8 +18,10 @@ namespace PackAnything {
             public class SIDE_SCREEN {
                 public static LocString NAME = (LocString)"Survyed List";
                 public static LocString TOOL_TIP = (LocString)"There is no object being surveyed, or alternatively, there is an object in motion";
+                public static LocString TOOL_TIP_OBJ = (LocString)"\n\nDouble-click to view this object.";
                 public static LocString APPLY_BUTTON_TEXT = (LocString)"Move It";
-                public static LocString APPLY_BUTTON_TOOL_TIP = (LocString)"Move this object to a specific location \n\n It's best not to have your Duplicant stand where the object is about to be moved";
+                public static LocString APPLY_BUTTON_TOOL_TIP = (LocString)"Move this object to a specific location";
+                public static LocString CANCEL_BUTTON_TOOL_TIP = (LocString)"Cancel survey for this item.";
             }
         }
 
@@ -30,7 +32,7 @@ namespace PackAnything {
             }
 
             public class SKILL {
-                public static LocString PERK_DESC = (LocString)"Displacement Beacon Usage";
+                public static LocString PERK_DESC = (LocString)"THIS SKILL WILL BE DELETED IN THE FUTURE.";
             }
 
             public class SURVEY {
