@@ -22,7 +22,7 @@ namespace PackAnything {
                 PlaserSpriteRenderer = spriteRenderer;
                 float widthInM = PackAnythingStaticVars.ToolIcon.texture.width / PackAnythingStaticVars.ToolIcon.pixelsPerUnit,
                     scaleWidth = Grid.CellSizeInMeters / widthInM;
-                spriteRenderer.name = "TeleportRestrictToolSprite";
+                spriteRenderer.name = "MoveBeaconToolSprite";
                 spriteRenderer.color = Color.white;
                 spriteRenderer.sprite = PackAnythingStaticVars.ToolIcon;
                 spriteRenderer.enabled = true;
@@ -69,6 +69,7 @@ namespace PackAnything {
             Vector3 posCbc = Grid.CellToPosCBC(mouseCell, visualizerLayer);
             GameObject gameObject = Util.KInstantiate(Assets.GetPrefab((Tag)BeaconPlacerConfig.ID), posCbc);
             gameObject.AddOrGet<DelayMove>().cell = mouseCell;
+            gameObject.AddOrGet<UserNameable>().savedName = targetSurveyable.gameObject.GetProperName();
             gameObject.SetActive(true);
         }
 
@@ -80,7 +81,8 @@ namespace PackAnything {
         }
 
         private bool SurveyableCanMoveTo(int cell) {
-            return !Grid.Solid[cell];
+            if (Grid.Element.Length < cell) return false;
+            return !Grid.Element[cell].IsSolid;
         }
 
     }

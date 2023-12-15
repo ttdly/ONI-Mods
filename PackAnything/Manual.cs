@@ -5,13 +5,6 @@ namespace PackAnything {
         [Serialize]
         private bool isMarkForSurvey;
 
-        protected override void OnSpawn() {
-            base.OnSpawn();
-            if (isSurveyed) {
-                PackAnythingStaticVars.SurveableCmps.Add(this);
-            }
-        }
-
         string ISidescreenButtonControl.SidescreenButtonText => ButtonText();
 
         string ISidescreenButtonControl.SidescreenButtonTooltip => ButtonToolTip();

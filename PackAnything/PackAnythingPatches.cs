@@ -1,13 +1,9 @@
 ﻿using HarmonyLib;
-using PeterHan.PLib.UI;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static DetailsScreen;
-using STRINGS;
 
-namespace PackAnything
-{
+namespace PackAnything {
     public class PackAnythingPatches {
 
         public static void EntityPostfix(GameObject __result) {

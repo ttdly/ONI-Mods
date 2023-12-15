@@ -79,6 +79,9 @@ namespace PackAnything {
                 if(surveyable != null) {
                     GameObject obj = Util.KInstantiateUI(stateButtonPrefab, buttonContainer.gameObject, force_active: true);
                     Sprite sprite = Def.GetUISprite(surveyable.gameObject).first;
+                    if (sprite.name ==  "unknown") {
+                        sprite = Def.GetUISprite(surveyable.gameObject, "place").first;
+                    }
                     MultiToggle component = obj.GetComponent<MultiToggle>();
                     if(PackAnythingStaticVars.targetSurveyable != null && PackAnythingStaticVars.targetSurveyable == surveyable) {
                         component.ChangeState(1);
@@ -138,7 +141,6 @@ namespace PackAnything {
                 textToChangeComp = transform.Find(subCompName);
             else
                 textToChangeComp = transform;
-
             if (textToChangeComp == null)
                 return false;
             var textToChange = textToChangeComp.gameObject.GetComponent<LocText>();
@@ -146,7 +148,6 @@ namespace PackAnything {
                 return false;
             textToChange.key = string.Empty;
             textToChange.text = newText;
-
             return true;
         }
 

@@ -12,8 +12,6 @@ namespace PackAnything {
         [Serialize]
         private bool isMarkForSurvey;
         [Serialize]
-        public bool hasBacon = false;
-        [Serialize]
         public bool isSurveyed = false;
         private Guid statusItemGuid;
         public bool MarkFroSurvey => isMarkForSurvey;
@@ -82,7 +80,6 @@ namespace PackAnything {
             base.OnCompleteWork(worker);
             if (DetailsScreen.Instance != null && DetailsScreen.Instance.CompareTargetWith(gameObject))
                 DetailsScreen.Instance.Show(false);
-            hasBacon = true;
             isSurveyed = true;
             OnRefreshUserMenu(null);
             PackAnythingStaticVars.SurveableCmps.Add(this);
@@ -93,7 +90,6 @@ namespace PackAnything {
             base.OnCleanUp();
             PackAnythingStaticVars.SurveableCmps.Remove(this);
         }
-
 
         // 自定义的方法
         public void OnRefreshUserMenu(object _) {

@@ -8,12 +8,6 @@ namespace PackAnything {
                 public static LocString NAME_OFF = (LocString)"Cancel Survey";
                 public static LocString TOOLTIP_OFF = (LocString)"Cancel order to survey this item.";
             }
-            public class ACTIVATE {
-                public static LocString NAME = (LocString)"Active";
-                public static LocString TOOLTIP = (LocString)"Active the Displacement Beacon.";
-                public static LocString NAME_OFF = (LocString)"Cancel Active";
-                public static LocString TOOLTIP_OFF = (LocString)"Cancel order to active this item.";
-            }
 
             public class SIDE_SCREEN {
                 public static LocString NAME = (LocString)"Survyed List";
@@ -29,15 +23,6 @@ namespace PackAnything {
             public class DISPLACEMENT_BEACON {
                 public static LocString NAME = (LocString)"Displacement Beacon";
                 public static LocString DESC = (LocString)"Record the information of an object, activate this beacon, and the recorded object will be moved to this location.";
-            }
-
-            public class SKILL {
-                public static LocString PERK_DESC = (LocString)"THIS SKILL WILL BE DELETED IN THE FUTURE. \n\n Learn Masterwork";
-            }
-
-            public class SURVEY {
-                public static LocString NAME = (LocString)"Don't learn";
-                public static LocString DESCRIPTION = (LocString)"Learn Masterwork";
             }
         }
     }
@@ -62,10 +47,6 @@ namespace PackAnything {
                     public static LocString NAME = (LocString)"Survey Errand";
                     public static LocString TOOLTIP = (LocString)"Item will be surveyed once a Duplicant is available";
                 }
-                public class WAITINGACTIVE {
-                    public static LocString NAME = (LocString)"Active Errand";
-                    public static LocString TOOLTIP = (LocString)"Displacement beacon will be actived once a Duplicant is available";
-                }
             }
         }
 
@@ -75,10 +56,6 @@ namespace PackAnything {
                     public static LocString NAME = (LocString)"Surveying";
                     public static LocString TOOLTIP = (LocString)"This Duplicant is surveying an object";
                 }
-                public class ACTIVEBEACON {
-                    public static LocString NAME = (LocString)"Activating beacon";
-                    public static LocString TOOLTIP = (LocString)"This Duplicant is activing a displacement beacon.";
-                }
             }
 
             public class CHORES {
@@ -87,12 +64,6 @@ namespace PackAnything {
                     public static LocString STATUS = (LocString)"Going to Survey";
                     public static LocString TOOLTIP = (LocString)"This Duplicant is surving an object";
                     public static LocString REPORT_NAME = (LocString)"Survey {0}";
-                }
-                public class ACTIVE {
-                    public static LocString NAME = (LocString)"Active";
-                    public static LocString STATUS = (LocString)"Going to active";
-                    public static LocString TOOLTIP = (LocString)"This Duplicant is active a displacement beacon";
-                    public static LocString REPORT_NAME = (LocString)"Active {0}";
                 }
             }
         }
