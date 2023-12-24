@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
 namespace PackAnything {
@@ -81,8 +82,11 @@ namespace PackAnything {
         }
 
         private bool SurveyableCanMoveTo(int cell) {
-            if (Grid.Element.Length < cell) return false;
-            return !Grid.Element[cell].IsSolid;
+            try {
+                if (!Grid.IsValidCell(cell)) return false;
+                return !Grid.Element[cell].IsSolid;
+            }
+            catch (Exception) { return false; }
         }
 
     }

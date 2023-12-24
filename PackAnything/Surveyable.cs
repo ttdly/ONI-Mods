@@ -109,6 +109,13 @@ namespace PackAnything {
         }
 
         public void OnClickSurvey() {
+            if (DebugHandler.InstantBuildMode) {
+                OnClickCancel();
+                isSurveyed = true;
+                OnRefreshUserMenu(null);
+                PackAnythingStaticVars.SurveableCmps.Add(this);
+                return;
+            }
             Prioritizable.AddRef(gameObject);
             isMarkForSurvey = true;
             if (chore != null) return;
