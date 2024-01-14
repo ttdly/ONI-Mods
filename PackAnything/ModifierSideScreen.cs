@@ -9,10 +9,15 @@ namespace PackAnything {
 
     public class ModifierSideScreen : SideScreenContent {
 
-        private static readonly IDetouredField<ArtableSelectionSideScreen, KButton> APPLY_BUTTON = PDetours.DetourField<ArtableSelectionSideScreen, KButton>(nameof(applyButton));
-        private static readonly IDetouredField<ArtableSelectionSideScreen, KButton> CLEAR_BUTTON = PDetours.DetourField<ArtableSelectionSideScreen, KButton>(nameof(clearButton));
-        private static readonly IDetouredField<ArtableSelectionSideScreen, GameObject> STATE_BUTTON_PREFAB = PDetours.DetourField<ArtableSelectionSideScreen, GameObject>(nameof(stateButtonPrefab));
-        private static readonly IDetouredField<ArtableSelectionSideScreen, RectTransform> BUTTON_CONTAINER = PDetours.DetourField<ArtableSelectionSideScreen, RectTransform>(nameof(buttonContainer));
+        private static readonly IDetouredField<ArtableSelectionSideScreen, KButton> APPLY_BUTTON = 
+            PDetours.DetourField<ArtableSelectionSideScreen, KButton>(nameof(applyButton));
+        private static readonly IDetouredField<ArtableSelectionSideScreen, KButton> CLEAR_BUTTON = 
+            PDetours.DetourField<ArtableSelectionSideScreen, KButton>(nameof(clearButton));
+        private static readonly IDetouredField<ArtableSelectionSideScreen, GameObject> STATE_BUTTON_PREFAB = 
+            PDetours.DetourField<ArtableSelectionSideScreen, GameObject>(nameof(stateButtonPrefab));
+        private static readonly IDetouredField<ArtableSelectionSideScreen, RectTransform> BUTTON_CONTAINER = 
+            PDetours.DetourField<ArtableSelectionSideScreen, RectTransform>(nameof(buttonContainer));
+
         private KButton applyButton;
         private KButton clearButton;
         public GameObject stateButtonPrefab;
@@ -26,8 +31,8 @@ namespace PackAnything {
             base.OnSpawn();
             applyButton.onClick += delegate {
                 if (targetSurveyable != null) {
-                    PackAnythingStaticVars.targetSurveyable = targetSurveyable;
-                    PackAnythingStaticVars.targetModifier = targetBuilding;
+                    PackAnythingStaticVars.SetTargetSurveyable(targetSurveyable);
+                    PackAnythingStaticVars.SetTargetModifier(targetBuilding);
                     ActiveMoveTool(targetSurveyable);
                     targetSurveyable = null;
                 } else {
@@ -65,7 +70,7 @@ namespace PackAnything {
             int count = 0;
             buttons.Clear();
 
-            if (PackAnythingStaticVars.SurveableCmps.Count == 0 || PackAnythingStaticVars.targetMove != null) {
+            if (PackAnythingStaticVars.SurveableCmps.Count == 0 || PackAnythingStaticVars.MoveStatus.HaveAnObjectMoving) {
                 GameObject obj = Util.KInstantiateUI(stateButtonPrefab, buttonContainer.gameObject, force_active: true);
                 Sprite sprite = Assets.GetSprite((HashedString)"action_building_disabled");
                 MultiToggle component = obj.GetComponent<MultiToggle>();
@@ -83,14 +88,15 @@ namespace PackAnything {
                         sprite = Def.GetUISprite(surveyable.gameObject, "place").first;
                     }
                     MultiToggle component = obj.GetComponent<MultiToggle>();
-                    if(PackAnythingStaticVars.targetSurveyable != null && PackAnythingStaticVars.targetSurveyable == surveyable) {
+                    Surveyable tempSurveyable = PackAnythingStaticVars.MoveStatus.surveyable;
+                    if (tempSurveyable != null && tempSurveyable == surveyable) {
                         component.ChangeState(1);
                         targetSurveyable = surveyable;
                     }
                     component.GetComponent<ToolTip>().SetSimpleTooltip(UI.StripLinkFormatting(surveyable.GetProperName()) + PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_OBJ);
                     component.GetComponent<HierarchyReferences>().GetReference<Image>("Icon").sprite = sprite;
                     component.onClick = delegate {
-                        if (PackAnythingStaticVars.targetSurveyable != surveyable) {
+                        if (PackAnythingStaticVars.MoveStatus.surveyable != surveyable) {
                             targetSurveyable = surveyable;
                             RefreshButtons();
                             component.ChangeState(1);
@@ -121,18 +127,18 @@ namespace PackAnything {
             bool active = template.activeSelf;
             template.SetActive(false);
             var oldScreen = template.GetComponent<ArtableSelectionSideScreen>();
-            var ours = template.AddComponent<ModifierSideScreen>();
-            ours.stateButtonPrefab = STATE_BUTTON_PREFAB.Get(oldScreen);
-            ours.applyButton = APPLY_BUTTON.Get(oldScreen);
-            ours.applyButton.GetComponent<ToolTip>().SetSimpleTooltip(PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TOOL_TIP);
-            ours.clearButton = CLEAR_BUTTON.Get(oldScreen);
-            TryChangeText(ours.applyButton.gameObject.transform,"Label", PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TEXT);
-            ours.buttonContainer = BUTTON_CONTAINER.Get(oldScreen);
-            ours.clearButton = CLEAR_BUTTON.Get(oldScreen);
-            ours.clearButton.GetComponent<ToolTip>().SetSimpleTooltip(PackAnythingString.UI.SIDE_SCREEN.CANCEL_BUTTON_TOOL_TIP);
+            var newScreen = template.AddComponent<ModifierSideScreen>();
+            newScreen.stateButtonPrefab = STATE_BUTTON_PREFAB.Get(oldScreen);
+            newScreen.applyButton = APPLY_BUTTON.Get(oldScreen);
+            newScreen.applyButton.GetComponent<ToolTip>().SetSimpleTooltip(PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TOOL_TIP);
+            newScreen.clearButton = CLEAR_BUTTON.Get(oldScreen);
+            TryChangeText(newScreen.applyButton.gameObject.transform,"Label", PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TEXT);
+            newScreen.buttonContainer = BUTTON_CONTAINER.Get(oldScreen);
+            newScreen.clearButton = CLEAR_BUTTON.Get(oldScreen);
+            newScreen.clearButton.GetComponent<ToolTip>().SetSimpleTooltip(PackAnythingString.UI.SIDE_SCREEN.CANCEL_BUTTON_TOOL_TIP);
             DestroyImmediate(oldScreen);
             template.SetActive(active);
-            return ours;
+            return newScreen;
         }
 
         public static bool TryChangeText(Transform transform, string subCompName, string newText) {

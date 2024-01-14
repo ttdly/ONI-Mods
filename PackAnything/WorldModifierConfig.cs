@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace PackAnything {
     public class WorldModifierConfig : IBuildingConfig {

@@ -95,7 +95,20 @@ namespace PackAnything {
         public void OnRefreshUserMenu(object _) {
             if (isSurveyed || gameObject.HasTag("DontShowSurveyable")) return;
             if (gameObject.HasTag("OilWell") && gameObject.GetComponent<BuildingAttachPoint>()?.points[0].attachedBuilding != null) return;
-            Game.Instance.userMenu.AddButton(gameObject, isMarkForSurvey ? new KIconButtonMenu.ButtonInfo("action_follow_cam", PackAnythingString.UI.SURVEY.NAME_OFF, new System.Action(OnClickCancel), tooltipText: PackAnythingString.UI.SURVEY.TOOLTIP_OFF) : new KIconButtonMenu.ButtonInfo("action_follow_cam", PackAnythingString.UI.SURVEY.NAME, new System.Action(OnClickSurvey), tooltipText: PackAnythingString.UI.SURVEY.TOOLTIP));
+            Game.Instance.userMenu.AddButton(
+                gameObject, 
+                isMarkForSurvey ? 
+                new KIconButtonMenu.ButtonInfo(
+                    "action_follow_cam", 
+                    PackAnythingString.UI.SURVEY.NAME_OFF, 
+                    new System.Action(OnClickCancel), 
+                    tooltipText: PackAnythingString.UI.SURVEY.TOOLTIP_OFF) : 
+                new KIconButtonMenu.ButtonInfo(
+                    "action_follow_cam", 
+                    PackAnythingString.UI.SURVEY.NAME, 
+                    new System.Action(OnClickSurvey), 
+                    tooltipText: PackAnythingString.UI.SURVEY.TOOLTIP)
+                );
         }
 
         public void OnClickCancel() {

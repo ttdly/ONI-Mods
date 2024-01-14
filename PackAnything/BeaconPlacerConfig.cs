@@ -3,7 +3,7 @@
 namespace PackAnything {
     public class BeaconPlacerConfig : CommonPlacerConfig, IEntityConfig {
         public const string ID = "BeaconPlacer";
-        public const float mass = 200f;
+
         public GameObject CreatePrefab() {
             string name = PackAnythingString.MISC.DISPLACEMENT_BEACON.NAME;
             Material material = new Material(Assets.instance.movePickupToPlacerAssets.material.shader) {

@@ -9,11 +9,7 @@ namespace PackAnything {
         private ProgressBar m_Progress;
         [SerializeField]
         public float orderProgress;
-#if DEBUG
         public float delay = 0.5f;
-#else
-        public float delay = 0.5f;
-#endif
         public int Handler;
         [SerializeField]
         public int cell;
@@ -24,7 +20,8 @@ namespace PackAnything {
         protected override void OnSpawn() {
             base.OnSpawn();
             Handler = Subscribe(GameHashes.RefreshUserMenu.GetHashCode(), OnRefreshUserMenu);
-            PackAnythingStaticVars.targetMove = this;
+            PackAnythingStaticVars.SetMoving(true);
+            PackAnythingStaticVars.SetTargetMove(this);
             LightActive(true);
         }
 
@@ -40,34 +37,34 @@ namespace PackAnything {
             Complete();
         }
 
-        private void Complete() { 
-            if (orderProgress >= 1) {
-                if (PackAnythingStaticVars.targetSurveyable != null) {
-                    GameObject originObject = PackAnythingStaticVars.targetSurveyable.gameObject;
-                    Vector3 posCbc = Grid.CellToPosCBC(cell, Grid.SceneLayer.Building);
-                    KSelectable selectable = originObject.GetComponent<KSelectable>();
-                    OccupyArea occupyArea = originObject.GetComponent<OccupyArea>();
-                    Building building = originObject.GetComponent<Building>();
-                    if (PackAnythingStaticVars.targetSurveyable.gameObject.HasTag(GameTags.GeyserFeature)) {
-                        DeleteNeutronium(Grid.PosToCell(originObject));
-                        if (SingletonOptions<Options>.Instance.GenerateUnobtanium && unoCount > 0) {
-                            gameObject.transform.SetPosition(Grid.CellToPosCBC(Grid.OffsetCell(cell, 1, 2), Grid.SceneLayer.Move));
-                            CreateNeutronium(cell);
-                            cell = Grid.CellAbove(cell);
-                        }
-                        posCbc = Grid.CellToPosCBC(cell, originObject.FindOrAddComponent<KBatchedAnimController>().sceneLayer);
-                        float num = -0.15f;
-                        posCbc.z += num;
+        private void Complete() {
+            if (orderProgress < 1) return;
+            MoveStatus moveStatus = PackAnythingStaticVars.MoveStatus;
+            if (moveStatus.HaveAnObjectMoving) {
+                GameObject originObject = moveStatus.surveyable.gameObject;
+                Vector3 posCbc = Grid.CellToPosCBC(cell, Grid.SceneLayer.Building);
+                KSelectable selectable = originObject.GetComponent<KSelectable>();
+                OccupyArea occupyArea = originObject.GetComponent<OccupyArea>();
+                Building building = originObject.GetComponent<Building>();
+                if (originObject.gameObject.HasTag(GameTags.GeyserFeature)) {
+                    DeleteNeutronium(Grid.PosToCell(originObject));
+                    if (SingletonOptions<Options>.Instance.GenerateUnobtanium && unoCount > 0) {
+                        CreateNeutronium(cell);
+                        cell = Grid.CellAbove(cell);
                     }
-                    selectable?.transform.SetPosition(posCbc);
-                    occupyArea?.UpdateOccupiedArea();
-                    building?.UpdatePosition();
+                    posCbc = Grid.CellToPosCBC(cell, originObject.FindOrAddComponent<KBatchedAnimController>().sceneLayer);
+                    float num = -0.15f;
+                    posCbc.z += num;
                 }
-                LightActive(false);
-                PackAnythingStaticVars.targetModifier = null;
-                CancelAll();
-                
+                originObject?.transform?.SetPosition(posCbc);
+                selectable?.transform.SetPosition(posCbc);
+                occupyArea?.UpdateOccupiedArea();
+                building?.UpdatePosition();
             }
+            LightActive(false);
+            PackAnythingStaticVars.SetMoving(false);
+            CancelAll();
+                
         }
 
         private void ShowProgressBar() {
@@ -80,9 +77,10 @@ namespace PackAnything {
         }
 
         private void LightActive(bool on) {
-            if (PackAnythingStaticVars.targetModifier == null) return;
+            WorldModifier worldModifier = PackAnythingStaticVars.MoveStatus.worldModifier;
+            if (worldModifier == null) return;
             if (on) {
-                Light2D light2D = PackAnythingStaticVars.targetModifier.gameObject.AddOrGet<Light2D>();
+                Light2D light2D = worldModifier.gameObject.AddOrGet<Light2D>();
                 light2D.Color = new Color(0.6f, 0f, 0.6f, 1f);
                 light2D.Range = 3f;
                 light2D.Offset = new Vector2(0, 1);
@@ -90,17 +88,13 @@ namespace PackAnything {
                 light2D.shape = LightShape.Circle;
                 light2D.drawOverlay = true;
             } else {
-                DestroyImmediate(PackAnythingStaticVars.targetModifier.gameObject.AddOrGet<Light2D>());
+                DestroyImmediate(worldModifier.gameObject.AddOrGet<Light2D>());
             }
         }
 
         private void CancelAll() {
             LightActive(false);
-            if (PackAnythingStaticVars.targetModifier != null) {
-                PackAnythingStaticVars.targetModifier = null;
-            }
-            PackAnythingStaticVars.targetSurveyable = null;
-            PackAnythingStaticVars.targetMove = null;
+            PackAnythingStaticVars.SetMoving(false);
             if(m_Progress != null) {
                 m_Progress.gameObject.DeleteObject();
                 m_Progress = null;
@@ -149,7 +143,18 @@ namespace PackAnything {
         }
 
         private void OnRefreshUserMenu(object data) {
-            Game.Instance.userMenu.AddButton(gameObject, new KIconButtonMenu.ButtonInfo("action_control", UI.USERMENUACTIONS.PICKUPABLEMOVE.NAME_OFF, CancelAll, Action.NumActions, null, null, null, UI.USERMENUACTIONS.PICKUPABLEMOVE.TOOLTIP_OFF));
+            Game.Instance.userMenu.AddButton(
+                gameObject, 
+                new KIconButtonMenu.ButtonInfo(
+                    "action_control", 
+                    UI.USERMENUACTIONS.PICKUPABLEMOVE.NAME_OFF, 
+                    CancelAll, 
+                    Action.NumActions, 
+                    null, 
+                    null,
+                    null,
+                    UI.USERMENUACTIONS.PICKUPABLEMOVE.TOOLTIP_OFF)
+                );
         }
 
     }
