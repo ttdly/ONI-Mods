@@ -1,0 +1,25 @@
+msgid ""
+msgstr ""
+"Application: Oxygen Not Included"
+"POT Version: 2.0"
+
+#. SaltBox.MyStrings.BUILDINGS.PREFABS.SALTBOX.DESC
+msgctxt "SaltBox.MyStrings.BUILDINGS.PREFABS.SALTBOX.DESC"
+msgid "My salt has finally found its purpose!"
+msgstr ""
+
+#. SaltBox.MyStrings.BUILDINGS.PREFABS.SALTBOX.EFFECT
+msgctxt "SaltBox.MyStrings.BUILDINGS.PREFABS.SALTBOX.EFFECT"
+msgid "When food spoils, it uses the salt within the box to enhance its freshness."
+msgstr ""
+
+#. SaltBox.MyStrings.BUILDINGS.PREFABS.SALTBOX.NAME
+msgctxt "SaltBox.MyStrings.BUILDINGS.PREFABS.SALTBOX.NAME"
+msgid "<link=\"SALTBOX\">SaltBox</link>"
+msgstr ""
+
+#. SaltBox.MyStrings.MISC.StoreInSaltBoxModifer
+msgctxt "SaltBox.MyStrings.MISC.StoreInSaltBoxModifer"
+msgid "Stored in a salt box"
+msgstr ""
+
