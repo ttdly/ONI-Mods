@@ -1,6 +1,7 @@
 ﻿using KSerialization;
 using TUNING;
 using UnityEngine;
+using static Operational;
 
 
 namespace SaltBox {
@@ -98,6 +99,22 @@ namespace SaltBox {
             Operational component = GetComponent<Operational>();
             component.SetActive(component.IsOperational);
             filteredStorage.FilterChanged();
+            PickupSalt();
+        }
+
+        public void PickupSalt() {
+            GameObject gameObject = Grid.Objects[Grid.PosToCell(this.gameObject.transform.GetPosition()), 3];
+            if (gameObject != null) {
+                ObjectLayerListItem objectLayerListItem = gameObject.GetComponent<Pickupable>().objectLayerListItem;
+                while (objectLayerListItem != null) {
+                    Pickupable component = objectLayerListItem.gameObject.GetComponent<Pickupable>();
+                    if (component != null && component.HasTag(SimHashes.Salt.CreateTag())) {
+                        storage.Store(component.gameObject);
+                        break;
+                    }
+                    objectLayerListItem = objectLayerListItem.nextItem;
+                }
+            }
         }
 
         protected override void OnCleanUp() => filteredStorage.CleanUp();
