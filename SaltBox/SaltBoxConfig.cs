@@ -41,16 +41,16 @@ namespace SaltBox {
             go.AddOrGetDef<RocketUsageRestriction.Def>();
             ElementConverter elementConverter = go.AddOrGet<ElementConverter>();
             elementConverter.consumedElements = new ElementConverter.ConsumedElement[1]{
-                new ElementConverter.ConsumedElement(SimHashes.Salt.CreateTag(), 0.01f)
+                new ElementConverter.ConsumedElement(SimHashes.Salt.CreateTag(), 0.002f)
             };
             elementConverter.outputElements = new ElementConverter.OutputElement[1] {
-                new ElementConverter.OutputElement(0.001f, SimHashes.Sand, 0.0f, storeOutput: true)
+                new ElementConverter.OutputElement(0.001f, SimHashes.Sand, 0.0002f, storeOutput: true)
             };
             ManualDeliveryKG manualDeliveryKg = go.AddOrGet<ManualDeliveryKG>();
             manualDeliveryKg.SetStorage(storage);
             manualDeliveryKg.RequestedItemTag = SimHashes.Salt.CreateTag();
-            manualDeliveryKg.capacity = 320f;
-            manualDeliveryKg.refillMass = 32;
+            manualDeliveryKg.capacity = 300f;
+            manualDeliveryKg.refillMass = 30f;
             manualDeliveryKg.choreTypeIDHash = Db.Get().ChoreTypes.FetchCritical.IdHash;
             ElementDropper elementDropper = go.AddComponent<ElementDropper>();
             elementDropper.emitMass = 10f;
@@ -179,6 +179,7 @@ namespace SaltBox {
 
         public override void InitializeStates(out BaseState default_state) {
             default_state = off;
+            root.Enter(smi => smi.converter.SetWorkSpeedMultiplier(0.001f));
             off.PlayAnim("off").UpdateTransition(on, AnyUnfreshFood, UpdateRate.SIM_4000ms, load_balance: true).Enter(RemoveTag);
             on.PlayAnim("on").UpdateTransition(off, AllFoodFresh, UpdateRate.SIM_4000ms, load_balance: true).Enter(AddTag);
         }
