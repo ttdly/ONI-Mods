@@ -32,6 +32,14 @@ namespace PackAnything {
             }
         }
 
+        [HarmonyPatch(typeof(EntityTemplates), "ConfigPlacedEntity")]
+        public class EntityTemplates_ConfigPlacedEntity_Patch {
+            public static void Postfix(GameObject __result) {
+                if (__result.HasTag(GameTags.Gravitas)) __result.AddOrGet<Surveyable>();
+            }
+        }
+
+
         [HarmonyPatch(typeof(WarpPortalConfig),nameof(WarpPortalConfig.CreatePrefab))]
         public class WarpPortalConfig_CreatePrefab_Patch { 
             public static void Postfix(GameObject __result) {

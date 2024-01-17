@@ -1,6 +1,5 @@
 ﻿using PeterHan.PLib.Core;
 using PeterHan.PLib.Options;
-using STRINGS;
 using System;
 using UnityEngine;
 
@@ -19,52 +18,51 @@ namespace PackAnything {
 
         protected override void OnSpawn() {
             base.OnSpawn();
-            Handler = Subscribe(GameHashes.RefreshUserMenu.GetHashCode(), OnRefreshUserMenu);
             PackAnythingStaticVars.SetMoving(true);
             PackAnythingStaticVars.SetTargetMove(this);
             LightActive(true);
         }
 
-        protected override void OnCleanUp() {
-            base.OnCleanUp();
-            Unsubscribe(Handler);
-            Handler = -1;
-        }
-
         public void Sim1000ms(float dt) {
             orderProgress += delay;
             ShowProgressBar();
-            Complete();
+            MoveObject();
         }
 
-        private void Complete() {
-            if (orderProgress < 1) return;
+        private void MoveObject() {
+            if (orderProgress < 0.5) return;
             MoveStatus moveStatus = PackAnythingStaticVars.MoveStatus;
-            if (moveStatus.HaveAnObjectMoving) {
-                GameObject originObject = moveStatus.surveyable.gameObject;
-                Vector3 posCbc = Grid.CellToPosCBC(cell, Grid.SceneLayer.Building);
-                KSelectable selectable = originObject.GetComponent<KSelectable>();
-                OccupyArea occupyArea = originObject.GetComponent<OccupyArea>();
-                Building building = originObject.GetComponent<Building>();
-                if (originObject.gameObject.HasTag(GameTags.GeyserFeature)) {
-                    DeleteNeutronium(Grid.PosToCell(originObject));
-                    if (SingletonOptions<Options>.Instance.GenerateUnobtanium && unoCount > 0) {
-                        CreateNeutronium(cell);
-                        cell = Grid.CellAbove(cell);
-                    }
-                    posCbc = Grid.CellToPosCBC(cell, originObject.FindOrAddComponent<KBatchedAnimController>().sceneLayer);
-                    float num = -0.15f;
-                    posCbc.z += num;
+            if (!moveStatus.HaveAnObjectMoving) return;
+            bool isGeyser = false;
+            GameObject originObject = moveStatus.surveyable.gameObject;
+            Vector3 posCbc = Grid.CellToPosCBC(cell, Grid.SceneLayer.Building);
+            if (originObject.gameObject.HasTag(GameTags.GeyserFeature)) {
+                isGeyser = true;
+                DeleteNeutronium(Grid.PosToCell(originObject));
+                if (SingletonOptions<Options>.Instance.GenerateUnobtanium && unoCount > 0) {
+                    CreateNeutronium(cell);
+                    cell = Grid.CellAbove(cell);
                 }
-                originObject?.transform?.SetPosition(posCbc);
-                selectable?.transform.SetPosition(posCbc);
-                occupyArea?.UpdateOccupiedArea();
-                building?.UpdatePosition();
+                posCbc = Grid.CellToPosCBC(cell, originObject.FindOrAddComponent<KBatchedAnimController>().sceneLayer);
+                float num = -0.15f;
+                posCbc.z += num;
             }
+            GameObject cloneObject;
+            if (isGeyser) {
+                cloneObject = Util.KInstantiate(Assets.GetPrefab(originObject.GetComponent<KPrefabID>().PrefabTag), posCbc);
+                cloneObject.AddOrGet<Surveyable>().isSurveyed = true;
+            } else {
+                cloneObject = GameUtil.KInstantiate(originObject, posCbc, Grid.SceneLayer.Building);
+            }
+            cloneObject.transform.SetPosition(posCbc);
+            cloneObject.SetActive(false);
+            if (orderProgress < 1) return;
+            cloneObject.SetActive(true);
+            Destroy(originObject);
+            PackAnythingStaticVars.SurveableCmps.RemoveAll(data => data == null);
             LightActive(false);
             PackAnythingStaticVars.SetMoving(false);
             CancelAll();
-                
         }
 
         private void ShowProgressBar() {
@@ -95,7 +93,7 @@ namespace PackAnything {
         private void CancelAll() {
             LightActive(false);
             PackAnythingStaticVars.SetMoving(false);
-            if(m_Progress != null) {
+            if (m_Progress != null) {
                 m_Progress.gameObject.DeleteObject();
                 m_Progress = null;
             }
@@ -141,21 +139,5 @@ namespace PackAnything {
                 unoCount++;
             }
         }
-
-        private void OnRefreshUserMenu(object data) {
-            Game.Instance.userMenu.AddButton(
-                gameObject, 
-                new KIconButtonMenu.ButtonInfo(
-                    "action_control", 
-                    UI.USERMENUACTIONS.PICKUPABLEMOVE.NAME_OFF, 
-                    CancelAll, 
-                    Action.NumActions, 
-                    null, 
-                    null,
-                    null,
-                    UI.USERMENUACTIONS.PICKUPABLEMOVE.TOOLTIP_OFF)
-                );
-        }
-
     }
 }

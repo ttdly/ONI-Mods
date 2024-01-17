@@ -26,6 +26,7 @@ namespace PackAnything {
         public static Sprite ToolIcon;
         public static Color PrimaryColor;
         public static MoveStatus MoveStatus;
+        public static HashSet<Tag> GeyserPerfab;
 
         public static void Init() {
             WaitingSurvey = Db.Get().MiscStatusItems.Add(

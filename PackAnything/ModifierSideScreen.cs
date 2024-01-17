@@ -82,6 +82,8 @@ namespace PackAnything {
 
             foreach(Surveyable surveyable in PackAnythingStaticVars.SurveableCmps) {
                 if(surveyable != null) {
+                    if (surveyable.gameObject.HasTag("OilWell") 
+                        && surveyable.gameObject.gameObject.GetComponent<BuildingAttachPoint>()?.points[0].attachedBuilding != null) continue;
                     GameObject obj = Util.KInstantiateUI(stateButtonPrefab, buttonContainer.gameObject, force_active: true);
                     Sprite sprite = Def.GetUISprite(surveyable.gameObject).first;
                     if (sprite.name ==  "unknown") {
