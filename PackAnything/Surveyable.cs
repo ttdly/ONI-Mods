@@ -13,6 +13,8 @@ namespace PackAnything {
         private bool isMarkForSurvey;
         [Serialize]
         public bool isSurveyed = false;
+        [Serialize]
+        public ObjectType objectType = ObjectType.None;
         private Guid statusItemGuid;
         public bool MarkFroSurvey => isMarkForSurvey;
         public CellOffset[] PlacementOffsets {
@@ -58,9 +60,7 @@ namespace PackAnything {
                 PackAnythingStaticVars.SurveableCmps.Add(this);
                 return;
             }
-            if (isMarkForSurvey) {
-                OnClickSurvey();
-            }
+            if (isMarkForSurvey) OnClickSurvey();
         }
 
         protected override void OnStartWork(Worker worker) {

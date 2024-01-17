@@ -17,7 +17,7 @@ namespace PackAnything {
         [HarmonyPatch(typeof(GeyserGenericConfig), nameof(GeyserGenericConfig.CreateGeyser))]
         partial class GeyserGenericConfig_Patch {
             public static void Postfix(GameObject __result) {
-                __result.AddOrGet<Surveyable>();
+                __result.AddOrGet<Surveyable>().objectType = ObjectType.Geyser;
             }
         }
 

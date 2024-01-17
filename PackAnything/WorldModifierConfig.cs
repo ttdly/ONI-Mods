@@ -19,6 +19,13 @@ namespace PackAnything {
 
         public override void DoPostConfigureComplete(GameObject go) {
             go.AddOrGet<WorldModifier>();
+            Light2D light2D = go.AddOrGet<Light2D>();
+            light2D.Color = new Color(0.6f, 0f, 0.6f, 1f);
+            light2D.Range = 3f;
+            light2D.Offset = new Vector2(0, 1);
+            light2D.overlayColour = new Color(0.8f, 0f, 0.8f, 1f);
+            light2D.shape = LightShape.Circle;
+            light2D.drawOverlay = true;
         }
     }
 }

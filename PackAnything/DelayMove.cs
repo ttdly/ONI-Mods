@@ -1,103 +1,84 @@
 ﻿using PeterHan.PLib.Core;
+using PeterHan.PLib.Detours;
 using PeterHan.PLib.Options;
 using System;
 using UnityEngine;
 
 namespace PackAnything {
-    public class DelayMove : KMonoBehaviour, ISim1000ms {
-        private ProgressBar m_Progress;
-        [SerializeField]
-        public float orderProgress;
-        public float delay = 0.5f;
-        public int Handler;
+    public class DelayMove : KMonoBehaviour {
         [SerializeField]
         public int cell;
         [SerializeField]
         public int unoCount;
-        public virtual float GetProgress() => orderProgress;
+
+        Surveyable OriginSurvayable {
+            get {
+                return PackAnythingStaticVars.MoveStatus.surveyable;
+            }
+        }
+
+        GameObject OriginObject {
+            get {
+                return PackAnythingStaticVars.MoveStatus.surveyable.gameObject;
+            }
+        }
 
         protected override void OnSpawn() {
             base.OnSpawn();
             PackAnythingStaticVars.SetMoving(true);
             PackAnythingStaticVars.SetTargetMove(this);
-            LightActive(true);
+            if (!PackAnythingStaticVars.MoveStatus.HaveAnObjectMoving) return;
+            CloneOriginObject(out GameObject clonedObject);
+            SetFinalPosition(clonedObject);
+            clonedObject.SetActive(true);
+            OriginObject.SetActive(false);
+            UpdateSurveyStatues(clonedObject);
+            Util.KDestroyGameObject(OriginObject);
+            PackAnythingStaticVars.SetMoving(false);
+            DestroyImmediate(gameObject);
         }
 
-        public void Sim1000ms(float dt) {
-            orderProgress += delay;
-            ShowProgressBar();
-            MoveObject();
+        public void UpdateSurveyStatues(GameObject needSurvey) {
+            int index = PackAnythingStaticVars.SurveableCmps.IndexOf(OriginSurvayable);
+            Surveyable surveyable = needSurvey.AddOrGet<Surveyable>();
+            surveyable.isSurveyed = OriginSurvayable.isSurveyed;
+            surveyable.objectType = OriginSurvayable.objectType;
+            if (index == -1) {
+                PackAnythingStaticVars.SurveableCmps.Add(surveyable);
+                PackAnythingStaticVars.SurveableCmps.RemoveAll(item => item == null);
+            } else {
+                PackAnythingStaticVars.SurveableCmps[index] = surveyable;
+            }
         }
 
-        private void MoveObject() {
-            if (orderProgress < 0.5) return;
-            MoveStatus moveStatus = PackAnythingStaticVars.MoveStatus;
-            if (!moveStatus.HaveAnObjectMoving) return;
-            bool isGeyser = false;
-            GameObject originObject = moveStatus.surveyable.gameObject;
+        public void SetFinalPosition(GameObject final) {
+            int originCell = Grid.PosToCell(OriginObject.transform.position);
             Vector3 posCbc = Grid.CellToPosCBC(cell, Grid.SceneLayer.Building);
-            if (originObject.gameObject.HasTag(GameTags.GeyserFeature)) {
-                isGeyser = true;
-                DeleteNeutronium(Grid.PosToCell(originObject));
+            if (OriginSurvayable.objectType == ObjectType.Geyser) {
+                DeleteNeutronium(originCell);
                 if (SingletonOptions<Options>.Instance.GenerateUnobtanium && unoCount > 0) {
                     CreateNeutronium(cell);
                     cell = Grid.CellAbove(cell);
                 }
-                posCbc = Grid.CellToPosCBC(cell, originObject.FindOrAddComponent<KBatchedAnimController>().sceneLayer);
-                float num = -0.15f;
-                posCbc.z += num;
+                posCbc = Grid.CellToPosCBC(cell, OriginObject.FindOrAddComponent<KBatchedAnimController>().sceneLayer);
+                posCbc.z -= 0.15f;
             }
-            GameObject cloneObject;
-            if (isGeyser) {
-                cloneObject = Util.KInstantiate(Assets.GetPrefab(originObject.GetComponent<KPrefabID>().PrefabTag), posCbc);
-                cloneObject.AddOrGet<Surveyable>().isSurveyed = true;
-            } else {
-                cloneObject = GameUtil.KInstantiate(originObject, posCbc, Grid.SceneLayer.Building);
-            }
-            cloneObject.transform.SetPosition(posCbc);
-            cloneObject.SetActive(false);
-            if (orderProgress < 1) return;
-            cloneObject.SetActive(true);
-            Destroy(originObject);
-            PackAnythingStaticVars.SurveableCmps.RemoveAll(data => data == null);
-            LightActive(false);
-            PackAnythingStaticVars.SetMoving(false);
-            CancelAll();
+            final.transform.SetPosition(posCbc);
         }
 
-        private void ShowProgressBar() {
-            if (m_Progress == null) {
-                m_Progress = ProgressBar.CreateProgressBar(gameObject, GetProgress);
-                m_Progress.enabled = true;
-                m_Progress.SetVisibility(true);
-                m_Progress.barColor = PackAnythingStaticVars.PrimaryColor;
+        public void CloneOriginObject(out GameObject clonedObject) {
+            switch (OriginSurvayable.objectType) {
+                case ObjectType.Geyser:
+                    clonedObject = Util.KInstantiate(Assets.GetPrefab(OriginObject.GetComponent<KPrefabID>().PrefabTag));
+                    if (OriginObject.GetComponent<Studyable>().Studied) {
+                        PDetours.DetourField<Studyable, bool>("studied").Set(clonedObject.AddOrGet<Studyable>(), true);
+                    }
+                    break;
+                default:
+                    clonedObject = GameUtil.KInstantiate(OriginObject, OriginObject.transform.position, Grid.SceneLayer.Building);
+                    break;
             }
-        }
-
-        private void LightActive(bool on) {
-            WorldModifier worldModifier = PackAnythingStaticVars.MoveStatus.worldModifier;
-            if (worldModifier == null) return;
-            if (on) {
-                Light2D light2D = worldModifier.gameObject.AddOrGet<Light2D>();
-                light2D.Color = new Color(0.6f, 0f, 0.6f, 1f);
-                light2D.Range = 3f;
-                light2D.Offset = new Vector2(0, 1);
-                light2D.overlayColour = new Color(0.8f, 0f, 0.8f, 1f);
-                light2D.shape = LightShape.Circle;
-                light2D.drawOverlay = true;
-            } else {
-                DestroyImmediate(worldModifier.gameObject.AddOrGet<Light2D>());
-            }
-        }
-
-        private void CancelAll() {
-            LightActive(false);
-            PackAnythingStaticVars.SetMoving(false);
-            if (m_Progress != null) {
-                m_Progress.gameObject.DeleteObject();
-                m_Progress = null;
-            }
-            DestroyImmediate(gameObject);
+            clonedObject.SetActive(false);
         }
 
         public void CreateNeutronium(int cell) {
