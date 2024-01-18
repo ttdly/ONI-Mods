@@ -22,7 +22,7 @@ namespace PackAnything {
         public static ChoreType Survey;
         public static StatusItem SurveyingItem;
         public static StatusItem WaitingSurvey;
-        public static List<Surveyable> SurveableCmps;
+        public static HashSet<Surveyable> SurveableCmps;
         public static Sprite ToolIcon;
         public static Color PrimaryColor;
         public static MoveStatus MoveStatus;
@@ -47,7 +47,7 @@ namespace PackAnything {
                     5000, 
                     STRINGS.DUPLICANTS.CHORES.SURVEY.REPORT_NAME.ToString() 
                 });
-            SurveableCmps = new List<Surveyable>();
+            SurveableCmps = new HashSet<Surveyable>();
             ToolIcon = PUIUtils.LoadSprite("PackAnything.images.tooIcon.png");
             PrimaryColor = new Color(0.5f, 0.7f, 1.0f, 1f);
             MoveStatus = new MoveStatus();

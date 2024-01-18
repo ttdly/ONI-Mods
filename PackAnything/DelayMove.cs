@@ -2,6 +2,7 @@
 using PeterHan.PLib.Detours;
 using PeterHan.PLib.Options;
 using System;
+using System.Reflection;
 using UnityEngine;
 
 namespace PackAnything {
@@ -28,27 +29,19 @@ namespace PackAnything {
             PackAnythingStaticVars.SetMoving(true);
             PackAnythingStaticVars.SetTargetMove(this);
             if (!PackAnythingStaticVars.MoveStatus.HaveAnObjectMoving) return;
-            CloneOriginObject(out GameObject clonedObject);
-            SetFinalPosition(clonedObject);
-            clonedObject.SetActive(true);
-            OriginObject.SetActive(false);
-            UpdateSurveyStatues(clonedObject);
-            Util.KDestroyGameObject(OriginObject);
+            OriginSurvayable.objectType = CheckObjectType(OriginSurvayable.objectType);
+            if (OriginSurvayable.objectType == ObjectType.GravitasCreatureManipulator) {
+                SetFinalPosition(OriginObject);
+            } else {
+                CloneOriginObject(out GameObject clonedObject);
+                SetFinalPosition(clonedObject);
+                clonedObject.SetActive(false);
+                clonedObject.SetActive(true);
+                OriginObject.SetActive(false);
+                Destroy(OriginObject);
+            }
             PackAnythingStaticVars.SetMoving(false);
             DestroyImmediate(gameObject);
-        }
-
-        public void UpdateSurveyStatues(GameObject needSurvey) {
-            int index = PackAnythingStaticVars.SurveableCmps.IndexOf(OriginSurvayable);
-            Surveyable surveyable = needSurvey.AddOrGet<Surveyable>();
-            surveyable.isSurveyed = OriginSurvayable.isSurveyed;
-            surveyable.objectType = OriginSurvayable.objectType;
-            if (index == -1) {
-                PackAnythingStaticVars.SurveableCmps.Add(surveyable);
-                PackAnythingStaticVars.SurveableCmps.RemoveAll(item => item == null);
-            } else {
-                PackAnythingStaticVars.SurveableCmps[index] = surveyable;
-            }
         }
 
         public void SetFinalPosition(GameObject final) {
@@ -66,19 +59,76 @@ namespace PackAnything {
             final.transform.SetPosition(posCbc);
         }
 
+        public ObjectType CheckObjectType(ObjectType objectType) {
+            if (objectType != ObjectType.None) return objectType;
+            switch (OriginObject.GetComponent<KPrefabID>().PrefabTag.ToString()) {
+                case "WarpReceiver":
+                    return ObjectType.WarpReceiver;
+                case "GravitasCreatureManipulator":
+                    return ObjectType.GravitasCreatureManipulator;
+            }
+            if (OriginObject.GetComponent<SetLocker>() != null) return ObjectType.HaveSetLocker;
+            if (OriginObject.GetComponent<LoreBearer>() != null) return ObjectType.HaveLoreBearer;
+            if (OriginObject.GetComponent<Activatable>() != null) return ObjectType.Activatable;
+            return ObjectType.None;
+        }
+
         public void CloneOriginObject(out GameObject clonedObject) {
+            if (OriginSurvayable.objectType == ObjectType.Geyser) {
+                clonedObject = Util.KInstantiate(Assets.GetPrefab(OriginObject.GetComponent<KPrefabID>().PrefabTag));
+            } else {
+                clonedObject = GameUtil.KInstantiate(OriginObject, OriginObject.transform.position, Grid.SceneLayer.Building);
+            }
+            Surveyable surveyable = clonedObject.GetComponent<Surveyable>();
+            surveyable.objectType = OriginSurvayable.objectType;
+            surveyable.isSurveyed = true;
+            PackAnythingStaticVars.SurveableCmps.Add(surveyable);
             switch (OriginSurvayable.objectType) {
                 case ObjectType.Geyser:
-                    clonedObject = Util.KInstantiate(Assets.GetPrefab(OriginObject.GetComponent<KPrefabID>().PrefabTag));
                     if (OriginObject.GetComponent<Studyable>().Studied) {
-                        PDetours.DetourField<Studyable, bool>("studied").Set(clonedObject.AddOrGet<Studyable>(), true);
+                        IDetouredField<Studyable, bool> detoured = PDetours.DetourField<Studyable, bool>("studied");
+                        detoured.Set(clonedObject.AddOrGet<Studyable>(), true);
                     }
                     break;
-                default:
-                    clonedObject = GameUtil.KInstantiate(OriginObject, OriginObject.transform.position, Grid.SceneLayer.Building);
+                case ObjectType.HaveSetLocker:
+                    if (!OriginObject.GetComponent<SetLocker>().SidescreenButtonInteractable()) {
+                        PDetours.DetourField<SetLocker, bool>("used").Set(clonedObject.AddOrGet<SetLocker>(), true);
+                    }
+                    ToogleLoreBearer(clonedObject);
+                    break;
+                case ObjectType.CryoTank:
+                case ObjectType.HaveLoreBearer:
+                    ToogleLoreBearer(clonedObject);
+                    break;
+                case ObjectType.WarpPortal:
+                    IDetouredField<WarpPortal, bool> warp = PDetours.DetourField<WarpPortal, bool>("discovered");
+                    bool origin = warp.Get(OriginObject.GetComponent<WarpPortal>());
+                    warp.Set(clonedObject.AddOrGet<WarpPortal>(), origin);
+                    ToogleLoreBearer(clonedObject);
+                    break;
+                case ObjectType.WarpReceiver:
+                    clonedObject.AddOrGet<WarpReceiver>().Used = OriginObject.GetComponent<WarpReceiver>().Used;
+                    ToogleLoreBearer(clonedObject);
+                    break;
+                case ObjectType.Activatable:
+                    if (OriginObject.GetComponent<Activatable>().IsActivated) {
+                        Activatable activatable = clonedObject.AddOrGet<Activatable>();
+                        Type type = typeof(Activatable);
+                        MethodInfo methodInfo = type.GetMethod("OnCompleteWork", BindingFlags.NonPublic | BindingFlags.Instance);
+                        if (methodInfo != null) {
+                            _ = methodInfo.Invoke(activatable, new object[1] { null });
+                        }
+                    }
                     break;
             }
-            clonedObject.SetActive(false);
+        }
+
+        public void ToogleLoreBearer(GameObject needToogle) {
+            if (OriginObject.GetComponent<LoreBearer>() != null) {
+                if (!OriginObject.GetComponent<LoreBearer>().SidescreenButtonInteractable()) {
+                    PDetours.DetourField<LoreBearer, bool>("BeenClicked").Set(needToogle.AddOrGet<LoreBearer>(), true);
+                }
+            }
         }
 
         public void CreateNeutronium(int cell) {
@@ -100,6 +150,8 @@ namespace PackAnything {
                 unoCount--;
             }
         }
+
+
 
         public void DeleteNeutronium(int cell) {
             int[] cells = new[]{
