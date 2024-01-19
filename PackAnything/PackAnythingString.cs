@@ -30,6 +30,7 @@ namespace PackAnything {
     public class STRINGS {
         public static LocString GENERATE_UNOBTANIUM = (LocString)"Generate Unobtanium";
         public static LocString GENERATE_UNOBTANIUM_DESC = (LocString)"Whether or not does moving a geyser create neutronium";
+        public static LocString NO_NEED_DUPLICANTS_OPERATE = (LocString)"No need for a duplicate operation.";
 
         public class BUILDINGS {
             public class PREFABS {

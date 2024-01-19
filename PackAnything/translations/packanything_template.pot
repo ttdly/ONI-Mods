@@ -128,3 +128,8 @@ msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.TOOLTIP"
 msgid "Item will be surveyed once a Duplicant is available"
 msgstr ""
 
+#. PackAnything.STRINGS.NO_NEED_DUPLICANTS_OPERATE
+msgctxt "PackAnything.STRINGS.NO_NEED_DUPLICANTS_OPERATE"
+msgid "No need for a duplicate operation."
+msgstr ""
+

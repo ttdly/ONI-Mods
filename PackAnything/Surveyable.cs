@@ -1,5 +1,6 @@
 ﻿using KSerialization;
 using PeterHan.PLib.Core;
+using PeterHan.PLib.Options;
 using System;
 using TUNING;
 using UnityEngine;
@@ -122,7 +123,7 @@ namespace PackAnything {
         }
 
         public void OnClickSurvey() {
-            if (DebugHandler.InstantBuildMode) {
+            if (DebugHandler.InstantBuildMode || SingletonOptions<Options>.Instance.NoDuplicateOperation) {
                 OnClickCancel();
                 isSurveyed = true;
                 OnRefreshUserMenu(null);
@@ -138,7 +139,7 @@ namespace PackAnything {
 
         public void RemoveThisFromList() {
             isSurveyed = false;
-            PUtil.LogDebug(PackAnythingStaticVars.SurveableCmps.Remove(this));
+            PackAnythingStaticVars.SurveableCmps.Remove(this);
         }
 
         private void AddStatus() {
