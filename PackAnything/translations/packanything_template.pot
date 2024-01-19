@@ -13,41 +13,6 @@ msgctxt "PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.NAME"
 msgid "Displacement Beacon"
 msgstr ""
 
-#. PackAnything.PackAnythingString.MISC.SKILL.PERK_DESC
-msgctxt "PackAnything.PackAnythingString.MISC.SKILL.PERK_DESC"
-msgid "THIS SKILL WILL BE DELETED IN THE FUTURE."
-msgstr ""
-
-#. PackAnything.PackAnythingString.MISC.SURVEY.DESCRIPTION
-msgctxt "PackAnything.PackAnythingString.MISC.SURVEY.DESCRIPTION"
-msgid "Allow the Duplicant to survey the items"
-msgstr ""
-
-#. PackAnything.PackAnythingString.MISC.SURVEY.NAME
-msgctxt "PackAnything.PackAnythingString.MISC.SURVEY.NAME"
-msgid "Survey"
-msgstr ""
-
-#. PackAnything.PackAnythingString.UI.ACTIVATE.NAME
-msgctxt "PackAnything.PackAnythingString.UI.ACTIVATE.NAME"
-msgid "Active"
-msgstr ""
-
-#. PackAnything.PackAnythingString.UI.ACTIVATE.NAME_OFF
-msgctxt "PackAnything.PackAnythingString.UI.ACTIVATE.NAME_OFF"
-msgid "Cancel Active"
-msgstr ""
-
-#. PackAnything.PackAnythingString.UI.ACTIVATE.TOOLTIP
-msgctxt "PackAnything.PackAnythingString.UI.ACTIVATE.TOOLTIP"
-msgid "Active the Displacement Beacon."
-msgstr ""
-
-#. PackAnything.PackAnythingString.UI.ACTIVATE.TOOLTIP_OFF
-msgctxt "PackAnything.PackAnythingString.UI.ACTIVATE.TOOLTIP_OFF"
-msgid "Cancel order to active this item."
-msgstr ""
-
 #. PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TEXT
 msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TEXT"
 msgid "Move It"
@@ -113,26 +78,6 @@ msgctxt "PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.NAME"
 msgid "<link=\"MOVABLEBEACON\">Displacement Beacon</link>"
 msgstr ""
 
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.NAME
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.NAME"
-msgid "Active"
-msgstr ""
-
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.REPORT_NAME
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.REPORT_NAME"
-msgid "Active {0}"
-msgstr ""
-
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.STATUS
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.STATUS"
-msgid "Going to active"
-msgstr ""
-
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.TOOLTIP
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.TOOLTIP"
-msgid "This Duplicant is active a displacement beacon"
-msgstr ""
-
 #. PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.NAME
 msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.NAME"
 msgid "Survey"
@@ -153,16 +98,6 @@ msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.TOOLTIP"
 msgid "This Duplicant is surving an object"
 msgstr ""
 
-#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.ACTIVEBEACON.NAME
-msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.ACTIVEBEACON.NAME"
-msgid "Activating beacon"
-msgstr ""
-
-#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.ACTIVEBEACON.TOOLTIP
-msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.ACTIVEBEACON.TOOLTIP"
-msgid "This Duplicant is activing a displacement beacon."
-msgstr ""
-
 #. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.SURVEYITEM.NAME
 msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.SURVEYITEM.NAME"
 msgid "Surveying"
@@ -181,16 +116,6 @@ msgstr ""
 #. PackAnything.STRINGS.GENERATE_UNOBTANIUM_DESC
 msgctxt "PackAnything.STRINGS.GENERATE_UNOBTANIUM_DESC"
 msgid "Whether or not does moving a geyser create neutronium"
-msgstr ""
-
-#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGACTIVE.NAME
-msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGACTIVE.NAME"
-msgid "Active Errand"
-msgstr ""
-
-#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGACTIVE.TOOLTIP
-msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGACTIVE.TOOLTIP"
-msgid "Displacement beacon will be actived once a Duplicant is available"
 msgstr ""
 
 #. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.NAME

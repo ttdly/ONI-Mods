@@ -9,13 +9,13 @@ namespace PackAnything {
 
     public class ModifierSideScreen : SideScreenContent {
 
-        private static readonly IDetouredField<ArtableSelectionSideScreen, KButton> APPLY_BUTTON = 
+        private static readonly IDetouredField<ArtableSelectionSideScreen, KButton> APPLY_BUTTON =
             PDetours.DetourField<ArtableSelectionSideScreen, KButton>(nameof(applyButton));
-        private static readonly IDetouredField<ArtableSelectionSideScreen, KButton> CLEAR_BUTTON = 
+        private static readonly IDetouredField<ArtableSelectionSideScreen, KButton> CLEAR_BUTTON =
             PDetours.DetourField<ArtableSelectionSideScreen, KButton>(nameof(clearButton));
-        private static readonly IDetouredField<ArtableSelectionSideScreen, GameObject> STATE_BUTTON_PREFAB = 
+        private static readonly IDetouredField<ArtableSelectionSideScreen, GameObject> STATE_BUTTON_PREFAB =
             PDetours.DetourField<ArtableSelectionSideScreen, GameObject>(nameof(stateButtonPrefab));
-        private static readonly IDetouredField<ArtableSelectionSideScreen, RectTransform> BUTTON_CONTAINER = 
+        private static readonly IDetouredField<ArtableSelectionSideScreen, RectTransform> BUTTON_CONTAINER =
             PDetours.DetourField<ArtableSelectionSideScreen, RectTransform>(nameof(buttonContainer));
 
         private KButton applyButton;
@@ -34,7 +34,6 @@ namespace PackAnything {
                     PackAnythingStaticVars.SetTargetSurveyable(targetSurveyable);
                     PackAnythingStaticVars.SetTargetModifier(targetBuilding);
                     ActiveMoveTool(targetSurveyable);
-                    targetSurveyable = null;
                 } else {
                     PlaySound(GlobalAssets.GetSound("Negative"));
                 }
@@ -80,13 +79,13 @@ namespace PackAnything {
                 return;
             }
 
-            foreach(Surveyable surveyable in PackAnythingStaticVars.SurveableCmps) {
-                if(surveyable != null) {
-                    if (surveyable.gameObject.HasTag("OilWell") 
+            foreach (Surveyable surveyable in PackAnythingStaticVars.SurveableCmps) {
+                if (surveyable != null) {
+                    if (surveyable.gameObject.HasTag("OilWell")
                         && surveyable.gameObject.gameObject.GetComponent<BuildingAttachPoint>()?.points[0].attachedBuilding != null) continue;
                     GameObject obj = Util.KInstantiateUI(stateButtonPrefab, buttonContainer.gameObject, force_active: true);
                     Sprite sprite = Def.GetUISprite(surveyable.gameObject).first;
-                    if (sprite.name ==  "unknown") {
+                    if (sprite.name == "unknown") {
                         sprite = Def.GetUISprite(surveyable.gameObject, "place").first;
                     }
                     MultiToggle component = obj.GetComponent<MultiToggle>();
@@ -134,7 +133,7 @@ namespace PackAnything {
             newScreen.applyButton = APPLY_BUTTON.Get(oldScreen);
             newScreen.applyButton.GetComponent<ToolTip>().SetSimpleTooltip(PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TOOL_TIP);
             newScreen.clearButton = CLEAR_BUTTON.Get(oldScreen);
-            TryChangeText(newScreen.applyButton.gameObject.transform,"Label", PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TEXT);
+            TryChangeText(newScreen.applyButton.gameObject.transform, "Label", PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TEXT);
             newScreen.buttonContainer = BUTTON_CONTAINER.Get(oldScreen);
             newScreen.clearButton = CLEAR_BUTTON.Get(oldScreen);
             newScreen.clearButton.GetComponent<ToolTip>().SetSimpleTooltip(PackAnythingString.UI.SIDE_SCREEN.CANCEL_BUTTON_TOOL_TIP);
@@ -180,9 +179,50 @@ namespace PackAnything {
         }
 
         private void ActiveMoveTool(Surveyable surveyable) {
+            
+            switch (surveyable.gameObject.GetComponent<KPrefabID>().PrefabTag.ToString()) {
+                case "LonelyMinionHouse":
+                    LonyMinionActive(surveyable);
+                    break;
+                default:
+                    NormalActive(surveyable);
+                    break;
+            }
+            targetSurveyable = null;
+        }
+
+        void NormalActive(Surveyable surveyable) {
             MoveTargetTool.Instance.Acitvate(surveyable);
         }
 
+        void ManipulatorActive(Surveyable surveyable) {
+            TemplateContainer template = TemplateCache.GetTemplate("mainpulator");
+            if (template != null && template.cells != null) {
+                MoveStoryTargetTool.Instance.Activate(template, new GameObject[1] { surveyable.gameObject });
+            }
+        }
+
+        void LonyMinionActive(Surveyable surveyable) {
+            TemplateContainer template = TemplateCache.GetTemplate("only_loney");
+            GameObject box;
+            if (template != null && template.cells != null) {
+                int cell = Grid.PosToCell(surveyable.gameObject);
+                ListPool<ScenePartitionerEntry, GameScenePartitioner>.PooledList pooledList = ListPool<ScenePartitionerEntry, GameScenePartitioner>.Allocate();
+                GameScenePartitioner.Instance.GatherEntries(new Extents(cell, 10), GameScenePartitioner.Instance.objectLayers[1], pooledList);
+                int num = 0;
+                while ( num < pooledList.Count) {
+                    if ((pooledList[num].obj as GameObject).GetComponent<KPrefabID>().PrefabTag.GetHash() == LonelyMinionMailboxConfig.IdHash.HashValue) {
+                        box = pooledList[num].obj as GameObject;
+                        MoveStoryTargetTool.Instance.Activate(template, new GameObject[2] { surveyable.gameObject, box }, DeactivateOnStamp: true);
+                        return;
+                    }
+                    num++;
+                }
+                
+            }
+        }
+
+       
     }
 
 }

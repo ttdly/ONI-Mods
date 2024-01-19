@@ -70,6 +70,12 @@ namespace PackAnything {
                 moveBeaconTool.SetActive(true);
                 moveBeaconTool.SetActive(false);
                 interfaceTools.Add(tool);
+                var moveSoryTool = new GameObject("MoveStory");
+                var tool2 = moveSoryTool.AddComponent<MoveStoryTargetTool>();
+                moveSoryTool.transform.SetParent(__instance.gameObject.transform);
+                moveSoryTool.SetActive(true);
+                moveSoryTool.SetActive(false);
+                interfaceTools.Add(tool2);
                 __instance.tools = interfaceTools.ToArray();
             }
         }

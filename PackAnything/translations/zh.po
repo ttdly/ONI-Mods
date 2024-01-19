@@ -16,8 +16,8 @@ msgstr ""
 #. PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.DESC
 msgctxt "PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.DESC"
 msgid ""
-"Record the information of an object, activate this beacon, and the recorded object "
-"will be moved to this location."
+"Record the information of an object, activate this beacon, and the recorded "
+"object will be moved to this location."
 msgstr "记录一个物体的信息，激活该信标，记录的物体就会被移动到这个位置。"
 
 #. PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.NAME
@@ -25,40 +25,43 @@ msgctxt "PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.NAME"
 msgid "Displacement Beacon"
 msgstr "位移信标"
 
-#. PackAnything.PackAnythingString.MISC.SKILL.PERK_DESC
-msgctxt "PackAnything.PackAnythingString.MISC.SKILL.PERK_DESC"
-msgid "THIS SKILL WILL BE DELETED IN THE FUTURE. \n\n Learn Masterwork"
-msgstr "这个技能已弃用 \n\n 学习大师技艺就行"
+#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TEXT
+msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TEXT"
+msgid "Move It"
+msgstr "移动"
 
-#. PackAnything.PackAnythingString.MISC.SURVEY.DESCRIPTION
-msgctxt "PackAnything.PackAnythingString.MISC.SURVEY.DESCRIPTION"
-msgid "Learn Masterwork"
-msgstr "学习大师技艺"
+#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TOOL_TIP
+msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TOOL_TIP"
+msgid "Move this object to a specific location"
+msgstr "将这个物体移动到指定位置"
 
-#. PackAnything.PackAnythingString.MISC.SURVEY.NAME
-msgctxt "PackAnything.PackAnythingString.MISC.SURVEY.NAME"
-msgid "Don't learn"
-msgstr "不要学习"
+#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.CANCEL_BUTTON_TOOL_TIP
+msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.CANCEL_BUTTON_TOOL_TIP"
+msgid "Cancel survey for this item."
+msgstr "取消对这个物品的测绘"
 
-#. PackAnything.PackAnythingString.UI.ACTIVATE.NAME
-msgctxt "PackAnything.PackAnythingString.UI.ACTIVATE.NAME"
-msgid "Active"
-msgstr "激活"
+#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.NAME
+msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.NAME"
+msgid "Survyed List"
+msgstr "已测绘物体"
 
-#. PackAnything.PackAnythingString.UI.ACTIVATE.NAME_OFF
-msgctxt "PackAnything.PackAnythingString.UI.ACTIVATE.NAME_OFF"
-msgid "Cancel Active"
-msgstr "取消激活"
+#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP
+msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP"
+msgid ""
+"There is no object being surveyed, or alternatively, there is an object in "
+"motion"
+msgstr "没有测绘任何物品或有物品正在移动"
 
-#. PackAnything.PackAnythingString.UI.ACTIVATE.TOOLTIP
-msgctxt "PackAnything.PackAnythingString.UI.ACTIVATE.TOOLTIP"
-msgid "Active the Displacement Beacon."
-msgstr "激活位移信标"
-
-#. PackAnything.PackAnythingString.UI.ACTIVATE.TOOLTIP_OFF
-msgctxt "PackAnything.PackAnythingString.UI.ACTIVATE.TOOLTIP_OFF"
-msgid "Cancel order to active this item."
-msgstr "取消位移信标的激活"
+#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_OBJ
+msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_OBJ"
+msgid ""
+"\n"
+"\n"
+"Double-click to view this object."
+msgstr ""
+"\n"
+"\n"
+"双击查看这个物体的位置"
 
 #. PackAnything.PackAnythingString.UI.SURVEY.NAME
 msgctxt "PackAnything.PackAnythingString.UI.SURVEY.NAME"
@@ -68,7 +71,7 @@ msgstr "测绘"
 #. PackAnything.PackAnythingString.UI.SURVEY.NAME_OFF
 msgctxt "PackAnything.PackAnythingString.UI.SURVEY.NAME_OFF"
 msgid "Cancel Survey"
-msgstr "取消测绘"
+msgstr "取消"
 
 #. PackAnything.PackAnythingString.UI.SURVEY.TOOLTIP
 msgctxt "PackAnything.PackAnythingString.UI.SURVEY.TOOLTIP"
@@ -80,25 +83,20 @@ msgctxt "PackAnything.PackAnythingString.UI.SURVEY.TOOLTIP_OFF"
 msgid "Cancel order to survey this item."
 msgstr "取消对这个物品的测绘"
 
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.NAME
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.NAME"
-msgid "Active"
-msgstr "激活"
+#. PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.DESC
+msgctxt "PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.DESC"
+msgid "The magical machine that can alter this world."
+msgstr "神奇的机器，可以改变这个世界。"
 
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.REPORT_NAME
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.REPORT_NAME"
-msgid "Active {0}"
-msgstr "激活 {0}"
+#. PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.EFFECT
+msgctxt "PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.EFFECT"
+msgid "Move the object surveyed."
+msgstr "移动测绘后的物体。"
 
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.STATUS
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.STATUS"
-msgid "Going to active"
-msgstr "正在前去激活信标"
-
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.TOOLTIP
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.ACTIVE.TOOLTIP"
-msgid "This Duplicant is active a displacement beacon"
-msgstr "这名复制人正在激活位移信标"
+#. PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.NAME
+msgctxt "PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.NAME"
+msgid "<link=\"MOVABLEBEACON\">Displacement Beacon</link>"
+msgstr "<link=\"MOVABLEBEACON\">位移信标</link>"
 
 #. PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.NAME
 msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.NAME"
@@ -120,16 +118,6 @@ msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.TOOLTIP"
 msgid "This Duplicant is surving an object"
 msgstr "这名复制人正在测绘物品"
 
-#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.ACTIVEBEACON.NAME
-msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.ACTIVEBEACON.NAME"
-msgid "Activating beacon"
-msgstr "激活信标"
-
-#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.ACTIVEBEACON.TOOLTIP
-msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.ACTIVEBEACON.TOOLTIP"
-msgid "This Duplicant is activing a displacement beacon."
-msgstr "这名复制人正在激活信标"
-
 #. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.SURVEYITEM.NAME
 msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.SURVEYITEM.NAME"
 msgid "Surveying"
@@ -139,26 +127,6 @@ msgstr "测绘"
 msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.SURVEYITEM.TOOLTIP"
 msgid "This Duplicant is surveying an object"
 msgstr "这名复制人正在测绘物品"
-
-#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGACTIVE.NAME
-msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGACTIVE.NAME"
-msgid "Active Errand"
-msgstr "激活任务"
-
-#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGACTIVE.TOOLTIP
-msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGACTIVE.TOOLTIP"
-msgid "Displacement beacon will be actived once a Duplicant is available"
-msgstr "复制人有空就会来激活这个位移信标"
-
-#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.NAME
-msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.NAME"
-msgid "Survey Errand"
-msgstr "测绘任务"
-
-#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.TOOLTIP
-msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.TOOLTIP"
-msgid "Item will be surveyed once a Duplicant is available"
-msgstr "复制人有空就会对这个物品进行测绘"
 
 #. PackAnything.STRINGS.GENERATE_UNOBTANIUM
 msgctxt "PackAnything.STRINGS.GENERATE_UNOBTANIUM"
@@ -170,47 +138,12 @@ msgctxt "PackAnything.STRINGS.GENERATE_UNOBTANIUM_DESC"
 msgid "Whether or not does moving a geyser create neutronium"
 msgstr "是否在移动间歇泉的时候一起移动中子物质"
 
-#. PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.DESC
-msgctxt "PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.DESC"
-msgid "The magical machine that can alter this world."
-msgstr "神奇的机器，可以改变这个世界。"
+#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.NAME
+msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.NAME"
+msgid "Survey Errand"
+msgstr "测绘任务"
 
-#. PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.EFFECT
-msgctxt "PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.EFFECT"
-msgid "Move the object surveyed."
-msgstr "移动测绘后的物体。"
-
-#. PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.NAME
-msgctxt "PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.NAME"
-msgid "<link=\"MOVABLEBEACON\">Displacement Beacon</link>"
-msgstr "<link=\"MOVABLEBEACON\">位移信标</link>"
-
-#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TEXT
-msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TEXT"
-msgid "Move It"
-msgstr "移动"
-
-#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TOOL_TIP
-msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TOOL_TIP"
-msgid "Move this object to a specific location"
-msgstr "讲这个物体移动到指定位置"
-
-#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.CANCEL_BUTTON_TOOL_TIP
-msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.CANCEL_BUTTON_TOOL_TIP"
-msgid "Cancel survey for this item"
-msgstr "取消对这个物品的测绘"
-
-#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_OBJ
-msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_OBJ"
-msgid "\n\nDouble-click to view this object"
-msgstr "\n\n双击查看这个物体的位置"
-
-#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.NAME
-msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.NAME"
-msgid "Survyed List"
-msgstr "已测绘物体"
-
-#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP
-msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP"
-msgid "There is no object being surveyed, or alternatively, there is an object in motion"
-msgstr "没有测绘任何物体或有物品正在移动"
+#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.TOOLTIP
+msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.TOOLTIP"
+msgid "Item will be surveyed once a Duplicant is available"
+msgstr "复制人有空就会对这个物品进行测绘"

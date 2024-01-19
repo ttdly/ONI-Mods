@@ -96,6 +96,7 @@ namespace PackAnything {
                     }
                     ToogleLoreBearer(clonedObject);
                     break;
+                
                 case ObjectType.CryoTank:
                 case ObjectType.HaveLoreBearer:
                     ToogleLoreBearer(clonedObject);
