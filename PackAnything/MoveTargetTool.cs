@@ -4,10 +4,15 @@ using UnityEngine;
 
 namespace PackAnything {
     public class MoveTargetTool : InterfaceTool{
-        private Surveyable targetSurveyable;
+        private ObjectCanMove waittingMoveObject;
         public int targetCell;
         public static MoveTargetTool Instance;
         public static SpriteRenderer PlaserSpriteRenderer = null;
+        public WorldModifier TargetWorldModifier {
+            get {
+                return PackAnythingStaticVars.MoveStatus.worldModifier;
+            }
+        }
 
         protected override void OnPrefabInit() {
             base.OnPrefabInit();
@@ -34,7 +39,7 @@ namespace PackAnything {
 
         public override void OnLeftClickDown(Vector3 cursor_pos) {
             base.OnLeftClickDown(cursor_pos);
-            if ( !(targetSurveyable != null))
+            if ( !(waittingMoveObject != null))
                 return;
             int mouseCell = DebugHandler.GetMouseCell();
             if (SurveyableCanMoveTo(mouseCell)) {
@@ -61,17 +66,16 @@ namespace PackAnything {
             visualizer.SetActive(false);
         }
 
-        public void Acitvate(Surveyable surveyable) {
-            targetSurveyable = surveyable;
+        public void Acitvate(ObjectCanMove watingMove) {
+            waittingMoveObject = watingMove;
             PlayerController.Instance.ActivateTool(this);
         }
 
         private void SetMoveBeacon(int mouseCell) {
-            Vector3 posCbc = Grid.CellToPosCBC(mouseCell, visualizerLayer);
-            GameObject gameObject = Util.KInstantiate(Assets.GetPrefab((Tag)BeaconPlacerConfig.ID), posCbc);
-            gameObject.AddOrGet<DelayMove>().cell = mouseCell;
-            gameObject.AddOrGet<UserNameable>().savedName = targetSurveyable.gameObject.GetProperName();
-            gameObject.SetActive(true);
+            if (TargetWorldModifier != null) {
+                TargetWorldModifier.cell = mouseCell;
+                TargetWorldModifier.StartMoving();
+            } 
         }
 
         private void RefreshColor() {

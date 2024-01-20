@@ -32,6 +32,8 @@ namespace PackAnything {
                 { typeof(WarpPortalConfig), nameof(WarpPortalConfig.CreatePrefab)},
                 { typeof(CryoTankConfig), nameof(CryoTankConfig.CreatePrefab) },
                 { typeof(BaseBeeHiveConfig), nameof(BaseBeeHiveConfig.CreatePrefab)},
+                { typeof(GeneShufflerConfig), nameof(GeneShufflerConfig.CreatePrefab)},
+
             };
             foreach (KeyValuePair<System.Type, string> pair in entityPatchMap) {
                 harmony.Patch(pair.Key.GetMethod(pair.Value), postfix: new HarmonyMethod(entityPostfix));

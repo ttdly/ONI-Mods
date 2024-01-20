@@ -6,12 +6,13 @@ using static DetailsScreen;
 namespace PackAnything {
     public class PackAnythingPatches {
         public static void EntityPostfix(GameObject __result) {
-            __result.AddOrGet<Surveyable>();
+            __result.AddOrGet<ObjectCanMove>();
         }
 
         public static void BuildingPostfix(GameObject go) {
-            go.AddOrGet<Surveyable>();
+            go.AddOrGet<ObjectCanMove>();
         }
+
         [HarmonyPatch(typeof(GeneratedBuildings), "LoadGeneratedBuildings")]
         public class GeneratedBuildings_LoadGeneratedBuildings_Patch {
             public static void Prefix() {
@@ -26,7 +27,7 @@ namespace PackAnything {
         [HarmonyPatch(typeof(GeyserGenericConfig), nameof(GeyserGenericConfig.CreateGeyser))]
         partial class GeyserGenericConfig_Patch {
             public static void Postfix(GameObject __result) {
-                __result.AddOrGet<Surveyable>().objectType = ObjectType.Geyser;
+                __result.AddOrGet<ObjectCanMove>().objectType = ObjectType.Geyser;
             }
         }
 
@@ -34,7 +35,7 @@ namespace PackAnything {
         [HarmonyPatch(typeof(EntityTemplates), "ConfigPlacedEntity")]
         public class EntityTemplates_ConfigPlacedEntity_Patch {
             public static void Postfix(GameObject __result) {
-                if (__result.HasTag(GameTags.Gravitas)) __result.AddOrGet<Surveyable>();
+                if (__result.HasTag(GameTags.Gravitas)) __result.AddOrGet<ObjectCanMove>();
             }
         }
         
@@ -42,30 +43,14 @@ namespace PackAnything {
         [HarmonyPatch(typeof(MegaBrainTank), "OnSpawn")]
         public class MegaBrainTank_OnSpawn_Patch { 
             public static void Postfix(MegaBrainTank __instance) {
-                __instance.gameObject.AddOrGet<Surveyable>();
+                __instance.gameObject.AddOrGet<ObjectCanMove>();
             }
         }
         // 生物织构
         [HarmonyPatch(typeof(MorbRoverMakerWorkable), "OnSpawn")]
         public class MorbRoverMakerWorkable_OnSpawn_Patch {
             public static void Postfix(MorbRoverMakerWorkable __instance) {
-                __instance.gameObject.AddOrGet<Surveyable>();
-            }
-        }
-        // 小人传送
-        [HarmonyPatch(typeof(WarpPortalConfig), nameof(WarpPortalConfig.CreatePrefab))]
-        public class WarpPortalConfig_CreatePrefab_Patch {
-            public static void Postfix(GameObject __result) {
-                __result.AddOrGet<Manual>();
-                __result.AddTag("DontShowSurveyable");
-            }
-        }
-        // 神经震荡
-        [HarmonyPatch(typeof(GeneShufflerConfig), nameof(GeneShufflerConfig.CreatePrefab))]
-        public class GeneShufflerConfig_CreatePrefab_Patch {
-            public static void Postfix(GameObject __result) {
-                __result.AddOrGet<Manual>();
-                __result.AddTag("DontShowSurveyable");
+                __instance.gameObject.AddOrGet<ObjectCanMove>();
             }
         }
 

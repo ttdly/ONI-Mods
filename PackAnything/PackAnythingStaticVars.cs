@@ -7,14 +7,12 @@ using UnityEngine;
 namespace PackAnything {
     public class MoveStatus {
         public bool HaveAnObjectMoving = false;
-        public Surveyable surveyable;
+        public ObjectCanMove watingMoveObject;
         public WorldModifier worldModifier;
-        public DelayMove delayMove;
 
         public MoveStatus() {
-            surveyable = null;
+            watingMoveObject = null;
             worldModifier = null;
-            delayMove = null;
         }
     }
 
@@ -22,7 +20,7 @@ namespace PackAnything {
         public static ChoreType Survey;
         public static StatusItem SurveyingItem;
         public static StatusItem WaitingSurvey;
-        public static HashSet<Surveyable> SurveableCmps;
+        public static HashSet<ObjectCanMove> SurveableCmps;
         public static Sprite ToolIcon;
         public static Color PrimaryColor;
         public static MoveStatus MoveStatus;
@@ -47,7 +45,7 @@ namespace PackAnything {
                     5000, 
                     STRINGS.DUPLICANTS.CHORES.SURVEY.REPORT_NAME.ToString() 
                 });
-            SurveableCmps = new HashSet<Surveyable>();
+            SurveableCmps = new HashSet<ObjectCanMove>();
             ToolIcon = PUIUtils.LoadSprite("PackAnything.images.tooIcon.png");
             PrimaryColor = new Color(0.5f, 0.7f, 1.0f, 1f);
             MoveStatus = new MoveStatus();
@@ -57,12 +55,8 @@ namespace PackAnything {
             MoveStatus.HaveAnObjectMoving = isMoving;
         }
 
-        public static void SetTargetMove (DelayMove delayMove) {
-            MoveStatus.delayMove = delayMove;
-        }
-
-        public static void SetTargetSurveyable(Surveyable surveyable) {
-            MoveStatus.surveyable = surveyable;
+        public static void SetTargetSurveyable(ObjectCanMove surveyable) {
+            MoveStatus.watingMoveObject = surveyable;
         }
 
         public static void SetTargetModifier(WorldModifier worldModifier) {

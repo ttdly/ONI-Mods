@@ -25,23 +25,23 @@ namespace PackAnything {
         private RectTransform buttonContainer;
         private readonly Dictionary<int, MultiToggle> buttons = new Dictionary<int, MultiToggle>();
         private WorldModifier targetBuilding;
-        private Surveyable targetSurveyable;
+        private ObjectCanMove waittingMoveObject;
 
         protected override void OnSpawn() {
             base.OnSpawn();
             applyButton.onClick += delegate {
-                if (targetSurveyable != null) {
-                    PackAnythingStaticVars.SetTargetSurveyable(targetSurveyable);
+                if (waittingMoveObject != null) {
+                    PackAnythingStaticVars.SetTargetSurveyable(waittingMoveObject);
                     PackAnythingStaticVars.SetTargetModifier(targetBuilding);
-                    ActiveMoveTool(targetSurveyable);
+                    ActiveMoveTool(waittingMoveObject);
                 } else {
                     PlaySound(GlobalAssets.GetSound("Negative"));
                 }
             };
             clearButton.onClick += () => {
-                if (targetSurveyable != null) {
-                    targetSurveyable.RemoveThisFromList();
-                    targetSurveyable = null;
+                if (waittingMoveObject != null) {
+                    waittingMoveObject.RemoveThisFromList();
+                    waittingMoveObject = null;
                     GenerateStateButtons();
                 } else {
                     PlaySound(GlobalAssets.GetSound("Negative"));
@@ -79,7 +79,17 @@ namespace PackAnything {
                 return;
             }
 
-            foreach (Surveyable surveyable in PackAnythingStaticVars.SurveableCmps) {
+            if (!targetBuilding.CanStartMove) {
+                GameObject obj = Util.KInstantiateUI(stateButtonPrefab, buttonContainer.gameObject, force_active: true);
+                Sprite sprite = Assets.GetSprite((HashedString)"action_building_disabled");
+                MultiToggle component = obj.GetComponent<MultiToggle>();
+                component.GetComponent<ToolTip>().SetSimpleTooltip(PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_ELEMENT);
+                component.GetComponent<HierarchyReferences>().GetReference<Image>("Icon").sprite = sprite;
+                buttons.Add(count++, component);
+                return;
+            }
+
+            foreach (ObjectCanMove surveyable in PackAnythingStaticVars.SurveableCmps) {
                 if (surveyable != null) {
                     if (surveyable.gameObject.HasTag("OilWell")
                         && surveyable.gameObject.gameObject.GetComponent<BuildingAttachPoint>()?.points[0].attachedBuilding != null) continue;
@@ -89,16 +99,16 @@ namespace PackAnything {
                         sprite = Def.GetUISprite(surveyable.gameObject, "place").first;
                     }
                     MultiToggle component = obj.GetComponent<MultiToggle>();
-                    Surveyable tempSurveyable = PackAnythingStaticVars.MoveStatus.surveyable;
+                    ObjectCanMove tempSurveyable = PackAnythingStaticVars.MoveStatus.watingMoveObject;
                     if (tempSurveyable != null && tempSurveyable == surveyable) {
                         component.ChangeState(1);
-                        targetSurveyable = surveyable;
+                        waittingMoveObject = surveyable;
                     }
                     component.GetComponent<ToolTip>().SetSimpleTooltip(UI.StripLinkFormatting(surveyable.GetProperName()) + PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_OBJ);
                     component.GetComponent<HierarchyReferences>().GetReference<Image>("Icon").sprite = sprite;
                     component.onClick = delegate {
-                        if (PackAnythingStaticVars.MoveStatus.surveyable != surveyable) {
-                            targetSurveyable = surveyable;
+                        if (PackAnythingStaticVars.MoveStatus.watingMoveObject != surveyable) {
+                            waittingMoveObject = surveyable;
                             RefreshButtons();
                             component.ChangeState(1);
                         }
@@ -178,7 +188,7 @@ namespace PackAnything {
                 PUtil.LogWarning("Unable to find side screen!");
         }
 
-        private void ActiveMoveTool(Surveyable surveyable) {
+        private void ActiveMoveTool(ObjectCanMove surveyable) {
             
             switch (surveyable.gameObject.GetComponent<KPrefabID>().PrefabTag.ToString()) {
                 case "LonelyMinionHouse":
@@ -188,21 +198,21 @@ namespace PackAnything {
                     NormalActive(surveyable);
                     break;
             }
-            targetSurveyable = null;
+            waittingMoveObject = null;
         }
 
-        void NormalActive(Surveyable surveyable) {
+        void NormalActive(ObjectCanMove surveyable) {
             MoveTargetTool.Instance.Acitvate(surveyable);
         }
 
-        void ManipulatorActive(Surveyable surveyable) {
+        void ManipulatorActive(ObjectCanMove surveyable) {
             TemplateContainer template = TemplateCache.GetTemplate("mainpulator");
             if (template != null && template.cells != null) {
                 MoveStoryTargetTool.Instance.Activate(template, new GameObject[1] { surveyable.gameObject });
             }
         }
 
-        void LonyMinionActive(Surveyable surveyable) {
+        void LonyMinionActive(ObjectCanMove surveyable) {
             TemplateContainer template = TemplateCache.GetTemplate("only_loney");
             GameObject box;
             if (template != null && template.cells != null) {

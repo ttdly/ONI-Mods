@@ -12,6 +12,7 @@ namespace PackAnything {
             public class SIDE_SCREEN {
                 public static LocString NAME = (LocString)"Survyed List";
                 public static LocString TOOL_TIP = (LocString)"There is no object being surveyed, or alternatively, there is an object in motion";
+                public static LocString TOOL_TIP_ELEMENT = (LocString)"Need some steel to start.";
                 public static LocString TOOL_TIP_OBJ = (LocString)"\n\nDouble-click to view this object.";
                 public static LocString APPLY_BUTTON_TEXT = (LocString)"Move It";
                 public static LocString APPLY_BUTTON_TOOL_TIP = (LocString)"Move this object to a specific location";

@@ -38,6 +38,11 @@ msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP"
 msgid "There is no object being surveyed, or alternatively, there is an object in motion"
 msgstr ""
 
+#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_ELEMENT
+msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_ELEMENT"
+msgid "Need some steel to start."
+msgstr ""
+
 #. PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_OBJ
 msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_OBJ"
 msgid "\n\nDouble-click to view this object."

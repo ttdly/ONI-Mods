@@ -152,3 +152,8 @@ msgstr "复制人有空就会对这个物品进行测绘"
 msgctxt "PackAnything.STRINGS.NO_NEED_DUPLICANTS_OPERATE"
 msgid "No need for a duplicate operation."
 msgstr "不需要复制人操作"
+
+#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_ELEMENT
+msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_ELEMENT"
+msgid "Need some steel to start"
+msgstr "需要一些钢来启动"

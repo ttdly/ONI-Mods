@@ -18,7 +18,6 @@ namespace PackAnything {
         }
 
         public override void DoPostConfigureComplete(GameObject go) {
-            go.AddOrGet<WorldModifier>();
             Light2D light2D = go.AddOrGet<Light2D>();
             light2D.Color = new Color(0.6f, 0f, 0.6f, 1f);
             light2D.Range = 3f;
@@ -26,6 +25,16 @@ namespace PackAnything {
             light2D.overlayColour = new Color(0.8f, 0f, 0.8f, 1f);
             light2D.shape = LightShape.Circle;
             light2D.drawOverlay = true;
+            Storage storage = go.AddOrGet<Storage>();
+            storage.capacityKg = 200;
+            storage.showInUI = true;
+            ManualDeliveryKG manualDeliveryKg = go.AddOrGet<ManualDeliveryKG>();
+            manualDeliveryKg.SetStorage(storage);
+            manualDeliveryKg.RequestedItemTag = SimHashes.Steel.CreateTag();
+            manualDeliveryKg.capacity = 200f;
+            manualDeliveryKg.refillMass = 10f;
+            manualDeliveryKg.choreTypeIDHash = Db.Get().ChoreTypes.FetchCritical.IdHash;
+            go.AddOrGet<WorldModifier>();
         }
     }
 }
