@@ -66,6 +66,8 @@ namespace PackAnything {
                     return ObjectType.WarpReceiver;
                 case "GravitasCreatureManipulator":
                     return ObjectType.GravitasCreatureManipulator;
+                case "WarpPortal":
+                    return ObjectType.WarpPortal;
             }
             if (OriginObject.GetComponent<SetLocker>() != null) return ObjectType.HaveSetLocker;
             if (OriginObject.GetComponent<LoreBearer>() != null) return ObjectType.HaveLoreBearer;

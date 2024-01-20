@@ -52,6 +52,22 @@ namespace PackAnything {
                 __instance.gameObject.AddOrGet<Surveyable>();
             }
         }
+        // 小人传送
+        [HarmonyPatch(typeof(WarpPortalConfig), nameof(WarpPortalConfig.CreatePrefab))]
+        public class WarpPortalConfig_CreatePrefab_Patch {
+            public static void Postfix(GameObject __result) {
+                __result.AddOrGet<Manual>();
+                __result.AddTag("DontShowSurveyable");
+            }
+        }
+        // 神经震荡
+        [HarmonyPatch(typeof(GeneShufflerConfig), nameof(GeneShufflerConfig.CreatePrefab))]
+        public class GeneShufflerConfig_CreatePrefab_Patch {
+            public static void Postfix(GameObject __result) {
+                __result.AddOrGet<Manual>();
+                __result.AddTag("DontShowSurveyable");
+            }
+        }
 
         [HarmonyPatch(typeof(Game), nameof(Game.Load))]
         public class Game_Load_Patch {
