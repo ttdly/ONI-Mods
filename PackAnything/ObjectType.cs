@@ -10,5 +10,6 @@
         Activatable,
         GravitasCreatureManipulator,
         CryoTank,
+        RadiationEmitter
     }
 }

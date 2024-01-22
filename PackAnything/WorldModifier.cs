@@ -86,7 +86,7 @@ namespace PackAnything {
         }
 
         public void CloneOriginObject(out GameObject clonedObject) {
-            if (OriginCanMoveCompent.objectType == ObjectType.Geyser) {
+            if (OriginCanMoveCompent.objectType == ObjectType.Geyser || OriginCanMoveCompent.objectType == ObjectType.RadiationEmitter) {
                 clonedObject = Util.KInstantiate(Assets.GetPrefab(OriginObject.GetComponent<KPrefabID>().PrefabTag));
             } else {
                 clonedObject = GameUtil.KInstantiate(OriginObject, OriginObject.transform.position, Grid.SceneLayer.Building);
@@ -101,6 +101,10 @@ namespace PackAnything {
                         IDetouredField<Studyable, bool> detoured = PDetours.DetourField<Studyable, bool>("studied");
                         detoured.Set(clonedObject.AddOrGet<Studyable>(), true);
                     }
+                    break;
+                case ObjectType.RadiationEmitter:
+                    ToogleSetLockerr(clonedObject);
+                    ToogleLoreBearer(clonedObject);
                     break;
                 case ObjectType.HaveSetLocker:
                     if (!OriginObject.GetComponent<SetLocker>().SidescreenButtonInteractable()) {
@@ -132,6 +136,14 @@ namespace PackAnything {
                         }
                     }
                     break;
+            }
+        }
+
+        public void ToogleSetLockerr(GameObject needToogle) {
+            if (OriginObject.GetComponent<SetLocker>() != null) {
+                if (!OriginObject.GetComponent<SetLocker>().SidescreenButtonInteractable()) {
+                    PDetours.DetourField<SetLocker, bool>("used").Set(needToogle.AddOrGet<SetLocker>(), true);
+                }
             }
         }
 

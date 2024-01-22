@@ -1,4 +1,5 @@
 ﻿using KSerialization;
+using PeterHan.PLib.Core;
 using UnityEngine;
 
 namespace PackAnything {
@@ -8,9 +9,6 @@ namespace PackAnything {
         [Serialize]
         public ObjectType objectType;
 
-        public ObjectType ObjectType {
-            get { return objectType; }
-        }
         private static readonly EventSystem.IntraObjectHandler<ObjectCanMove> OnRefreshUserMenuDelegate = new EventSystem.IntraObjectHandler<ObjectCanMove>((component, data) => component.OnRefreshUserMenu(data));
 
         protected override void OnPrefabInit() {
@@ -59,6 +57,9 @@ namespace PackAnything {
 
         public void RefershObjectType() {
             objectType = GetObjectType();
+#if DEBUG
+            PUtil.LogDebug($"{gameObject.GetProperName()}::ObjectType::{objectType}");
+#endif
         }
 
         private ObjectType GetObjectType() {
@@ -71,6 +72,7 @@ namespace PackAnything {
                 case "WarpPortal":
                     return ObjectType.WarpPortal;
             }
+            if (gameObject.GetComponent<RadiationEmitter>() != null) return ObjectType.RadiationEmitter;
             if (gameObject.GetComponent<SetLocker>() != null) return ObjectType.HaveSetLocker;
             if (gameObject.GetComponent<LoreBearer>() != null) return ObjectType.HaveLoreBearer;
             if (gameObject.GetComponent<Activatable>() != null) return ObjectType.Activatable;
