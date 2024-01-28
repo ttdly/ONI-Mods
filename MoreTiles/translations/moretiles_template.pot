@@ -1,0 +1,20 @@
+msgid ""
+msgstr ""
+"Application: Oxygen Not Included"
+"POT Version: 2.0"
+
+#. MoreTiles.Strings.BUILDINGS.PREFABS.AUTOLIGHTTILE.DESC
+msgctxt "MoreTiles.Strings.BUILDINGS.PREFABS.AUTOLIGHTTILE.DESC"
+msgid " The tile will automatically detect whether there are duplicates working on the tile, and if so, they will light up for the duplicates."
+msgstr ""
+
+#. MoreTiles.Strings.BUILDINGS.PREFABS.AUTOLIGHTTILE.EFFECT
+msgctxt "MoreTiles.Strings.BUILDINGS.PREFABS.AUTOLIGHTTILE.EFFECT"
+msgid "Provide illumination automatically for the duplicates working."
+msgstr ""
+
+#. MoreTiles.Strings.BUILDINGS.PREFABS.AUTOLIGHTTILE.NAME
+msgctxt "MoreTiles.Strings.BUILDINGS.PREFABS.AUTOLIGHTTILE.NAME"
+msgid "Auto Light Tile"
+msgstr ""
+

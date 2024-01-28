@@ -1,15 +1,13 @@
 ﻿using TUNING;
 using UnityEngine;
-using MoreTiles;
-using TemplateClasses;
 
-namespace Saltbox {
+namespace MoreTiles {
     public class AutoLightTileConfig : IBuildingConfig {
-        public static string ID = "AutoLightTileConfig";
+        public static string ID = "AutoLightTile";
 
         public override BuildingDef CreateBuildingDef() {
-            float[] tieR2 = BUILDINGS.CONSTRUCTION_MASS_KG.TIER2;
-            string[] farmable = MATERIALS.FARMABLE;
+            float[] tieR2 = { 100f, 10f};
+            string[] farmable = { "Glass", "RefinedMetal"};
             EffectorValues none1 = NOISE_POLLUTION.NONE;
             EffectorValues none2 = BUILDINGS.DECOR.NONE;
             EffectorValues noise = none1;
@@ -24,7 +22,6 @@ namespace Saltbox {
             buildingDef.BaseTimeUntilRepair = -1f;
             buildingDef.SceneLayer = Grid.SceneLayer.TileMain;
             buildingDef.ConstructionOffsetFilter = BuildingDef.ConstructionOffsetFilter_OneDown;
-            buildingDef.PermittedRotations = PermittedRotations.FlipV;
             buildingDef.DragBuild = true;
             buildingDef.BlockTileIsTransparent = true;
             buildingDef.RequiresPowerInput = true;
@@ -50,7 +47,7 @@ namespace Saltbox {
             go.AddOrGet<AutoLightTile>();
             Light2D light2d = go.AddOrGet<Light2D>();
             light2d.Offset = new Vector2(0, 1);
-            light2d.Range = 3;
+            light2d.Range = 1;
             light2d.Lux = 4000;
             light2d.drawOverlay = true;
             light2d.shape = LightShape.Circle;
@@ -62,9 +59,8 @@ namespace Saltbox {
             rangeVisualizer.RangeMin.x = 0;
             rangeVisualizer.RangeMin.y = 1;
             rangeVisualizer.RangeMax.x = 0;
-            rangeVisualizer.RangeMax.y = 2;
+            rangeVisualizer.RangeMax.y = 1;
             rangeVisualizer.BlockingTileVisible = true;
-            FarmTileConfig
         }
     }
 }

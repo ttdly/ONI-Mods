@@ -1,0 +1,31 @@
+msgid ""
+msgstr ""
+"Application: Oxygen Not IncludedPOT Version: 2.0\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#. MoreTiles.Strings.BUILDINGS.PREFABS.AUTOLIGHTTILE.DESC
+msgctxt "MoreTiles.Strings.BUILDINGS.PREFABS.AUTOLIGHTTILE.DESC"
+msgid ""
+" The tile will automatically detect whether there are duplicates working on "
+"the tile, and if so, they will light up for the duplicates."
+msgstr "砖块会自动检测是否有复制人在砖块上工作，如果有则为复制人亮灯"
+
+#. MoreTiles.Strings.BUILDINGS.PREFABS.AUTOLIGHTTILE.EFFECT
+msgctxt "MoreTiles.Strings.BUILDINGS.PREFABS.AUTOLIGHTTILE.EFFECT"
+msgid "Provide illumination automatically for the duplicates working."
+msgstr "自动为工作的复制人提供光照"
+
+#. MoreTiles.Strings.BUILDINGS.PREFABS.AUTOLIGHTTILE.NAME
+msgctxt "MoreTiles.Strings.BUILDINGS.PREFABS.AUTOLIGHTTILE.NAME"
+msgid "Auto Light Tile"
+msgstr "自亮砖"
