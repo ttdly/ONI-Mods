@@ -157,3 +157,8 @@ msgstr "不需要复制人操作"
 msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_ELEMENT"
 msgid "Need some steel to start"
 msgstr "需要一些钢来启动"
+
+#. PackAnything.STRINGS.DONT_CONSUME_ANYTHING
+msgctxt "PackAnything.STRINGS.DONT_CONSUME_ANYTHING"
+msgid "No consumption is required"
+msgstr "不需要任何消耗"

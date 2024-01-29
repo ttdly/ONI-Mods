@@ -83,6 +83,11 @@ msgctxt "PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.NAME"
 msgid "<link=\"MOVABLEBEACON\">Displacement Beacon</link>"
 msgstr ""
 
+#. PackAnything.STRINGS.DONT_CONSUME_ANYTHING
+msgctxt "PackAnything.STRINGS.DONT_CONSUME_ANYTHING"
+msgid "No consumption is required"
+msgstr ""
+
 #. PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.NAME
 msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.NAME"
 msgid "Survey"

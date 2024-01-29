@@ -18,6 +18,7 @@ namespace PackAnything {
         private readonly Dictionary<Element, float> createElementList = new Dictionary<Element, float>();
         public bool CanStartMove {
             get {
+                if (SingletonOptions<Options>.Instance.DontConsumeAnything) return true;
                 return storage.GetMassAvailable(consumeTag) >= 10f;
             }
         }
@@ -39,6 +40,14 @@ namespace PackAnything {
             createElementList.Clear();
             createElementList.Add(ElementLoader.FindElementByHash(SimHashes.Iron), 7f);
             createElementList.Add(ElementLoader.FindElementByHash(SimHashes.RefinedCarbon), 2f);
+            if (!SingletonOptions<Options>.Instance.DontConsumeAnything) {
+                ManualDeliveryKG manualDeliveryKg = gameObject.AddOrGet<ManualDeliveryKG>();
+                manualDeliveryKg.SetStorage(storage);
+                manualDeliveryKg.RequestedItemTag = SimHashes.Steel.CreateTag();
+                manualDeliveryKg.capacity = 200f;
+                manualDeliveryKg.refillMass = 10f;
+                manualDeliveryKg.choreTypeIDHash = Db.Get().ChoreTypes.FetchCritical.IdHash;
+            }
         }
 
         private void ConsumeElement() {
@@ -67,7 +76,9 @@ namespace PackAnything {
                 OriginCanMoveCompent.DestoryOriginObject();
             }
             PackAnythingStaticVars.SetMoving(false);
-            ConsumeElement();
+            if (!SingletonOptions<Options>.Instance.DontConsumeAnything) {
+                ConsumeElement();
+            }
         }
 
         public void SetFinalPosition(GameObject final) {

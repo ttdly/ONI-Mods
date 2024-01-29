@@ -1,7 +1,4 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: StampTool
-// Assembly: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 namespace PackAnything {
     public class MoveStoryTargetTool : InterfaceTool {

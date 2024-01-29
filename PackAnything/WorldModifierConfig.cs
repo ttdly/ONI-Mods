@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using PeterHan.PLib.Options;
+using UnityEngine;
 
 namespace PackAnything {
     public class WorldModifierConfig : IBuildingConfig {
@@ -28,12 +29,6 @@ namespace PackAnything {
             Storage storage = go.AddOrGet<Storage>();
             storage.capacityKg = 200;
             storage.showInUI = true;
-            ManualDeliveryKG manualDeliveryKg = go.AddOrGet<ManualDeliveryKG>();
-            manualDeliveryKg.SetStorage(storage);
-            manualDeliveryKg.RequestedItemTag = SimHashes.Steel.CreateTag();
-            manualDeliveryKg.capacity = 200f;
-            manualDeliveryKg.refillMass = 10f;
-            manualDeliveryKg.choreTypeIDHash = Db.Get().ChoreTypes.FetchCritical.IdHash;
             go.AddOrGet<WorldModifier>();
         }
     }
