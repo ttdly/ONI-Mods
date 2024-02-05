@@ -1,0 +1,75 @@
+msgid ""
+msgstr ""
+"Application: Oxygen Not Included"
+"POT Version: 2.0"
+
+#. Market.MyStrings.BUILDINGS.PREFABS.TRUEVENDINGMACHINE.DESC
+msgctxt "Market.MyStrings.BUILDINGS.PREFABS.TRUEVENDINGMACHINE.DESC"
+msgid "Selling some goods."
+msgstr ""
+
+#. Market.MyStrings.BUILDINGS.PREFABS.TRUEVENDINGMACHINE.EFFECT
+msgctxt "Market.MyStrings.BUILDINGS.PREFABS.TRUEVENDINGMACHINE.EFFECT"
+msgid "It will automatically store surrounding raw mineral, seeds, refined metals, and will convert them into 100 coins each time 1000 kilograms of items are collected."
+msgstr ""
+
+#. Market.MyStrings.BUILDINGS.PREFABS.TRUEVENDINGMACHINE.NAME
+msgctxt "Market.MyStrings.BUILDINGS.PREFABS.TRUEVENDINGMACHINE.NAME"
+msgid "Market"
+msgstr ""
+
+#. Market.MyStrings.MISC.STATUSITEMS.COIN.NAME
+msgctxt "Market.MyStrings.MISC.STATUSITEMS.COIN.NAME"
+msgid "Coins held: {Coin}"
+msgstr ""
+
+#. Market.MyStrings.MISC.STATUSITEMS.COIN.TOOLTIP
+msgctxt "Market.MyStrings.MISC.STATUSITEMS.COIN.TOOLTIP"
+msgid "You can use so many coins to buy what you want."
+msgstr ""
+
+#. Market.MyStrings.OTHERS.OPEN_BUTTON
+msgctxt "Market.MyStrings.OTHERS.OPEN_BUTTON"
+msgid "OPEN"
+msgstr ""
+
+#. Market.MyStrings.SIDESCREEN.APPLY_BUTTON
+msgctxt "Market.MyStrings.SIDESCREEN.APPLY_BUTTON"
+msgid "Purchase"
+msgstr ""
+
+#. Market.MyStrings.SIDESCREEN.APPLY_BUTTON_NO_ITEM
+msgctxt "Market.MyStrings.SIDESCREEN.APPLY_BUTTON_NO_ITEM"
+msgid "No items are selected."
+msgstr ""
+
+#. Market.MyStrings.SIDESCREEN.APPLY_BUTTON_TIP_POST
+msgctxt "Market.MyStrings.SIDESCREEN.APPLY_BUTTON_TIP_POST"
+msgid " coins to purchase."
+msgstr ""
+
+#. Market.MyStrings.SIDESCREEN.APPLY_BUTTON_TIP_PRE
+msgctxt "Market.MyStrings.SIDESCREEN.APPLY_BUTTON_TIP_PRE"
+msgid "Consume "
+msgstr ""
+
+#. Market.MyStrings.SIDESCREEN.CLEAR_BUTTON
+msgctxt "Market.MyStrings.SIDESCREEN.CLEAR_BUTTON"
+msgid "Cancel the purchase of the selected item."
+msgstr ""
+
+#. Market.MyStrings.SIDESCREEN.ITEM_TIP
+msgctxt "Market.MyStrings.SIDESCREEN.ITEM_TIP"
+msgid "Price: {Coin} \n"
+msgstr ""
+
+#. Market.MyStrings.SIDESCREEN.ITEM_TIP_UNIT
+msgctxt "Market.MyStrings.SIDESCREEN.ITEM_TIP_UNIT"
+msgid "Unit: {Unit} kg"
+msgstr ""
+
+#. Market.MyStrings.SIDESCREEN.TITLE
+msgctxt "Market.MyStrings.SIDESCREEN.TITLE"
+msgid "Product List"
+msgstr ""
+

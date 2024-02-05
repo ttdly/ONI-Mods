@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyTitle>Market 市场</AssemblyTitle>
+    <FileVersion>1.0.0</FileVersion>
+    <RootNamespace>Market</RootNamespace>
+    <Description>出售一些无法生产的物品</Description>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <LastWorkingBuild>581698</LastWorkingBuild>
+    <Platforms>Vanilla;Mergedown</Platforms>
+  </PropertyGroup>
+</Project>

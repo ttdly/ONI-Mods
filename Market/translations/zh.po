@@ -1,0 +1,89 @@
+msgid ""
+msgstr ""
+"Application: Oxygen Not IncludedPOT Version: 2.0\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#. Market.MyStrings.BUILDINGS.PREFABS.TRUEVENDINGMACHINE.DESC
+msgctxt "Market.MyStrings.BUILDINGS.PREFABS.TRUEVENDINGMACHINE.DESC"
+msgid "Selling some goods."
+msgstr "出售一些商品"
+
+#. Market.MyStrings.BUILDINGS.PREFABS.TRUEVENDINGMACHINE.EFFECT
+msgctxt "Market.MyStrings.BUILDINGS.PREFABS.TRUEVENDINGMACHINE.EFFECT"
+msgid ""
+"It will automatically store surrounding raw mineral, seeds, refined metals, "
+"and will convert them into 100 coins each time 1000 kilograms of items are "
+"collected."
+msgstr ""
+"会自动存储周围的矿物原料，种子，精炼金属，每收集 1000 千克物品就会将它转换"
+"成 100 金币"
+
+#. Market.MyStrings.BUILDINGS.PREFABS.TRUEVENDINGMACHINE.NAME
+msgctxt "Market.MyStrings.BUILDINGS.PREFABS.TRUEVENDINGMACHINE.NAME"
+msgid "Market"
+msgstr "市场"
+
+#. Market.MyStrings.MISC.STATUSITEMS.COIN.NAME
+msgctxt "Market.MyStrings.MISC.STATUSITEMS.COIN.NAME"
+msgid "Coins held: {Coin}"
+msgstr "持有金币: {Coin}"
+
+#. Market.MyStrings.MISC.STATUSITEMS.COIN.TOOLTIP
+msgctxt "Market.MyStrings.MISC.STATUSITEMS.COIN.TOOLTIP"
+msgid "You can use so many coins to buy what you want."
+msgstr "用这些金币买你想要的"
+
+#. Market.MyStrings.OTHERS.OPEN_BUTTON
+msgctxt "Market.MyStrings.OTHERS.OPEN_BUTTON"
+msgid "OPEN"
+msgstr "打开"
+
+#. Market.MyStrings.SIDESCREEN.APPLY_BUTTON
+msgctxt "Market.MyStrings.SIDESCREEN.APPLY_BUTTON"
+msgid "Purchase"
+msgstr "购买"
+
+#. Market.MyStrings.SIDESCREEN.APPLY_BUTTON_NO_ITEM
+msgctxt "Market.MyStrings.SIDESCREEN.APPLY_BUTTON_NO_ITEM"
+msgid "No items are selected."
+msgstr "没有选中物品"
+
+#. Market.MyStrings.SIDESCREEN.APPLY_BUTTON_TIP_POST
+msgctxt "Market.MyStrings.SIDESCREEN.APPLY_BUTTON_TIP_POST"
+msgid " coins to purchase."
+msgstr " 金币来购买"
+
+#. Market.MyStrings.SIDESCREEN.APPLY_BUTTON_TIP_PRE
+msgctxt "Market.MyStrings.SIDESCREEN.APPLY_BUTTON_TIP_PRE"
+msgid "Consume "
+msgstr "花费 "
+
+#. Market.MyStrings.SIDESCREEN.CLEAR_BUTTON
+msgctxt "Market.MyStrings.SIDESCREEN.CLEAR_BUTTON"
+msgid "Cancel the purchase of the selected item."
+msgstr "取消选中物品的购买"
+
+#. Market.MyStrings.SIDESCREEN.ITEM_TIP
+msgctxt "Market.MyStrings.SIDESCREEN.ITEM_TIP"
+msgid "Price: {Coin} \n"
+msgstr "价格: {Coin}\n"
+
+#. Market.MyStrings.SIDESCREEN.ITEM_TIP_UNIT
+msgctxt "Market.MyStrings.SIDESCREEN.ITEM_TIP_UNIT"
+msgid "Unit: {Unit} kg"
+msgstr "单位: {Unit} 千克"
+
+#. Market.MyStrings.SIDESCREEN.TITLE
+msgctxt "Market.MyStrings.SIDESCREEN.TITLE"
+msgid "Product List"
+msgstr "商品列表"
