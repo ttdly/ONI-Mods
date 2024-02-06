@@ -10,7 +10,7 @@ msgstr ""
 
 #. Market.MyStrings.BUILDINGS.PREFABS.TRUEVENDINGMACHINE.EFFECT
 msgctxt "Market.MyStrings.BUILDINGS.PREFABS.TRUEVENDINGMACHINE.EFFECT"
-msgid "It will automatically store surrounding raw mineral, seeds, refined metals, and will convert them into 100 coins each time 1000 kilograms of items are collected."
+msgid "Fill it up, so you will get 100 gold coins."
 msgstr ""
 
 #. Market.MyStrings.BUILDINGS.PREFABS.TRUEVENDINGMACHINE.NAME

@@ -5,7 +5,7 @@
                 public class TRUEVENDINGMACHINE {
                     public static LocString NAME = "Market";
                     public static LocString DESC = "Selling some goods.";
-                    public static LocString EFFECT = "It will automatically store surrounding raw mineral, seeds, refined metals, and will convert them into 100 coins each time 1000 kilograms of items are collected.";
+                    public static LocString EFFECT = "Fill it up, so you will get 100 gold coins.";
                 }
             }
         }

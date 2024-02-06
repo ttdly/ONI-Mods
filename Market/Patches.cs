@@ -15,6 +15,7 @@ namespace Market {
             }
         }
 
+
         [HarmonyPatch(typeof(GeneratedBuildings), "LoadGeneratedBuildings")]
         public class GeneratedBuildings_LoadGeneratedBuildings_Patch {
             public static void Prefix() {

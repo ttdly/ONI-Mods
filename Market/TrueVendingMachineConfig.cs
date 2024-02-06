@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using TUNING;
+using UnityEngine;
 
 namespace Market {
     internal class TrueVendingMachineConfig : IBuildingConfig {
@@ -19,16 +21,20 @@ namespace Market {
 
         public override void DoPostConfigureComplete(GameObject go) {
             Storage storage = go.AddOrGet<Storage>();
-            storage.capacityKg = 1100;
+            storage.capacityKg = 1000;
             storage.showInUI = true;
+            storage.showDescriptor = true;
+            storage.storageFilters = new List<Tag>() {
+                GameTags.Seed,
+                GameTags.RefinedMetal,
+                GameTags.BuildableRaw,
+            };
+            storage.storageFullMargin = STORAGE.STORAGE_LOCKER_FILLED_MARGIN;
+            storage.fetchCategory = Storage.FetchCategory.GeneralStorage;
+            storage.showCapacityStatusItem = true;
+            storage.showCapacityAsMainStatus = true;
             go.AddOrGet<TrueVendingMachineComponent>();
-            RangeVisualizer rangeVisualizer = go.AddOrGet<RangeVisualizer>();
-            rangeVisualizer.OriginOffset = new Vector2I(0, 0);
-            rangeVisualizer.RangeMin.x = -1;
-            rangeVisualizer.RangeMin.y = 0;
-            rangeVisualizer.RangeMax.x = 1;
-            rangeVisualizer.RangeMax.y = 0;
-            rangeVisualizer.BlockingTileVisible = true;
+            go.AddOrGet<TreeFilterable>();
         }
     }
 }

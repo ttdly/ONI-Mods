@@ -67,6 +67,11 @@ namespace Market {
         public override void SetTarget(GameObject target) {
             vendingMachineComponent = target.GetComponent<TrueVendingMachineComponent>();
             GenerateStateButtons();
+            if (marketItems.Count > 0) {
+                foreach (MarketItem item in marketItems) {
+                    item.count = 0;
+                }
+            }
             ClearBuffer();
             needConsume = 0;
         }
@@ -93,8 +98,8 @@ namespace Market {
 
         public void GenerateStateButtons() {
             if (created) return;
+            if (marketItems.Count == 0) Init();
             Strings.Add("MARKETITEMCOUNT", "x0");
-            Init();
             foreach (MarketItem marketItem in marketItems) {
                 GameObject obj = Util.KInstantiateUI(stateButtonPrefab, buttonContainer.gameObject, force_active: true);
                 string tooltip = "";

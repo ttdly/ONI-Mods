@@ -30,7 +30,11 @@ namespace Market.ItemSpwan {
 
         public void SpawnObject() {
             GameObject go = null;
-            go = GameUtil.KInstantiate(Assets.GetPrefab(spawnTag), Grid.SceneLayer.Building);
+            spawnPrefab = Assets.GetPrefab(spawnTag);
+            if (spawnPrefab == null) {
+                gameObject.DeleteObject();
+            }
+            go = GameUtil.KInstantiate(spawnPrefab, Grid.SceneLayer.Building);
             if (go == null) return;
             Vector3 posCbc = gameObject.transform.position;
             if (go.GetComponent<Geyser>() != null) {

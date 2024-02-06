@@ -20,13 +20,8 @@ msgstr "出售一些商品"
 
 #. Market.MyStrings.BUILDINGS.PREFABS.TRUEVENDINGMACHINE.EFFECT
 msgctxt "Market.MyStrings.BUILDINGS.PREFABS.TRUEVENDINGMACHINE.EFFECT"
-msgid ""
-"It will automatically store surrounding raw mineral, seeds, refined metals, "
-"and will convert them into 100 coins each time 1000 kilograms of items are "
-"collected."
-msgstr ""
-"会自动存储周围的矿物原料，种子，精炼金属，每收集 1000 千克物品就会将它转换"
-"成 100 金币"
+msgid "Fill it up, so you will get 100 gold coins."
+msgstr "装满它，这样你会获得 100 金币"
 
 #. Market.MyStrings.BUILDINGS.PREFABS.TRUEVENDINGMACHINE.NAME
 msgctxt "Market.MyStrings.BUILDINGS.PREFABS.TRUEVENDINGMACHINE.NAME"
