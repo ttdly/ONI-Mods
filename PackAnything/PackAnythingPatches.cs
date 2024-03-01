@@ -83,8 +83,8 @@ namespace PackAnything {
 
         [HarmonyPatch(typeof(DetailsScreen), "OnPrefabInit")]
         public static class DetailsScreen_OnPrefabInit_Patch {
-            internal static void Postfix(List<SideScreenRef> ___sideScreens, GameObject ___sideScreenContentBody) {
-                ModifierSideScreen.AddSideScreen(___sideScreens, ___sideScreenContentBody);
+            internal static void Postfix(List<SideScreenRef> ___sideScreens, GameObject ___sideScreenConfigContentBody) {
+                ModifierSideScreen.AddSideScreen(___sideScreens, ___sideScreenConfigContentBody);
             }
         }
 

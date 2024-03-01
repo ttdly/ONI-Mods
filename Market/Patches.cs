@@ -10,8 +10,8 @@ namespace Market {
 
         [HarmonyPatch(typeof(DetailsScreen), "OnPrefabInit")]
         public static class DetailsScreen_OnPrefabInit_Patch {
-            internal static void Postfix(List<SideScreenRef> ___sideScreens, GameObject ___sideScreenContentBody) {
-                MarketSideScreen.AddSideScreen(___sideScreens, ___sideScreenContentBody);
+            internal static void Postfix(List<SideScreenRef> ___sideScreens, GameObject ___sideScreenConfigContentBody) {
+                MarketSideScreen.AddSideScreen(___sideScreens, ___sideScreenConfigContentBody);
             }
         }
 
