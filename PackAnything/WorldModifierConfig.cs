@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace PackAnything {
     public class WorldModifierConfig : IBuildingConfig {
+        public override string[] GetDlcIds() {
+            return DlcManager.AVAILABLE_EXPANSION1_ONLY;
+        }
+
         public const string ID = "MovableBeacon";
 
         public override BuildingDef CreateBuildingDef() {

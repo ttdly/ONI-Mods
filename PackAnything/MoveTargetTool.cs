@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 
-
 namespace PackAnything {
     public class MoveTargetTool : InterfaceTool{
         private ObjectCanMove waittingMoveObject;

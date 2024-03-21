@@ -24,6 +24,7 @@ namespace PackAnything {
         public static Sprite ToolIcon;
         public static Color PrimaryColor;
         public static MoveStatus MoveStatus;
+        public static bool IsDlc;
 
         public static void Init() {
             WaitingSurvey = Db.Get().MiscStatusItems.Add(
@@ -49,14 +50,15 @@ namespace PackAnything {
             ToolIcon = PUIUtils.LoadSprite("PackAnything.images.tooIcon.png");
             PrimaryColor = new Color(0.5f, 0.7f, 1.0f, 1f);
             MoveStatus = new MoveStatus();
+            IsDlc = DlcManager.GetActiveDLCIds().Count > 0 && DlcManager.GetActiveDLCIds().Contains("EXPANSION1_ID");
         }
 
         public static void SetMoving(bool isMoving) {
             MoveStatus.HaveAnObjectMoving = isMoving;
         }
 
-        public static void SetTargetSurveyable(ObjectCanMove surveyable) {
-            MoveStatus.watingMoveObject = surveyable;
+        public static void SetTargetObjectCanMove(ObjectCanMove objectCanMove) {
+            MoveStatus.watingMoveObject = objectCanMove;
         }
 
         public static void SetTargetModifier(WorldModifier worldModifier) {

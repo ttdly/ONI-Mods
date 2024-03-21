@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+
 namespace PackAnything {
     public class MoveStoryTargetTool : InterfaceTool {
         public static MoveStoryTargetTool Instance;
@@ -25,8 +26,6 @@ namespace PackAnything {
         });
         }
 
-        private void Update() => preview.Refresh(Grid.PosToCell(GetCursorPos()));
-
         public void Activate(TemplateContainer template, GameObject[] objects, bool SelectAffected = false, bool DeactivateOnStamp = false) {
             selectAffected = SelectAffected;
             deactivateOnStamp = DeactivateOnStamp;
@@ -37,8 +36,6 @@ namespace PackAnything {
             StartCoroutine(preview.Setup(template));
             needDestory = objects;
         }
-
-        private Vector3 GetCursorPos() => PlayerController.GetCursorPos(KInputManager.GetMousePos());
 
         public override void OnLeftClickDown(Vector3 cursor_pos) {
             base.OnLeftClickDown(cursor_pos);

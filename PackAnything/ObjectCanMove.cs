@@ -1,13 +1,15 @@
 ﻿using KSerialization;
 using PeterHan.PLib.Core;
+using STRINGS;
 using UnityEngine;
 
 namespace PackAnything {
-    public class ObjectCanMove: KMonoBehaviour {
+    public class ObjectCanMove : KMonoBehaviour {
         [Serialize]
         public bool isSurveyed = false;
         [Serialize]
         public ObjectType objectType;
+        private WorldModifier buffer;
 
         private static readonly EventSystem.IntraObjectHandler<ObjectCanMove> OnRefreshUserMenuDelegate = new EventSystem.IntraObjectHandler<ObjectCanMove>((component, data) => component.OnRefreshUserMenu(data));
 
@@ -33,19 +35,76 @@ namespace PackAnything {
 
         // 自定义的方法
         public void OnRefreshUserMenu(object _) {
-            if (isSurveyed) return;
             if (gameObject.HasTag("OilWell") && gameObject.GetComponent<BuildingAttachPoint>()?.points[0].attachedBuilding != null) return;
+            //RemoveThisFromList();
             Game.Instance.userMenu.AddButton(
                 gameObject,
+                new KIconButtonMenu.ButtonInfo("action_control", UI.USERMENUACTIONS.PICKUPABLEMOVE.NAME, OnClickMove,tooltipText:UI.USERMENUACTIONS.PICKUPABLEMOVE.TOOLTIP));
+            if (isSurveyed) return;
+            if (PackAnythingStaticVars.IsDlc) {
+                Game.Instance.userMenu.AddButton(
+                gameObject,
                 new KIconButtonMenu.ButtonInfo(
-                    "action_follow_cam", 
-                    PackAnythingString.UI.SURVEY.NAME, 
-                    new System.Action(AddThisToList), 
+                    "action_follow_cam",
+                    PackAnythingString.UI.SURVEY.NAME,
+                    AddThisToList,
                     tooltipText: PackAnythingString.UI.SURVEY.TOOLTIP)
                 );
+            }
         }
 
-        public void AddThisToList() {
+        private void OnClickMove() {
+            if (buffer ==  null) {
+                GameObject go = new GameObject("Proxy");
+                 buffer = go.AddComponent<WorldModifier>();
+            }
+            PackAnythingStaticVars.SetTargetObjectCanMove(this);
+            PackAnythingStaticVars.SetTargetModifier(buffer);
+            ActiveMoveTool(this);
+            isSurveyed = false;
+        }
+
+
+        // ---- Copy from SideScreen ---
+
+        public void ActiveMoveTool(ObjectCanMove objectCanMove) {
+            switch (objectCanMove.gameObject.GetComponent<KPrefabID>().PrefabTag.ToString()) {
+                case "LonelyMinionHouse":
+                    LonyMinionActive(objectCanMove);
+                    break;
+                default:
+                    NormalActive(objectCanMove);
+                    break;
+            }
+        }
+
+        void NormalActive(ObjectCanMove objectCanMove) {
+            MoveTargetTool.Instance.Acitvate(objectCanMove);
+        }
+
+        void LonyMinionActive(ObjectCanMove objectCanMove) {
+            TemplateContainer template = TemplateCache.GetTemplate("only_loney");
+            GameObject box;
+            if (template != null && template.cells != null) {
+                int cell = Grid.PosToCell(objectCanMove.gameObject);
+                ListPool<ScenePartitionerEntry, GameScenePartitioner>.PooledList pooledList = ListPool<ScenePartitionerEntry, GameScenePartitioner>.Allocate();
+                GameScenePartitioner.Instance.GatherEntries(new Extents(cell, 10), GameScenePartitioner.Instance.objectLayers[1], pooledList);
+                int num = 0;
+                while (num < pooledList.Count) {
+                    if ((pooledList[num].obj as GameObject).GetComponent<KPrefabID>().PrefabTag.GetHash() == LonelyMinionMailboxConfig.IdHash.HashValue) {
+                        box = pooledList[num].obj as GameObject;
+                        MoveStoryTargetTool.Instance.Activate(template, new GameObject[2] { objectCanMove.gameObject, box }, DeactivateOnStamp: true);
+                        return;
+                    }
+                    num++;
+                }
+
+            }
+        }
+
+        // ---- End Copy ---
+
+        public void AddThisToList() { 
             isSurveyed = true;
             PackAnythingStaticVars.SurveableCmps.Add(this);
         }

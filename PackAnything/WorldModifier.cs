@@ -8,20 +8,10 @@ using System.Collections.Generic;
 
 namespace PackAnything {
     public class WorldModifier : KMonoBehaviour {
-        [MyCmpReq]
-        Storage storage;
         [SerializeField]
         public int cell;
         [SerializeField]
         public int unoCount;
-        private Tag consumeTag = SimHashes.Steel.CreateTag();
-        private readonly Dictionary<Element, float> createElementList = new Dictionary<Element, float>();
-        public bool CanStartMove {
-            get {
-                if (SingletonOptions<Options>.Instance.DontConsumeAnything) return true;
-                return storage.GetMassAvailable(consumeTag) >= 10f;
-            }
-        }
 
         ObjectCanMove OriginCanMoveCompent {
             get {
@@ -37,30 +27,7 @@ namespace PackAnything {
 
         protected override void OnSpawn() {
             base.OnSpawn();
-            createElementList.Clear();
-            createElementList.Add(ElementLoader.FindElementByHash(SimHashes.Iron), 7f);
-            createElementList.Add(ElementLoader.FindElementByHash(SimHashes.RefinedCarbon), 2f);
-            if (!SingletonOptions<Options>.Instance.DontConsumeAnything) {
-                ManualDeliveryKG manualDeliveryKg = gameObject.AddOrGet<ManualDeliveryKG>();
-                manualDeliveryKg.SetStorage(storage);
-                manualDeliveryKg.RequestedItemTag = SimHashes.Steel.CreateTag();
-                manualDeliveryKg.capacity = 200f;
-                manualDeliveryKg.refillMass = 10f;
-                manualDeliveryKg.choreTypeIDHash = Db.Get().ChoreTypes.FetchCritical.IdHash;
-            }
-        }
-
-        private void ConsumeElement() {
-            storage.ConsumeIgnoringDisease(consumeTag, 10f);
-            foreach(KeyValuePair<Element, float> pair in createElementList) {
-                Fall(pair.Key.substance.SpawnResource(gameObject.transform.position, pair.Value, 0f, byte.MaxValue, 0));
-            }
-        }
-
-        private void Fall(GameObject go) {
-            if (GameComps.Fallers.Has(go)) GameComps.Fallers.Remove(go);
-            Vector2 initial_velocity = new Vector2(UnityEngine.Random.Range(-3f, 3f), UnityEngine.Random.Range(4f, 8f));
-            GameComps.Fallers.Add(go, initial_velocity);
+            
         }
 
         public void StartMoving() {
@@ -76,9 +43,6 @@ namespace PackAnything {
                 OriginCanMoveCompent.DestoryOriginObject();
             }
             PackAnythingStaticVars.SetMoving(false);
-            if (!SingletonOptions<Options>.Instance.DontConsumeAnything) {
-                ConsumeElement();
-            }
         }
 
         public void SetFinalPosition(GameObject final) {

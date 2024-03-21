@@ -31,7 +31,7 @@ namespace PackAnything {
             base.OnSpawn();
             applyButton.onClick += delegate {
                 if (waittingMoveObject != null) {
-                    PackAnythingStaticVars.SetTargetSurveyable(waittingMoveObject);
+                    PackAnythingStaticVars.SetTargetObjectCanMove(waittingMoveObject);
                     PackAnythingStaticVars.SetTargetModifier(targetBuilding);
                     ActiveMoveTool(waittingMoveObject);
                 } else {
@@ -74,16 +74,6 @@ namespace PackAnything {
                 Sprite sprite = Assets.GetSprite((HashedString)"action_building_disabled");
                 MultiToggle component = obj.GetComponent<MultiToggle>();
                 component.GetComponent<ToolTip>().SetSimpleTooltip(PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP);
-                component.GetComponent<HierarchyReferences>().GetReference<Image>("Icon").sprite = sprite;
-                buttons.Add(count++, component);
-                return;
-            }
-
-            if (!targetBuilding.CanStartMove) {
-                GameObject obj = Util.KInstantiateUI(stateButtonPrefab, buttonContainer.gameObject, force_active: true);
-                Sprite sprite = Assets.GetSprite((HashedString)"action_building_disabled");
-                MultiToggle component = obj.GetComponent<MultiToggle>();
-                component.GetComponent<ToolTip>().SetSimpleTooltip(PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_ELEMENT);
                 component.GetComponent<HierarchyReferences>().GetReference<Image>("Icon").sprite = sprite;
                 buttons.Add(count++, component);
                 return;
@@ -188,42 +178,41 @@ namespace PackAnything {
                 PUtil.LogWarning("Unable to find side screen!");
         }
 
-        private void ActiveMoveTool(ObjectCanMove surveyable) {
-            
-            switch (surveyable.gameObject.GetComponent<KPrefabID>().PrefabTag.ToString()) {
+        public void ActiveMoveTool(ObjectCanMove objectCanMove) {
+            switch (objectCanMove.gameObject.GetComponent<KPrefabID>().PrefabTag.ToString()) {
                 case "LonelyMinionHouse":
-                    LonyMinionActive(surveyable);
+                    LonyMinionActive(objectCanMove);
                     break;
                 default:
-                    NormalActive(surveyable);
+                    NormalActive(objectCanMove);
                     break;
             }
             waittingMoveObject = null;
         }
 
-        void NormalActive(ObjectCanMove surveyable) {
-            MoveTargetTool.Instance.Acitvate(surveyable);
+        void NormalActive(ObjectCanMove objectCanMove) {
+            MoveTargetTool.Instance.Acitvate(objectCanMove);
         }
 
-        void ManipulatorActive(ObjectCanMove surveyable) {
+        void ManipulatorActive(ObjectCanMove objectCanMove) {
             TemplateContainer template = TemplateCache.GetTemplate("mainpulator");
             if (template != null && template.cells != null) {
-                MoveStoryTargetTool.Instance.Activate(template, new GameObject[1] { surveyable.gameObject });
+                MoveStoryTargetTool.Instance.Activate(template, new GameObject[1] { objectCanMove.gameObject });
             }
         }
 
-        void LonyMinionActive(ObjectCanMove surveyable) {
+        void LonyMinionActive(ObjectCanMove objectCanMove) {
             TemplateContainer template = TemplateCache.GetTemplate("only_loney");
             GameObject box;
             if (template != null && template.cells != null) {
-                int cell = Grid.PosToCell(surveyable.gameObject);
+                int cell = Grid.PosToCell(objectCanMove.gameObject);
                 ListPool<ScenePartitionerEntry, GameScenePartitioner>.PooledList pooledList = ListPool<ScenePartitionerEntry, GameScenePartitioner>.Allocate();
                 GameScenePartitioner.Instance.GatherEntries(new Extents(cell, 10), GameScenePartitioner.Instance.objectLayers[1], pooledList);
                 int num = 0;
                 while ( num < pooledList.Count) {
                     if ((pooledList[num].obj as GameObject).GetComponent<KPrefabID>().PrefabTag.GetHash() == LonelyMinionMailboxConfig.IdHash.HashValue) {
                         box = pooledList[num].obj as GameObject;
-                        MoveStoryTargetTool.Instance.Activate(template, new GameObject[2] { surveyable.gameObject, box }, DeactivateOnStamp: true);
+                        MoveStoryTargetTool.Instance.Activate(template, new GameObject[2] { objectCanMove.gameObject, box }, DeactivateOnStamp: true);
                         return;
                     }
                     num++;
@@ -231,8 +220,6 @@ namespace PackAnything {
                 
             }
         }
-
-       
     }
 
 }
