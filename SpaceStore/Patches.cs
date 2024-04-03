@@ -31,6 +31,13 @@ namespace SpaceStore {
             }
         }
 
+        [HarmonyPatch(typeof(HeadquartersConfig), nameof(HeadquartersConfig.DoPostConfigureComplete))]
+        public static class HeadquartersConfig_Patch {
+            public static void Postfix(GameObject go) {
+                go.AddOrGet<ShowDialog>();
+            }
+        }
+
         [HarmonyPatch(typeof(RockCrusherConfig), nameof(RockCrusherConfig.DoPostConfigureComplete))]
         public static class RockCrusherConfig_Patch {
             public static void Postfix(GameObject go) {

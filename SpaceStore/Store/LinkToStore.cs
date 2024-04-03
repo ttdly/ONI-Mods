@@ -61,5 +61,6 @@ namespace SpaceStore.Store {
             Subscribe((int)GameHashes.OnStorageChange, OnStorageChangeDelegate);
             UpdateChore();
         }
+
     }
 }
