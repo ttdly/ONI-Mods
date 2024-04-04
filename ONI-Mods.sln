@@ -40,6 +40,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoreTiles", "MoreTiles\More
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Market", "Market\Market.csproj", "{0065117A-70AF-4DB1-8A81-0173FE84B132}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceStore", "SpaceStore\SpaceStore.csproj", "{AB33F564-8C23-451F-A439-64FE5AEA65C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mergedown = Debug|Mergedown
@@ -144,6 +146,14 @@ Global
 		{0065117A-70AF-4DB1-8A81-0173FE84B132}.Release|Mergedown.Build.0 = Release|Mergedown
 		{0065117A-70AF-4DB1-8A81-0173FE84B132}.Release|Vanilla.ActiveCfg = Release|Vanilla
 		{0065117A-70AF-4DB1-8A81-0173FE84B132}.Release|Vanilla.Build.0 = Release|Vanilla
+		{AB33F564-8C23-451F-A439-64FE5AEA65C7}.Debug|Mergedown.ActiveCfg = Debug|Mergedown
+		{AB33F564-8C23-451F-A439-64FE5AEA65C7}.Debug|Mergedown.Build.0 = Debug|Mergedown
+		{AB33F564-8C23-451F-A439-64FE5AEA65C7}.Debug|Vanilla.ActiveCfg = Debug|Vanilla
+		{AB33F564-8C23-451F-A439-64FE5AEA65C7}.Debug|Vanilla.Build.0 = Debug|Vanilla
+		{AB33F564-8C23-451F-A439-64FE5AEA65C7}.Release|Mergedown.ActiveCfg = Release|Mergedown
+		{AB33F564-8C23-451F-A439-64FE5AEA65C7}.Release|Mergedown.Build.0 = Release|Mergedown
+		{AB33F564-8C23-451F-A439-64FE5AEA65C7}.Release|Vanilla.ActiveCfg = Release|Vanilla
+		{AB33F564-8C23-451F-A439-64FE5AEA65C7}.Release|Vanilla.Build.0 = Release|Vanilla
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -161,6 +171,7 @@ Global
 		{5AEE33DD-099B-4391-AE47-FD7B19DFF020} = {84877F02-1D2E-4A8E-BC3E-44FA8F6A417F}
 		{19D45ECC-9E8A-44EC-ABED-B9CC2468973A} = {84877F02-1D2E-4A8E-BC3E-44FA8F6A417F}
 		{0065117A-70AF-4DB1-8A81-0173FE84B132} = {84877F02-1D2E-4A8E-BC3E-44FA8F6A417F}
+		{AB33F564-8C23-451F-A439-64FE5AEA65C7} = {84877F02-1D2E-4A8E-BC3E-44FA8F6A417F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {05AD4341-9C99-4998-8BEC-CFBB218B464B}
