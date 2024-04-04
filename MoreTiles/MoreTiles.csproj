@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <AssemblyTitle>MoreTiles</AssemblyTitle>
-    <FileVersion>1.0.0</FileVersion>
+    <AssemblyTitle>Auto Light Tile(自亮砖)</AssemblyTitle>
+    <FileVersion>1.0.1</FileVersion>
     <RootNamespace>MoreTiles</RootNamespace>
     <Description>MoreTiles</Description>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <AssemblyVersion>1.0.1</AssemblyVersion>
     <LastWorkingBuild>581979</LastWorkingBuild>
     <Platforms>Vanilla;Mergedown</Platforms>
   </PropertyGroup>

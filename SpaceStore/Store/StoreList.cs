@@ -24,44 +24,60 @@ namespace SpaceStore.Store
             public string name = "test";
             public int price;
             public Tag tag;
-            public Tag innerTag;
-            public SimHashes simHashes;
             public ObjectType type;
-            public int unit = 0;
-            public int count = 0;
+            public int quantity = 0;
+            public CarePackageInfo info;
 
             // 初始化元素商品
-            public MarketItem
-                (Tag tag, SimHashes simHashes = 0, int unit = 0, int price = 10, ObjectType type = ObjectType.Element)
-            {
-                this.tag = tag;
+            public MarketItem(SimHashes simHashes = 0, int count = 0, int price = 9999, ObjectType type = ObjectType.Element){
                 this.price = price;
                 this.type = type;
-                this.simHashes = simHashes;
-                this.unit = unit;
+                quantity = count;
+                tag = simHashes.CreateTag();
                 sprite = Def.GetUISprite(tag).first;
                 name = UI.StripLinkFormatting(Strings.Get("STRINGS.ELEMENTS." + tag.ToString().ToUpper() + ".NAME"));
+                info = new CarePackageInfo(tag.ToString(), count, null);
             }
 
 
-            public MarketItem(Tag tag, int price = 10, ObjectType type = ObjectType.Object)
-            {
+            public MarketItem(Tag tag, int price = 9999, int count = 1,ObjectType type = ObjectType.Object){
                 this.tag = tag;
                 sprite = Def.GetUISprite(tag).first;
                 this.price = price;
                 this.type = type;
+                quantity = count;
+                name = Assets.GetPrefab(tag).GetProperName();
+                info = new CarePackageInfo(tag.ToString(), count, null);
+            }
+
+            public string GetDesc() => MyString.UI.STORE.STOREDIALOG.NAME_TEMPLATE.Replace("{name}", name)
+                    .Replace("{quantity}", GetSpawnableQuantityOnly()).Replace("{price}", price.ToString());
+
+            private string GetSpawnableQuantityOnly() {
+                if (ElementLoader.GetElement(info.id.ToTag()) != null)
+                    return string.Format((string)UI.IMMIGRANTSCREEN.CARE_PACKAGE_ELEMENT_COUNT_ONLY, GameUtil.GetFormattedMass(info.quantity));
+                return EdiblesManager.GetFoodInfo(info.id) != null ? string.Format((string)UI.IMMIGRANTSCREEN.CARE_PACKAGE_ELEMENT_COUNT_ONLY, GameUtil.GetFormattedCaloriesForItem((Tag)info.id, info.quantity)) : string.Format((string)UI.IMMIGRANTSCREEN.CARE_PACKAGE_ELEMENT_COUNT_ONLY, info.quantity.ToString());
             }
 
             public override string ToString()
             {
-                return $"\n名称：\t{name}\n标签：\t{tag}\n价格：\t{price}\n数量：\t{count}\n单位：\t{unit}\n类型：\t{type}\n内部：\t{innerTag}";
+                return $"\n名称：\t{name}\n标签：\t{tag}\n类型：\t{type}\n描述: \t {GetDesc()}";
             }
         }
 
         public static List<Tuple<SimHashes, int, int>> elements = new List<Tuple<SimHashes, int, int>>() {
-            new Tuple<SimHashes, int, int>(SimHashes.Steel, 10, 500),
-            new Tuple<SimHashes, int, int>(SimHashes.SuperInsulator, 2, 300),
-            new Tuple<SimHashes, int, int>(SimHashes.SuperCoolant, 1, 200),
+            new Tuple<SimHashes, int, int>(SimHashes.Steel, 100, 500),
+            new Tuple<SimHashes, int, int>(SimHashes.SuperInsulator, 20, 300),
+            new Tuple<SimHashes, int, int>(SimHashes.SuperCoolant, 100, 200),
+            new Tuple<SimHashes, int, int>(SimHashes.Steel, 100, 500),
+            new Tuple<SimHashes, int, int>(SimHashes.SuperInsulator, 20, 300),
+            new Tuple<SimHashes, int, int>(SimHashes.SuperCoolant, 100, 200),
+            new Tuple<SimHashes, int, int>(SimHashes.Steel, 100, 500),
+            new Tuple<SimHashes, int, int>(SimHashes.SuperInsulator, 20, 300),
+            new Tuple<SimHashes, int, int>(SimHashes.SuperCoolant, 100, 200),
+            new Tuple<SimHashes, int, int>(SimHashes.Steel, 100, 500),
+            new Tuple<SimHashes, int, int>(SimHashes.SuperInsulator, 20, 300),
+            new Tuple<SimHashes, int, int>(SimHashes.SuperCoolant, 100, 200),
         };
 
         public static List<Tuple<string, int>> objects = new List<Tuple<string, int>>() {
@@ -78,7 +94,7 @@ namespace SpaceStore.Store
         {
             foreach (Tuple<SimHashes, int, int> element in elements)
             {
-                marketItems.Add(new MarketItem(element.first.CreateTag(), element.first, element.second, element.third));
+                marketItems.Add(new MarketItem(element.first, element.second, element.third));
             }
 
 
@@ -87,10 +103,6 @@ namespace SpaceStore.Store
                 marketItems.Add(new MarketItem(obj.first, obj.second));
             }
 
-            //foreach (Tuple<string, int> pack in packs)
-            //{
-            //    marketItems.Add(new MarketItem(Assets.GetPrefab(pack.first).GetProperName(), pack.first, pack.second));
-            //}
         }
     }
 }

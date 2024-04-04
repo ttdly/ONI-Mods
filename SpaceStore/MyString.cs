@@ -15,6 +15,7 @@
             }
         }
 
+
         public class UI {
             public class GEO_ACTIVATOR {
                 // 选择一个间歇泉
@@ -28,6 +29,24 @@
                 public static LocString NAME = "Add Robo-Panel";
             }
 
+            public class MENU_TOOL {
+                public static LocString TITLE = "Space Store";
+                public static LocString TOOL_TIP = "Open Sapce Store";
+            }
+
+            public class SELL {
+                public static LocString TITLE = "SELL";
+                public static LocString TOOL_TIP = "Selling this will earn you {coin} Space Coin";
+            }
+
+            public class STORE {
+                public class STOREDIALOG {
+                    public static LocString NAME_TEMPLATE = "{name}{quantity} [{price} coins]";
+                    public static LocString DISABLEED = "Cannot purchase items without a Printing Pod";
+                    public static LocString CURR_COIN = "Current Space Coins: ";
+                    public static LocString BUY = "Purchase";
+                }
+            }
         }
     }
 }

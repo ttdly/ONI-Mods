@@ -68,23 +68,33 @@ namespace SpaceStore.MyGeyser {
                         Tag tag = go.PrefabID();
                         string upper = tag.ToString().ToUpper();
                         upper = upper.Replace("GEYSERGENERIC_", "");
-                        GameObject obj = Util.KInstantiateUI(stateButtonPrefab, buttonContainer.gameObject, force_active: true);
-                        Sprite sprite = Def.GetUISprite(go.gameObject).first;
-                        MultiToggle component = obj.GetComponent<MultiToggle>();
-
-                        component.GetComponent<ToolTip>().SetSimpleTooltip(UI.StripLinkFormatting(go.GetProperName()));
-                        component.GetComponent<HierarchyReferences>().GetReference<Image>("Icon").sprite = sprite;
-                        component.onClick = delegate {
-                            if (needSpawnGeyser != go) {
-                                needSpawnGeyserTag = tag;
-                                RefreshButtons();
-                                component.ChangeState(1);
-                            }
-                        };
-                        buttons.Add(count++, component);
+                        
+                        AddOneButton(go, count++);
                     }
                 }
             }
+
+            GameObject oilWell = Assets.GetPrefab(OilWellConfig.ID);
+            AddOneButton(oilWell, count++);
+
+        }
+
+        private void AddOneButton(GameObject go, int count) {
+            Sprite sprite = Def.GetUISprite(go.gameObject).first;
+            GameObject obj = Util.KInstantiateUI(stateButtonPrefab, buttonContainer.gameObject, force_active: true);
+
+                MultiToggle component = obj.GetComponent<MultiToggle>();
+
+                component.GetComponent<ToolTip>().SetSimpleTooltip(UI.StripLinkFormatting(go.GetProperName()));
+                component.GetComponent<HierarchyReferences>().GetReference<Image>("Icon").sprite = sprite;
+                component.onClick = delegate {
+                    if (needSpawnGeyser != go) {
+                        needSpawnGeyserTag = tag;
+                        RefreshButtons();
+                        component.ChangeState(1);
+                    }
+                };
+                buttons.Add(count, component);
         }
 
         private void RefreshButtons() {
