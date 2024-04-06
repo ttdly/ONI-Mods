@@ -1,5 +1,4 @@
-﻿using Klei.CustomSettings;
-using PeterHan.PLib.Core;
+﻿using PeterHan.PLib.Core;
 using PeterHan.PLib.Detours;
 using STRINGS;
 using System.Collections.Generic;
@@ -25,21 +24,14 @@ namespace SpaceStore.MyGeyser {
         private RectTransform buttonContainer;
         private readonly Dictionary<int, MultiToggle> buttons = new Dictionary<int, MultiToggle>();
         private GeoActivator targetGeyserPack;
-        private GameObject needSpawnGeyser;
         private Tag needSpawnGeyserTag;
 
         protected override void OnSpawn() {
             base.OnSpawn();
             applyButton.onClick += delegate {
                 if (needSpawnGeyserTag != null) {
-                    GameObject go = GameUtil.KInstantiate(Assets.GetPrefab(needSpawnGeyserTag), Grid.SceneLayer.Building);
-                    go.SetActive(false);
-                    Vector3 posCbc = targetGeyserPack.gameObject.transform.position;
-                    float num = -0.15f;
-                    posCbc.z += num;
-                    go.transform.SetPosition(posCbc);
-                    go.SetActive(true);
-                    targetGeyserPack.gameObject.DeleteObject();
+                    targetGeyserPack.Active(needSpawnGeyserTag);
+                    
                 } else {
                     PlaySound(GlobalAssets.GetSound("Negative"));
                 }
@@ -87,7 +79,7 @@ namespace SpaceStore.MyGeyser {
                 component.GetComponent<ToolTip>().SetSimpleTooltip(UI.StripLinkFormatting(go.GetProperName()));
                 component.GetComponent<HierarchyReferences>().GetReference<Image>("Icon").sprite = sprite;
                 component.onClick = delegate {
-                    if (needSpawnGeyser != go) {
+                    if (needSpawnGeyserTag != go.PrefabID()) {
                         needSpawnGeyserTag = go.PrefabID();
                         RefreshButtons();
                         component.ChangeState(1);

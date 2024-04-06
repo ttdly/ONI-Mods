@@ -80,6 +80,11 @@ namespace SpaceStore.Store
             new Tuple<string, int>(OilWellConfig.ID, 500),
         };
 
+        public static List<Tuple<string, int>> GetLocalList() {
+            KMod.Manager.GetDirectory();
+            return new List<Tuple<string, int>>() { };
+        } 
+
         public static void Init()
         {
             foreach (Tuple<SimHashes, int, int> element in elements)

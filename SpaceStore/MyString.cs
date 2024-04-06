@@ -1,5 +1,12 @@
 ﻿namespace SpaceStore {
     public class MyString {
+
+        public class OPTIONS {
+            public static LocString ITEM_WIDTH = "每个条目的宽度";
+            public static LocString COL = "每列的条目数";
+            public static LocString DIALOG_HEIGHT = "窗口总高度";
+        }
+
         public class ITEM {
             public class GEO_ACTIVATOR {
                 // 地质种子

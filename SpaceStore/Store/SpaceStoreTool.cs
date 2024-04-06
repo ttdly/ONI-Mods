@@ -31,6 +31,8 @@
         protected override void OnDeactivateTool(InterfaceTool new_tool) {
             base.OnDeactivateTool(new_tool);
             PauseAndDisable(false);
+            StoreDialog.DialogObj.TryGetComponent(out KScreen screen);
+            screen?.Deactivate();
             StoreDialog.DialogObj.SetActive(false);
             //StoreScreen.DialogObject.SetActive(false);
         }

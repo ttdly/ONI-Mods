@@ -1,4 +1,5 @@
-﻿using PeterHan.PLib.UI;
+﻿using PeterHan.PLib.Options;
+using PeterHan.PLib.UI;
 using UnityEngine;
 using static SpaceStore.MyString;
 
@@ -8,6 +9,8 @@ namespace SpaceStore.Store {
         public static PLabel CoinLabel;
         public const int SPACE = 6;
         public const int COL = 5;
+        public const int DIALOG_HEIGHT = 400;
+        public const int ITEM_WIDTH = 130;
         public const float ICON_SIZE = 52;
         public const float COIN_ICON_SIZE = 24;
 
@@ -25,11 +28,10 @@ namespace SpaceStore.Store {
                 Sprite = StaticVars.CoinIcon,
                 SpriteSize = new Vector2(COIN_ICON_SIZE, COIN_ICON_SIZE),
                 SpritePosition = TextAnchor.MiddleLeft,
+                FlexSize = Vector2.right,
+                TextAlignment = TextAnchor.MiddleLeft,
             };
             RefreshCoin();
-            
-            mainPanel.AddChild(CoinLabel);
-
             CreateItems(mainPanel);
 
             PScrollPane scrollPane = new PScrollPane("ScrollPane") {
@@ -43,9 +45,10 @@ namespace SpaceStore.Store {
             PDialog main = new PDialog("main") {
                 Title = "SpaceStore",
                 DialogClosed = _ => ToolMenu.Instance.ClearSelection(),
-                MaxSize = new Vector2(0, 400),
+                MaxSize = new Vector2(0, SingletonOptions<Options>.Instance.DialogHeight),
                 DialogBackColor = Color.white,
             };
+            main.Body.AddChild(CoinLabel);
             main.Body.AddChild(scrollPane);
             DialogObj = main.Build();
             DialogObj.SetActive(false);
@@ -57,7 +60,7 @@ namespace SpaceStore.Store {
             int col = 0;
             if (Components.Telepads.Count > 0) {
                 for (int i = 0; i < StoreList.marketItems.Count; i++) {
-                    if (col % COL == 0) {
+                    if (col % SingletonOptions<Options>.Instance.Col == 0) {
                         rowPane = new PPanel("rowPanel" + i.ToString()) {
                             Direction = PanelDirection.Horizontal,
                             Spacing = SPACE,
@@ -71,8 +74,9 @@ namespace SpaceStore.Store {
                 }
             } else {
                 CoinLabel.Text = UI.STORE.STOREDIALOG.DISABLEED;
+                CoinLabel.Sprite = null;
+                CoinLabel.TextAlignment = TextAnchor.MiddleCenter;
             }
-
         }
 
         public PRelativePanel CreateItem(StoreList.MarketItem marketItem) {
@@ -98,7 +102,7 @@ namespace SpaceStore.Store {
 
 
             PSpacer spacer = new PSpacer() {
-                PreferredSize = new Vector2(130, 0),
+                PreferredSize = new Vector2(SingletonOptions<Options>.Instance.ItemWidth, 0),
             };
 
             PButton btn = new PButton($"{marketItem.name}Button") {
@@ -126,7 +130,6 @@ namespace SpaceStore.Store {
             };
 
             itemContainer.AddChild(label).AddChild(spacer).AddChild(btn).SetBottomEdge(btn, 0);
-
             return itemContainer;
         }
 
