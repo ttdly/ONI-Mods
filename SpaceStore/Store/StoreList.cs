@@ -50,8 +50,7 @@ namespace SpaceStore.Store
                 info = new CarePackageInfo(tag.ToString(), count, null);
             }
 
-            public string GetDesc() => MyString.UI.STORE.STOREDIALOG.NAME_TEMPLATE.Replace("{name}", name)
-                    .Replace("{quantity}", GetSpawnableQuantityOnly()).Replace("{price}", price.ToString());
+            public string GetDesc() => $"{name}\n{GetSpawnableQuantityOnly()}\n\n.";
 
             private string GetSpawnableQuantityOnly() {
                 if (ElementLoader.GetElement(info.id.ToTag()) != null)
@@ -67,16 +66,7 @@ namespace SpaceStore.Store
 
         public static List<Tuple<SimHashes, int, int>> elements = new List<Tuple<SimHashes, int, int>>() {
             new Tuple<SimHashes, int, int>(SimHashes.Steel, 100, 500),
-            new Tuple<SimHashes, int, int>(SimHashes.SuperInsulator, 20, 300),
-            new Tuple<SimHashes, int, int>(SimHashes.SuperCoolant, 100, 200),
-            new Tuple<SimHashes, int, int>(SimHashes.Steel, 100, 500),
-            new Tuple<SimHashes, int, int>(SimHashes.SuperInsulator, 20, 300),
-            new Tuple<SimHashes, int, int>(SimHashes.SuperCoolant, 100, 200),
-            new Tuple<SimHashes, int, int>(SimHashes.Steel, 100, 500),
-            new Tuple<SimHashes, int, int>(SimHashes.SuperInsulator, 20, 300),
-            new Tuple<SimHashes, int, int>(SimHashes.SuperCoolant, 100, 200),
-            new Tuple<SimHashes, int, int>(SimHashes.Steel, 100, 500),
-            new Tuple<SimHashes, int, int>(SimHashes.SuperInsulator, 20, 300),
+            new Tuple<SimHashes, int, int>(SimHashes.SuperInsulator, 100, 300),
             new Tuple<SimHashes, int, int>(SimHashes.SuperCoolant, 100, 200),
         };
 

@@ -2,10 +2,10 @@
     public class MyString {
         public class ITEM {
             public class GEO_ACTIVATOR {
-                // 地质激活器
-                public static LocString NAME = "Geo-Activator";
-                // 挖掘星球核心的力量 - 利用创造间歇泉的能力，主宰资源之流。这款尖端设备允许你操控地质力量，在你最需要的地方召唤出自然能源的源泉。
-                public static LocString DESC = "Tap into the planet's core - harness the power to create a geyser and dominate the resource stream. This cutting-edge device lets you manipulate geological forces, conjuring up a natural font of energy exactly where you need it.";
+                // 地质种子
+                public static LocString NAME = "Geo-Seed";
+                // “爆炸带来地质种子，流星使之发芽。”\n 在种子的位置生成间歇泉，注意！这会召唤流星雨。"
+                public static LocString DESC = "\"Explosions bring the Geo-Seed, and meteors make them germinate.\" \n Generate a geyser at the location of the seeds, caution! This will summon a meteor shower.";
             }
             public class ROBO_PANEL {
                 // 机器人面板
@@ -41,7 +41,7 @@
 
             public class STORE {
                 public class STOREDIALOG {
-                    public static LocString NAME_TEMPLATE = "{name}{quantity} [{price} coins]";
+                    public static LocString NAME_TEMPLATE = "{name}\n{quantity}";
                     public static LocString DISABLEED = "Cannot purchase items without a Printing Pod";
                     public static LocString CURR_COIN = "Current Space Coins: ";
                     public static LocString BUY = "Purchase";

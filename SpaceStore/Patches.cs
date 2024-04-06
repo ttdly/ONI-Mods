@@ -57,7 +57,9 @@ namespace SpaceStore
         [HarmonyPatch(typeof(ToolMenu), "CreateBasicTools")]
         public static class ToolMenu_CreateBasicTools_Patch {
             internal static void Prefix(ToolMenu __instance) {
-                if (StoreScreen.ScreenInstance == null) StoreScreen.CreateScreenInstance();
+                if (StoreScreen.ScreenInstance == null) { 
+                    StoreScreen.CreateScreenInstance();
+                }
                 __instance.basicTools.Add(ToolMenu.CreateToolCollection(MyString.UI.MENU_TOOL.TITLE, "dreamIcon_earth", StaticVars.Action.GetKAction(),
                     StaticVars.ToolName, MyString.UI.MENU_TOOL.TOOL_TIP, false));
             }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SpaceStore.MyGeyser {
     internal class GeoActivatorConfig :IEntityConfig{
-        public const string ID = "Store_GeyserPack";
+        public const string ID = "Store_GeoSeed";
 
         public static readonly Tag TAG = TagManager.Create(ID);
 
@@ -13,7 +13,7 @@ namespace SpaceStore.MyGeyser {
         }
 
         public GameObject CreatePrefab() {
-            GameObject gameObject = EntityTemplates.CreatePlacedEntity(ID, MyString.ITEM.GEO_ACTIVATOR.NAME, MyString.ITEM.GEO_ACTIVATOR.DESC, 1f, Assets.GetAnim("geyser_pack_kanim"), "object", Grid.SceneLayer.Move, 2, 2, TUNING.DECOR.PENALTY.TIER2 ,element: SimHashes.Unobtanium);
+            GameObject gameObject = EntityTemplates.CreatePlacedEntity(ID, MyString.ITEM.GEO_ACTIVATOR.NAME, MyString.ITEM.GEO_ACTIVATOR.DESC, 1f, decor: TUNING.DECOR.BONUS.TIER1, anim: Assets.GetAnim("geo_seed_kanim"), initialAnim: "object", sceneLayer: Grid.SceneLayer.BuildingFront, width: 1, height: 1, element: SimHashes.Unobtanium, additionalTags: null, defaultTemperature: 255f);
             gameObject.AddOrGet<GeoActivator>();
             gameObject.AddOrGet<Pickupable>();
             gameObject.AddOrGet<Movable>();

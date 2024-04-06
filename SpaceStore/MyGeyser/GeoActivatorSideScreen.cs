@@ -1,4 +1,5 @@
-﻿using PeterHan.PLib.Core;
+﻿using Klei.CustomSettings;
+using PeterHan.PLib.Core;
 using PeterHan.PLib.Detours;
 using STRINGS;
 using System.Collections.Generic;
@@ -68,7 +69,6 @@ namespace SpaceStore.MyGeyser {
                         Tag tag = go.PrefabID();
                         string upper = tag.ToString().ToUpper();
                         upper = upper.Replace("GEYSERGENERIC_", "");
-                        
                         AddOneButton(go, count++);
                     }
                 }
@@ -76,7 +76,6 @@ namespace SpaceStore.MyGeyser {
 
             GameObject oilWell = Assets.GetPrefab(OilWellConfig.ID);
             AddOneButton(oilWell, count++);
-
         }
 
         private void AddOneButton(GameObject go, int count) {
@@ -89,7 +88,7 @@ namespace SpaceStore.MyGeyser {
                 component.GetComponent<HierarchyReferences>().GetReference<Image>("Icon").sprite = sprite;
                 component.onClick = delegate {
                     if (needSpawnGeyser != go) {
-                        needSpawnGeyserTag = tag;
+                        needSpawnGeyserTag = go.PrefabID();
                         RefreshButtons();
                         component.ChangeState(1);
                     }
