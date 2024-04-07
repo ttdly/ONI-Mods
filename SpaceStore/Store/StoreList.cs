@@ -1,7 +1,13 @@
-﻿using SpaceStore.MyGeyser;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using PeterHan.PLib.Core;
+using SpaceStore.MyGeyser;
 using SpaceStore.StoreRoboPanel;
 using STRINGS;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using UnityEngine;
 
 namespace SpaceStore.Store
@@ -24,27 +30,13 @@ namespace SpaceStore.Store
             public string name = "test";
             public int price;
             public Tag tag;
-            public ObjectType type;
             public int quantity = 0;
             public CarePackageInfo info;
 
-            // 初始化元素商品
-            public MarketItem(SimHashes simHashes = 0, int count = 0, int price = 9999, ObjectType type = ObjectType.Element){
-                this.price = price;
-                this.type = type;
-                quantity = count;
-                tag = simHashes.CreateTag();
-                sprite = Def.GetUISprite(tag).first;
-                name = UI.StripLinkFormatting(Strings.Get("STRINGS.ELEMENTS." + tag.ToString().ToUpper() + ".NAME"));
-                info = new CarePackageInfo(tag.ToString(), count, null);
-            }
-
-
-            public MarketItem(Tag tag, int price = 9999, int count = 1,ObjectType type = ObjectType.Object){
+            public MarketItem(Tag tag, int price = 9999, int count = 1){
                 this.tag = tag;
                 sprite = Def.GetUISprite(tag).first;
                 this.price = price;
-                this.type = type;
                 quantity = count;
                 name = Assets.GetPrefab(tag).GetProperName();
                 info = new CarePackageInfo(tag.ToString(), count, null);
@@ -60,44 +52,63 @@ namespace SpaceStore.Store
 
             public override string ToString()
             {
-                return $"\n名称：\t{name}\n标签：\t{tag}\n类型：\t{type}\n描述: \t {GetDesc()}";
+                return $"\n名称：\t{name}\n标签：\t{tag}\n描述: \t {GetDesc()}";
             }
         }
 
-        public static List<Tuple<SimHashes, int, int>> elements = new List<Tuple<SimHashes, int, int>>() {
-            new Tuple<SimHashes, int, int>(SimHashes.Steel, 100, 500),
-            new Tuple<SimHashes, int, int>(SimHashes.SuperInsulator, 100, 300),
-            new Tuple<SimHashes, int, int>(SimHashes.SuperCoolant, 100, 200),
-        };
-
         public static List<Tuple<string, int>> objects = new List<Tuple<string, int>>() {
-            new Tuple<string, int>(GeneShufflerRechargeConfig.ID, 400),
             new Tuple<string, int>(RoboPanelConfig.ID,600),
             new Tuple<string, int>(GeoActivatorConfig.ID, 600),
         };
 
-        public static List<Tuple<string, int>> packs = new List<Tuple<string, int>>() {
-            new Tuple<string, int>(OilWellConfig.ID, 500),
-        };
+        public static void GetLocalList() {
+            string rootDir = StaticVars.LOCAL_FILE_DIR;
+            if (!Directory.Exists(rootDir)) { 
+                Directory.CreateDirectory(rootDir);
+                return;
+            }
+            string[] filePaths = Directory.GetFiles(rootDir, "store*.json");
 
-        public static List<Tuple<string, int>> GetLocalList() {
-            KMod.Manager.GetDirectory();
-            return new List<Tuple<string, int>>() { };
-        } 
+            foreach (string filePath in filePaths) {
+                ReadListFromAFile(filePath);
+            }
+        }
+
+        public static void ReadListFromAFile(string path) {
+#if DEBUG
+            PUtil.LogDebug($"Load {path}");
+#endif
+            try {
+                string json = File.ReadAllText(path);
+                JArray jsonArray = JArray.Parse(json);
+                foreach (JObject item in jsonArray.Cast<JObject>()) {
+                    string id = item["id"].ToString();
+                    int quantity = (int)item["quantity"];
+                    int price = (int)item["price"];
+#if DEBUG
+                    PUtil.LogDebug($"id:{id} quantity:{quantity} price:{price}");
+#endif
+                    marketItems.Add(new MarketItem(tag: new Tag(id), count: quantity, price: price));
+                }
+            }
+            catch (UnauthorizedAccessException e) {
+                PUtil.LogExcWarn(e);
+            }
+            catch (IOException e) {
+                PUtil.LogExcWarn(e);
+            }
+            catch (JsonException e) {
+                PUtil.LogExcWarn(e);
+            }
+        }
 
         public static void Init()
         {
-            foreach (Tuple<SimHashes, int, int> element in elements)
-            {
-                marketItems.Add(new MarketItem(element.first, element.second, element.third));
-            }
-
-
             foreach (Tuple<string, int> obj in objects)
             {
                 marketItems.Add(new MarketItem(obj.first, obj.second));
             }
-
+            GetLocalList();
         }
     }
 }

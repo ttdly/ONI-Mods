@@ -4,6 +4,7 @@ using PeterHan.PLib.AVC;
 using PeterHan.PLib.Core;
 using PeterHan.PLib.Options;
 using PeterHan.PLib.UI;
+using System.IO;
 using UnityEngine;
 
 namespace SpaceStore {
@@ -31,7 +32,7 @@ namespace SpaceStore {
         public static int Coin = 0;
         public static PAction Action;
         public static Sprite CoinIcon;
-        public static string LOCAL_FILE_DIR = "spacestore";
+        public static string LOCAL_FILE_DIR = Path.Combine(KMod.Manager.GetDirectory(), "spacestore");
 
         public static void AddCoin(int amount) {
             Coin += amount;
