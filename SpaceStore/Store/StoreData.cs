@@ -8,7 +8,7 @@ namespace SpaceStore.Store
     internal class StoreData : KMonoBehaviour, ISaveLoadable
     {
         [Serialize]
-        private int coin = 1000;
+        private float coin = 0;
 
         [OnSerializing]
         internal void OnSerializing()

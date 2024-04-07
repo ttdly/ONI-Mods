@@ -21,8 +21,8 @@ namespace SpaceStore.SellButtons {
             base.Sell();
         }
 
-        public int CountValue() {
-            return (int)(primaryElement.Units * GetCoinPerUnit());
+        public float CountValue() {
+            return primaryElement.Units * GetCoinPerUnit();
         }
 
         
@@ -31,10 +31,9 @@ namespace SpaceStore.SellButtons {
                 return 0.02f;
             }
             if (primaryElement.HasTag(GameTags.RefinedMetal)) {
-                return 0.03f;
+                return 0.05f;
             }
-            return 0.01f;
+            return 0.0001f;
         }
-
     }
 }

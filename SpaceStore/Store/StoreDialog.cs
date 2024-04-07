@@ -43,7 +43,7 @@ namespace SpaceStore.Store {
             };
 
             PDialog main = new PDialog("main") {
-                Title = "SpaceStore",
+                Title = UI.MENU_TOOL.TITLE,
                 DialogClosed = _ => ToolMenu.Instance.ClearSelection(),
                 MaxSize = new Vector2(0, SingletonOptions<Options>.Instance.DialogHeight),
                 DialogBackColor = Color.white,
@@ -134,7 +134,7 @@ namespace SpaceStore.Store {
         }
 
         public static void RefreshCoin() {
-            CoinLabel.Text = StaticVars.Coin.ToString();
+            CoinLabel.Text = ((int)StaticVars.Coin).ToString();
         }
     }
 }

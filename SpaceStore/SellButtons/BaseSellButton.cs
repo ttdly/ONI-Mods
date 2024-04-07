@@ -1,7 +1,7 @@
 ﻿using SpaceStore.Store;
 namespace SpaceStore.SellButtons {
     public class BaseSellButton :KMonoBehaviour {
-        public int coin;
+        public float coin;
 
         private static readonly EventSystem.IntraObjectHandler<BaseSellButton> OnRefreshUserMenuDelegate = new EventSystem.IntraObjectHandler<BaseSellButton>((component, data) => component.OnRefreshUserMenu(data));
 

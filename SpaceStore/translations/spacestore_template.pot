@@ -1,0 +1,95 @@
+msgid ""
+msgstr ""
+"Application: Oxygen Not Included"
+"POT Version: 2.0"
+
+#. SpaceStore.MyString.ITEM.GEO_ACTIVATOR.DESC
+msgctxt "SpaceStore.MyString.ITEM.GEO_ACTIVATOR.DESC"
+msgid "\"Explosions bring the Geo-Seed, and meteors make them germinate.\" \n Generate a geyser at the location of the seeds, caution! This will summon a meteor shower."
+msgstr ""
+
+#. SpaceStore.MyString.ITEM.GEO_ACTIVATOR.NAME
+msgctxt "SpaceStore.MyString.ITEM.GEO_ACTIVATOR.NAME"
+msgid "Geo-Seed"
+msgstr ""
+
+#. SpaceStore.MyString.ITEM.ROBO_PANEL.DESC
+msgctxt "SpaceStore.MyString.ITEM.ROBO_PANEL.DESC"
+msgid "Empower your base with automation - upgrade your devices to operate independently, boosting efficiency and freeing up your Duplicants for more critical tasks."
+msgstr ""
+
+#. SpaceStore.MyString.ITEM.ROBO_PANEL.NAME
+msgctxt "SpaceStore.MyString.ITEM.ROBO_PANEL.NAME"
+msgid "Robo-Panel"
+msgstr ""
+
+#. SpaceStore.MyString.OPTIONS.COL
+msgctxt "SpaceStore.MyString.OPTIONS.COL"
+msgid "Col Number"
+msgstr ""
+
+#. SpaceStore.MyString.OPTIONS.DIALOG_HEIGHT
+msgctxt "SpaceStore.MyString.OPTIONS.DIALOG_HEIGHT"
+msgid "Window Height"
+msgstr ""
+
+#. SpaceStore.MyString.OPTIONS.ITEM_WIDTH
+msgctxt "SpaceStore.MyString.OPTIONS.ITEM_WIDTH"
+msgid "Item With"
+msgstr ""
+
+#. SpaceStore.MyString.UI.GEO_ACTIVATOR.TEXT1
+msgctxt "SpaceStore.MyString.UI.GEO_ACTIVATOR.TEXT1"
+msgid "ACTIVATE"
+msgstr ""
+
+#. SpaceStore.MyString.UI.GEO_ACTIVATOR.TITLE
+msgctxt "SpaceStore.MyString.UI.GEO_ACTIVATOR.TITLE"
+msgid "Choose a Geyser"
+msgstr ""
+
+#. SpaceStore.MyString.UI.MENU_TOOL.TITLE
+msgctxt "SpaceStore.MyString.UI.MENU_TOOL.TITLE"
+msgid "Space Store"
+msgstr ""
+
+#. SpaceStore.MyString.UI.MENU_TOOL.TOOL_TIP
+msgctxt "SpaceStore.MyString.UI.MENU_TOOL.TOOL_TIP"
+msgid "Open Sapce Store"
+msgstr ""
+
+#. SpaceStore.MyString.UI.ROBO_PANEL.NAME
+msgctxt "SpaceStore.MyString.UI.ROBO_PANEL.NAME"
+msgid "Add Robo-Panel"
+msgstr ""
+
+#. SpaceStore.MyString.UI.SELL.TITLE
+msgctxt "SpaceStore.MyString.UI.SELL.TITLE"
+msgid "SELL"
+msgstr ""
+
+#. SpaceStore.MyString.UI.SELL.TOOL_TIP
+msgctxt "SpaceStore.MyString.UI.SELL.TOOL_TIP"
+msgid "Selling this will earn you {coin} Space Coin"
+msgstr ""
+
+#. SpaceStore.MyString.UI.STORE.STOREDIALOG.BUY
+msgctxt "SpaceStore.MyString.UI.STORE.STOREDIALOG.BUY"
+msgid "Purchase"
+msgstr ""
+
+#. SpaceStore.MyString.UI.STORE.STOREDIALOG.CURR_COIN
+msgctxt "SpaceStore.MyString.UI.STORE.STOREDIALOG.CURR_COIN"
+msgid "Current Space Coins: "
+msgstr ""
+
+#. SpaceStore.MyString.UI.STORE.STOREDIALOG.DISABLEED
+msgctxt "SpaceStore.MyString.UI.STORE.STOREDIALOG.DISABLEED"
+msgid "Cannot purchase items without a Printing Pod"
+msgstr ""
+
+#. SpaceStore.MyString.UI.STORE.STOREDIALOG.NAME_TEMPLATE
+msgctxt "SpaceStore.MyString.UI.STORE.STOREDIALOG.NAME_TEMPLATE"
+msgid "{name}\n{quantity}"
+msgstr ""
+

@@ -2,9 +2,9 @@
     public class MyString {
 
         public class OPTIONS {
-            public static LocString ITEM_WIDTH = "每个条目的宽度";
-            public static LocString COL = "每列的条目数";
-            public static LocString DIALOG_HEIGHT = "窗口总高度";
+            public static LocString ITEM_WIDTH = "Item Width";
+            public static LocString COL = "Col Number";
+            public static LocString DIALOG_HEIGHT = "Window Height";
         }
 
         public class ITEM {

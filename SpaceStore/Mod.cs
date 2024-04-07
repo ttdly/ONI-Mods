@@ -2,6 +2,7 @@
 using PeterHan.PLib.Actions;
 using PeterHan.PLib.AVC;
 using PeterHan.PLib.Core;
+using PeterHan.PLib.Database;
 using PeterHan.PLib.Options;
 using PeterHan.PLib.UI;
 using System.IO;
@@ -14,6 +15,7 @@ namespace SpaceStore {
             // 初始化 PUtil 的文件
             PUtil.InitLibrary();
             // 检查模组版本是否更新
+            new PLocalization().Register();
 #if DEBUG
             ModUtil.RegisterForTranslation(typeof(MyString));
 #endif
@@ -29,12 +31,12 @@ namespace SpaceStore {
         public static string ToolName = "SpaceStoreTool";
         public static Tag PrimaryTag = new Tag("SpaceStore");
         public static Tag AutoTag = new Tag("RoboPanleAdd");
-        public static int Coin = 0;
+        public static float Coin = 0;
         public static PAction Action;
         public static Sprite CoinIcon;
         public static string LOCAL_FILE_DIR = Path.Combine(KMod.Manager.GetDirectory(), "spacestore");
 
-        public static void AddCoin(int amount) {
+        public static void AddCoin(float amount) {
             Coin += amount;
         }
     }
