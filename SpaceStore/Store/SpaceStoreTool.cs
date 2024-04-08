@@ -2,7 +2,6 @@
     public class SpaceStoreTool: InterfaceTool {
         public static SpaceStoreTool Instance;
 
-
         protected override void OnPrefabInit() {
             base.OnPrefabInit();
             Instance = this;
@@ -20,12 +19,6 @@
                 new StoreDialog();
             }
             StoreDialog.DialogObj.SetActive(true);
-  
-            //if (StoreScreen.ScreenInstance == null) { 
-            //    StoreScreen.CreateScreenInstance();
-            //} else {
-            //    StoreScreen.DialogObject.SetActive(true);
-            //}
         }
 
         protected override void OnDeactivateTool(InterfaceTool new_tool) {
@@ -34,7 +27,6 @@
             StoreDialog.DialogObj.TryGetComponent(out KScreen screen);
             screen?.Deactivate();
             StoreDialog.DialogObj.SetActive(false);
-            //StoreScreen.DialogObject.SetActive(false);
         }
 
         private void PauseAndDisable(bool show) {

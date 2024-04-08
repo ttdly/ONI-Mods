@@ -1,35 +1,16 @@
 ﻿using HarmonyLib;
 using System.Collections.Generic;
-using static DetailsScreen;
 using UnityEngine;
-using SpaceStore.MyGeyser;
-using SpaceStore.StoreRoboPanel;
 using SpaceStore.SellButtons;
 using SpaceStore.Store;
 
 namespace SpaceStore
 {
     public class Patches {
-
-        [HarmonyPatch(typeof(DetailsScreen), "OnPrefabInit")]
-        public static class DetailsScreen_OnPrefabInit_Patch {
-            public static void Postfix(List<SideScreenRef> ___sideScreens, GameObject ___sideScreenConfigContentBody) {
-                GeoActivatorSideScreen.AddSideScreen(___sideScreens, ___sideScreenConfigContentBody);
-            }
-        }
-
         [HarmonyPatch(typeof(GeneratedBuildings), "LoadGeneratedBuildings")]
         public class GeneratedBuildings_LoadGeneratedBuildings_Patch {
             public static void Prefix() {
                 LocString.CreateLocStringKeys(typeof(MyString));
-            }
-        }
-
-        [HarmonyPatch(typeof(RockCrusherConfig), nameof(RockCrusherConfig.DoPostConfigureComplete))]
-        public static class RockCrusherConfig_Patch {
-            public static void Postfix(GameObject go) {
-                Autoable.MakeDupTinkerable(go, true);
-                go.AddOrGet<RoboPanel>();
             }
         }
 
@@ -57,9 +38,7 @@ namespace SpaceStore
         [HarmonyPatch(typeof(ToolMenu), "CreateBasicTools")]
         public static class ToolMenu_CreateBasicTools_Patch {
             internal static void Prefix(ToolMenu __instance) {
-                if (StoreScreen.ScreenInstance == null) { 
-                    StoreScreen.CreateScreenInstance();
-                }
+                new StoreDialog();
                 __instance.basicTools.Add(ToolMenu.CreateToolCollection(MyString.UI.MENU_TOOL.TITLE, "dreamIcon_earth", StaticVars.Action.GetKAction(),
                     StaticVars.ToolName, MyString.UI.MENU_TOOL.TOOL_TIP, false));
             }

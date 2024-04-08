@@ -13,40 +13,10 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Language: zh_CN\n"
 
-#. SpaceStore.MyString.ITEM.GEO_ACTIVATOR.DESC
-msgctxt "SpaceStore.MyString.ITEM.GEO_ACTIVATOR.DESC"
-msgid ""
-"\"Explosions bring the Geo-Seed, and meteors make them germinate.\" \n"
-" Generate a geyser at the location of the seeds, caution! This will summon a "
-"meteor shower."
-msgstr ""
-"“爆炸带来地质种子，流星使之发芽。”\n"
-" 在种子的位置生成间歇泉，注意！这会召唤流星雨。"
-
-#. SpaceStore.MyString.ITEM.GEO_ACTIVATOR.NAME
-msgctxt "SpaceStore.MyString.ITEM.GEO_ACTIVATOR.NAME"
-msgid "Geo-Seed"
-msgstr "地质种子"
-
-#. SpaceStore.MyString.ITEM.ROBO_PANEL.DESC
-msgctxt "SpaceStore.MyString.ITEM.ROBO_PANEL.DESC"
-msgid ""
-"Empower your base with automation - upgrade your devices to operate "
-"independently, boosting efficiency and freeing up your Duplicants for more "
-"critical tasks."
-msgstr ""
-"赋予你的基地自动化力量 - 将你的设备升级为独立运行，提高效率的同时释放复制人，"
-"让他们专注于更重要的任务。"
-
-#. SpaceStore.MyString.ITEM.ROBO_PANEL.NAME
-msgctxt "SpaceStore.MyString.ITEM.ROBO_PANEL.NAME"
-msgid "Robo-Panel"
-msgstr "机器人面板"
-
 #. SpaceStore.MyString.OPTIONS.COL
 msgctxt "SpaceStore.MyString.OPTIONS.COL"
 msgid "Col Number"
-msgstr "列数"
+msgstr "每行条目数"
 
 #. SpaceStore.MyString.OPTIONS.DIALOG_HEIGHT
 msgctxt "SpaceStore.MyString.OPTIONS.DIALOG_HEIGHT"
@@ -58,15 +28,10 @@ msgctxt "SpaceStore.MyString.OPTIONS.ITEM_WIDTH"
 msgid "Item Width"
 msgstr "条目宽度"
 
-#. SpaceStore.MyString.UI.GEO_ACTIVATOR.TEXT1
-msgctxt "SpaceStore.MyString.UI.GEO_ACTIVATOR.TEXT1"
-msgid "ACTIVATE"
-msgstr "激活"
-
-#. SpaceStore.MyString.UI.GEO_ACTIVATOR.TITLE
-msgctxt "SpaceStore.MyString.UI.GEO_ACTIVATOR.TITLE"
-msgid "Choose a Geyser"
-msgstr "选择一个间歇泉"
+#. SpaceStore.MyString.UI.COIN_NAME
+msgctxt "SpaceStore.MyString.UI.COIN_NAME"
+msgid "Space Coin"
+msgstr "太空币"
 
 #. SpaceStore.MyString.UI.MENU_TOOL.TITLE
 msgctxt "SpaceStore.MyString.UI.MENU_TOOL.TITLE"
@@ -78,35 +43,20 @@ msgctxt "SpaceStore.MyString.UI.MENU_TOOL.TOOL_TIP"
 msgid "Open Sapce Store"
 msgstr "打开太空商店"
 
-#. SpaceStore.MyString.UI.ROBO_PANEL.NAME
-msgctxt "SpaceStore.MyString.UI.ROBO_PANEL.NAME"
-msgid "Add Robo-Panel"
-msgstr "添加机器人面板"
-
 #. SpaceStore.MyString.UI.SELL.TITLE
 msgctxt "SpaceStore.MyString.UI.SELL.TITLE"
 msgid "SELL"
-msgstr "售卖"
+msgstr "卖出"
 
 #. SpaceStore.MyString.UI.SELL.TOOL_TIP
 msgctxt "SpaceStore.MyString.UI.SELL.TOOL_TIP"
 msgid "Selling this will earn you {coin} Space Coin"
-msgstr "卖出将获得 {coin} 太空币"
-
-#. SpaceStore.MyString.UI.STORE.STOREDIALOG.BUY
-msgctxt "SpaceStore.MyString.UI.STORE.STOREDIALOG.BUY"
-msgid "Purchase"
-msgstr "购买"
-
-#. SpaceStore.MyString.UI.STORE.STOREDIALOG.CURR_COIN
-msgctxt "SpaceStore.MyString.UI.STORE.STOREDIALOG.CURR_COIN"
-msgid "Current Space Coins: "
-msgstr "目前的太空币"
+msgstr "卖出这个你会获得 {coin} 太空币"
 
 #. SpaceStore.MyString.UI.STORE.STOREDIALOG.DISABLEED
 msgctxt "SpaceStore.MyString.UI.STORE.STOREDIALOG.DISABLEED"
-msgid "Cannot purchase items without a Printing Pod"
-msgstr "没有打印舱的殖民地无法使用太空商店"
+msgid "Can not purchase items without a Printing Pod"
+msgstr "没有打印舱的话是无法购买商品的"
 
 #. SpaceStore.MyString.UI.STORE.STOREDIALOG.NAME_TEMPLATE
 msgctxt "SpaceStore.MyString.UI.STORE.STOREDIALOG.NAME_TEMPLATE"

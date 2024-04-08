@@ -32,6 +32,11 @@ namespace SpaceStore.Store {
                 TextAlignment = TextAnchor.MiddleLeft,
             };
             RefreshCoin();
+
+            if (StoreList.marketItems.Count == 0) { 
+                StoreList.Init();
+            }
+
             CreateItems(mainPanel);
 
             PScrollPane scrollPane = new PScrollPane("ScrollPane") {

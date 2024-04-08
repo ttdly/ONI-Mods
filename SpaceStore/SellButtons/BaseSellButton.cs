@@ -1,7 +1,8 @@
 ﻿using SpaceStore.Store;
+using UnityEngine;
 namespace SpaceStore.SellButtons {
     public class BaseSellButton :KMonoBehaviour {
-        public float coin;
+        public float coin = 0;
 
         private static readonly EventSystem.IntraObjectHandler<BaseSellButton> OnRefreshUserMenuDelegate = new EventSystem.IntraObjectHandler<BaseSellButton>((component, data) => component.OnRefreshUserMenu(data));
 
@@ -20,7 +21,8 @@ namespace SpaceStore.SellButtons {
         }
 
         public virtual void Sell() {
-            StoreScreen.RefreshCoin();
+            PopFXManager.Instance.SpawnFX(PopFXManager.Instance.sprite_Resource, MyString.UI.COIN_NAME + " " + coin.ToString(), gameObject.transform, Vector3.zero);
+            StoreDialog.RefreshCoin();
         }
     }
 }

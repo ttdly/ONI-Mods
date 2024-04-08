@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PeterHan.PLib.Core;
-using SpaceStore.MyGeyser;
-using SpaceStore.StoreRoboPanel;
 using STRINGS;
 using System;
 using System.Collections.Generic;
@@ -56,11 +54,6 @@ namespace SpaceStore.Store
             }
         }
 
-        public static List<Tuple<string, int>> objects = new List<Tuple<string, int>>() {
-            new Tuple<string, int>(RoboPanelConfig.ID,600),
-            new Tuple<string, int>(GeoActivatorConfig.ID, 600),
-        };
-
         public static void GetLocalList() {
             string rootDir = StaticVars.LOCAL_FILE_DIR;
             if (!Directory.Exists(rootDir)) { 
@@ -102,13 +95,11 @@ namespace SpaceStore.Store
             }
         }
 
-        public static void Init()
-        {
-            foreach (Tuple<string, int> obj in objects)
-            {
-                marketItems.Add(new MarketItem(obj.first, obj.second));
-            }
+        public static void Init(){
             GetLocalList();
+            if (marketItems.Count == 0) {
+                marketItems.Add(new MarketItem(SimHashes.Water.CreateTag(), 1000, 200));
+            }
         }
     }
 }

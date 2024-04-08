@@ -29,8 +29,6 @@ namespace SpaceStore {
 
     public static class StaticVars {
         public static string ToolName = "SpaceStoreTool";
-        public static Tag PrimaryTag = new Tag("SpaceStore");
-        public static Tag AutoTag = new Tag("RoboPanleAdd");
         public static float Coin = 0;
         public static PAction Action;
         public static Sprite CoinIcon;

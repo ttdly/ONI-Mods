@@ -2,6 +2,7 @@
 using PeterHan.PLib.Options;
 
 namespace SpaceStore {
+    [ConfigFile("SpaceStoreConfig.json", true, true)]
     [RestartRequired]
     [JsonObject(MemberSerialization.OptIn)]
     public class Options {

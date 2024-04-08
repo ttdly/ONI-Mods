@@ -1,11 +1,9 @@
 ﻿using PeterHan.PLib.Core;
-using SpaceStore.Store;
-using static UnityEngine.UI.CanvasScaler;
 
 namespace SpaceStore.SellButtons {
     public class ElementSellButton: BaseSellButton {
         [MyCmpGet]
-        PrimaryElement primaryElement;
+        readonly PrimaryElement primaryElement;
 
         protected override void OnSpawn() {
             base.OnSpawn();
@@ -25,7 +23,6 @@ namespace SpaceStore.SellButtons {
             return primaryElement.Units * GetCoinPerUnit();
         }
 
-        
         private float GetCoinPerUnit() {
             if (primaryElement.HasTag(GameTags.PreciousMetal)) {
                 return 0.02f;
