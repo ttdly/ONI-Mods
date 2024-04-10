@@ -24,7 +24,7 @@ namespace SpaceStore.Store
 
         public class MarketItem
         {
-            public Sprite sprite;
+            public Tuple<Sprite, Color> sprite;
             public string name = "test";
             public int price;
             public Tag tag;
@@ -33,7 +33,7 @@ namespace SpaceStore.Store
 
             public MarketItem(Tag tag, int price = 9999, int count = 1){
                 this.tag = tag;
-                sprite = Def.GetUISprite(tag).first;
+                sprite = Def.GetUISprite(tag);
                 this.price = price;
                 quantity = count;
                 name = Assets.GetPrefab(tag).GetProperName();

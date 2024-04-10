@@ -95,7 +95,8 @@ namespace SpaceStore.Store {
 
 
             PLabel label = new PLabel($"{marketItem.name}Label") {
-                Sprite = marketItem.sprite,
+                Sprite = marketItem.sprite.first,
+                SpriteTint = marketItem.sprite.second,
                 SpriteSize = new Vector2(ICON_SIZE, ICON_SIZE),
                 SpritePosition = TextAnchor.UpperCenter,
                 Text = marketItem.GetDesc(),

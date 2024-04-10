@@ -9,7 +9,7 @@ namespace SpaceStore {
         [Option("OPTIONS.ITEM_WIDTH", "", null)]
         [JsonProperty]
         public int ItemWidth { get; set; } = 130;
-
+       
         [Option("OPTIONS.COL", "", null)]
         [JsonProperty]
         public int Col { get; set; } = 5;
