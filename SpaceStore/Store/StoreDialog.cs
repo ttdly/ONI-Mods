@@ -53,8 +53,25 @@ namespace SpaceStore.Store {
                 MaxSize = new Vector2(0, SingletonOptions<Options>.Instance.DialogHeight),
                 DialogBackColor = Color.white,
             };
+
+            PSpacer pSpacer = new PSpacer() {
+                PreferredSize = new Vector2(0,10)
+            };
+
+            PButton refreshBtn = new PButton("refresh") {
+                Text = UI.STORE.STOREDIALOG.REFRESH,
+                OnClick = delegate {
+                    SpaceStoreTool.Instance.DeactivateTool();
+                    StoreList.marketItems.Clear();
+                    DialogObj.DeleteObject();
+                    DialogObj = null;
+                },
+            };
+
             main.Body.AddChild(CoinLabel);
             main.Body.AddChild(scrollPane);
+            main.Body.AddChild(pSpacer);
+            main.Body.AddChild(refreshBtn);
             DialogObj = main.Build();
             DialogObj.SetActive(false);
         }

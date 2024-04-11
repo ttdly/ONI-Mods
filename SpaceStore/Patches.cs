@@ -7,12 +7,6 @@ using SpaceStore.Store;
 namespace SpaceStore
 {
     public class Patches {
-        [HarmonyPatch(typeof(GeneratedBuildings), "LoadGeneratedBuildings")]
-        public class GeneratedBuildings_LoadGeneratedBuildings_Patch {
-            public static void Prefix() {
-                LocString.CreateLocStringKeys(typeof(MyString));
-            }
-        }
 
         [HarmonyPatch(typeof(PlayerController), "OnPrefabInit")]
         public static class PlayerController_OnPrefabInit_Patch {

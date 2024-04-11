@@ -53,3 +53,8 @@ msgctxt "SpaceStore.MyString.UI.STORE.STOREDIALOG.NAME_TEMPLATE"
 msgid "{name}\n{quantity}"
 msgstr ""
 
+#. SpaceStore.MyString.UI.STORE.STOREDIALOG.REFRESH
+msgctxt "SpaceStore.MyString.UI.STORE.STOREDIALOG.REFRESH"
+msgid "Reload Config"
+msgstr ""
+

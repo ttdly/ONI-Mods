@@ -25,6 +25,7 @@
                 public class STOREDIALOG {
                     public static LocString NAME_TEMPLATE = "{name}\n{quantity}";
                     public static LocString DISABLEED = "Can not purchase items without a Printing Pod";
+                    public static LocString REFRESH = "Reload Config";
                 }
             }
         }

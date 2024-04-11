@@ -66,3 +66,8 @@ msgid ""
 msgstr ""
 "{name}\n"
 "{quantity}"
+
+#. SpaceStore.MyString.UI.STORE.STOREDIALOG.REFRESH
+msgctxt "SpaceStore.MyString.UI.STORE.STOREDIALOG.REFRESH"
+msgid "Reload Config"
+msgstr "重载配置"
