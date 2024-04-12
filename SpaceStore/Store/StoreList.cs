@@ -4,8 +4,10 @@ using PeterHan.PLib.Core;
 using STRINGS;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 namespace SpaceStore.Store
@@ -92,6 +94,19 @@ namespace SpaceStore.Store
             }
             catch (JsonException e) {
                 PUtil.LogExcWarn(e);
+            }
+        }
+
+        public static void OpenConfigFolder() {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
+                PUtil.LogDebug(StaticVars.LOCAL_FILE_DIR);
+                Process.Start(new ProcessStartInfo("explorer", $"\"{StaticVars.LOCAL_FILE_DIR}\"") { UseShellExecute = true });
+            } else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) {
+                Process.Start("open", StaticVars.LOCAL_FILE_DIR);
+            } else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) {
+                Process.Start("xdg-open", StaticVars.LOCAL_FILE_DIR);
+            } else {
+                PUtil.LogError("Unsupport platform");
             }
         }
 

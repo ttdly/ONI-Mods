@@ -16,7 +16,7 @@ msgstr ""
 #. SpaceStore.MyString.OPTIONS.COL
 msgctxt "SpaceStore.MyString.OPTIONS.COL"
 msgid "Col Number"
-msgstr "每行条目数"
+msgstr "列数"
 
 #. SpaceStore.MyString.OPTIONS.DIALOG_HEIGHT
 msgctxt "SpaceStore.MyString.OPTIONS.DIALOG_HEIGHT"
@@ -50,13 +50,13 @@ msgstr "卖出"
 
 #. SpaceStore.MyString.UI.SELL.TOOL_TIP
 msgctxt "SpaceStore.MyString.UI.SELL.TOOL_TIP"
-msgid "Selling this will earn you {coin} Space Coin"
-msgstr "卖出这个你会获得 {coin} 太空币"
+msgid "Sell these {item} and you will get {coin} space coin"
+msgstr "卖出这些{item}你会获得 {coin} 太空币"
 
 #. SpaceStore.MyString.UI.STORE.STOREDIALOG.DISABLEED
 msgctxt "SpaceStore.MyString.UI.STORE.STOREDIALOG.DISABLEED"
 msgid "Can not purchase items without a Printing Pod"
-msgstr "没有打印舱的话是无法购买商品的"
+msgstr "没有打印舱的情况下无法使用太空商店"
 
 #. SpaceStore.MyString.UI.STORE.STOREDIALOG.NAME_TEMPLATE
 msgctxt "SpaceStore.MyString.UI.STORE.STOREDIALOG.NAME_TEMPLATE"
@@ -66,6 +66,11 @@ msgid ""
 msgstr ""
 "{name}\n"
 "{quantity}"
+
+#. SpaceStore.MyString.UI.STORE.STOREDIALOG.OPEN_CONFIG_FOLDER
+msgctxt "SpaceStore.MyString.UI.STORE.STOREDIALOG.OPEN_CONFIG_FOLDER"
+msgid "Open Config Folder"
+msgstr "打开配置文件夹"
 
 #. SpaceStore.MyString.UI.STORE.STOREDIALOG.REFRESH
 msgctxt "SpaceStore.MyString.UI.STORE.STOREDIALOG.REFRESH"

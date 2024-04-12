@@ -39,7 +39,7 @@ namespace SpaceStore {
         public static float Coin = 0;
         public static PAction Action;
         public static Sprite CoinIcon;
-        public static string LOCAL_FILE_DIR = Path.Combine(KMod.Manager.GetDirectory(), "spacestore");
+        public static string LOCAL_FILE_DIR = Path.GetFullPath(Path.Combine(KMod.Manager.GetDirectory(), "spacestore"));
 
         public static void AddCoin(float amount) {
             Coin += amount;

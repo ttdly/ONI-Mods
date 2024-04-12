@@ -40,7 +40,7 @@ msgstr ""
 
 #. SpaceStore.MyString.UI.SELL.TOOL_TIP
 msgctxt "SpaceStore.MyString.UI.SELL.TOOL_TIP"
-msgid "Selling this will earn you {coin} Space Coin"
+msgid "Sell these {item} and you will get {coin} space coin"
 msgstr ""
 
 #. SpaceStore.MyString.UI.STORE.STOREDIALOG.DISABLEED
@@ -51,6 +51,11 @@ msgstr ""
 #. SpaceStore.MyString.UI.STORE.STOREDIALOG.NAME_TEMPLATE
 msgctxt "SpaceStore.MyString.UI.STORE.STOREDIALOG.NAME_TEMPLATE"
 msgid "{name}\n{quantity}"
+msgstr ""
+
+#. SpaceStore.MyString.UI.STORE.STOREDIALOG.OPEN_CONFIG_FOLDER
+msgctxt "SpaceStore.MyString.UI.STORE.STOREDIALOG.OPEN_CONFIG_FOLDER"
+msgid "Open Config Folder"
 msgstr ""
 
 #. SpaceStore.MyString.UI.STORE.STOREDIALOG.REFRESH

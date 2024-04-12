@@ -68,10 +68,27 @@ namespace SpaceStore.Store {
                 },
             };
 
-            main.Body.AddChild(CoinLabel);
-            main.Body.AddChild(scrollPane);
-            main.Body.AddChild(pSpacer);
-            main.Body.AddChild(refreshBtn);
+            PButton openConfigFolderBtn = new PButton("openfolder") {
+                Text = UI.STORE.STOREDIALOG.OPEN_CONFIG_FOLDER,
+                OnClick = delegate {
+                    StoreList.OpenConfigFolder();
+                },
+                
+            };
+
+            PPanel fileActionButton = new PPanel("FileOption") {
+                Spacing = SPACE,
+                Direction = PanelDirection.Horizontal,
+            };
+
+            fileActionButton
+                .AddChild(refreshBtn)
+                .AddChild(openConfigFolderBtn);
+            main.Body
+                .AddChild(CoinLabel)
+                .AddChild(scrollPane)
+                .AddChild(pSpacer)
+                .AddChild(fileActionButton);
             DialogObj = main.Build();
             DialogObj.SetActive(false);
         }
@@ -109,7 +126,6 @@ namespace SpaceStore.Store {
                 BackColor = PUITuning.Colors.ButtonBlueStyle.inactiveColor,
                 DynamicSize = false,
             };
-
 
             PLabel label = new PLabel($"{marketItem.name}Label") {
                 Sprite = marketItem.sprite.first,

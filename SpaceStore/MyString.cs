@@ -5,8 +5,6 @@
             public static LocString ITEM_WIDTH = "Item Width";
             public static LocString COL = "Col Number";
             public static LocString DIALOG_HEIGHT = "Window Height";
-            public static LocString CATE_WINDOW = "Window";
-
         }
 
 
@@ -28,6 +26,7 @@
                     public static LocString NAME_TEMPLATE = "{name}\n{quantity}";
                     public static LocString DISABLEED = "Can not purchase items without a Printing Pod";
                     public static LocString REFRESH = "Reload Config";
+                    public static LocString OPEN_CONFIG_FOLDER = "Open Config Folder";
                 }
             }
         }
