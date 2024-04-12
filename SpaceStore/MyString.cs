@@ -5,6 +5,8 @@
             public static LocString ITEM_WIDTH = "Item Width";
             public static LocString COL = "Col Number";
             public static LocString DIALOG_HEIGHT = "Window Height";
+            public static LocString CATE_WINDOW = "Window";
+
         }
 
 
@@ -18,7 +20,7 @@
 
             public class SELL {
                 public static LocString TITLE = "SELL";
-                public static LocString TOOL_TIP = "Selling this will earn you {coin} Space Coin";
+                public static LocString TOOL_TIP = "Sell these {item} and you will get {coin} space coin";
             }
 
             public class STORE {

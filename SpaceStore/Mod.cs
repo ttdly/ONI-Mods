@@ -19,17 +19,17 @@ namespace SpaceStore {
             // 初始化 PUtil 的文件
             PUtil.InitLibrary();
             // 检查模组版本是否更新
-            new PLocalization().Register();
-            new POptions().RegisterOptions(this, typeof(Options));
             new PVersionCheck().Register(this, new SteamVersionChecker());
+            new POptions().RegisterOptions(this, typeof(Options));
+            LocString.CreateLocStringKeys(typeof(MyString.OPTIONS));
+            new PLocalization().Register();
             StaticVars.Action = new PActionManager().CreateAction("OpenSpaceStore", MyString.UI.MENU_TOOL.TITLE, new PKeyBinding());
             StaticVars.CoinIcon = PUIUtils.LoadSprite("SpaceStore.images.coin.png");
         }
 
         public override void OnAllModsLoaded(Harmony harmony, IReadOnlyList<KMod.Mod> mods) {
             base.OnAllModsLoaded(harmony, mods);
-            
-            LocString.CreateLocStringKeys(typeof(MyString),"");
+            LocString.CreateLocStringKeys(typeof(MyString.OPTIONS));
         }
 
     }

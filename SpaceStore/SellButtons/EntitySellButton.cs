@@ -9,7 +9,6 @@
             StaticVars.AddCoin(coin);
             base.Sell();
             gameObject.DeleteObject();
-            
         }
     }
 }

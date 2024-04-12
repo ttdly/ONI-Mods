@@ -38,8 +38,15 @@ namespace SpaceStore
             }
         }
 
-        [HarmonyPatch(typeof(EntityTemplates), nameof(EntityTemplates.CreateOreEntity))]
-        public static class EntityTemplates_CreateOreEntity_Patch {
+        [HarmonyPatch(typeof(EntityTemplates), nameof(EntityTemplates.CreateSolidOreEntity))]
+        public static class EntityTemplates_CreateSolidOreEntity_Patch {
+            public static void Postfix(GameObject __result) {
+                __result.AddOrGet<ElementSellButton>();
+            }
+        }
+
+        [HarmonyPatch(typeof(EntityTemplates), nameof(EntityTemplates.CreateAndRegisterSeedForPlant))]
+        public static class EntityTemplates_CreateAndRegisterSeedForPlant_Patch {
             public static void Postfix(GameObject __result) {
                 __result.AddOrGet<ElementSellButton>();
             }

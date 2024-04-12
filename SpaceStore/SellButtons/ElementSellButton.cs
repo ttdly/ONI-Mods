@@ -1,4 +1,6 @@
 ﻿using PeterHan.PLib.Core;
+using System.Collections.Generic;
+
 
 namespace SpaceStore.SellButtons {
     public class ElementSellButton: BaseSellButton {
@@ -7,7 +9,6 @@ namespace SpaceStore.SellButtons {
 
         protected override void OnSpawn() {
             base.OnSpawn();
-            coin = CountValue();
         }
 
         public override void Sell() {
@@ -19,16 +20,19 @@ namespace SpaceStore.SellButtons {
             base.Sell();
         }
 
-        public float CountValue() {
-            return primaryElement.Units * GetCoinPerUnit();
+        public override void CountPrice() {
+            coin = primaryElement.Units * GetCoinPerUnit();
         }
 
         private float GetCoinPerUnit() {
-            if (primaryElement.HasTag(GameTags.PreciousMetal)) {
-                return 0.02f;
+            if (PriceConvter.Instance == null) {
+                new PriceConvter();
             }
-            if (primaryElement.HasTag(GameTags.RefinedMetal)) {
-                return 0.05f;
+
+            foreach(KeyValuePair<Tag, float> tagAndPrice in PriceConvter.Instance.sellItems) {
+                if (gameObject.HasTag(tagAndPrice.Key)) {
+                    return tagAndPrice.Value;
+                }
             }
             return 0.0001f;
         }
