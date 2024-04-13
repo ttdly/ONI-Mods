@@ -34,11 +34,12 @@ namespace SpaceStore.Store
             public CarePackageInfo info;
 
             public MarketItem(Tag tag, int price = 9999, int count = 1){
+                GameObject go = Assets.GetPrefab(tag) ?? throw new Exception($"Tag {tag} not exist");
                 this.tag = tag;
                 sprite = Def.GetUISprite(tag);
                 this.price = price;
                 quantity = count;
-                name = Assets.GetPrefab(tag).GetProperName();
+                name = go.GetProperName();
                 info = new CarePackageInfo(tag.ToString(), count, null);
             }
 
@@ -83,7 +84,7 @@ namespace SpaceStore.Store
 #if DEBUG
                     PUtil.LogDebug($"id:{id} quantity:{quantity} price:{price}");
 #endif
-                    marketItems.Add(new MarketItem(tag: new Tag(id), count: quantity, price: price));
+                    AddOneItem(new Tag(id), price, quantity);
                 }
             }
             catch (UnauthorizedAccessException e) {
@@ -94,6 +95,21 @@ namespace SpaceStore.Store
             }
             catch (JsonException e) {
                 PUtil.LogExcWarn(e);
+            }
+        }
+
+        public static void AddOneItem(Tag tag, int price, int quantity) {
+            try {
+                MarketItem marketItem = new MarketItem(tag, price, quantity);
+                if (price > 0 && quantity > 0) {
+                    marketItems.Add(marketItem);
+                } else {
+                    PUtil.LogWarning($"{tag} price or quantity can not less than zero!");
+                }
+                
+            }
+            catch (Exception) {
+                PUtil.LogWarning($"{tag} not exist");
             }
         }
 
