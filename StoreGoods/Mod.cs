@@ -16,8 +16,7 @@ namespace StoreGoods {
 
         public override void OnAllModsLoaded(Harmony harmony, IReadOnlyList<KMod.Mod> mods) {
             base.OnAllModsLoaded(harmony, mods);
-            string configPath = Path.GetFullPath(Path.Combine(KMod.Manager.GetDirectory(), "spacestore", "store_2024_4_13_store_goods.json"));
-            SpaceStoreConfigWriter.Write(configPath);
+            SpaceStoreConfigWriter.Write();
         }
     }
 

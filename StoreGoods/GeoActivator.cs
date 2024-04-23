@@ -3,7 +3,9 @@
 namespace StoreGoods {
     public class GeoActivator: KMonoBehaviour{
         public void Active(Tag tag) {
-            ClusterManager.Instance.GetWorld(gameObject.GetMyWorldId()).GetSMI<GameplaySeasonManager.Instance>().StartNewSeason(Db.Get().GameplaySeasons.TemporalTearMeteorShowers);
+            if (DlcManager.IsContentActive("EXPANSION1_ID")) {
+                ClusterManager.Instance.GetWorld(gameObject.GetMyWorldId()).GetSMI<GameplaySeasonManager.Instance>().StartNewSeason(Db.Get().GameplaySeasons.SpacedOutStyleWarpMeteorShowers);
+            }
             GameObject go = GameUtil.KInstantiate(Assets.GetPrefab(tag), Grid.SceneLayer.Building);
             go.SetActive(false);
             Vector3 posCbc = gameObject.transform.position;

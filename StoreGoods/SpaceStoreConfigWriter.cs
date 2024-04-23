@@ -16,7 +16,12 @@ namespace StoreGoods {
             }
         }
 
-        public static void Write(string filePath) {
+        public static void Write() {
+            string filePath = Path.GetFullPath(Path.Combine(
+                KMod.Manager.GetDirectory(),
+                "spacestore",
+                $"store_{System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName}_2024_4_13.json"
+                ));
             List<MarketItem> list = new List<MarketItem>() { 
                 new MarketItem(GeoActivatorConfig.ID, 1, 800),
                 new MarketItem(RoboPanelConfig.ID, 1, 600),
