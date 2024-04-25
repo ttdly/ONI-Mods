@@ -1,11 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <AssemblyTitle>StoreGoods</AssemblyTitle>
+    <AssemblyTitle>Space Store Expansion Pack</AssemblyTitle>
     <FileVersion>1.0.0</FileVersion>
     <RootNamespace>StoreGoods</RootNamespace>
-    <Description>缺氧模组</Description>
+    <Description>太空商店拓展包</Description>
     <AssemblyVersion>1.0.0</AssemblyVersion>
     <LastWorkingBuild>596100</LastWorkingBuild>
     <Platforms>Vanilla;Mergedown</Platforms>
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="translations\" />
+  </ItemGroup>
 </Project>

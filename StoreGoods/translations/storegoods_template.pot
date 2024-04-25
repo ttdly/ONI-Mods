@@ -1,0 +1,30 @@
+msgid ""
+msgstr ""
+"Application: Oxygen Not Included"
+"POT Version: 2.0"
+
+#. StoreGoods.MyString.ITEM.GEO_ACTIVATOR.DESC
+msgctxt "StoreGoods.MyString.ITEM.GEO_ACTIVATOR.DESC"
+msgid "\"Explosions bring the Geo-Seed, and meteors make them germinate.\" \n Generate a geyser at the location of the seeds, caution! This will summon a meteor shower."
+msgstr ""
+
+#. StoreGoods.MyString.ITEM.GEO_ACTIVATOR.NAME
+msgctxt "StoreGoods.MyString.ITEM.GEO_ACTIVATOR.NAME"
+msgid "Geo-Seed"
+msgstr ""
+
+#. StoreGoods.MyString.UI.GEO_ACTIVATOR.TEXT1
+msgctxt "StoreGoods.MyString.UI.GEO_ACTIVATOR.TEXT1"
+msgid "ACTIVATE"
+msgstr ""
+
+#. StoreGoods.MyString.UI.GEO_ACTIVATOR.TITLE
+msgctxt "StoreGoods.MyString.UI.GEO_ACTIVATOR.TITLE"
+msgid "Choose a Geyser"
+msgstr ""
+
+#. StoreGoods.MyString.UI.GEO_ACTIVATOR.TOOLTIP
+msgctxt "StoreGoods.MyString.UI.GEO_ACTIVATOR.TOOLTIP"
+msgid "After activation, a selected geyser will be generated at the current location."
+msgstr ""
+

@@ -104,7 +104,7 @@ namespace StoreGoods {
             var newScreen = template.AddComponent<GeoActivatorSideScreen>();
             newScreen.stateButtonPrefab = STATE_BUTTON_PREFAB.Get(oldScreen);
             newScreen.applyButton = APPLY_BUTTON.Get(oldScreen);
-            //newScreen.applyButton.GetComponent<ToolTip>().SetSimpleTooltip(MyString.UI.GEO_ACTIVATOR.TOOLTIP);
+            newScreen.applyButton.GetComponent<ToolTip>().SetSimpleTooltip(MyString.UI.GEO_ACTIVATOR.TOOLTIP);
             newScreen.clearButton = CLEAR_BUTTON.Get(oldScreen);
             TryChangeText(newScreen.applyButton.gameObject.transform, "Label", MyString.UI.GEO_ACTIVATOR.TEXT1);
             newScreen.buttonContainer = BUTTON_CONTAINER.Get(oldScreen);

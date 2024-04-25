@@ -1,8 +1,8 @@
 ﻿using HarmonyLib;
 using PeterHan.PLib.AVC;
 using PeterHan.PLib.Core;
+using PeterHan.PLib.Database;
 using System.Collections.Generic;
-using System.IO;
 
 namespace StoreGoods {
     public sealed class Mod : KMod.UserMod2 {
@@ -12,11 +12,16 @@ namespace StoreGoods {
             PUtil.InitLibrary();
             // 检查模组版本是否更新
             new PVersionCheck().Register(this, new SteamVersionChecker());
+            new PLocalization().Register();
+#if DEBUG
+            ModUtil.RegisterForTranslation(typeof(MyString));
+#endif
         }
 
         public override void OnAllModsLoaded(Harmony harmony, IReadOnlyList<KMod.Mod> mods) {
             base.OnAllModsLoaded(harmony, mods);
             SpaceStoreConfigWriter.Write();
+            LocString.CreateLocStringKeys(typeof(MyString));
         }
     }
 

@@ -1,0 +1,46 @@
+msgid ""
+msgstr ""
+"Application: Oxygen Not IncludedPOT Version: 2.0\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#. StoreGoods.MyString.ITEM.GEO_ACTIVATOR.DESC
+msgctxt "StoreGoods.MyString.ITEM.GEO_ACTIVATOR.DESC"
+msgid ""
+"\"Explosions bring the Geo-Seed, and meteors make them germinate.\" \n"
+" Generate a geyser at the location of the seeds, caution! This will summon a "
+"meteor shower."
+msgstr ""
+"“爆炸带来地质种子，流星使之发芽。”\n"
+"在种子的位置生成间歇泉，注意！这会召唤流星雨。"
+
+#. StoreGoods.MyString.ITEM.GEO_ACTIVATOR.NAME
+msgctxt "StoreGoods.MyString.ITEM.GEO_ACTIVATOR.NAME"
+msgid "Geo-Seed"
+msgstr "地质种子"
+
+#. StoreGoods.MyString.UI.GEO_ACTIVATOR.TEXT1
+msgctxt "StoreGoods.MyString.UI.GEO_ACTIVATOR.TEXT1"
+msgid "ACTIVATE"
+msgstr "激活"
+
+#. StoreGoods.MyString.UI.GEO_ACTIVATOR.TITLE
+msgctxt "StoreGoods.MyString.UI.GEO_ACTIVATOR.TITLE"
+msgid "Choose a Geyser"
+msgstr "选择一个间歇泉"
+
+#. StoreGoods.MyString.UI.GEO_ACTIVATOR.TOOLTIP
+msgctxt "StoreGoods.MyString.UI.GEO_ACTIVATOR.TOOLTIP"
+msgid ""
+"After activation, a selected geyser will be generated at the current "
+"location."
+msgstr "激活之后会在当前位置生成选定的间歇泉"
