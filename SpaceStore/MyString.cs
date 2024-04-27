@@ -27,6 +27,7 @@
                     public static LocString DISABLEED = "Can not purchase items without a Printing Pod";
                     public static LocString REFRESH = "Reload Config";
                     public static LocString OPEN_CONFIG_FOLDER = "Open Config Folder";
+                    public static LocString OPEN_WEB_PAGE = "Create a configuration file";
                 }
             }
         }

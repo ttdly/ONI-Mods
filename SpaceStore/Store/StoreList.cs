@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Policy;
 using UnityEngine;
 
 namespace SpaceStore.Store
@@ -123,6 +124,20 @@ namespace SpaceStore.Store
                 Process.Start("xdg-open", StaticVars.LOCAL_FILE_DIR);
             } else {
                 PUtil.LogError("Unsupport platform");
+            }
+        }
+
+        public static void OpenWebPage() {
+            try {
+                ProcessStartInfo psi = new ProcessStartInfo {
+                    FileName = "https://spacestore-config-editor.pages.dev/",
+                    UseShellExecute = true
+                };
+                Process.Start(psi);
+            }
+            catch (Exception ex) {
+                // 处理可能发生的异常
+                Console.WriteLine("无法打开浏览器: " + ex.Message);
             }
         }
 

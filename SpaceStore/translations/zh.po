@@ -72,6 +72,11 @@ msgctxt "SpaceStore.MyString.UI.STORE.STOREDIALOG.OPEN_CONFIG_FOLDER"
 msgid "Open Config Folder"
 msgstr "打开配置文件夹"
 
+#. SpaceStore.MyString.UI.STORE.STOREDIALOG.OPEN_WEB_PAGE
+msgctxt "SpaceStore.MyString.UI.STORE.STOREDIALOG.OPEN_WEB_PAGE"
+msgid "Create a configuration file"
+msgstr "创建配置文件"
+
 #. SpaceStore.MyString.UI.STORE.STOREDIALOG.REFRESH
 msgctxt "SpaceStore.MyString.UI.STORE.STOREDIALOG.REFRESH"
 msgid "Reload Config"

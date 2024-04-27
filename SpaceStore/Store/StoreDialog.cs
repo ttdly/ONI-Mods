@@ -1,5 +1,7 @@
 ﻿using PeterHan.PLib.Options;
 using PeterHan.PLib.UI;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using static SpaceStore.MyString;
 
@@ -76,6 +78,13 @@ namespace SpaceStore.Store {
                 
             };
 
+            PButton openWebPage = new PButton("openwebPage") {
+                Text = UI.STORE.STOREDIALOG.OPEN_WEB_PAGE, 
+                OnClick = delegate {
+                    StoreList.OpenWebPage();
+                }
+            };
+
             PPanel fileActionButton = new PPanel("FileOption") {
                 Spacing = SPACE,
                 Direction = PanelDirection.Horizontal,
@@ -83,7 +92,8 @@ namespace SpaceStore.Store {
 
             fileActionButton
                 .AddChild(refreshBtn)
-                .AddChild(openConfigFolderBtn);
+                .AddChild(openConfigFolderBtn)
+                .AddChild(openWebPage);
             main.Body
                 .AddChild(CoinLabel)
                 .AddChild(scrollPane)
@@ -157,12 +167,14 @@ namespace SpaceStore.Store {
                         StaticVars.Coin = marketItem.price * 2;
                     }
 #endif
-                    if (StaticVars.Coin < marketItem.price || Components.Telepads.Count == 0) {
+                    Telepad telepad = GetCurrTelepad();
+                    if (StaticVars.Coin < marketItem.price || telepad == null) {
                         return;
                     }
+                    
                     StaticVars.AddCoin(-marketItem.price);
-                    marketItem.info.Deliver(Components.Telepads[0].transform.position);
-                    CameraController.Instance.CameraGoTo(Components.Telepads[0].transform.position);
+                    marketItem.info.Deliver(telepad.transform.position);
+                    CameraController.Instance.CameraGoTo(telepad.transform.position);
                     RefreshCoin();
                     SpaceStoreTool.Instance.DeactivateTool();
                 }
@@ -173,7 +185,17 @@ namespace SpaceStore.Store {
         }
 
         public static void RefreshCoin() {
-            CoinLabel.Text = ((int)StaticVars.Coin).ToString();
+            CoinLabel.Text = string.Format("{0:0.00}", StaticVars.Coin);
+        }
+        public static Telepad GetCurrTelepad() {
+            if (Components.Telepads.Count == 0) return null;
+            if (!DlcManager.GetActiveDLCIds().Contains("EXPANSION1_ID")) {
+                return Components.Telepads[0];
+            } else {
+                List<Telepad> list = Components.Telepads.GetWorldItems(ClusterManager.Instance.activeWorldId);
+                if (list.Count == 0) return Components.Telepads[0];
+                else return list[0];
+            }
         }
     }
 }
