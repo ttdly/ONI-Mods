@@ -1,22 +1,102 @@
 ﻿using HarmonyLib;
-using PeterHan.PLib.Core;
 using System;
+using System.Collections.Generic;
 using System.Reflection;
-using static EnergyGenerator;
+using UnityEngine;
 
 namespace WirelessProject.ProwerManager {
     public class Patches {
-        [HarmonyPatch(typeof(EnergyConsumer), "OnSpawn")]
-        public class EnergyConsumer_OnSpawn_Patch {
-            public static void Postfix(EnergyConsumer __instance) {
-                __instance.gameObject.AddOrGet<ProxyLink>().type = ProxyLink.ProwerType.Consumer;
+        #region GeneratorOrBatteries
+        [HarmonyPatch(typeof(GeneratorConfig), "DoPostConfigureComplete")]
+        public class GeneratorConfig_DoPostConfigureComplete_Patch {
+            public static void Postfix(GameObject go) {
+                go.AddOrGet<GeneratorLinkToProxy>();
             }
         }
+
+        [HarmonyPatch(typeof(HydrogenGeneratorConfig), "DoPostConfigureComplete")]
+        public class HydrogenGeneratorConfig_DoPostConfigureComplete_Patch {
+            public static void Postfix(GameObject go) {
+                go.AddOrGet<GeneratorLinkToProxy>();
+            }
+        }
+
+        [HarmonyPatch(typeof(MethaneGeneratorConfig), "DoPostConfigureComplete")]
+        public class MethaneGeneratorConfig_DoPostConfigureComplete_Patch {
+            public static void Postfix(GameObject go) {
+                go.AddOrGet<GeneratorLinkToProxy>();
+            }
+        }
+
+        [HarmonyPatch(typeof(NuclearReactorConfig), "DoPostConfigureComplete")]
+        public class NuclearReactorConfig_DoPostConfigureComplete_Patch {
+            public static void Postfix(GameObject go) {
+                go.AddOrGet<GeneratorLinkToProxy>();
+            }
+        }
+
+        [HarmonyPatch(typeof(PetroleumGeneratorConfig), "DoPostConfigureComplete")]
+        public class PetroleumGeneratorConfig_DoPostConfigureComplete_Patch {
+            public static void Postfix(GameObject go) {
+                go.AddOrGet<GeneratorLinkToProxy>();
+            }
+        }
+
+        [HarmonyPatch(typeof(SolarPanelConfig), "DoPostConfigureComplete")]
+        public class SolarPanelConfig_DoPostConfigureComplete_Patch {
+            public static void Postfix(GameObject go) {
+                go.AddOrGet<GeneratorLinkToProxy>();
+            }
+        }
+
+        //[HarmonyPatch(typeof(SteamTurbineConfig2), "DoPostConfigureComplete")]
+        //public class SteamTurbineConfig2_DoPostConfigureComplete_Patch {
+        //    public static void Postfix(GameObject go) {
+        //        go.AddOrGet<GeneratorLinkToProxy>();
+        //    }
+        //}
+
+        [HarmonyPatch(typeof(WoodGasGeneratorConfig), "DoPostConfigureComplete")]
+        public class WoodGasGeneratorConfig_DoPostConfigureComplete_Patch {
+            public static void Postfix(GameObject go) {
+                go.AddOrGet<GeneratorLinkToProxy>();
+            }
+        }
+
+
+        [HarmonyPatch(typeof(BaseBatteryConfig), "DoPostConfigureComplete")]
+        public class BaseBatteryConfig_DoPostConfigureComplete_Patch {
+            public static void Postfix(GameObject go) {
+                go.AddOrGet<BatteryLinkToProxy>();
+            }
+        }
+
+        [HarmonyPatch(typeof(BatterySmartConfig), "DoPostConfigureComplete")]
+        public class BatterySmartConfig_DoPostConfigureComplete_Patch {
+            public static void Postfix(GameObject go) {
+                go.AddOrGet<BatteryLinkToProxy>();
+            }
+        }
+
+        [HarmonyPatch(typeof(BatteryConfig), "DoPostConfigureComplete")]
+        public class BatteryConfig_DoPostConfigureComplete_Patch {
+            public static void Postfix(GameObject go) {
+                go.AddOrGet<BatteryLinkToProxy>();
+            }
+        }
+
+        [HarmonyPatch(typeof(BatteryMediumConfig), "DoPostConfigureComplete")]
+        public class BatteryMediumConfig_DoPostConfigureComplete_Patch {
+            public static void Postfix(GameObject go) {
+                go.AddOrGet<BatteryLinkToProxy>();
+            }
+        }
+        #endregion
 
         [HarmonyPatch(typeof(EnergyConsumer), "IsConnected", MethodType.Getter)]
         public class EnergyConsumer_IsConnected_Patch {
             public static bool Prefix(EnergyConsumer __instance, ref bool __result) {
-                if (__instance.gameObject.HasTag(GlobalVar.HasProxy)) {
+                if (__instance.gameObject.HasTag(GlobalVar.HasProxyTag)) {
                     __result = true;
                     return false;
                 }
@@ -24,12 +104,7 @@ namespace WirelessProject.ProwerManager {
             }
         }
 
-        [HarmonyPatch(typeof(Battery), "OnSpawn")]
-        public class Battery_Patch {
-            public static void Postfix(Battery __instance) {
-                __instance.gameObject.AddOrGet<ProxyLink>().type = ProxyLink.ProwerType.Battery;
-            }
-        }
+
 
         //[HarmonyPatch(typeof(EnergyGenerator), "EnergySim200ms")]
         //public class ElectricityGenerator_EnergySim200ms_Patch {
@@ -39,7 +114,7 @@ namespace WirelessProject.ProwerManager {
         //            MethodInfo methodInfo = type.GetMethod("SetStatusItem", BindingFlags.NonPublic | BindingFlags.Instance);
         //            methodInfo.Invoke(__instance, new object[1] { null });
         //            Operational operational = __instance.gameObject.GetComponent<Operational>();
-                    
+
         //            if (__instance.hasMeter) {
         //                InputItem input = __instance.formula.inputs[0];
         //                ___meter.SetPositionPercent(___storage.GetMassAvailable(input.tag) / input.maxStoredMass);
@@ -77,17 +152,12 @@ namespace WirelessProject.ProwerManager {
 
 
 
-        [HarmonyPatch(typeof(Generator), "OnSpawn")]
-        public class Generator_Patch {
-            public static void Postfix(Generator __instance) {
-                __instance.gameObject.AddOrGet<ProxyLink>().type = ProxyLink.ProwerType.Generator;
-            }
-        }
+
 
         [HarmonyPatch(typeof(Generator), "CheckConnectionStatus")]
         public class Generate_CheckStatues_Patch {
             public static bool Prefix(Generator __instance) {
-                if (__instance.gameObject.HasTag(GlobalVar.HasProxy)) {
+                if (__instance.gameObject.HasTag(GlobalVar.HasProxyTag)) {
                     Type type = typeof(Generator);
                     MethodInfo methodInfo = type.GetMethod("SetStatusItem", BindingFlags.NonPublic | BindingFlags.Instance);
                     methodInfo.Invoke(__instance, new object[1] { null });

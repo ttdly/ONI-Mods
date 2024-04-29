@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using STRINGS;
 using static CircuitManager;
+using static WirelessProject.ProwerManager.GlobalVar;
 using UnityEngine;
-using KSerialization;
+using PeterHan.PLib.Core;
 
 namespace WirelessProject.ProwerManager {
-    [SerializationConfig(MemberSerialization.OptIn)]
+    
     public class PowerProxy : KMonoBehaviour, ISim200ms {
         public float minBatteryPercentFull;
         public float wattsUsed;
@@ -17,41 +18,46 @@ namespace WirelessProject.ProwerManager {
         private readonly List<Generator> activeGenerators = new List<Generator>();
         [MyCmpGet]
         readonly Operational operational;
+        private int ThisCell;
 
         #region LifeCycle
         protected override void OnSpawn() {
             base.OnSpawn();
-            GlobalVar.PowerProxies.Add(this);
-            GetComponent<KSelectable>().AddStatusItem(GlobalVar.ProxyMaxWattageStatus,this);
-            GetComponent<KSelectable>().AddStatusItem(GlobalVar.ProxyCircuitStatus, this);
+            ThisCell = Grid.PosToCell(gameObject.transform.GetPosition());
+            PowerProxiesWithCell.Add(ThisCell, this);
+            GetComponent<KSelectable>().AddStatusItem(ProxyMaxWattageStatus,this);
+            GetComponent<KSelectable>().AddStatusItem(ProxyCircuitStatus, this);
         }
 
         protected override void OnCleanUp() {
+            PUtil.LogDebug($"代理发电器 {generators.Count}，电池{batteries.Count}，用电器{energyConsumers.Count} 开始清理");            
             while(generators.Count > 0) {
                 ClearProxy(generators[0].gameObject);
-                Disconnect(generators[0]);
-            }
-            while (energyConsumers.Count > 0) {
-                ClearProxy(batteries[0].gameObject);
-                Disconnect(energyConsumers[0], true);
+                PUtil.LogDebug($"发电器{generators.Count}");
             }
             while (batteries.Count > 0) {
                 ClearProxy(batteries[0].gameObject);
-                Disconnect(batteries[0]);
+                PUtil.LogDebug($"电池{batteries.Count}");
             }
-            GlobalVar.PowerProxies.Remove(this);
+            while (energyConsumers.Count > 0) {
+                ClearProxy(energyConsumers[0].gameObject);
+                PUtil.LogDebug($"电器{energyConsumers.Count}");
+            }
+            PowerProxiesWithCell.Remove(ThisCell);
             base.OnCleanUp();
         }
         #endregion
 
         #region DisOrConnect
 
-        public void Connect(Generator generator) {
+        public int Connect(Generator generator) {
             if (!Game.IsQuitting()) {
                 Game.Instance.energySim.RemoveGenerator(generator);
                 Game.Instance.circuitManager.Disconnect(generator);
                 generators.Add(generator);
+                return ThisCell;
             }
+            return -1;
         }
 
         public void Disconnect(Generator generator) {
@@ -62,11 +68,13 @@ namespace WirelessProject.ProwerManager {
             }
         }
 
-        public void Connect(Battery battery) {
+        public int Connect(Battery battery) {
             if (!Game.IsQuitting()) {
                 Game.Instance.energySim.RemoveBattery(battery);
                 batteries.Add(battery);
+                return ThisCell;
             }
+            return -1;
         }
 
         public void Disconnect(Battery battery) {
@@ -76,12 +84,14 @@ namespace WirelessProject.ProwerManager {
             }
         }
 
-        public void Connect(EnergyConsumer consumer) {
+        public int Connect(EnergyConsumer consumer) {
             if (!Game.IsQuitting()) {
                 Game.Instance.energySim.RemoveEnergyConsumer(consumer);
                 Game.Instance.circuitManager.Disconnect(consumer, true);
                 energyConsumers.Add(consumer);
+                return ThisCell;
             }
+            return -1;
         }
 
         public void Disconnect(EnergyConsumer consumer, bool isDestroy) {
@@ -95,6 +105,44 @@ namespace WirelessProject.ProwerManager {
             }
         }
 
+        #endregion
+
+        #region AddOrRemove
+        public void Remove(EnergyConsumer consumer) {
+            energyConsumers.Remove(consumer);
+        }
+
+        public void Remove(Generator generator) {
+            generators.Remove(generator);
+        }
+
+        public void Remove(Battery battery) {
+            batteries.Remove(battery);
+        }
+
+        public int Add(EnergyConsumer consumer) {
+            if (!Game.IsQuitting()) {
+                energyConsumers.Add(consumer);
+                return ThisCell;
+            }
+            return -1;
+        }
+
+        public int Add(Generator generator) {
+            if (!Game.IsQuitting()) {
+                generators.Add(generator);
+                return ThisCell;
+            }
+            return -1;
+        }
+
+        public int Add(Battery battery) {
+            if (!Game.IsQuitting()) {
+                batteries.Add(battery);
+                return ThisCell;
+            }
+            return -1;
+        }
         #endregion
 
         #region RenderEverTick
@@ -325,12 +373,7 @@ namespace WirelessProject.ProwerManager {
         }
 
         private void ClearProxy(GameObject go) {
-            ProxyLink proxy = go.GetComponent<ProxyLink>();
-            if (proxy != null) {
-                proxy.proxy = null;
-                proxy.hasProxy = false;
-                proxy.gameObject.RemoveTag(GlobalVar.HasProxy);
-            }
+            go.GetComponent<BaseLinkToProxy>().RemoveThisFromProxy();
         }
     }
 }

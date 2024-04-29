@@ -11,11 +11,9 @@ namespace WirelessProject.ProwerManager {
             EffectorValues tieR5 = NOISE_POLLUTION.NOISY.TIER5;
             EffectorValues tieR1 = BUILDINGS.DECOR.PENALTY.TIER1;
             EffectorValues noise = tieR5;
-            BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef(ID, 3, 2, "transformer_kanim", 30, 30f, tieR3, refinedMetals, 800f, BuildLocationRule.OnFloor, tieR1, noise);
+            BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef(ID, 3, 2, "power_proxy_kanim", 30, 30f, tieR3, refinedMetals, 800f, BuildLocationRule.OnFloor, tieR1, noise);
             buildingDef.ViewMode = OverlayModes.Power.ID;
             buildingDef.AudioCategory = "Metal";
-            buildingDef.Entombable = true;
-            buildingDef.PermittedRotations = PermittedRotations.FlipH;
             return buildingDef;
         }
 

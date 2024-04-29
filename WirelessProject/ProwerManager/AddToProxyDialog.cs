@@ -1,5 +1,6 @@
 ﻿using PeterHan.PLib.Core;
 using PeterHan.PLib.UI;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace WirelessProject.ProwerManager {
@@ -8,7 +9,7 @@ namespace WirelessProject.ProwerManager {
         private readonly GameObject DialogObj;
         private PPanel Preview;
 
-        public AddToProxyDialog(ProxyLink  addToProxy) {
+        public AddToProxyDialog(BaseLinkToProxy addToProxy) {
             PPanel mainPanel = new PPanel("MainPanel") {
                 FlexSize = Vector2.right,
                 BackColor = Color.white,
@@ -24,7 +25,7 @@ namespace WirelessProject.ProwerManager {
             };
 
             PDialog main = new PDialog("main") {
-                Title =  "选择接入终端",
+                Title = "选择接入终端",
                 MaxSize = new Vector2(0, 400),
                 DialogBackColor = Color.white,
                 DialogClosed = _ => CloseDialog(),
@@ -40,14 +41,15 @@ namespace WirelessProject.ProwerManager {
             DialogObj.DeleteObject();
         }
 
-        public void ShowDialog(PPanel parent, ProxyLink addToProxy) {
-            foreach (PowerProxy proxy in GlobalVar.PowerProxies) {
+        public void ShowDialog(PPanel parent, BaseLinkToProxy addToProxy) {
+            foreach (KeyValuePair<int, PowerProxy> valuePair in GlobalVar.PowerProxiesWithCell) {
+                PowerProxy proxy = valuePair.Value;
                 bool isCurr = proxy == addToProxy.proxy;
                 PPanel panel = new PPanel() {
                     Direction = PanelDirection.Horizontal,
                     FlexSize = Vector2.right,
-                    BackColor = isCurr 
-                    ? PUITuning.Colors.ButtonBlueStyle.activeColor 
+                    BackColor = isCurr
+                    ? PUITuning.Colors.ButtonBlueStyle.activeColor
                     : PUITuning.Colors.ButtonBlueStyle.inactiveColor,
                 };
                 if (isCurr) {

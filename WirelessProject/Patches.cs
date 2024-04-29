@@ -54,7 +54,7 @@ namespace WirelessProject {
         [HarmonyPatch(typeof(Game), nameof(Game.Load))]
         public class Game_Load_Patch {
             public static void Prefix() {
-                ProwerManager.GlobalVar.PowerProxies.Clear();
+                ProwerManager.GlobalVar.PowerProxiesWithCell.Clear();
             }
         }
     }
