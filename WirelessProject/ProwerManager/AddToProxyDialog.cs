@@ -7,7 +7,6 @@ namespace WirelessProject.ProwerManager {
     public class AddToProxyDialog {
         public static AddToProxyDialog Instance;
         private readonly GameObject DialogObj;
-        private PPanel Preview;
 
         public AddToProxyDialog(BaseLinkToProxy addToProxy) {
             PPanel mainPanel = new PPanel("MainPanel") {
@@ -42,31 +41,21 @@ namespace WirelessProject.ProwerManager {
         }
 
         public void ShowDialog(PPanel parent, BaseLinkToProxy addToProxy) {
-            foreach (KeyValuePair<int, PowerProxy> valuePair in GlobalVar.PowerProxiesWithCell) {
-                PowerProxy proxy = valuePair.Value;
-                bool isCurr = proxy == addToProxy.proxy;
+            foreach (KeyValuePair<int, PowerProxy.ProxyList> valuePair in GlobalVar.PowerProxiesWithCell) {
+                PUtil.LogDebug($"建{valuePair.Key} {valuePair.Value == null} {addToProxy == null}");
                 PPanel panel = new PPanel() {
                     Direction = PanelDirection.Horizontal,
                     FlexSize = Vector2.right,
-                    BackColor = isCurr
-                    ? PUITuning.Colors.ButtonBlueStyle.activeColor
-                    : PUITuning.Colors.ButtonBlueStyle.inactiveColor,
                 };
-                if (isCurr) {
-                    Preview = panel;
-                }
+
                 PLabel label = new PLabel() {
-                    Text = proxy.gameObject.GetProperName(),
+                    Text = valuePair.Value.ThisCell.ToString(),
                 };
                 PButton btn = new PButton() {
                     Text = "连接",
                     OnClick = delegate {
-                        if (isCurr) return;
                         panel.BackColor = PUITuning.Colors.ButtonBlueStyle.activeColor;
-                        if (Preview != null) {
-                            Preview.BackColor = PUITuning.Colors.ButtonBlueStyle.inactiveColor;
-                        }
-                        addToProxy.ChangeProxy(proxy);
+                        addToProxy.ChangeProxy(valuePair.Value);
                         CloseDialog();
                     }
                 };

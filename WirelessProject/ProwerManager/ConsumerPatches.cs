@@ -9,7 +9,7 @@ namespace WirelessProject.ProwerManager {
                 go.AddOrGet<ConsumerLinkToProxy>();
             }
         }
-        s
+
         [HarmonyPatch(typeof(AdvancedResearchCenterConfig), "DoPostConfigureComplete")]
         public class AdvancedResearchCenterConfig_DoPostConfigureComplete_Patch {
             public static void Postfix(GameObject go) {
