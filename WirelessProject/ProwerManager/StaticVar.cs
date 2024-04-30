@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 namespace WirelessProject.ProwerManager {
-    public class GlobalVar {
+    public class StaticVar {
         public static Tag HasProxyTag = new Tag("Project_HasProxy");
         public static List<PowerProxy> PowerProxies = new List<PowerProxy>();
         //public static Dictionary<int, PowerProxy> PowerProxiesWithCell = new Dictionary<int, PowerProxy>();

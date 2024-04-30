@@ -95,7 +95,7 @@ namespace WirelessProject.ProwerManager {
         [HarmonyPatch(typeof(EnergyConsumer), "IsConnected", MethodType.Getter)]
         public class EnergyConsumer_IsConnected_Patch {
             public static bool Prefix(EnergyConsumer __instance, ref bool __result) {
-                if (__instance.gameObject.HasTag(GlobalVar.HasProxyTag)) {
+                if (__instance.gameObject.HasTag(StaticVar.HasProxyTag)) {
                     __result = true;
                     return false;
                 }
@@ -103,57 +103,10 @@ namespace WirelessProject.ProwerManager {
             }
         }
 
-
-
-        //[HarmonyPatch(typeof(EnergyGenerator), "EnergySim200ms")]
-        //public class ElectricityGenerator_EnergySim200ms_Patch {
-        //    public static bool Prefix(float dt, EnergyGenerator __instance, Storage ___storage, MeterController ___meter) {
-        //        if (__instance.gameObject.HasTag(GlobalVar.HasProxy)) {
-        //            Type type = typeof(Generator);
-        //            MethodInfo methodInfo = type.GetMethod("SetStatusItem", BindingFlags.NonPublic | BindingFlags.Instance);
-        //            methodInfo.Invoke(__instance, new object[1] { null });
-        //            Operational operational = __instance.gameObject.GetComponent<Operational>();
-
-        //            if (__instance.hasMeter) {
-        //                InputItem input = __instance.formula.inputs[0];
-        //                ___meter.SetPositionPercent(___storage.GetMassAvailable(input.tag) / input.maxStoredMass);
-        //            }
-        //            bool flag = false;
-        //            if (IsConvertible(__instance.formula, dt, ___storage)) {
-        //                flag = true;
-        //            }
-        //            if (GlobalVar.wireConnectedFlag == null) {
-        //                GlobalVar.InitFlagMy();
-        //            }
-        //            operational.SetFlag(Generator.generatorConnectedFlag, true);
-        //            operational.SetFlag(GlobalVar.wireConnectedFlag, true);
-        //            __instance.GetComponent<Operational>().SetActive(flag);
-        //            return false;
-        //        }
-        //        return true;
-        //    }
-
-        //    private static bool IsConvertible(Formula formula, float dt, Storage storage) {
-        //        bool flag = true;
-        //        InputItem[] inputs = formula.inputs;
-        //        for (int i = 0; i < inputs.Length; i++) {
-        //            InputItem inputItem = inputs[i];
-        //            float massAvailable = storage.GetMassAvailable(inputItem.tag);
-        //            float num = inputItem.consumptionRate * dt;
-        //            flag = flag && massAvailable >= num;
-        //            if (!flag) {
-        //                break;
-        //            }
-        //        }
-        //        return flag;
-        //    }
-        //}
-
-
         [HarmonyPatch(typeof(Generator), "CheckConnectionStatus")]
         public class Generate_CheckStatues_Patch {
             public static bool Prefix(Generator __instance) {
-                if (__instance.gameObject.HasTag(GlobalVar.HasProxyTag)) {
+                if (__instance.gameObject.HasTag(StaticVar.HasProxyTag)) {
                     Type type = typeof(Generator);
                     MethodInfo methodInfo = type.GetMethod("SetStatusItem", BindingFlags.NonPublic | BindingFlags.Instance);
                     methodInfo.Invoke(__instance, new object[1] { null });

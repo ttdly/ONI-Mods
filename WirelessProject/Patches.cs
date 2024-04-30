@@ -11,7 +11,7 @@ namespace WirelessProject {
                 ModUtil.AddBuildingToPlanScreen("Equipment", ProwerManager.PowerProxyConfig.ID);
                 TUNING.BUILDINGS.PLANSUBCATEGORYSORTING.Add(ProwerManager.PowerProxyConfig.ID, "Prower Proxy");
                 Db.Get().Techs.Get("AdvancedResearch").unlockedItemIDs.Add(ProwerManager.PowerProxyConfig.ID);
-                GlobalVar.ProxyCircuitStatus = new StatusItem("ProxyCircuitStatus", "BUILDING", "", StatusItem.IconType.Info, NotificationType.Neutral, false, OverlayModes.None.ID).SetResolveStringCallback((Func<string, object, string>)((str, data) => {
+                StaticVar.ProxyCircuitStatus = new StatusItem("ProxyCircuitStatus", "BUILDING", "", StatusItem.IconType.Info, NotificationType.Neutral, false, OverlayModes.None.ID).SetResolveStringCallback((Func<string, object, string>)((str, data) => {
                     PowerProxy proxy = (PowerProxy)data;
                     GameUtil.WattageFormatterUnit unit = GameUtil.WattageFormatterUnit.Watts;
                     if (proxy.maxWatts >= Wire.WattageRating.Max20000)
@@ -31,7 +31,7 @@ namespace WirelessProject {
                     return str;
                 }));
 
-                GlobalVar.ProxyMaxWattageStatus = new StatusItem("ProxyMaxWattageStatus", "BUILDING", "", StatusItem.IconType.Info, NotificationType.Neutral, false, OverlayModes.None.ID).SetResolveStringCallback((str, data) => {
+                StaticVar.ProxyMaxWattageStatus = new StatusItem("ProxyMaxWattageStatus", "BUILDING", "", StatusItem.IconType.Info, NotificationType.Neutral, false, OverlayModes.None.ID).SetResolveStringCallback((str, data) => {
                     PowerProxy proxy = (PowerProxy)data;
                     GameUtil.WattageFormatterUnit unit = GameUtil.WattageFormatterUnit.Watts;
                     if (proxy.maxWatts >= Wire.WattageRating.Max20000)
@@ -54,7 +54,7 @@ namespace WirelessProject {
         [HarmonyPatch(typeof(Game), nameof(Game.Load))]
         public class Game_Load_Patch {
             public static void Prefix() {
-                ProwerManager.GlobalVar.PowerProxiesWithCell.Clear();
+                ProwerManager.StaticVar.PowerProxiesWithCell.Clear();
             }
         }
     }

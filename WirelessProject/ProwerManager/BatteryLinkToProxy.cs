@@ -4,44 +4,33 @@
         readonly Battery battery;
 
         protected override void AddThisToProxy() {
-            if (proxy == null) return;
-            ProxyCell = proxy.Connect(battery);
+            if (proxyList == null) return;
+            ProxyCell = proxyList.Connect(battery);
             base.AddThisToProxy();
         }
 
-        public override void RemoveThisFromProxy() {
-            if (proxy == null) return;
-            proxy.Disconnect(battery);
-            base.RemoveThisFromProxy();
+        public override void RemoveThisFromProxy(bool isCleanUp =false) {
+            if (proxyList == null) return;
+            if (isCleanUp) {
+                proxyList.Remove(battery);
+            } else {
+                proxyList.Disconnect(battery);
+            }
+            base.RemoveThisFromProxy(isCleanUp);
         }
-
-        //public override void ChangeProxy(PowerProxy new_proxy) {
-        //    if (new_proxy == null) {
-        //        RemoveThisFromProxy();
-        //        return;
-        //    }
-        //    if (proxy == null) {
-        //        proxy = new_proxy;
-        //        AddThisToProxy();
-        //    } else {
-        //        proxy.Remove(battery);
-        //        ProxyCell = new_proxy.Add(battery);
-        //        proxy = new_proxy;
-        //    }
-        //}
 
         public override void ChangeProxy(PowerProxy.ProxyList new_proxy) {
             if (new_proxy == null) {
                 RemoveThisFromProxy();
                 return;
             }
-            if (proxy == null) {
-                proxy = new_proxy;
+            if (proxyList == null) {
+                proxyList = new_proxy;
                 AddThisToProxy();
             } else {
-                proxy.Remove(battery);
+                proxyList.Remove(battery);
                 ProxyCell = new_proxy.Add(battery);
-                proxy = new_proxy;
+                proxyList = new_proxy;
             }
         }
     }

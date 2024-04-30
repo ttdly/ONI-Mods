@@ -6,44 +6,34 @@ namespace WirelessProject.ProwerManager {
         readonly Generator generator;
 
         protected override void AddThisToProxy() {
-            if (proxy == null) return;
-            ProxyCell = proxy.Connect(generator);
+            if (proxyList == null) return;
+            ProxyCell = proxyList.Connect(generator);
             base.AddThisToProxy();
         }
 
-        public override void RemoveThisFromProxy() {
-            if (proxy == null) return;
-            proxy.Disconnect(generator);
-            base.RemoveThisFromProxy();
+        public override void RemoveThisFromProxy(bool isCleanUp = false) {
+            if (proxyList == null) return;
+            if (isCleanUp) {
+                proxyList.Remove(generator);
+            } else {
+                proxyList.Disconnect(generator);
+            }
+            base.RemoveThisFromProxy(isCleanUp);
         }
 
-        //public override void ChangeProxy(PowerProxy new_proxy) {
-        //    if (new_proxy == null) {
-        //        RemoveThisFromProxy();
-        //        return;
-        //    }
-        //    if (proxy == null) {
-        //        proxy = new_proxy;
-        //        AddThisToProxy();
-        //    } else {
-        //        proxy.Remove(generator);
-        //        ProxyCell = new_proxy.Add(generator);
-        //        proxy = new_proxy;
-        //    }
-        //}
 
         public override void ChangeProxy(PowerProxy.ProxyList new_proxy) {
             if (new_proxy == null) {
                 RemoveThisFromProxy();
                 return;
             }
-            if (proxy == null) {
-                proxy = new_proxy;
+            if (proxyList == null) {
+                proxyList = new_proxy;
                 AddThisToProxy();
             } else {
-                proxy.Remove(generator);
+                proxyList.Remove(generator);
                 ProxyCell = new_proxy.Add(generator);
-                proxy = new_proxy;
+                proxyList = new_proxy;
             }
         }
     }

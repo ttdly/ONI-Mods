@@ -1,16 +1,16 @@
 ﻿using KSerialization;
 using PeterHan.PLib.Core;
-using static WirelessProject.ProwerManager.GlobalVar;
+using static WirelessProject.ProwerManager.StaticVar;
 using UnityEngine;
 
 namespace WirelessProject.ProwerManager {
-    public class BaseLinkToProxy :KMonoBehaviour{
+    public class BaseLinkToProxy : KMonoBehaviour {
         [Serialize]
         public bool hasProxy = false;
         [Serialize]
         public int ProxyCell = -1;
         //public PowerProxy proxy = null;
-        public PowerProxy.ProxyList proxy;
+        public PowerProxy.ProxyList proxyList;
 
         private static readonly EventSystem.IntraObjectHandler<BaseLinkToProxy> OnRefreshUserMenuDelegate = new EventSystem.IntraObjectHandler<BaseLinkToProxy>((component, data) => component.OnRefreshUserMenu(data));
 
@@ -21,7 +21,7 @@ namespace WirelessProject.ProwerManager {
             if (ProxyCell != -1) {
                 PowerProxiesWithCell.TryGetValue(ProxyCell, out PowerProxy.ProxyList new_proxy);
                 if (new_proxy != null) {
-                    proxy = new_proxy;
+                    proxyList = new_proxy;
                 } else {
                     PowerProxy.ProxyList new_init_proxy = new PowerProxy.ProxyList {
                         ThisCell = ProxyCell,
@@ -32,39 +32,34 @@ namespace WirelessProject.ProwerManager {
             }
         }
 
+        protected override void OnCleanUp() {
+            base.OnCleanUp();
+            RemoveThisFromProxy(true);
+        }
+
         private void OnRefreshUserMenu(object _) {
             GameObject go = new GameObject("screen");
             DetailsScreen.Instance.SetSecondarySideScreen(go.AddComponent<PowerProxyScreen>(), "nihao");
             if (PowerProxiesWithCell.Count == 0) return;
-            if (hasProxy) {
-                Game.Instance.userMenu.AddButton(
+
+            Game.Instance.userMenu.AddButton(
                 gameObject,
                 new KIconButtonMenu.ButtonInfo(
                     "action_follow_cam",
-                    "断开连接",
-                    RemoveThisFromProxy,
+                    "管理终端",
+                    OpenDialog,
                     tooltipText: "NOO")
                 );
-            } else {
-                Game.Instance.userMenu.AddButton(
-                    gameObject,
-                    new KIconButtonMenu.ButtonInfo(
-                        "action_follow_cam",
-                        "接入终端",
-                        OpenDialog,
-                        tooltipText: "NOO")
-                    );
-            }
         }
 
         private void OpenDialog() {
             new AddToProxyDialog(this);
         }
 
-        public virtual void RemoveThisFromProxy() {
+        public virtual void RemoveThisFromProxy(bool _ = false) {
             gameObject.RemoveTag(HasProxyTag);
             hasProxy = false;
-            proxy = null;
+            proxyList = null;
             ProxyCell = -1;
         }
 
@@ -73,6 +68,6 @@ namespace WirelessProject.ProwerManager {
             hasProxy = true;
         }
 
-        public virtual void ChangeProxy(PowerProxy.ProxyList new_proxy) {}
+        public virtual void ChangeProxy(PowerProxy.ProxyList new_proxy) { }
     }
 }

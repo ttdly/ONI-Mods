@@ -2,6 +2,7 @@
 using PeterHan.PLib.UI;
 using System.Collections.Generic;
 using UnityEngine;
+using static Database.MonumentPartResource;
 
 namespace WirelessProject.ProwerManager {
     public class AddToProxyDialog {
@@ -40,9 +41,31 @@ namespace WirelessProject.ProwerManager {
             DialogObj.DeleteObject();
         }
 
+        public void AddNull(PPanel parent, BaseLinkToProxy addToProxy) {
+            PPanel panel = new PPanel() {
+                Direction = PanelDirection.Horizontal,
+                FlexSize = Vector2.right,
+            };
+
+            PLabel label = new PLabel() {
+                Text = "NULL",
+                TextStyle = PUITuning.Fonts.TextDarkStyle
+            };
+            PButton btn = new PButton() {
+                Text = "连接",
+                OnClick = delegate {
+                    panel.BackColor = PUITuning.Colors.ButtonBlueStyle.activeColor;
+                    addToProxy.ChangeProxy(null);
+                    CloseDialog();
+                }
+            };
+            panel.AddChild(label).AddChild(btn);
+            parent.AddChild(panel);
+        }
+
         public void ShowDialog(PPanel parent, BaseLinkToProxy addToProxy) {
-            foreach (KeyValuePair<int, PowerProxy.ProxyList> valuePair in GlobalVar.PowerProxiesWithCell) {
-                PUtil.LogDebug($"建{valuePair.Key} {valuePair.Value == null} {addToProxy == null}");
+            AddNull(parent, addToProxy);
+            foreach (KeyValuePair<int, PowerProxy.ProxyList> valuePair in StaticVar.PowerProxiesWithCell) {
                 PPanel panel = new PPanel() {
                     Direction = PanelDirection.Horizontal,
                     FlexSize = Vector2.right,
@@ -50,6 +73,8 @@ namespace WirelessProject.ProwerManager {
 
                 PLabel label = new PLabel() {
                     Text = valuePair.Value.ThisCell.ToString(),
+                    FlexSize = Vector2.right,
+                    TextStyle = PUITuning.Fonts.TextDarkStyle
                 };
                 PButton btn = new PButton() {
                     Text = "连接",

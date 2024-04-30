@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using STRINGS;
 using static CircuitManager;
-using static WirelessProject.ProwerManager.GlobalVar;
+using static WirelessProject.ProwerManager.StaticVar;
 using UnityEngine;
 using PeterHan.PLib.Core;
 
