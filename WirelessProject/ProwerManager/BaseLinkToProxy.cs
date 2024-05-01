@@ -1,7 +1,6 @@
 ﻿using KSerialization;
-using PeterHan.PLib.Core;
-using static WirelessProject.ProwerManager.StaticVar;
 using UnityEngine;
+using static WirelessProject.ProwerManager.StaticVar;
 
 namespace WirelessProject.ProwerManager {
     public class BaseLinkToProxy : KMonoBehaviour {
@@ -9,7 +8,6 @@ namespace WirelessProject.ProwerManager {
         public bool hasProxy = false;
         [Serialize]
         public int ProxyCell = -1;
-        //public PowerProxy proxy = null;
         public PowerProxy.ProxyList proxyList;
 
         private static readonly EventSystem.IntraObjectHandler<BaseLinkToProxy> OnRefreshUserMenuDelegate = new EventSystem.IntraObjectHandler<BaseLinkToProxy>((component, data) => component.OnRefreshUserMenu(data));
@@ -17,16 +15,16 @@ namespace WirelessProject.ProwerManager {
         protected override void OnSpawn() {
             base.OnSpawn();
             Subscribe((int)GameHashes.RefreshUserMenu, OnRefreshUserMenuDelegate);
-
             if (ProxyCell != -1) {
-                PowerProxiesWithCell.TryGetValue(ProxyCell, out PowerProxy.ProxyList new_proxy);
+                PowerInfoList.TryGetValue(ProxyCell, out PowerProxy.ProxyList new_proxy);
                 if (new_proxy != null) {
                     proxyList = new_proxy;
                 } else {
                     PowerProxy.ProxyList new_init_proxy = new PowerProxy.ProxyList {
                         ThisCell = ProxyCell,
                     };
-                    PowerProxiesWithCell.Add(ProxyCell, new_init_proxy);
+                    PowerInfoList.Add(ProxyCell, new_init_proxy);
+                    proxyList = new_init_proxy;
                 }
                 AddThisToProxy();
             }
@@ -38,10 +36,9 @@ namespace WirelessProject.ProwerManager {
         }
 
         private void OnRefreshUserMenu(object _) {
+            if (PowerInfoList.Count == 0) return;
             GameObject go = new GameObject("screen");
             DetailsScreen.Instance.SetSecondarySideScreen(go.AddComponent<PowerProxyScreen>(), "nihao");
-            if (PowerProxiesWithCell.Count == 0) return;
-
             Game.Instance.userMenu.AddButton(
                 gameObject,
                 new KIconButtonMenu.ButtonInfo(

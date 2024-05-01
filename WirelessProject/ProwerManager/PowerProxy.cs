@@ -3,7 +3,7 @@ using STRINGS;
 using static CircuitManager;
 using static WirelessProject.ProwerManager.StaticVar;
 using UnityEngine;
-using PeterHan.PLib.Core;
+using KSerialization;
 
 namespace WirelessProject.ProwerManager {
 
@@ -113,15 +113,19 @@ namespace WirelessProject.ProwerManager {
             }
             #endregion
         }
-
+        [Serialize]
+        bool named = false;
         public ProxyList proxyList;
-        public float minBatteryPercentFull;
         public float wattsUsed;
         public Wire.WattageRating maxWatts = Wire.WattageRating.Max20000;
         private float elapsedTime;
         private readonly List<Generator> activeGenerators = new List<Generator>();
         [MyCmpGet]
         readonly Operational operational;
+        [MyCmpGet]
+        readonly Building building;
+        [MyCmpGet]
+        readonly UserNameable nameable;
         public int ThisCell;
 
         #region LifeCycle
@@ -129,7 +133,7 @@ namespace WirelessProject.ProwerManager {
             base.OnSpawn();
             ThisCell = Grid.PosToCell(gameObject.transform.GetPosition());
             //PowerProxiesWithCell.Add(ThisCell, this);
-            PowerProxiesWithCell.TryGetValue(ThisCell, out ProxyList proxyList);
+            PowerInfoList.TryGetValue(ThisCell, out ProxyList proxyList);
             if (proxyList != null) {
                 this.proxyList = proxyList;
                 this.proxyList.proxy = this;
@@ -138,12 +142,12 @@ namespace WirelessProject.ProwerManager {
                     ThisCell = ThisCell,
                     proxy = this
                 };
-                PowerProxiesWithCell.Add(ThisCell, new_proxyList);
+                PowerInfoList.Add(ThisCell, new_proxyList);
                 this.proxyList = new_proxyList;
             }
-            
-            GetComponent<KSelectable>().AddStatusItem(ProxyMaxWattageStatus, this);
-            GetComponent<KSelectable>().AddStatusItem(ProxyCircuitStatus, this);
+            GenerateName();
+            //GetComponent<KSelectable>().AddStatusItem(ProxyMaxWattageStatus, this);
+            //GetComponent<KSelectable>().AddStatusItem(ProxyCircuitStatus, this);
         }
 
         protected override void OnCleanUp() {
@@ -156,12 +160,10 @@ namespace WirelessProject.ProwerManager {
             while (proxyList.energyConsumers.Count > 0) {
                 ClearProxy(proxyList.energyConsumers[0].gameObject);
             }
-            PowerProxiesWithCell.Remove(ThisCell);
+            PowerInfoList.Remove(ThisCell);
             base.OnCleanUp();
         }
         #endregion
-
-
 
         #region RenderEverTick
         public void Sim200msLast(float dt) {
@@ -185,17 +187,13 @@ namespace WirelessProject.ProwerManager {
 
             activeGenerators.Sort((Generator a, Generator b) => a.JoulesAvailable.CompareTo(b.JoulesAvailable));
 
-            float num = 1f;
             for (int index = 0; index < proxyList.batteries.Count; index++) {
                 Battery battery = proxyList.batteries[index];
                 if (battery.JoulesAvailable > 0f) {
                     hasAnyWattProvider = true;
                 }
-
-                num = Mathf.Min(num, battery.PercentFull);
             }
 
-            minBatteryPercentFull = num;
             if (hasAnyWattProvider) {
                 for (int index = 0; index < proxyList.energyConsumers.Count; index++) {
                     EnergyConsumer energyConsumer = proxyList.energyConsumers[index];
@@ -237,34 +235,12 @@ namespace WirelessProject.ProwerManager {
             proxyList.batteries.Sort((Battery a, Battery b) => (a.Capacity - a.JoulesAvailable).CompareTo(b.Capacity - b.JoulesAvailable));
             proxyList.generators.Sort((Generator a, Generator b) => a.JoulesAvailable.CompareTo(b.JoulesAvailable));
 
-            float joules_used = 0f;
-            float joules_used2 = 0f;
+            ChargeBatteries(proxyList.batteries, proxyList.generators);
 
-            ChargeBatteries(proxyList.batteries, proxyList.generators, ref joules_used2);
+            UpdateBatteryConnectionStatus(proxyList.batteries, true);
 
-            minBatteryPercentFull = 1f;
-            for (int index = 0; index < proxyList.batteries.Count; index++) {
-                float percentFull = proxyList.batteries[index].PercentFull;
-                if (percentFull < minBatteryPercentFull) {
-                    minBatteryPercentFull = percentFull;
-                }
-            }
-
-            wattsUsed += joules_used / 0.2f;
-            bool is_connected_to_something_useful = proxyList.generators.Count + proxyList.energyConsumers.Count > 0;
-            UpdateBatteryConnectionStatus(proxyList.batteries, is_connected_to_something_useful);
-            bool flag4 = proxyList.generators.Count > 0;
-            if (!flag4) {
-                foreach (Battery battery3 in proxyList.batteries) {
-                    if (battery3.JoulesAvailable > 0f) {
-                        flag4 = true;
-                        break;
-                    }
-                }
-            }
-
-            for (int num12 = 0; num12 < proxyList.generators.Count; num12++) {
-                Generator generator2 = proxyList.generators[num12];
+            for (int index = 0; index < proxyList.generators.Count; index++) {
+                Generator generator2 = proxyList.generators[index];
                 ReportManager.Instance.ReportValue(ReportManager.ReportType.EnergyWasted, 0f - generator2.JoulesAvailable, StringFormatter.Replace(BUILDINGS.PREFABS.GENERATOR.OVERPRODUCTION, "{Generator}", generator2.gameObject.GetProperName()));
             }
         }
@@ -276,6 +252,7 @@ namespace WirelessProject.ProwerManager {
             }
             operational.SetActive(true);
             Sim200msLast(dt);
+            building.Def.ExhaustKilowattsWhenActive = wattsUsed;
             EnergySim200ms(dt);
         }
 
@@ -318,17 +295,17 @@ namespace WirelessProject.ProwerManager {
             }
         }
 
-        private void ChargeBatteries(List<Battery> sink_batteries, List<Generator> source_generators, ref float joules_used) {
+        private void ChargeBatteries(List<Battery> sink_batteries, List<Generator> source_generators) {
             if (sink_batteries.Count == 0) {
                 return;
             }
             foreach (Generator source_generator in source_generators) {
-                for (bool flag = true; flag && source_generator.JoulesAvailable >= 1f; flag = ChargeBatteriesFromGenerator(sink_batteries, source_generator, ref joules_used)) {
+                for (bool flag = true; flag && source_generator.JoulesAvailable >= 1f; flag = ChargeBatteriesFromGenerator(sink_batteries, source_generator)) {
                 }
             }
         }
 
-        private bool ChargeBatteriesFromGenerator(List<Battery> sink_batteries, Generator source_generator, ref float joules_used) {
+        private bool ChargeBatteriesFromGenerator(List<Battery> sink_batteries, Generator source_generator) {
             float num = source_generator.JoulesAvailable;
             float num2 = 0f;
             for (int i = 0; i < sink_batteries.Count; i++) {
@@ -346,7 +323,6 @@ namespace WirelessProject.ProwerManager {
 
             if (num2 > 0f) {
                 source_generator.ApplyDeltaJoules(0f - num2);
-                joules_used += num2;
                 return true;
             }
 
@@ -392,6 +368,31 @@ namespace WirelessProject.ProwerManager {
 
         private void ClearProxy(GameObject go) {
             go.GetComponent<BaseLinkToProxy>().RemoveThisFromProxy();
+        }
+
+        private void GenerateName() {
+            if (named) return;
+            int cell = Grid.PosToCell(gameObject);
+            Quadrant[] quadrantOfCell = gameObject.GetMyWorld().GetQuadrantOfCell(cell, 2);
+            string str1 = ((int)quadrantOfCell[0]).ToString();
+            int num = (int)quadrantOfCell[1];
+            string str2 = num.ToString();
+            string str3 = str1 + str2;
+            string[] strArray1 = NAMEGEN.GEYSER_IDS.IDs.ToString().Split('\n');
+            string str4 = strArray1[Random.Range(0, strArray1.Length)];
+            string[] strArray2 = new string[6]
+            {
+              UI.StripLinkFormatting(gameObject.GetProperName()),
+              " ",
+              str4,
+              str3,
+              "‑",
+              null
+            };
+            num = Random.Range(0, 10);
+            strArray2[5] = num.ToString();
+            nameable.SetName(string.Concat(strArray2));
+            named = true;
         }
     }
 }
