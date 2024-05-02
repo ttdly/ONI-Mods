@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using PeterHan.PLib.UI;
 using System;
 using System.Reflection;
 using UnityEngine;
@@ -114,6 +115,13 @@ namespace WirelessProject.ProwerManager {
                     return false;
                 }
                 return true;
+            }
+        }
+
+        [HarmonyPatch(typeof(DetailsScreen), "OnPrefabInit")]
+        public static class SideScreenCreator {
+            internal static void Postfix() {
+                LinkToProxyScreen.AddSideScreenContent();
             }
         }
     }

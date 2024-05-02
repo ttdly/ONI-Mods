@@ -4,6 +4,7 @@ using static CircuitManager;
 using static WirelessProject.ProwerManager.StaticVar;
 using UnityEngine;
 using KSerialization;
+using Microsoft.Build.Framework;
 
 namespace WirelessProject.ProwerManager {
 
@@ -11,7 +12,8 @@ namespace WirelessProject.ProwerManager {
 
         public class ProxyList {
             public PowerProxy proxy;
-            public int ThisCell;
+            public int ProxyInfoId;
+            public string ProxyName;
             public readonly List<EnergyConsumer> energyConsumers = new List<EnergyConsumer>();
             public readonly List<Battery> batteries = new List<Battery>();
             public readonly List<Generator> generators = new List<Generator>();
@@ -23,7 +25,7 @@ namespace WirelessProject.ProwerManager {
                     Game.Instance.energySim.RemoveGenerator(generator);
                     Game.Instance.circuitManager.Disconnect(generator);
                     generators.Add(generator);
-                    return ThisCell;
+                    return ProxyInfoId;
                 }
                 return -1;
             }
@@ -40,7 +42,7 @@ namespace WirelessProject.ProwerManager {
                 if (!Game.IsQuitting()) {
                     Game.Instance.energySim.RemoveBattery(battery);
                     batteries.Add(battery);
-                    return ThisCell;
+                    return ProxyInfoId;
                 }
                 return -1;
             }
@@ -57,7 +59,7 @@ namespace WirelessProject.ProwerManager {
                     Game.Instance.energySim.RemoveEnergyConsumer(consumer);
                     Game.Instance.circuitManager.Disconnect(consumer, true);
                     energyConsumers.Add(consumer);
-                    return ThisCell;
+                    return ProxyInfoId;
                 }
                 return -1;
             }
@@ -91,7 +93,7 @@ namespace WirelessProject.ProwerManager {
             public int Add(EnergyConsumer consumer) {
                 if (!Game.IsQuitting()) {
                     energyConsumers.Add(consumer);
-                    return ThisCell;
+                    return ProxyInfoId;
                 }
                 return -1;
             }
@@ -99,7 +101,7 @@ namespace WirelessProject.ProwerManager {
             public int Add(Generator generator) {
                 if (!Game.IsQuitting()) {
                     generators.Add(generator);
-                    return ThisCell;
+                    return ProxyInfoId;
                 }
                 return -1;
             }
@@ -107,7 +109,7 @@ namespace WirelessProject.ProwerManager {
             public int Add(Battery battery) {
                 if (!Game.IsQuitting()) {
                     batteries.Add(battery);
-                    return ThisCell;
+                    return ProxyInfoId;
                 }
                 return -1;
             }
@@ -132,20 +134,21 @@ namespace WirelessProject.ProwerManager {
         protected override void OnSpawn() {
             base.OnSpawn();
             ThisCell = Grid.PosToCell(gameObject.transform.GetPosition());
-            //PowerProxiesWithCell.Add(ThisCell, this);
             PowerInfoList.TryGetValue(ThisCell, out ProxyList proxyList);
             if (proxyList != null) {
                 this.proxyList = proxyList;
                 this.proxyList.proxy = this;
             } else {
                 ProxyList new_proxyList = new ProxyList {
-                    ThisCell = ThisCell,
+                    ProxyInfoId = ThisCell,
                     proxy = this
                 };
                 PowerInfoList.Add(ThisCell, new_proxyList);
                 this.proxyList = new_proxyList;
             }
             GenerateName();
+            this.proxyList.ProxyName = gameObject.GetProperName();
+            LinkToProxyScreen.Instance?.AddCheckBox(ThisCell, gameObject.GetProperName());
             //GetComponent<KSelectable>().AddStatusItem(ProxyMaxWattageStatus, this);
             //GetComponent<KSelectable>().AddStatusItem(ProxyCircuitStatus, this);
         }
@@ -161,6 +164,7 @@ namespace WirelessProject.ProwerManager {
                 ClearProxy(proxyList.energyConsumers[0].gameObject);
             }
             PowerInfoList.Remove(ThisCell);
+            LinkToProxyScreen.Instance.RemoveCheckBox(ThisCell);
             base.OnCleanUp();
         }
         #endregion

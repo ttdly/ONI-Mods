@@ -1,5 +1,7 @@
 ﻿
 
+using PeterHan.PLib.Core;
+
 namespace WirelessProject.ProwerManager {
     public class GeneratorLinkToProxy:BaseLinkToProxy {
         [MyCmpGet]
@@ -7,7 +9,7 @@ namespace WirelessProject.ProwerManager {
 
         protected override void AddThisToProxy() {
             if (proxyList == null) return;
-            ProxyCell = proxyList.Connect(generator);
+            ProxyInfoId = proxyList.Connect(generator);
             base.AddThisToProxy();
         }
 
@@ -22,18 +24,37 @@ namespace WirelessProject.ProwerManager {
         }
 
 
-        public override void ChangeProxy(PowerProxy.ProxyList new_proxy) {
-            if (new_proxy == null) {
+        //public override void ChangeProxy(PowerProxy.ProxyList new_proxy) {
+        //    if (new_proxy == null) {
+        //        RemoveThisFromProxy();
+        //        return;
+        //    }
+        //    if (proxyList == null) {
+        //        proxyList = new_proxy;
+        //        AddThisToProxy();
+        //    } else {
+        //        proxyList.Remove(generator);
+        //        ProxyInfoId = new_proxy.Add(generator);
+        //        proxyList = new_proxy;
+        //    }
+        //}
+
+        public override void ChangeProxy(int newProxyId) {
+            if (newProxyId == -1) {
                 RemoveThisFromProxy();
                 return;
             }
-            if (proxyList == null) {
-                proxyList = new_proxy;
-                AddThisToProxy();
+            if (StaticVar.PowerInfoList.TryGetValue(newProxyId, out PowerProxy.ProxyList proxyList)) {
+                if (this.proxyList == null) {
+                    this.proxyList = proxyList;
+                    AddThisToProxy();
+                } else {
+                    proxyList.Remove(generator);
+                    ProxyInfoId = proxyList.Add(generator);
+                    this.proxyList = proxyList;
+                }
             } else {
-                proxyList.Remove(generator);
-                ProxyCell = new_proxy.Add(generator);
-                proxyList = new_proxy;
+                PUtil.LogWarning("Try to add this equipment to a not exist proxyList");
             }
         }
     }

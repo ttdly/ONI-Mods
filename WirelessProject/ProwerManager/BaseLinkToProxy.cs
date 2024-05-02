@@ -1,5 +1,7 @@
 ﻿using KSerialization;
+using ProcGenGame;
 using UnityEngine;
+
 using static WirelessProject.ProwerManager.StaticVar;
 
 namespace WirelessProject.ProwerManager {
@@ -7,7 +9,7 @@ namespace WirelessProject.ProwerManager {
         [Serialize]
         public bool hasProxy = false;
         [Serialize]
-        public int ProxyCell = -1;
+        public int ProxyInfoId = -1;
         public PowerProxy.ProxyList proxyList;
 
         private static readonly EventSystem.IntraObjectHandler<BaseLinkToProxy> OnRefreshUserMenuDelegate = new EventSystem.IntraObjectHandler<BaseLinkToProxy>((component, data) => component.OnRefreshUserMenu(data));
@@ -15,15 +17,15 @@ namespace WirelessProject.ProwerManager {
         protected override void OnSpawn() {
             base.OnSpawn();
             Subscribe((int)GameHashes.RefreshUserMenu, OnRefreshUserMenuDelegate);
-            if (ProxyCell != -1) {
-                PowerInfoList.TryGetValue(ProxyCell, out PowerProxy.ProxyList new_proxy);
+            if (ProxyInfoId != -1) {
+                PowerInfoList.TryGetValue(ProxyInfoId, out PowerProxy.ProxyList new_proxy);
                 if (new_proxy != null) {
                     proxyList = new_proxy;
                 } else {
                     PowerProxy.ProxyList new_init_proxy = new PowerProxy.ProxyList {
-                        ThisCell = ProxyCell,
+                        ProxyInfoId = ProxyInfoId,
                     };
-                    PowerInfoList.Add(ProxyCell, new_init_proxy);
+                    PowerInfoList.Add(ProxyInfoId, new_init_proxy);
                     proxyList = new_init_proxy;
                 }
                 AddThisToProxy();
@@ -37,27 +39,28 @@ namespace WirelessProject.ProwerManager {
 
         private void OnRefreshUserMenu(object _) {
             if (PowerInfoList.Count == 0) return;
-            GameObject go = new GameObject("screen");
-            DetailsScreen.Instance.SetSecondarySideScreen(go.AddComponent<PowerProxyScreen>(), "nihao");
-            Game.Instance.userMenu.AddButton(
-                gameObject,
-                new KIconButtonMenu.ButtonInfo(
-                    "action_follow_cam",
-                    "管理终端",
-                    OpenDialog,
-                    tooltipText: "NOO")
-                );
+            LinkToProxyScreen.Instance.SetTarget(this);
+            DetailsScreen.Instance.SetSecondarySideScreen(LinkToProxyScreen.Instance, "第二窗口");
+            //Game.Instance.userMenu.AddButton(
+            //    gameObject,
+            //    new KIconButtonMenu.ButtonInfo(
+            //        "action_follow_cam",
+            //        "管理终端",
+            //        OpenDialog,
+            //        tooltipTex: "NOO")
+            //    );
         }
+        
 
-        private void OpenDialog() {
-            new AddToProxyDialog(this);
-        }
+        //private void OpenDialog() {
+        //    new AddToProxyDialog(this);
+        //}
 
         public virtual void RemoveThisFromProxy(bool _ = false) {
             gameObject.RemoveTag(HasProxyTag);
             hasProxy = false;
             proxyList = null;
-            ProxyCell = -1;
+            ProxyInfoId = -1;
         }
 
         protected virtual void AddThisToProxy() {
@@ -65,6 +68,7 @@ namespace WirelessProject.ProwerManager {
             hasProxy = true;
         }
 
-        public virtual void ChangeProxy(PowerProxy.ProxyList new_proxy) { }
+        public virtual void ChangeProxy(int newProxyId) { }
+        //public virtual void ChangeProxy(PowerProxy.ProxyList new_proxy) { }
     }
 }
