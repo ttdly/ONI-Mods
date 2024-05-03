@@ -7,7 +7,7 @@ namespace WirelessProject.ProwerManager {
 
         protected override void AddThisToProxy() {
             if (proxyList == null) return;
-            ProxyInfoId = proxyList.Connect(battery);
+            ProxyListId = proxyList.Connect(battery);
             base.AddThisToProxy();
         }
 
@@ -21,20 +21,6 @@ namespace WirelessProject.ProwerManager {
             base.RemoveThisFromProxy(isCleanUp);
         }
 
-        //public override void ChangeProxy(PowerProxy.ProxyList new_proxy) {
-        //    if (new_proxy == null) {
-        //        RemoveThisFromProxy();
-        //        return;
-        //    }
-        //    if (proxyList == null) {
-        //        proxyList = new_proxy;
-        //        AddThisToProxy();
-        //    } else {
-        //        proxyList.Remove(battery);
-        //        ProxyInfoId = new_proxy.Add(battery);
-        //        proxyList = new_proxy;
-        //    }
-        //}
         public override void ChangeProxy(int newProxyId) {
             if ( newProxyId == -1){
                 RemoveThisFromProxy();
@@ -46,7 +32,7 @@ namespace WirelessProject.ProwerManager {
                     AddThisToProxy();
                 } else {
                     proxyList.Remove(battery);
-                    ProxyInfoId = proxyList.Add(battery);
+                    ProxyListId = proxyList.Add(battery);
                     this.proxyList = proxyList;
                 }
             } else {

@@ -15,6 +15,7 @@ namespace WirelessProject {
                 }
             }
         }
+
         public static class BUILDINGS {
             public class PREFABS {
                 public class POWERPROXY {
@@ -24,5 +25,11 @@ namespace WirelessProject {
                 }
             }
         }
+
+        public static class PowerManager {
+            public static LocString WindowName = "Select Terminal";
+            public static LocString NoTerminal = "None";
+        }
+
     }
 }

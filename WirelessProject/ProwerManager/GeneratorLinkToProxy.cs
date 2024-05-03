@@ -9,7 +9,7 @@ namespace WirelessProject.ProwerManager {
 
         protected override void AddThisToProxy() {
             if (proxyList == null) return;
-            ProxyInfoId = proxyList.Connect(generator);
+            ProxyListId = proxyList.Connect(generator);
             base.AddThisToProxy();
         }
 
@@ -50,7 +50,7 @@ namespace WirelessProject.ProwerManager {
                     AddThisToProxy();
                 } else {
                     proxyList.Remove(generator);
-                    ProxyInfoId = proxyList.Add(generator);
+                    ProxyListId = proxyList.Add(generator);
                     this.proxyList = proxyList;
                 }
             } else {

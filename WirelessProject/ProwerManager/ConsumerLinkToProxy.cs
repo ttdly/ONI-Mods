@@ -8,7 +8,7 @@ namespace WirelessProject.ProwerManager {
 
         protected override void AddThisToProxy() {
             if (proxyList == null) return;
-            ProxyInfoId = proxyList.Connect(consumer);
+            ProxyListId = proxyList.Connect(consumer);
             base.AddThisToProxy();
         }
 
@@ -47,7 +47,7 @@ namespace WirelessProject.ProwerManager {
                     AddThisToProxy();
                 } else {
                     proxyList.Remove(consumer);
-                    ProxyInfoId = proxyList.Add(consumer);
+                    ProxyListId = proxyList.Add(consumer);
                     this.proxyList = proxyList;
                 }
             } else {
