@@ -317,7 +317,7 @@ namespace WirelessProject.ProwerManager {
                 if (battery != null && source_generator != null && battery.gameObject != source_generator.gameObject) {
                     float num3 = battery.Capacity - battery.JoulesAvailable;
                     if (num3 > 0f) {
-                        float num4 = Mathf.Min(num3, num / (float)(sink_batteries.Count - i));
+                        float num4 = Mathf.Min(num3, num / (sink_batteries.Count - i));
                         battery.AddEnergy(num4);
                         num -= num4;
                         num2 += num4;

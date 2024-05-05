@@ -1,7 +1,6 @@
 ﻿using HarmonyLib;
 using System;
 using UnityEngine;
-using WirelessProject.ProwerManager;
 
 namespace WirelessProject {
     public class Patches {
@@ -55,6 +54,7 @@ namespace WirelessProject {
         public class Game_Load_Patch {
             public static void Prefix() {
                 ProwerManager.StaticVar.PowerInfoList.Clear();
+                ConduitManger.StaticVar.GlobalIdAndProxyList.Clear();
             }
         }
     }
