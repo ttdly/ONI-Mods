@@ -5,6 +5,7 @@ using PeterHan.PLib.Core;
 using PeterHan.PLib.Database;
 using PeterHan.PLib.Options;
 using PeterHan.PLib.UI;
+using SpaceStore.SellButtons;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -40,6 +41,8 @@ namespace SpaceStore {
         public static PAction Action;
         public static Sprite CoinIcon;
         public static string LOCAL_FILE_DIR = Path.GetFullPath(Path.Combine(KMod.Manager.GetDirectory(), "spacestore"));
+        public static List<ElementSellButton> Buttons = new List<ElementSellButton>();
+
 
         public static void AddCoin(float amount) {
             Coin += amount;

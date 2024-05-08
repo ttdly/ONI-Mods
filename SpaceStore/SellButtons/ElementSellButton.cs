@@ -6,12 +6,17 @@ namespace SpaceStore.SellButtons {
     public class ElementSellButton: BaseSellButton {
         [MyCmpGet]
         readonly PrimaryElement primaryElement;
+        [MyCmpGet]
+        public readonly Pickupable pickupable;
 
         protected override void OnSpawn() {
             base.OnSpawn();
+            StaticVars.Buttons.Add(this);
         }
 
         public override void Sell() {
+            if (coin == 0) { CountPrice(); }
+            if (coin < 0) { return; }
             StaticVars.AddCoin(coin);
 #if DEBUG
             PUtil.LogDebug($"卖出 {primaryElement.GetProperName()} {primaryElement.Units}单位，目前{StaticVars.Coin}");
