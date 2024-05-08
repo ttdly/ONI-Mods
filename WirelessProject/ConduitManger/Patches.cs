@@ -1,10 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HarmonyLib;
 
 namespace WirelessProject.ConduitManger {
-    internal class Patches {
+    public class Patches {
+        [HarmonyPatch(typeof(ConduitConsumer), "ConduitUpdate")]
+        public class ConduitConsumer_ConduitConsumer_Patch {
+            public static bool Prefix(ConduitConsumer __instance) {
+                if (__instance.gameObject.HasTag(StaticVar.HasProxyTag)) {
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        [HarmonyPatch(typeof(ConduitDispenser), "ConduitUpdate")]
+        public class ConduitDispenser_ConduitUpdate_Patch {
+            public static bool Prefix(ConduitDispenser __instance) {
+                if (__instance.gameObject.HasTag(StaticVar.HasProxyTag)) {
+                    return false;
+                }
+                return true;
+            }
+        }
     }
 }
