@@ -6,6 +6,7 @@ using PeterHan.PLib.Database;
 using PeterHan.PLib.Options;
 using PeterHan.PLib.UI;
 using SpaceStore.SellButtons;
+using SpaceStore.Store;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -31,6 +32,7 @@ namespace SpaceStore {
         public override void OnAllModsLoaded(Harmony harmony, IReadOnlyList<KMod.Mod> mods) {
             base.OnAllModsLoaded(harmony, mods);
             LocString.CreateLocStringKeys(typeof(MyString.OPTIONS));
+            new PriceConvter();
         }
 
     }

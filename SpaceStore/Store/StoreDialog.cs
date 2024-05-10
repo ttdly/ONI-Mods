@@ -1,14 +1,15 @@
 ﻿using PeterHan.PLib.Options;
 using PeterHan.PLib.UI;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static SpaceStore.MyString;
 
 namespace SpaceStore.Store {
     public class StoreDialog {
         public static GameObject DialogObj;
         public static PLabel CoinLabel;
+        public static Text CoinText;
         public const int SPACE = 6;
         public const int COL = 5;
         public const int DIALOG_HEIGHT = 400;

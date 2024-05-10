@@ -1,0 +1,42 @@
+[
+  {
+    "id": "IgneousRock",
+    "price": 0.00005
+  },
+  {
+    "id": "SandStone",
+    "price": 0.0002
+  },
+  {
+    "id": "Regolith",
+    "price": 0.00005
+  },
+  {
+    "id": "Carbon",
+    "price": 0.0005
+  },
+  {
+    "id": "Sand",
+    "price": 0.0001
+  },
+  {
+    "id": "Water",
+    "price": 0.0001
+  },
+  {
+    "id": "CarbonDioxide",
+    "price": 0.00001
+  },
+  {
+    "id": "Iron",
+    "price": 0.005
+  },
+  {
+    "id": "BasicSingleHarvestPlantSeed",
+    "price": 0.001
+  },
+  {
+    "id": "SwampLilySeed",
+    "price": 0.001
+  }
+]

@@ -1,17 +1,17 @@
 msgid ""
 msgstr ""
-"Application: Oxygen Not IncludedPOT Version: 2.0\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Application: Oxygen Not IncludedPOT Version: 2.0\n"
 "X-Generator: Poedit 3.0\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: zh_CN\n"
 
 #. SpaceStore.MyString.OPTIONS.COL
 msgctxt "SpaceStore.MyString.OPTIONS.COL"
@@ -43,6 +43,16 @@ msgctxt "SpaceStore.MyString.UI.MENU_TOOL.TOOL_TIP"
 msgid "Open Sapce Store"
 msgstr "打开太空商店"
 
+#. SpaceStore.MyString.UI.MENU_TOOL_2.TITLE
+msgctxt "SpaceStore.MyString.UI.MENU_TOOL_2.TITLE"
+msgid "Sell Objects"
+msgstr "卖出物品"
+
+#. SpaceStore.MyString.UI.MENU_TOOL_2.TOOL_TIP
+msgctxt "SpaceStore.MyString.UI.MENU_TOOL_2.TOOL_TIP"
+msgid "Sell objects on the ground."
+msgstr "卖出地上的物品。"
+
 #. SpaceStore.MyString.UI.SELL.TITLE
 msgctxt "SpaceStore.MyString.UI.SELL.TITLE"
 msgid "SELL"
@@ -55,7 +65,7 @@ msgstr "卖出这些{item}你会获得 {coin} 太空币"
 
 #. SpaceStore.MyString.UI.STORE.STOREDIALOG.DISABLEED
 msgctxt "SpaceStore.MyString.UI.STORE.STOREDIALOG.DISABLEED"
-msgid "Can not purchase items without a Printing Pod"
+msgid "Can not purchase goods without a Printing Pod"
 msgstr "没有打印舱的情况下无法使用太空商店"
 
 #. SpaceStore.MyString.UI.STORE.STOREDIALOG.NAME_TEMPLATE

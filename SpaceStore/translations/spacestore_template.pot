@@ -33,6 +33,16 @@ msgctxt "SpaceStore.MyString.UI.MENU_TOOL.TOOL_TIP"
 msgid "Open Sapce Store"
 msgstr ""
 
+#. SpaceStore.MyString.UI.MENU_TOOL_2.TITLE
+msgctxt "SpaceStore.MyString.UI.MENU_TOOL_2.TITLE"
+msgid "Sell Objects"
+msgstr ""
+
+#. SpaceStore.MyString.UI.MENU_TOOL_2.TOOL_TIP
+msgctxt "SpaceStore.MyString.UI.MENU_TOOL_2.TOOL_TIP"
+msgid "Sell objects on the ground."
+msgstr ""
+
 #. SpaceStore.MyString.UI.SELL.TITLE
 msgctxt "SpaceStore.MyString.UI.SELL.TITLE"
 msgid "SELL"
@@ -45,7 +55,7 @@ msgstr ""
 
 #. SpaceStore.MyString.UI.STORE.STOREDIALOG.DISABLEED
 msgctxt "SpaceStore.MyString.UI.STORE.STOREDIALOG.DISABLEED"
-msgid "Can not purchase items without a Printing Pod"
+msgid "Can not purchase goods without a Printing Pod"
 msgstr ""
 
 #. SpaceStore.MyString.UI.STORE.STOREDIALOG.NAME_TEMPLATE

@@ -9,9 +9,15 @@
     <Platforms>Vanilla;Mergedown</Platforms>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="config\sell.json" />
+    <None Remove="config\store.json" />
     <None Remove="images\coin.png" />
+    <None Remove="images\icon_space_store.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="config\sell.json" />
+    <EmbeddedResource Include="config\store.json" />
     <EmbeddedResource Include="images\coin.png" />
+    <EmbeddedResource Include="images\icon_space_store.png" />
   </ItemGroup>
 </Project>

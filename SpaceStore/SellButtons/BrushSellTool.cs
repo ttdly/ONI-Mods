@@ -1,5 +1,4 @@
-﻿using PeterHan.PLib.Core;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace SpaceStore.SellButtons {
@@ -8,12 +7,12 @@ namespace SpaceStore.SellButtons {
         private readonly string soundPath = GlobalAssets.GetSound("SandboxTool_ClearFloor");
 
         public static void DestroyInstance() {
-            BrushSellTool.instance = null;
+            instance = null;
         }
 
         protected override void OnPrefabInit() {
             base.OnPrefabInit();
-            BrushSellTool.instance = this;
+            instance = this;
         }
 
         protected override string GetDragSound() => "";
@@ -34,7 +33,7 @@ namespace SpaceStore.SellButtons {
 
         public override void GetOverlayColorData(out HashSet<ToolMenu.CellColorData> colors) {
             colors = new HashSet<ToolMenu.CellColorData>();
-            foreach (int cellsInRadiu in this.cellsInRadius)
+            foreach (int cellsInRadiu in cellsInRadius)
                 colors.Add(new ToolMenu.CellColorData(cellsInRadiu, this.radiusIndicatorColor));
         }
 
@@ -49,22 +48,14 @@ namespace SpaceStore.SellButtons {
             base.OnPaintCell(cell, distFromOrigin);
             bool flag = false;
             foreach (ElementSellButton sell in StaticVars.Buttons) {
-                if (sell == null) continue;
-                if (!(Grid.PosToCell(sell) == cell)) continue;
-                if (sell.pickupable.storage != null) continue;
+                if (sell == null || !(Grid.PosToCell(sell) == cell) || sell.pickupable.storage != null) continue;
                 if (!flag) {
                     KFMOD.PlayOneShot(soundPath, sell.gameObject.transform.GetPosition());
                     flag = true;
                 }
                 sell.Sell();
             }
-#if DEBUG
-            PUtil.LogDebug($"对数组进行清理前{StaticVars.Buttons.Count}");
-#endif
-            StaticVars.Buttons.RemoveAll(item => item==null || item.gameObject == null);
-#if DEBUG
-            PUtil.LogDebug($"对数组进行清理后{StaticVars.Buttons.Count}");
-#endif
+            StaticVars.Buttons.RemoveAll(item => item == null || item.gameObject == null);
         }
     }
 }
