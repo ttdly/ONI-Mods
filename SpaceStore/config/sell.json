@@ -1,7 +1,7 @@
 [
   {
     "id": "IgneousRock",
-    "price": 0.00005
+    "price": 0.0005
   },
   {
     "id": "SandStone",
@@ -9,11 +9,11 @@
   },
   {
     "id": "Regolith",
-    "price": 0.00005
+    "price": 0.0005
   },
   {
     "id": "Carbon",
-    "price": 0.0005
+    "price": 0.005
   },
   {
     "id": "Sand",
@@ -25,7 +25,7 @@
   },
   {
     "id": "CarbonDioxide",
-    "price": 0.00001
+    "price": 0.0001
   },
   {
     "id": "Iron",

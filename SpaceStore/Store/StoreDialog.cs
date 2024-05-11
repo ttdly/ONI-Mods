@@ -1,5 +1,6 @@
 ﻿using PeterHan.PLib.Options;
 using PeterHan.PLib.UI;
+using SpaceStore.SellButtons;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -66,6 +67,7 @@ namespace SpaceStore.Store {
                 OnClick = delegate {
                     SpaceStoreTool.Instance.DeactivateTool();
                     StoreList.marketItems.Clear();
+                    new PriceConvter();
                     DialogObj.DeleteObject();
                     DialogObj = null;
                 },
@@ -133,7 +135,7 @@ namespace SpaceStore.Store {
             PRelativePanel itemContainer = new PRelativePanel($"{marketItem.name}Container") {
                 FlexSize = Vector2.right,
                 BackImage = PUITuning.Images.ButtonBorder,
-                ImageMode = UnityEngine.UI.Image.Type.Sliced,
+                ImageMode = Image.Type.Sliced,
                 BackColor = PUITuning.Colors.ButtonBlueStyle.inactiveColor,
                 DynamicSize = false,
             };

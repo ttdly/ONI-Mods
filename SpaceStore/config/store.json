@@ -1,27 +1,27 @@
 [
   {
     "id": "Polypropylene",
-    "quantity": 10,
+    "quantity": 100,
     "price": 500
   },
   {
     "id": "TempConductorSolid",
-    "quantity": 10,
+    "quantity": 100,
     "price": 800
   },
   {
     "id": "SuperInsulator",
-    "quantity": 10,
+    "quantity": 100,
     "price": 800
   },
   {
     "id": "ViscoGel",
-    "quantity": 10,
+    "quantity": 100,
     "price": 850
   },
   {
     "id": "SuperCoolant",
-    "quantity": 10,
+    "quantity": 200,
     "price": 1000
   },
   {

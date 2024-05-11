@@ -39,9 +39,12 @@ namespace SpaceStore
 
         [HarmonyPatch(typeof(ToolMenu), "CreateBasicTools")]
         public static class ToolMenu_CreateBasicTools_Patch {
-            internal static void Prefix(ToolMenu __instance) {
+            public static void Prefix(ToolMenu __instance) {
                 new StoreDialog();
-                Assets.Sprites.Add(new HashedString("icon_space_store"), PUIUtils.LoadSprite("SpaceStore.images.icon_space_store.png"));
+                if (!StaticVars.Loaded) {
+                    Assets.Sprites.Add(new HashedString("icon_space_store"), PUIUtils.LoadSprite("SpaceStore.images.icon_space_store.png"));
+                    StaticVars.Loaded = true;
+                }
                 __instance.basicTools.Add(ToolMenu.CreateToolCollection(MyString.UI.MENU_TOOL.TITLE, "icon_space_store", StaticVars.Action.GetKAction(),
                     StaticVars.ToolName, MyString.UI.MENU_TOOL.TOOL_TIP, false));
                 __instance.basicTools.Add(ToolMenu.CreateToolCollection(MyString.UI.MENU_TOOL_2.TITLE, "icon_action_sweep", StaticVars.Action.GetKAction(),
