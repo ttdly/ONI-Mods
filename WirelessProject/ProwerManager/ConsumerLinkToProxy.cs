@@ -22,20 +22,6 @@ namespace WirelessProject.ProwerManager {
             base.RemoveThisFromProxy(isCleanUp);
         }
 
-        //public override void ChangeProxy(PowerProxy.ProxyList new_proxy) {
-        //    if (new_proxy == null) {
-        //        RemoveThisFromProxy();
-        //        return;
-        //    }
-        //    if (proxyList == null) {
-        //        proxyList = new_proxy;
-        //        AddThisToProxy();
-        //    } else {
-        //        proxyList.Remove(consumer);
-        //        ProxyInfoId = new_proxy.Add(consumer);
-        //        proxyList = new_proxy;
-        //    }
-        //}
         public override void ChangeProxy(int newProxyId) {
             if (newProxyId == -1) {
                 RemoveThisFromProxy();

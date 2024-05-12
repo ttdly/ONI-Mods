@@ -1,0 +1,30 @@
+msgid ""
+msgstr ""
+"Application: Oxygen Not Included"
+"POT Version: 2.0"
+
+#. WirelessProject.Strings.BUILDINGS.PREFABS.POWERPROXY.DESC
+msgctxt "WirelessProject.Strings.BUILDINGS.PREFABS.POWERPROXY.DESC"
+msgid "WPT (Wireless Power Terminal) \n\n What? You mean it's providing power for my entire base?"
+msgstr ""
+
+#. WirelessProject.Strings.BUILDINGS.PREFABS.POWERPROXY.EFFECT
+msgctxt "WirelessProject.Strings.BUILDINGS.PREFABS.POWERPROXY.EFFECT"
+msgid "You can choose to connect the power consumption, generation, and batteries in the base to this terminal, which will then coordinate these devices."
+msgstr ""
+
+#. WirelessProject.Strings.BUILDINGS.PREFABS.POWERPROXY.NAME
+msgctxt "WirelessProject.Strings.BUILDINGS.PREFABS.POWERPROXY.NAME"
+msgid "<link=\"POWERPROXY\">WPT</link>"
+msgstr ""
+
+#. WirelessProject.Strings.PowerManager.NoTerminal
+msgctxt "WirelessProject.Strings.PowerManager.NoTerminal"
+msgid "None"
+msgstr ""
+
+#. WirelessProject.Strings.PowerManager.WindowName
+msgctxt "WirelessProject.Strings.PowerManager.WindowName"
+msgid "Select Terminal"
+msgstr ""
+

@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <AssemblyTitle>Wireless Project 无线计划</AssemblyTitle>
+    <AssemblyTitle>Wire Not Included 无电线</AssemblyTitle>
     <FileVersion>1.0.0</FileVersion>
     <RootNamespace>WirelessProject</RootNamespace>
     <Description>WirelessProject</Description>

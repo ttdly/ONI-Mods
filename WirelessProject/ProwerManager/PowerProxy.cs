@@ -149,8 +149,6 @@ namespace WirelessProject.ProwerManager {
             GenerateName();
             this.proxyList.ProxyName = gameObject.GetProperName();
             LinkToProxyScreen.Instance?.AddCheckBox(ThisCell, gameObject.GetProperName());
-            //GetComponent<KSelectable>().AddStatusItem(ProxyMaxWattageStatus, this);
-            //GetComponent<KSelectable>().AddStatusItem(ProxyCircuitStatus, this);
         }
 
         protected override void OnCleanUp() {

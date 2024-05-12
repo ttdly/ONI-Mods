@@ -5,8 +5,5 @@ namespace WirelessProject.ProwerManager {
         public static Tag HasProxyTag = new Tag("Project_HasPowerProxy");
         public static List<PowerProxy> PowerProxies = new List<PowerProxy>();
         public static Dictionary<int, PowerProxy.ProxyList> PowerInfoList = new Dictionary<int, PowerProxy.ProxyList>();
-        public static List<ushort> IDs = new List<ushort>();
-        public static StatusItem ProxyCircuitStatus;
-        public static StatusItem ProxyMaxWattageStatus;
     }
 }

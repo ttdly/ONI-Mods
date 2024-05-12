@@ -1,11 +1,12 @@
 ﻿using HarmonyLib;
-using PeterHan.PLib.UI;
 using System;
 using System.Reflection;
 using UnityEngine;
 
 namespace WirelessProject.ProwerManager {
     public class Patches {
+        public static MethodInfo SetStatuesItem
+            = typeof(Generator).GetMethod("SetStatusItem", BindingFlags.NonPublic | BindingFlags.Instance);
         #region GeneratorOrBatteries
         [HarmonyPatch(typeof(GeneratorConfig), "DoPostConfigureComplete")]
         public class GeneratorConfig_DoPostConfigureComplete_Patch {
@@ -48,13 +49,6 @@ namespace WirelessProject.ProwerManager {
                 go.AddOrGet<GeneratorLinkToProxy>();
             }
         }
-
-        //[HarmonyPatch(typeof(SteamTurbineConfig2), "DoPostConfigureComplete")]
-        //public class SteamTurbineConfig2_DoPostConfigureComplete_Patch {
-        //    public static void Postfix(GameObject go) {
-        //        go.AddOrGet<GeneratorLinkToProxy>();
-        //    }
-        //}
 
         [HarmonyPatch(typeof(WoodGasGeneratorConfig), "DoPostConfigureComplete")]
         public class WoodGasGeneratorConfig_DoPostConfigureComplete_Patch {
@@ -108,9 +102,7 @@ namespace WirelessProject.ProwerManager {
         public class Generate_CheckStatues_Patch {
             public static bool Prefix(Generator __instance) {
                 if (__instance.gameObject.HasTag(StaticVar.HasProxyTag)) {
-                    Type type = typeof(Generator);
-                    MethodInfo methodInfo = type.GetMethod("SetStatusItem", BindingFlags.NonPublic | BindingFlags.Instance);
-                    methodInfo.Invoke(__instance, new object[1] { null });
+                    SetStatuesItem.Invoke(__instance, new object[1] { null });
                     __instance.gameObject.GetComponent<Operational>().SetFlag(Generator.generatorConnectedFlag, true);
                     return false;
                 }

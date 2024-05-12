@@ -1,0 +1,47 @@
+msgid ""
+msgstr ""
+"Application: Oxygen Not IncludedPOT Version: 2.0\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#. WirelessProject.Strings.BUILDINGS.PREFABS.POWERPROXY.DESC
+msgctxt "WirelessProject.Strings.BUILDINGS.PREFABS.POWERPROXY.DESC"
+msgid ""
+"WPT (Wireless Power Terminal) \n"
+"\n"
+" What? You mean it's providing power for my entire base?"
+msgstr ""
+"WPT(无线电力终端)\n"
+"\n"
+"什么？你说这玩意代理了整个基地的电力？"
+
+#. WirelessProject.Strings.BUILDINGS.PREFABS.POWERPROXY.EFFECT
+msgctxt "WirelessProject.Strings.BUILDINGS.PREFABS.POWERPROXY.EFFECT"
+msgid ""
+"You can choose to connect the power consumption, generation, and batteries "
+"in the base to this terminal, which will then coordinate these devices."
+msgstr "选择电力设备并接入终端，无需电线，终端会自动代理这些设备"
+
+#. WirelessProject.Strings.BUILDINGS.PREFABS.POWERPROXY.NAME
+msgctxt "WirelessProject.Strings.BUILDINGS.PREFABS.POWERPROXY.NAME"
+msgid "<link=\"POWERPROXY\">WPT</link>"
+msgstr "<link=\"POWERPROXY\">WPT</link>"
+
+#. WirelessProject.Strings.PowerManager.NoTerminal
+msgctxt "WirelessProject.Strings.PowerManager.NoTerminal"
+msgid "None"
+msgstr "不接入终端"
+
+#. WirelessProject.Strings.PowerManager.WindowName
+msgctxt "WirelessProject.Strings.PowerManager.WindowName"
+msgid "Select Terminal"
+msgstr "选择终端"

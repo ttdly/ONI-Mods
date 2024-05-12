@@ -42,14 +42,7 @@ namespace WirelessProject.ProwerManager {
             } else {
                 DetailsScreen.Instance.ClearSecondarySideScreen();
             }
-            //Game.Instance.userMenu.AddButton(
-            //    gameObject,
-            //    new KIconButtonMenu.ButtonInfo(
-            //        "action_follow_cam",
-            //        "管理终端",
-            //        OpenDialog,
-            //        tooltipTex: "NOO")
-            //    );
+
         }
 
         public virtual void RemoveThisFromProxy(bool _ = false) {

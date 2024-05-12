@@ -17,27 +17,12 @@ namespace WirelessProject.ProwerManager {
             if (proxyList == null) return;
             if (isCleanUp) {
                 proxyList.Remove(generator);
+                PUtil.LogDebug("HFHFHFHFHHF");
             } else {
                 proxyList.Disconnect(generator);
             }
             base.RemoveThisFromProxy(isCleanUp);
         }
-
-
-        //public override void ChangeProxy(PowerProxy.ProxyList new_proxy) {
-        //    if (new_proxy == null) {
-        //        RemoveThisFromProxy();
-        //        return;
-        //    }
-        //    if (proxyList == null) {
-        //        proxyList = new_proxy;
-        //        AddThisToProxy();
-        //    } else {
-        //        proxyList.Remove(generator);
-        //        ProxyInfoId = new_proxy.Add(generator);
-        //        proxyList = new_proxy;
-        //    }
-        //}
 
         public override void ChangeProxy(int newProxyId) {
             if (newProxyId == -1) {

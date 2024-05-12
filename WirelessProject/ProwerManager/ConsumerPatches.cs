@@ -248,13 +248,6 @@ namespace WirelessProject.ProwerManager {
             }
         }
 
-        //[HarmonyPatch(typeof(FoodRehydratorConfig), "DoPostConfigureComplete")]
-        //public class FoodRehydratorConfig_DoPostConfigureComplete_Patch {
-        //    public static void Postfix(GameObject go) {
-        //        go.AddOrGet<ConsumerLinkToProxy>();
-        //    }
-        //}
-
         [HarmonyPatch(typeof(GantryConfig), "DoPostConfigureComplete")]
         public class GantryConfig_DoPostConfigureComplete_Patch {
             public static void Postfix(GameObject go) {
