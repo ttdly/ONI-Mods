@@ -1,14 +1,16 @@
 ﻿using PeterHan.PLib.Options;
 using PeterHan.PLib.UI;
-using System;
+using SpaceStore.SellButtons;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static SpaceStore.MyString;
 
 namespace SpaceStore.Store {
     public class StoreDialog {
         public static GameObject DialogObj;
         public static PLabel CoinLabel;
+        public static Text CoinText;
         public const int SPACE = 6;
         public const int COL = 5;
         public const int DIALOG_HEIGHT = 400;
@@ -65,6 +67,7 @@ namespace SpaceStore.Store {
                 OnClick = delegate {
                     SpaceStoreTool.Instance.DeactivateTool();
                     StoreList.marketItems.Clear();
+                    new PriceConvter();
                     DialogObj.DeleteObject();
                     DialogObj = null;
                 },
@@ -132,7 +135,7 @@ namespace SpaceStore.Store {
             PRelativePanel itemContainer = new PRelativePanel($"{marketItem.name}Container") {
                 FlexSize = Vector2.right,
                 BackImage = PUITuning.Images.ButtonBorder,
-                ImageMode = UnityEngine.UI.Image.Type.Sliced,
+                ImageMode = Image.Type.Sliced,
                 BackColor = PUITuning.Colors.ButtonBlueStyle.inactiveColor,
                 DynamicSize = false,
             };

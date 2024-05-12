@@ -44,7 +44,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceStore", "SpaceStore\Sp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreGoods", "StoreGoods\StoreGoods.csproj", "{109D4430-517C-4F14-A5EA-87BB046384E0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WirelessProject", "WirelessProject\WirelessProject.csproj", "{559CA0FA-1631-422D-9470-CA71A905D27F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HighTemperatureCooking", "HighTemperatureCooking\HighTemperatureCooking.csproj", "{C877891F-5E62-4CD7-8FBF-55014B024CDB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -166,14 +166,14 @@ Global
 		{109D4430-517C-4F14-A5EA-87BB046384E0}.Release|Mergedown.Build.0 = Release|Mergedown
 		{109D4430-517C-4F14-A5EA-87BB046384E0}.Release|Vanilla.ActiveCfg = Release|Vanilla
 		{109D4430-517C-4F14-A5EA-87BB046384E0}.Release|Vanilla.Build.0 = Release|Vanilla
-		{559CA0FA-1631-422D-9470-CA71A905D27F}.Debug|Mergedown.ActiveCfg = Debug|Mergedown
-		{559CA0FA-1631-422D-9470-CA71A905D27F}.Debug|Mergedown.Build.0 = Debug|Mergedown
-		{559CA0FA-1631-422D-9470-CA71A905D27F}.Debug|Vanilla.ActiveCfg = Debug|Vanilla
-		{559CA0FA-1631-422D-9470-CA71A905D27F}.Debug|Vanilla.Build.0 = Debug|Vanilla
-		{559CA0FA-1631-422D-9470-CA71A905D27F}.Release|Mergedown.ActiveCfg = Release|Mergedown
-		{559CA0FA-1631-422D-9470-CA71A905D27F}.Release|Mergedown.Build.0 = Release|Mergedown
-		{559CA0FA-1631-422D-9470-CA71A905D27F}.Release|Vanilla.ActiveCfg = Release|Vanilla
-		{559CA0FA-1631-422D-9470-CA71A905D27F}.Release|Vanilla.Build.0 = Release|Vanilla
+		{C877891F-5E62-4CD7-8FBF-55014B024CDB}.Debug|Mergedown.ActiveCfg = Debug|Mergedown
+		{C877891F-5E62-4CD7-8FBF-55014B024CDB}.Debug|Mergedown.Build.0 = Debug|Mergedown
+		{C877891F-5E62-4CD7-8FBF-55014B024CDB}.Debug|Vanilla.ActiveCfg = Debug|Vanilla
+		{C877891F-5E62-4CD7-8FBF-55014B024CDB}.Debug|Vanilla.Build.0 = Debug|Vanilla
+		{C877891F-5E62-4CD7-8FBF-55014B024CDB}.Release|Mergedown.ActiveCfg = Release|Mergedown
+		{C877891F-5E62-4CD7-8FBF-55014B024CDB}.Release|Mergedown.Build.0 = Release|Mergedown
+		{C877891F-5E62-4CD7-8FBF-55014B024CDB}.Release|Vanilla.ActiveCfg = Release|Vanilla
+		{C877891F-5E62-4CD7-8FBF-55014B024CDB}.Release|Vanilla.Build.0 = Release|Vanilla
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -193,7 +193,7 @@ Global
 		{0065117A-70AF-4DB1-8A81-0173FE84B132} = {EA38FED7-E861-45D1-8BCA-C29F00400F9F}
 		{AB33F564-8C23-451F-A439-64FE5AEA65C7} = {84877F02-1D2E-4A8E-BC3E-44FA8F6A417F}
 		{109D4430-517C-4F14-A5EA-87BB046384E0} = {84877F02-1D2E-4A8E-BC3E-44FA8F6A417F}
-		{559CA0FA-1631-422D-9470-CA71A905D27F} = {84877F02-1D2E-4A8E-BC3E-44FA8F6A417F}
+		{C877891F-5E62-4CD7-8FBF-55014B024CDB} = {84877F02-1D2E-4A8E-BC3E-44FA8F6A417F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {05AD4341-9C99-4998-8BEC-CFBB218B464B}

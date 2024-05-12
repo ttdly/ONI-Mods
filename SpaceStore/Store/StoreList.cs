@@ -7,8 +7,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Runtime.InteropServices;
-using System.Security.Policy;
 using UnityEngine;
 
 namespace SpaceStore.Store
@@ -71,20 +72,41 @@ namespace SpaceStore.Store
             }
         }
 
+        public static void LoadFromAssembly() {
+            try {
+                Assembly asm = Assembly.GetAssembly(typeof(StoreList));
+                Stream stream = asm.GetManifestResourceStream("SpaceStore.config.store.json");
+                string json = "";
+                using (StreamReader reader = new StreamReader(stream)) {
+                    string line;
+                    while ((line = reader.ReadLine()) != null) {
+                        json += line;
+                    }
+                }
+                PraseJson(json);
+            }
+            catch (Exception ex) {
+                PUtil.LogError("错误： " + ex.Message);
+            }
+        }
+
         public static void ReadListFromAFile(string path) {
-#if DEBUG
-            PUtil.LogDebug($"Load {path}");
-#endif
             try {
                 string json = File.ReadAllText(path);
+                PraseJson(json);
+            }
+            catch (UnauthorizedAccessException e) {
+                PUtil.LogExcWarn(e);
+            }
+        }
+
+        public static void PraseJson(string json) {
+            try {
                 JArray jsonArray = JArray.Parse(json);
                 foreach (JObject item in jsonArray.Cast<JObject>()) {
                     string id = item["id"].ToString();
                     int quantity = (int)item["quantity"];
                     int price = (int)item["price"];
-#if DEBUG
-                    PUtil.LogDebug($"id:{id} quantity:{quantity} price:{price}");
-#endif
                     AddOneItem(new Tag(id), price, quantity);
                 }
             }
@@ -144,7 +166,7 @@ namespace SpaceStore.Store
         public static void Init(){
             GetLocalList();
             if (marketItems.Count == 0) {
-                marketItems.Add(new MarketItem(SimHashes.Water.CreateTag(), 1000, 200));
+                LoadFromAssembly();
             }
         }
     }

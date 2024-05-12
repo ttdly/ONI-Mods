@@ -14,6 +14,7 @@ namespace SpaceStore.Store
         internal void OnSerializing()
         {
             coin = StaticVars.Coin;
+            StaticVars.Coin = 0;
         }
         [OnDeserialized]
         internal void OnDeserialized()

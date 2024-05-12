@@ -5,6 +5,8 @@ using PeterHan.PLib.Core;
 using PeterHan.PLib.Database;
 using PeterHan.PLib.Options;
 using PeterHan.PLib.UI;
+using SpaceStore.SellButtons;
+using SpaceStore.Store;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -30,6 +32,7 @@ namespace SpaceStore {
         public override void OnAllModsLoaded(Harmony harmony, IReadOnlyList<KMod.Mod> mods) {
             base.OnAllModsLoaded(harmony, mods);
             LocString.CreateLocStringKeys(typeof(MyString.OPTIONS));
+            new PriceConvter();
         }
 
     }
@@ -40,6 +43,8 @@ namespace SpaceStore {
         public static PAction Action;
         public static Sprite CoinIcon;
         public static string LOCAL_FILE_DIR = Path.GetFullPath(Path.Combine(KMod.Manager.GetDirectory(), "spacestore"));
+        public static List<ElementSellButton> Buttons = new List<ElementSellButton>();
+        public static bool Loaded = false;
 
         public static void AddCoin(float amount) {
             Coin += amount;

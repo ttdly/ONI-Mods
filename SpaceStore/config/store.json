@@ -1,0 +1,57 @@
+[
+  {
+    "id": "Polypropylene",
+    "quantity": 100,
+    "price": 500
+  },
+  {
+    "id": "TempConductorSolid",
+    "quantity": 100,
+    "price": 800
+  },
+  {
+    "id": "SuperInsulator",
+    "quantity": 100,
+    "price": 800
+  },
+  {
+    "id": "ViscoGel",
+    "quantity": 100,
+    "price": 850
+  },
+  {
+    "id": "SuperCoolant",
+    "quantity": 200,
+    "price": 1000
+  },
+  {
+    "id": "FieldRation",
+    "quantity": 5,
+    "price": 100
+  },
+  {
+    "id": "SquirrelEgg",
+    "quantity": 1,
+    "price": 100
+  },
+  {
+    "id": "PacuEgg",
+    "quantity": 1,
+    "price": 100
+  },
+  {
+    "id": "ColdWheatSeed",
+    "quantity": 2,
+    "price": 150
+  },
+  {
+    "id": "ColdBreatherSeed",
+    "quantity": 1,
+    "price": 150
+  },
+  {
+    "id": "GeneShufflerRecharge",
+    "quantity": 1,
+    "price": 200
+  }
+]
