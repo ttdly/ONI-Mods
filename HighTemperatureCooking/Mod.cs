@@ -50,12 +50,31 @@ namespace HighTemperatureCooking {
                 temperatureCookable.cookedID = "CookedFish";
             }
         }
+
         [HarmonyPatch(typeof(WormBasicFruitConfig), nameof(WormBasicFruitConfig.CreatePrefab))]
         public class WormBasicFruitConfig_Patch {
             public static void Postfix(GameObject __result) {
                 TemperatureCookable temperatureCookable = __result.AddOrGet<TemperatureCookable>();
                 temperatureCookable.cookTemperature = 344.15f;
                 temperatureCookable.cookedID = "WormBasicFood";
+            }
+        }
+
+        [HarmonyPatch(typeof(ShellfishMeatConfig), nameof(FishMeatConfig.CreatePrefab))]
+        public class ShellfishMeatConfig_Patch {
+            public static void Postfix(GameObject __result) {
+                TemperatureCookable temperatureCookable = __result.AddOrGet<TemperatureCookable>();
+                temperatureCookable.cookTemperature = 344.15f;
+                temperatureCookable.cookedID = "CookedFish";
+            }
+        }
+
+        [HarmonyPatch(typeof(MushBarConfig), nameof(ShellfishMeatConfig.CreatePrefab))]
+        public class MushBarConfig_Patch {
+            public static void Postfix(GameObject __result) {
+                TemperatureCookable temperatureCookable = __result.AddOrGet<TemperatureCookable>();
+                temperatureCookable.cookTemperature = 344.15f;
+                temperatureCookable.cookedID = "FriedMushBar";
             }
         }
     }
