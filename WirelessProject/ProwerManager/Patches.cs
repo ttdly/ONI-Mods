@@ -110,11 +110,5 @@ namespace WirelessProject.ProwerManager {
             }
         }
 
-        [HarmonyPatch(typeof(DetailsScreen), "OnPrefabInit")]
-        public static class SideScreenCreator {
-            internal static void Postfix() {
-                LinkToProxyScreen.AddSideScreenContent();
-            }
-        }
     }
 }

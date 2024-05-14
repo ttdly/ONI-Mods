@@ -13,8 +13,8 @@ namespace WirelessProject {
         }
 
         public static class PowerManager {
-            public static LocString WindowName = "Select Terminal";
-            public static LocString NoTerminal = "None";
+            public static LocString AddtoProxy = "Add to Terminal";
+            public static LocString RemoveFromProxy = "Remove from Terminal";
         }
 
     }

@@ -6,9 +6,9 @@ namespace WirelessProject.ProwerManager {
         readonly Battery battery;
 
         protected override void AddThisToProxy() {
+            base.AddThisToProxy();
             if (proxyList == null) return;
             ProxyListId = proxyList.Connect(battery);
-            base.AddThisToProxy();
         }
 
         public override void RemoveThisFromProxy(bool isCleanUp =false) {

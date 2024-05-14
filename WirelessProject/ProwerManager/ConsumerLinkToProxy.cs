@@ -7,9 +7,9 @@ namespace WirelessProject.ProwerManager {
         readonly EnergyConsumer consumer;
 
         protected override void AddThisToProxy() {
+            base.AddThisToProxy();
             if (proxyList == null) return;
             ProxyListId = proxyList.Connect(consumer);
-            base.AddThisToProxy();
         }
 
         public override void RemoveThisFromProxy(bool isCleanUp = false) {

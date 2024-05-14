@@ -14,8 +14,10 @@ namespace WirelessProject.ProwerManager {
             BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef(ID, 3, 2, "power_proxy_kanim", 30, 30f, tieR3, refinedMetals, 800f, BuildLocationRule.OnFloor, tieR1, noise);
             buildingDef.ViewMode = OverlayModes.Power.ID;
             buildingDef.AudioCategory = "Metal";
-            buildingDef.ExhaustKilowattsWhenActive = 1000f;
-            buildingDef.SelfHeatKilowattsWhenActive = 800f;
+            buildingDef.ExhaustKilowattsWhenActive = 800f;
+            buildingDef.SelfHeatKilowattsWhenActive = 400f;
+            buildingDef.OnePerWorld = true;
+            buildingDef.Overheatable = false;
             return buildingDef;
         }
 
@@ -24,7 +26,6 @@ namespace WirelessProject.ProwerManager {
         }
 
         public override void DoPostConfigureComplete(GameObject go) {
-            go.AddOrGet<UserNameable>();
             go.AddOrGetDef<PoweredActiveController.Def>();
         }
     }

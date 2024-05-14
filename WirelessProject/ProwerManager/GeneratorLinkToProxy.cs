@@ -8,9 +8,9 @@ namespace WirelessProject.ProwerManager {
         readonly Generator generator;
 
         protected override void AddThisToProxy() {
+            base.AddThisToProxy();
             if (proxyList == null) return;
             ProxyListId = proxyList.Connect(generator);
-            base.AddThisToProxy();
         }
 
         public override void RemoveThisFromProxy(bool isCleanUp = false) {

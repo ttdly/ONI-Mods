@@ -4,14 +4,13 @@ using static CircuitManager;
 using static WirelessProject.ProwerManager.StaticVar;
 using UnityEngine;
 using KSerialization;
-using Microsoft.Build.Framework;
+
 
 namespace WirelessProject.ProwerManager {
 
     public class PowerProxy : KMonoBehaviour, ISim200ms {
-
         public class ProxyList {
-            public PowerProxy proxy;
+            public PowerProxy proxy = null;
             public int ProxyInfoId;
             public string ProxyName;
             public readonly List<EnergyConsumer> energyConsumers = new List<EnergyConsumer>();
@@ -115,8 +114,6 @@ namespace WirelessProject.ProwerManager {
             }
             #endregion
         }
-        [Serialize]
-        bool named = false;
         public ProxyList proxyList;
         public float wattsUsed;
         public Wire.WattageRating maxWatts = Wire.WattageRating.Max20000;
@@ -126,29 +123,26 @@ namespace WirelessProject.ProwerManager {
         readonly Operational operational;
         [MyCmpGet]
         readonly Building building;
-        [MyCmpGet]
-        readonly UserNameable nameable;
-        public int ThisCell;
+        public int WorldId;
 
         #region LifeCycle
         protected override void OnSpawn() {
             base.OnSpawn();
-            ThisCell = Grid.PosToCell(gameObject.transform.GetPosition());
-            PowerInfoList.TryGetValue(ThisCell, out ProxyList proxyList);
-            if (proxyList != null) {
+            WorldId = gameObject.GetMyWorldId();
+            PowerInfoList.TryGetValue(WorldId, out ProxyList proxyList);
+            if (proxyList != null && proxyList.proxy == null) {
                 this.proxyList = proxyList;
                 this.proxyList.proxy = this;
             } else {
                 ProxyList new_proxyList = new ProxyList {
-                    ProxyInfoId = ThisCell,
+                    ProxyInfoId = WorldId,
                     proxy = this
                 };
-                PowerInfoList.Add(ThisCell, new_proxyList);
+                PowerInfoList.Add(WorldId, new_proxyList);
                 this.proxyList = new_proxyList;
             }
-            GenerateName();
+
             this.proxyList.ProxyName = gameObject.GetProperName();
-            LinkToProxyScreen.Instance?.AddCheckBox(ThisCell, gameObject.GetProperName());
         }
 
         protected override void OnCleanUp() {
@@ -161,14 +155,14 @@ namespace WirelessProject.ProwerManager {
             while (proxyList.energyConsumers.Count > 0) {
                 ClearProxy(proxyList.energyConsumers[0].gameObject);
             }
-            PowerInfoList.Remove(ThisCell);
-            LinkToProxyScreen.Instance.RemoveCheckBox(ThisCell);
+            PowerInfoList.Remove(WorldId);
             base.OnCleanUp();
         }
         #endregion
 
         #region RenderEverTick
         public void Sim200msLast(float dt) {
+            if (proxyList == null) return;
             elapsedTime += dt;
             if (elapsedTime < 0.2f) {
                 return;
@@ -370,31 +364,6 @@ namespace WirelessProject.ProwerManager {
 
         private void ClearProxy(GameObject go) {
             go.GetComponent<BaseLinkToProxy>().RemoveThisFromProxy();
-        }
-
-        private void GenerateName() {
-            if (named) return;
-            int cell = Grid.PosToCell(gameObject);
-            Quadrant[] quadrantOfCell = gameObject.GetMyWorld().GetQuadrantOfCell(cell, 2);
-            string str1 = ((int)quadrantOfCell[0]).ToString();
-            int num = (int)quadrantOfCell[1];
-            string str2 = num.ToString();
-            string str3 = str1 + str2;
-            string[] strArray1 = NAMEGEN.GEYSER_IDS.IDs.ToString().Split('\n');
-            string str4 = strArray1[Random.Range(0, strArray1.Length)];
-            string[] strArray2 = new string[6]
-            {
-              UI.StripLinkFormatting(gameObject.GetProperName()),
-              " ",
-              str4,
-              str3,
-              "‑",
-              null
-            };
-            num = Random.Range(0, 10);
-            strArray2[5] = num.ToString();
-            nameable.SetName(string.Concat(strArray2));
-            named = true;
         }
     }
 }
