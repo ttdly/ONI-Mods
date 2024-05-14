@@ -18,13 +18,13 @@ msgctxt "WirelessProject.Strings.BUILDINGS.PREFABS.POWERPROXY.NAME"
 msgid "<link=\"POWERPROXY\">WPT</link>"
 msgstr ""
 
-#. WirelessProject.Strings.PowerManager.NoTerminal
-msgctxt "WirelessProject.Strings.PowerManager.NoTerminal"
-msgid "None"
+#. WirelessProject.Strings.PowerManager.AddtoProxy
+msgctxt "WirelessProject.Strings.PowerManager.AddtoProxy"
+msgid "Add to Terminal"
 msgstr ""
 
-#. WirelessProject.Strings.PowerManager.WindowName
-msgctxt "WirelessProject.Strings.PowerManager.WindowName"
-msgid "Select Terminal"
+#. WirelessProject.Strings.PowerManager.RemoveFromProxy
+msgctxt "WirelessProject.Strings.PowerManager.RemoveFromProxy"
+msgid "Remove from Terminal"
 msgstr ""
 

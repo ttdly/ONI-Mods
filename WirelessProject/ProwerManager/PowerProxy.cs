@@ -130,9 +130,11 @@ namespace WirelessProject.ProwerManager {
             base.OnSpawn();
             WorldId = gameObject.GetMyWorldId();
             PowerInfoList.TryGetValue(WorldId, out ProxyList proxyList);
-            if (proxyList != null && proxyList.proxy == null) {
-                this.proxyList = proxyList;
-                this.proxyList.proxy = this;
+            if (proxyList != null) {
+                if (proxyList.proxy == null) {
+                    this.proxyList = proxyList;
+                    this.proxyList.proxy = this;
+                }
             } else {
                 ProxyList new_proxyList = new ProxyList {
                     ProxyInfoId = WorldId,
@@ -140,12 +142,12 @@ namespace WirelessProject.ProwerManager {
                 };
                 PowerInfoList.Add(WorldId, new_proxyList);
                 this.proxyList = new_proxyList;
-            }
 
-            this.proxyList.ProxyName = gameObject.GetProperName();
+            }
         }
 
         protected override void OnCleanUp() {
+            if (proxyList == null) return;
             while (proxyList.generators.Count > 0) {
                 ClearProxy(proxyList.generators[0].gameObject);
             }
@@ -162,7 +164,6 @@ namespace WirelessProject.ProwerManager {
 
         #region RenderEverTick
         public void Sim200msLast(float dt) {
-            if (proxyList == null) return;
             elapsedTime += dt;
             if (elapsedTime < 0.2f) {
                 return;
@@ -242,6 +243,7 @@ namespace WirelessProject.ProwerManager {
         }
 
         public void Sim200ms(float dt) {
+            if (proxyList == null) return;
             if (proxyList.energyConsumers.Count == 0 && proxyList.generators.Count == 0) {
                 operational.SetActive(false);
                 return;
