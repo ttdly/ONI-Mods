@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using SpaceStore.SellButtons;
 using SpaceStore.Store;
-using PeterHan.PLib.Core;
 using PeterHan.PLib.UI;
 
 namespace SpaceStore
@@ -70,6 +69,14 @@ namespace SpaceStore
         public static class SaveGame_OnPrefabInit_Patch {
             internal static void Postfix(SaveGame __instance) {
                 __instance.gameObject.AddOrGet<StoreData>();
+            }
+        }
+
+        [HarmonyPatch(typeof(Game), nameof(Game.Load))]
+        public class Game_Load_Patch {
+            public static void Prefix() {
+                
+                StaticVars.Coin = SaveGame.Instance.gameObject.AddOrGet<StoreData>().coin;
             }
         }
 
