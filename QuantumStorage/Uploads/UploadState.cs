@@ -1,13 +1,6 @@
-﻿
-using Klei;
-using KSerialization;
-using PeterHan.PLib.Core;
-using STRINGS;
-using System;
-using TUNING;
+﻿using KSerialization;
 using UnityEngine;
-using static Door;
-using static QuantumStorage.Database.DatabaseQ;
+
 
 
 namespace QuantumStorage.Uploads {
@@ -21,7 +14,8 @@ namespace QuantumStorage.Uploads {
         [MyCmpReq]
         private readonly KBatchedAnimController controller;
         private MeterController meter;
-        public float uploadSpeed = 0.5f;
+        public float uploadSpeed = 10f;
+        private readonly float targetTemputre = 296.15f;
 
         protected override void OnPrefabInit() {
             base.OnPrefabInit();
@@ -50,34 +44,31 @@ namespace QuantumStorage.Uploads {
                 meter.meterController.Play((HashedString)"meter_counter", KAnim.PlayMode.Paused);
                 meter.SetPositionPercent(storage.MassStored() / storage.capacityKg);
             }
-            if (storage.MassStored() > 0) {
-                smi.sm.storageEmpty.Set(false, smi);
-            } else {
-                smi.sm.storageEmpty.Set(true, smi);
-            }
-            
+
         }
 
         private void DoUpload() {
-            float needUploadMass = uploadSpeed;
-            for (int i = 0; i < storage.items.Count; i++) {
+            float totalNeedUploadMass = uploadSpeed;
+            for (int i = 0; i < storage.items.Count && totalNeedUploadMass > 0; i++) {
                 GameObject go = storage.items[i];
                 PrimaryElement primaryElement = go.GetComponent<PrimaryElement>();
-                if (primaryElement.Mass > needUploadMass) {
-                    StaticVar.database.UpdateItems(new DatabaseItem(go.PrefabID(), (double)needUploadMass));
-                    storage.ConsumeIgnoringDisease(go.PrefabID(), needUploadMass);
-                    break;
+                float thisTimeUploadMass;
+                if (primaryElement.Mass > totalNeedUploadMass) {
+                    thisTimeUploadMass = totalNeedUploadMass;
                 } else {
-                    StaticVar.database.UpdateItems(new DatabaseItem(go.PrefabID(), (double)primaryElement.Mass));
-                    storage.ConsumeIgnoringDisease(go.PrefabID(), primaryElement.Mass);
-                    needUploadMass -= primaryElement.Mass;
+                    thisTimeUploadMass = primaryElement.Mass;
                 }
+                totalNeedUploadMass -= thisTimeUploadMass;
+                StaticVar.database.UpdateItems(go.PrefabID(), thisTimeUploadMass, 
+                    (primaryElement.Temperature - targetTemputre) * primaryElement.Element.specificHeatCapacity * thisTimeUploadMass);
+                storage.ConsumeIgnoringDisease(go.PrefabID(), thisTimeUploadMass);
             }
             UpdateMeter();
+            CanWork();
         }
 
         private void CanWork() {
-            smi.sm.canWork.Set(storage.MassStored() > 0 && StaticVar.database != null, smi);
+            smi.sm.canWork.Set(storage.MassStored() > 0 && StaticVar.database != null && operational.IsOperational, smi);
         }
 
         public class StatesInstance :GameStateMachine<States, StatesInstance, UploadState, object>.GameInstance {
@@ -98,14 +89,16 @@ namespace QuantumStorage.Uploads {
                     .EventTransition(GameHashes.OperationalChanged, off, smi => !smi.master.operational.IsOperational);
                 on.waiting.PlayAnim("on", KAnim.PlayMode.Once)
                     .Update((smi, dt) => smi.master.CanWork())
-                    .ParamTransition(canWork, on.working_pre, IsTrue);
+                    .ParamTransition(canWork, on.working_pre, IsTrue)
+                    .Exit(smi=> smi.sm.storageEmpty.Set(false, smi));
                 on.working_pre.PlayAnim("working_pre", KAnim.PlayMode.Once).OnAnimQueueComplete(on.working_loop);
                 on.working_loop.PlayAnim("working_loop", KAnim.PlayMode.Loop)
                     .Update((smi, dt) => { smi.master.DoUpload(); }, UpdateRate.SIM_1000ms)
-                    .ParamTransition(storageEmpty, on.waiting, IsTrue)
+                    .ParamTransition(canWork, on.working_pst, IsFalse)
                     .Enter(smi => { smi.master.operational.SetActive(true);})
                     .Exit(smi => { smi.master.operational.SetActive(false);});
-                on.working_pst.PlayAnim("working_pst", KAnim.PlayMode.Once).OnAnimQueueComplete(on.waiting);
+                on.working_pst.PlayAnim("working_pst", KAnim.PlayMode.Once)
+                    .OnAnimQueueComplete(on.waiting);
             }
         }
     }

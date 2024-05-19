@@ -2,6 +2,10 @@
 using QuantumStorage.Database;
 using QuantumStorage.Uploads;
 using System;
+using static DetailsScreen;
+using System.Collections.Generic;
+using UnityEngine;
+using ChangeBlueprints;
 
 
 namespace QuantumStorage {
@@ -26,6 +30,13 @@ namespace QuantumStorage {
             public static void Prefix() {
                 AddBuildings();
                 LocString.CreateLocStringKeys(typeof(ModString.BUILDINGS));
+            }
+        }
+
+        [HarmonyPatch(typeof(DetailsScreen), "OnPrefabInit")]
+        public static class DetailsScreen_OnPrefabInit_Patch {
+            internal static void Postfix(List<SideScreenRef> ___sideScreens, GameObject ___sideScreenConfigContentBody) {
+                DatabaseQSideScreen.AddSideScreen(___sideScreens, ___sideScreenConfigContentBody);
             }
         }
     }

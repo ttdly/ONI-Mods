@@ -1,6 +1,8 @@
 ﻿using Database;
 using PeterHan.PLib.Core;
 using PeterHan.PLib.Detours;
+using QuantumStorage;
+using QuantumStorage.Database;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,108 +15,50 @@ namespace ChangeBlueprints {
         private static readonly IDetouredField<ArtableSelectionSideScreen, GameObject> STATE_BUTTON_PREFAB = PDetours.DetourField<ArtableSelectionSideScreen, GameObject>(nameof(stateButtonPrefab));
         private static readonly IDetouredField<ArtableSelectionSideScreen, RectTransform> BUTTON_CONTAINER = PDetours.DetourField<ArtableSelectionSideScreen, RectTransform>(nameof(buttonContainer));
         private static readonly IDetouredField<ArtableSelectionSideScreen, RectTransform> SCROLL = PDetours.DetourField<ArtableSelectionSideScreen, RectTransform>(nameof(scrollTransoform));
-        private static string Title {
-            get {
-                if (Localization.GetCurrentLanguageCode() == "zh_klei") {
-                    return "切换蓝图";
-                }
-                return "Change Blueprint";
-            }
-        }
         private KButton applyButton;
         private KButton clearButton;
         public GameObject stateButtonPrefab;
         private RectTransform scrollTransoform;
-        private readonly Dictionary<string, MultiToggle> buttons = new Dictionary<string, MultiToggle>();
+        private readonly List<MultiToggle> buttons = new List<MultiToggle>();
         [SerializeField]
         private RectTransform buttonContainer;
-        public List<string> primits = new List<string>();
-        private BuildingFacade buildingFacade;
-        private BuildingDef buildingDef;
+        private DatabaseQ database;
 
         protected override void OnSpawn() {
             base.OnSpawn();
         }
 
         public override bool IsValidForTarget(GameObject target) {
-            if (target.GetComponent<BuildingFacade>() == null) return false;
-            if (target.GetComponent<Building>().Def.AvailableFacades.Count == 0) return false;
-            primits.Clear();
-            foreach (string id in target.GetComponent<Building>().Def.AvailableFacades) {
-                if (id != null && PermitItems.IsPermitUnlocked(Db.Get().Permits.Get(id))){
-                    primits.Add(id);
-                }
-            }
-            return primits.Count>0;
+            return target != null && target.TryGetComponent(out DatabaseQ _);
         }
 
         public override void SetTarget(GameObject target) {
-           buildingFacade = target.GetComponent<BuildingFacade>();
-           buildingDef = target.GetComponent<Building>().Def;
-           GenerateStateButtons();
+            if (target == null) PUtil.LogDebug("Target null");
+            database = target.GetComponent<DatabaseQ>();
+            GenerateStateButtons();
         }
 
         public override string GetTitle() {
-            return Title;
+            return ModString.UI.DatabaseQSideScreen.TITLE;
         }
 
         public void GenerateStateButtons() {
-            foreach (KeyValuePair<string, MultiToggle> button in buttons) {
-                Util.KDestroyGameObject(button.Value.gameObject);
+            foreach (MultiToggle button in buttons) {
+                Util.KDestroyGameObject(button.gameObject);
             }
             buttons.Clear();
-            if (buildingDef.AvailableFacades.Count == 0) {
-                gameObject.SetActive(false);
-            }
-
-            if (true) {
-                GameObject rawGameObject = Util.KInstantiate(Assets.GetPrefab(buildingDef.PrefabID));
-                BuildingDef rawDef = rawGameObject.GetComponent<Building>().Def;
+            foreach (KeyValuePair<Tag,double> item in database.itemDic) {
                 GameObject obj = Util.KInstantiateUI(stateButtonPrefab, buttonContainer.gameObject, force_active: true);
-                Sprite sprite = Def.GetUISprite(rawGameObject).first;
+                Tuple<Sprite, Color> sprite = Def.GetUISprite(item.Key);
                 MultiToggle component = obj.GetComponent<MultiToggle>();
-                component.GetComponent<ToolTip>().SetSimpleTooltip(rawDef.Name);
-                component.GetComponent<HierarchyReferences>().GetReference<Image>("Icon").sprite = sprite;
-                if (buildingFacade.CurrentFacade == "" || buildingFacade.CurrentFacade == null) {
-                    component.ChangeState(1);
-                }
+                component.GetComponent<ToolTip>().SetSimpleTooltip($"{Assets.GetPrefab(item.Key).GetProperName()}\n{item.Value:0.##e+0}克");
+                Image image = component.GetComponent<HierarchyReferences>().GetReference<Image>("Icon");
+                image.sprite = sprite.first;
+                image.color = sprite.second;
                 component.onClick = delegate {
-                    buttons.TryGetValue(buildingFacade.CurrentFacade, out MultiToggle perButton);
-                    if (perButton != null) {
-                        perButton.ChangeState(0);
-                        component.ChangeState(1);
-                    }
-                    ChangeBuilding(rawDef.AnimFiles, rawDef.Name, rawDef.Desc);
-                };
-                buttons.Add("DEFAULT", component);
-            }
 
-            foreach (string facade in primits) {
-                BuildingFacadeResource buildingFacadeResource = Db.GetBuildingFacades().Get(facade);
-                GameObject obj = Util.KInstantiateUI(stateButtonPrefab, buttonContainer.gameObject, force_active: true);
-                Sprite sprite = Def.GetUISpriteFromMultiObjectAnim(Assets.GetAnim(buildingFacadeResource.AnimFile));
-                MultiToggle component = obj.GetComponent<MultiToggle>();
-                component.GetComponent<ToolTip>().SetSimpleTooltip(buildingFacadeResource.Name);
-                component.GetComponent<HierarchyReferences>().GetReference<Image>("Icon").sprite = sprite;
-                component.ChangeState((facade == buildingFacade.CurrentFacade)? 1 : 0);
-                component.onClick = delegate {
-                    MultiToggle perButton;
-                    if (buildingFacade.CurrentFacade == "" || buildingFacade.CurrentFacade == null) {
-                        buttons.TryGetValue("DEFAULT", out perButton);
-                    } else {
-                        buttons.TryGetValue(buildingFacade.CurrentFacade, out perButton);
-                        if(perButton.CurrentState == 0) {
-                            buttons.TryGetValue("DEFAULT", out perButton);
-                        }
-                    }
-                    
-                    if (perButton != null) {
-                        perButton.ChangeState(0);
-                        component.ChangeState(1);
-                    }
-                    buildingFacade.ApplyBuildingFacade(buildingFacadeResource);
                 };
-                buttons.Add(facade, component);
+                buttons.Add(component);
             }
             return;
         }
@@ -140,13 +84,13 @@ namespace ChangeBlueprints {
                 scrollLayout.preferredHeight = 5;
             }
             if (containerLayout != null) {
-                containerLayout.cellSize = new Vector2(50, 50);
+                containerLayout.cellSize = new Vector2(46, 46);
                 containerLayout.constraintCount = 5;
                 containerLayout.spacing = new Vector2(4, 4);
             }
             if (stateButtonPrefabLayout != null) {
-                stateButtonPrefabLayout.minHeight = 50;
-                stateButtonPrefabLayout.minWidth = 50;
+                stateButtonPrefabLayout.minHeight = 46;
+                stateButtonPrefabLayout.minWidth = 46;
             }
             ours.clearButton.gameObject.SetActive(false);
             DestroyImmediate(oldScreen);
@@ -163,19 +107,6 @@ namespace ChangeBlueprints {
             }
         }
 
-        private void ChangeBuilding(KAnimFile[] animFiles, string displayName, string desc) {
-            Building[] components = buildingFacade.gameObject.GetComponents<Building>();
-            foreach (Building building in components) {
-                building.SetDescription(desc);
-                building.GetComponent<KBatchedAnimController>().SwapAnims(animFiles);
-            }
-            buildingFacade.gameObject.GetComponent<KSelectable>().SetName(displayName);
-            if (!(buildingFacade.gameObject.GetComponent<AnimTileable>() != null) || components.Length == 0)
-                return;
-            GameScenePartitioner.Instance.TriggerEvent(components[0].GetExtents(), GameScenePartitioner.Instance.objectLayers[1], null);
-        }
-
-
         public static void AddSideScreen(IList<DetailsScreen.SideScreenRef> existing, GameObject parent) {
             bool found = false;
             foreach (var ssRef in existing)
@@ -183,7 +114,7 @@ namespace ChangeBlueprints {
                     var newScreen = new DetailsScreen.SideScreenRef();
                     var ours = CreateScreen(sideScreen);
                     found = true;
-                    newScreen.name = nameof(ModeSelectScreen);
+                    newScreen.name = nameof(DatabaseQSideScreen);
                     newScreen.screenPrefab = ours;
                     newScreen.screenInstance = ours;
                     var ssTransform = ours.gameObject.transform;

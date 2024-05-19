@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine.Experimental.GlobalIllumination;
 
 namespace QuantumStorage {
     public class ModString {
@@ -50,6 +51,12 @@ namespace QuantumStorage {
                     public static LocString DESC = "DESC";
                     public static LocString EFFECT = "EFFECT";
                 }
+            }
+        }
+
+        public class UI {
+            public class DatabaseQSideScreen {
+                public static LocString TITLE = "数据库";
             }
         }
     }

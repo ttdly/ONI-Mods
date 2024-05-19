@@ -19,8 +19,6 @@ namespace QuantumStorage.Database {
             BuildingDef buildingDef = BuildingTemplates.CreateBuildingDef(ID, 3, 3, "research_center2_kanim", 30, 30f, tieR4, allMetals, 1600f, BuildLocationRule.OnFloor, none, noise);
             buildingDef.RequiresPowerInput = true;
             buildingDef.EnergyConsumptionWhenActive = 120f;
-            buildingDef.ExhaustKilowattsWhenActive = 0.5f;
-            buildingDef.SelfHeatKilowattsWhenActive = 4f;
             buildingDef.ViewMode = OverlayModes.Power.ID;
             buildingDef.AudioCategory = "Metal";
             buildingDef.AudioSize = "large";
