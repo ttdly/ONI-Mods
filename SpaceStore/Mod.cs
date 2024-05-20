@@ -45,6 +45,7 @@ namespace SpaceStore {
         public static string LOCAL_FILE_DIR = Path.GetFullPath(Path.Combine(KMod.Manager.GetDirectory(), "spacestore"));
         public static List<ElementSellButton> Buttons = new List<ElementSellButton>();
         public static bool Loaded = false;
+        public static CoinSaver coinSaver = null;
 
         public static void AddCoin(float amount) {
             Coin += amount;

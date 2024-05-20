@@ -80,6 +80,13 @@ namespace SpaceStore
             }
         }
 
+        [HarmonyPatch(typeof(HeadquartersConfig), "ConfigureBuildingTemplate")]
+        public class HeadquartersConfig_Patch { 
+            public static void Postfix(GameObject go) {
+                go.AddOrGet<CoinSaver>();
+            }
+        }
+
         public static void AddSellButton<T>(GameObject go) where T: KMonoBehaviour{
             if (PriceConvter.Instance.sellItems.ContainsKey(go.PrefabID())) {
                 go.AddOrGet<T>();

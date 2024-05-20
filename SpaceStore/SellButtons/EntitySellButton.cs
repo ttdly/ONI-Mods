@@ -6,7 +6,9 @@
         }
 
         public override void Sell() {
-            StaticVars.AddCoin(coin);
+            //StaticVars.AddCoin(coin);
+            if (StaticVars.coinSaver == null) return;
+            StaticVars.coinSaver.AddCoin(coin);
             base.Sell();
             gameObject.DeleteObject();
         }

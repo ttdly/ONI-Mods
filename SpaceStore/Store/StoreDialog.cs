@@ -165,17 +165,26 @@ namespace SpaceStore.Store {
                 FlexSize = Vector2.right,
                 Color = PUITuning.Colors.ButtonBlueStyle,
                 OnClick = delegate {
+//#if DEBUG
+//                    if (StaticVars.Coin < marketItem.price) {
+//                        StaticVars.Coin = marketItem.price * 2;
+//                    }
+//#endif
+//                    Telepad telepad = GetCurrTelepad();
+//                    if (StaticVars.Coin < marketItem.price || telepad == null) {
+//                        return;
+//                    }
 #if DEBUG
-                    if (StaticVars.Coin < marketItem.price) {
-                        StaticVars.Coin = marketItem.price * 2;
+                    if (StaticVars.coinSaver.coin < marketItem.price) {
+                        StaticVars.coinSaver.coin = marketItem.price * 2;
                     }
 #endif
                     Telepad telepad = GetCurrTelepad();
-                    if (StaticVars.Coin < marketItem.price || telepad == null) {
+                    if (StaticVars.coinSaver == null || StaticVars.coinSaver.coin < marketItem.price || telepad == null) {
                         return;
                     }
-                    
-                    StaticVars.AddCoin(-marketItem.price);
+                    StaticVars.coinSaver.AddCoin(-marketItem.price);
+                    //StaticVars.AddCoin(-marketItem.price);
                     marketItem.info.Deliver(telepad.transform.position);
                     CameraController.Instance.CameraGoTo(telepad.transform.position);
                     RefreshCoin();
@@ -188,7 +197,12 @@ namespace SpaceStore.Store {
         }
 
         public static void RefreshCoin() {
-            CoinLabel.Text = string.Format("{0:0.00}", StaticVars.Coin);
+            if (StaticVars.coinSaver == null) {
+                CoinLabel.Text = "NULL";
+            } else {
+                CoinLabel.Text = string.Format("{0:0.00}", StaticVars.coinSaver.coin);
+            }
+            //CoinLabel.Text = string.Format("{0:0.00}", StaticVars.Coin);
         }
         public static Telepad GetCurrTelepad() {
             if (Components.Telepads.Count == 0) return null;
