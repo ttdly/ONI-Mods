@@ -84,21 +84,35 @@ namespace QuantumStorage.Uploads {
 
             public override void InitializeStates(out BaseState default_state) {
                 default_state = off;
+                //off.PlayAnim("off").EventTransition(GameHashes.OperationalChanged, on, smi => smi.master.operational.IsOperational);
+                //on.DefaultState(on.waiting)
+                //    .EventTransition(GameHashes.OperationalChanged, off, smi => !smi.master.operational.IsOperational);
+                //on.waiting.PlayAnim("on", KAnim.PlayMode.Once)
+                //    .Update((smi, dt) => smi.master.CanWork())
+                //    .ParamTransition(canWork, on.working_pre, IsTrue)
+                //    .Exit(smi => smi.sm.storageEmpty.Set(false, smi));
+                //on.working_pre.PlayAnim("working_pre", KAnim.PlayMode.Once).OnAnimQueueComplete(on.working_loop);
+                //on.working_loop.PlayAnim("working_loop", KAnim.PlayMode.Loop)
+                //    .Update((smi, dt) => { smi.master.DoUpload(); }, UpdateRate.SIM_1000ms)
+                //    .ParamTransition(canWork, on.working_pst, IsFalse)
+                //    .Enter(smi => { smi.master.operational.SetActive(true); })
+                //    .Exit(smi => { smi.master.operational.SetActive(false); });
+                //on.working_pst.PlayAnim("working_pst", KAnim.PlayMode.Once)
+                //    .OnAnimQueueComplete(on.waiting); 
                 off.PlayAnim("off").EventTransition(GameHashes.OperationalChanged, on, smi => smi.master.operational.IsOperational);
                 on.DefaultState(on.waiting)
                     .EventTransition(GameHashes.OperationalChanged, off, smi => !smi.master.operational.IsOperational);
                 on.waiting.PlayAnim("on", KAnim.PlayMode.Once)
                     .Update((smi, dt) => smi.master.CanWork())
                     .ParamTransition(canWork, on.working_pre, IsTrue)
-                    .Exit(smi=> smi.sm.storageEmpty.Set(false, smi));
-                on.working_pre.PlayAnim("working_pre", KAnim.PlayMode.Once).OnAnimQueueComplete(on.working_loop);
-                on.working_loop.PlayAnim("working_loop", KAnim.PlayMode.Loop)
+                    .Exit(smi => smi.sm.storageEmpty.Set(false, smi));
+                on.working_pre.Enter(smi => smi.GoTo(on.working_loop));
+                on.working_loop
                     .Update((smi, dt) => { smi.master.DoUpload(); }, UpdateRate.SIM_1000ms)
                     .ParamTransition(canWork, on.working_pst, IsFalse)
-                    .Enter(smi => { smi.master.operational.SetActive(true);})
-                    .Exit(smi => { smi.master.operational.SetActive(false);});
-                on.working_pst.PlayAnim("working_pst", KAnim.PlayMode.Once)
-                    .OnAnimQueueComplete(on.waiting);
+                    .Enter(smi => { smi.master.operational.SetActive(true); })
+                    .Exit(smi => { smi.master.operational.SetActive(false); });
+                on.working_pst.Enter(smi => smi.GoTo(on.waiting));
             }
         }
     }
