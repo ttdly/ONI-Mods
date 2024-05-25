@@ -51,7 +51,7 @@ namespace ChangeBlueprints {
                 GameObject obj = Util.KInstantiateUI(stateButtonPrefab, buttonContainer.gameObject, force_active: true);
                 Tuple<Sprite, Color> sprite = Def.GetUISprite(item.Key);
                 MultiToggle component = obj.GetComponent<MultiToggle>();
-                component.GetComponent<ToolTip>().SetSimpleTooltip($"{Assets.GetPrefab(item.Key).GetProperName()}\n{item.Value:0.##e+0}克");
+                component.GetComponent<ToolTip>().SetSimpleTooltip($"{Assets.GetPrefab(item.Key).GetProperName()}\n{GameUtil.GetFormattedMass((float)item.Value)}");
                 Image image = component.GetComponent<HierarchyReferences>().GetReference<Image>("Icon");
                 image.sprite = sprite.first;
                 image.color = sprite.second;

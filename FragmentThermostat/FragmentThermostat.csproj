@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyTitle>碎片恒温器</AssemblyTitle>
+    <FileVersion>1.0.0</FileVersion>
+    <RootNamespace>FragmentThermostat</RootNamespace>
+    <Description>碎片恒温</Description>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <LastWorkingBuild>596100</LastWorkingBuild>
+    <Platforms>Vanilla;Mergedown</Platforms>
+  </PropertyGroup>
+</Project>

@@ -1,5 +1,4 @@
-﻿using JetBrains.Annotations;
-using KSerialization;
+﻿using KSerialization;
 using PeterHan.PLib.Core;
 using System.Collections.Generic;
 
@@ -8,12 +7,15 @@ namespace QuantumStorage.Database {
     public class DatabaseQ : KMonoBehaviour {
         [Serialize]
         public Dictionary<Tag, double> itemDic = new Dictionary<Tag, double>();
+        [Serialize]
+        public float tempHeat;
+        private readonly float maxTemp = 50000f;
         [MyCmpGet]
         public Operational operational;
 
         #region LifeCycle
         protected override void OnSpawn() {
-            base.OnSpawn();
+            base.OnSpawn(); 
             StaticVar.database = this;
         }
 
@@ -33,7 +35,16 @@ namespace QuantumStorage.Database {
                 itemDic.Add(tag, amount);
             }
             operational.SetActive(operational.IsOperational);
-            SimMessages.ModifyEnergy(Grid.PosToCell(gameObject), transferHeat, 10000f, SimMessages.EnergySourceID.Overheatable);
+            ApplyHeat(transferHeat);
+        }
+
+        public void ApplyHeat(float heat) {
+            tempHeat += heat;
+            if (tempHeat > maxTemp) { 
+                float count = tempHeat - maxTemp;
+                SimMessages.ModifyEnergy(Grid.PosToCell(gameObject), count, 10000f, SimMessages.EnergySourceID.Overheatable);
+            }
+
         }
         #endregion
     }

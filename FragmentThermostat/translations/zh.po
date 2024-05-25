@@ -1,0 +1,36 @@
+msgid ""
+msgstr ""
+"Application: Oxygen Not IncludedPOT Version: 2.0\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#. FragmentThermostat.ModString.BUILDINGS.PREFABS.FTMOD.DESC
+msgctxt "FragmentThermostat.ModString.BUILDINGS.PREFABS.FTMOD.DESC"
+msgid "Adjust the input debris temperature to the set temperature"
+msgstr "将输入的碎片温度调整到设定的温度"
+
+#. FragmentThermostat.ModString.BUILDINGS.PREFABS.FTMOD.EFFECT
+msgctxt "FragmentThermostat.ModString.BUILDINGS.PREFABS.FTMOD.EFFECT"
+msgid ""
+"Adjust the temperature of the input solid material, and apply the heat "
+"difference to the building itself."
+msgstr "提升或者降低输入的固体温度，并将热量差应用到建筑本身"
+
+#. FragmentThermostat.ModString.BUILDINGS.PREFABS.FTMOD.NAME
+msgctxt "FragmentThermostat.ModString.BUILDINGS.PREFABS.FTMOD.NAME"
+msgid "Debris Thermostat"
+msgstr "碎片恒温器"
+
+#. FragmentThermostat.ModString.UI_FTMOD.TITLE
+msgctxt "FragmentThermostat.ModString.UI_FTMOD.TITLE"
+msgid "Target Temperature"
+msgstr "目标温度"

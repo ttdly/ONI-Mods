@@ -1,4 +1,5 @@
 ﻿using KSerialization;
+using PeterHan.PLib.Core;
 using UnityEngine;
 
 
@@ -24,9 +25,9 @@ namespace QuantumStorage.Uploads {
         protected override void OnSpawn() {
             base.OnSpawn();
             Prioritizable.AddRef(gameObject);
-            meter = new MeterController(controller, "meter_target_counter", "meter_counter", Meter.Offset.Infront, Grid.SceneLayer.NoLayer, new string[1]{
-                    "meter_target_counter"
-                });
+            //meter = new MeterController(controller, "meter_target_counter", "meter_counter", Meter.Offset.Infront, Grid.SceneLayer.NoLayer, new string[1]{
+            //        "meter_target_counter"
+            //    });
             smi = new StatesInstance(this);
             smi.StartSM();
         }
@@ -36,22 +37,23 @@ namespace QuantumStorage.Uploads {
             base.OnCleanUp();
         }
 
-        private void UpdateMeter() {
-            float percent = (storage.MassStored() + uploadSpeed) / storage.capacityKg;
-            if (percent >= 1) {
-                meter.meterController.Play((HashedString)"meter_on", KAnim.PlayMode.Paused);
-            } else {
-                meter.meterController.Play((HashedString)"meter_counter", KAnim.PlayMode.Paused);
-                meter.SetPositionPercent(storage.MassStored() / storage.capacityKg);
-            }
+        //private void UpdateMeter() {
+        //    float percent = (storage.MassStored() + uploadSpeed) / storage.capacityKg;
+        //    if (percent >= 1) {
+        //        meter.meterController.Play((HashedString)"meter_on", KAnim.PlayMode.Paused);
+        //    } else {
+        //        meter.meterController.Play((HashedString)"meter_counter", KAnim.PlayMode.Paused);
+        //        meter.SetPositionPercent(storage.MassStored() / storage.capacityKg);
+        //    }
 
-        }
+        //}
 
         private void DoUpload() {
             float totalNeedUploadMass = uploadSpeed;
             for (int i = 0; i < storage.items.Count && totalNeedUploadMass > 0; i++) {
                 GameObject go = storage.items[i];
                 PrimaryElement primaryElement = go.GetComponent<PrimaryElement>();
+                if (primaryElement == null) continue;
                 float thisTimeUploadMass;
                 if (primaryElement.Mass > totalNeedUploadMass) {
                     thisTimeUploadMass = totalNeedUploadMass;
@@ -63,7 +65,7 @@ namespace QuantumStorage.Uploads {
                     (primaryElement.Temperature - targetTemputre) * primaryElement.Element.specificHeatCapacity * thisTimeUploadMass);
                 storage.ConsumeIgnoringDisease(go.PrefabID(), thisTimeUploadMass);
             }
-            UpdateMeter();
+            //UpdateMeter();
             CanWork();
         }
 

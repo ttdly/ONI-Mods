@@ -50,6 +50,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WirelessProject", "Wireless
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuantumStorage", "QuantumStorage\QuantumStorage.csproj", "{D20A4852-009F-4FC7-A853-2D150F2D7AD3}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FragmentThermostat", "FragmentThermostat\FragmentThermostat.csproj", "{B231A0A6-8889-41E7-9B5C-14289E09D5BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -264,6 +266,18 @@ Global
 		{D20A4852-009F-4FC7-A853-2D150F2D7AD3}.Release|Mergedown.Build.0 = Release|Mergedown
 		{D20A4852-009F-4FC7-A853-2D150F2D7AD3}.Release|Vanilla.ActiveCfg = Release|Vanilla
 		{D20A4852-009F-4FC7-A853-2D150F2D7AD3}.Release|Vanilla.Build.0 = Release|Vanilla
+		{B231A0A6-8889-41E7-9B5C-14289E09D5BD}.Debug|Any CPU.ActiveCfg = Debug|Vanilla
+		{B231A0A6-8889-41E7-9B5C-14289E09D5BD}.Debug|Any CPU.Build.0 = Debug|Vanilla
+		{B231A0A6-8889-41E7-9B5C-14289E09D5BD}.Debug|Mergedown.ActiveCfg = Debug|Mergedown
+		{B231A0A6-8889-41E7-9B5C-14289E09D5BD}.Debug|Mergedown.Build.0 = Debug|Mergedown
+		{B231A0A6-8889-41E7-9B5C-14289E09D5BD}.Debug|Vanilla.ActiveCfg = Debug|Vanilla
+		{B231A0A6-8889-41E7-9B5C-14289E09D5BD}.Debug|Vanilla.Build.0 = Debug|Vanilla
+		{B231A0A6-8889-41E7-9B5C-14289E09D5BD}.Release|Any CPU.ActiveCfg = Release|Vanilla
+		{B231A0A6-8889-41E7-9B5C-14289E09D5BD}.Release|Any CPU.Build.0 = Release|Vanilla
+		{B231A0A6-8889-41E7-9B5C-14289E09D5BD}.Release|Mergedown.ActiveCfg = Release|Mergedown
+		{B231A0A6-8889-41E7-9B5C-14289E09D5BD}.Release|Mergedown.Build.0 = Release|Mergedown
+		{B231A0A6-8889-41E7-9B5C-14289E09D5BD}.Release|Vanilla.ActiveCfg = Release|Vanilla
+		{B231A0A6-8889-41E7-9B5C-14289E09D5BD}.Release|Vanilla.Build.0 = Release|Vanilla
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -286,6 +300,7 @@ Global
 		{C877891F-5E62-4CD7-8FBF-55014B024CDB} = {84877F02-1D2E-4A8E-BC3E-44FA8F6A417F}
 		{2AE27D1A-5224-4832-A11E-F182FDA21F28} = {EA38FED7-E861-45D1-8BCA-C29F00400F9F}
 		{D20A4852-009F-4FC7-A853-2D150F2D7AD3} = {6C166698-42A6-4AFD-9F4C-CA6C20F55887}
+		{B231A0A6-8889-41E7-9B5C-14289E09D5BD} = {84877F02-1D2E-4A8E-BC3E-44FA8F6A417F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {05AD4341-9C99-4998-8BEC-CFBB218B464B}

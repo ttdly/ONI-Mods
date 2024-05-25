@@ -1,0 +1,25 @@
+msgid ""
+msgstr ""
+"Application: Oxygen Not Included"
+"POT Version: 2.0"
+
+#. FragmentThermostat.ModString.BUILDINGS.PREFABS.FTMOD.DESC
+msgctxt "FragmentThermostat.ModString.BUILDINGS.PREFABS.FTMOD.DESC"
+msgid "Adjust the input debris temperature to the set temperature"
+msgstr ""
+
+#. FragmentThermostat.ModString.BUILDINGS.PREFABS.FTMOD.EFFECT
+msgctxt "FragmentThermostat.ModString.BUILDINGS.PREFABS.FTMOD.EFFECT"
+msgid "Adjust the temperature of the input solid material, and apply the heat difference to the building itself."
+msgstr ""
+
+#. FragmentThermostat.ModString.BUILDINGS.PREFABS.FTMOD.NAME
+msgctxt "FragmentThermostat.ModString.BUILDINGS.PREFABS.FTMOD.NAME"
+msgid "Debris Thermostat"
+msgstr ""
+
+#. FragmentThermostat.ModString.UI_FTMOD.TITLE
+msgctxt "FragmentThermostat.ModString.UI_FTMOD.TITLE"
+msgid "Target Temperature"
+msgstr ""
+
