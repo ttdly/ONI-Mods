@@ -34,8 +34,7 @@ namespace FragmentThermostat {
             var storage = go.AddOrGet<Storage>();
             storage.showInUI = true;
             storage.capacityKg = 200f;
-            go.AddOrGet<SolidConduitConsumer>();
-            go.AddOrGet<SolidConduitDispenser>().alwaysDispense = true;
+            go.AddOrGet<RequireOutputs>().ignoreFullPipe = true;
             go.AddOrGet<FragmentThermostatComponent>();
         }
 
