@@ -1,17 +1,17 @@
 msgid ""
 msgstr ""
-"Application: Oxygen Not IncludedPOT Version: 2.0\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Application: Oxygen Not IncludedPOT Version: 2.0\n"
 "X-Generator: Poedit 3.0\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: zh_CN\n"
 
 #. FragmentThermostat.ModString.BUILDINGS.PREFABS.FTMOD.DESC
 msgctxt "FragmentThermostat.ModString.BUILDINGS.PREFABS.FTMOD.DESC"
@@ -23,12 +23,45 @@ msgctxt "FragmentThermostat.ModString.BUILDINGS.PREFABS.FTMOD.EFFECT"
 msgid ""
 "Adjust the temperature of the input solid material, and apply the heat "
 "difference to the building itself."
-msgstr "提升或者降低输入的固体温度，并将热量差应用到建筑本身"
+msgstr "提升或者降低输入的固体温度，并将热量差应用到建筑本身。"
 
 #. FragmentThermostat.ModString.BUILDINGS.PREFABS.FTMOD.NAME
 msgctxt "FragmentThermostat.ModString.BUILDINGS.PREFABS.FTMOD.NAME"
 msgid "Debris Thermostat"
 msgstr "碎片恒温器"
+
+#. FragmentThermostat.ModString.UI_FTMOD.Options.MAX_TEMP
+msgctxt "FragmentThermostat.ModString.UI_FTMOD.Options.MAX_TEMP"
+msgid "Max Temperature"
+msgstr "最高温度"
+
+#. FragmentThermostat.ModString.UI_FTMOD.Options.MIN_TEMP
+msgctxt "FragmentThermostat.ModString.UI_FTMOD.Options.MIN_TEMP"
+msgid "Min Temperature"
+msgstr "最低温度"
+
+#. FragmentThermostat.ModString.UI_FTMOD.Options.MODE_OPEN
+msgctxt "FragmentThermostat.ModString.UI_FTMOD.Options.MODE_OPEN"
+msgid "Open"
+msgstr "开启"
+
+#. FragmentThermostat.ModString.UI_FTMOD.Options.MODE_TIP
+msgctxt "FragmentThermostat.ModString.UI_FTMOD.Options.MODE_TIP"
+msgid ""
+"If this option is checked, Debris Thermostat will lower the temperature of "
+"the debris passing through the building by 14℃."
+msgstr ""
+"开启这个选项会让碎片恒温器像液温调节器那样固定降低穿过建筑的碎片温度 14℃。"
+
+#. FragmentThermostat.ModString.UI_FTMOD.Options.MODE_TIP2
+msgctxt "FragmentThermostat.ModString.UI_FTMOD.Options.MODE_TIP2"
+msgid "Only active when open this mode."
+msgstr "这个温度设置只在开启该模式时才生效"
+
+#. FragmentThermostat.ModString.UI_FTMOD.Options.MODE2
+msgctxt "FragmentThermostat.ModString.UI_FTMOD.Options.MODE2"
+msgid "Work as a Thermo Aquatuner"
+msgstr "类液温调节器模式"
 
 #. FragmentThermostat.ModString.UI_FTMOD.TITLE
 msgctxt "FragmentThermostat.ModString.UI_FTMOD.TITLE"

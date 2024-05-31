@@ -18,6 +18,36 @@ msgctxt "FragmentThermostat.ModString.BUILDINGS.PREFABS.FTMOD.NAME"
 msgid "Debris Thermostat"
 msgstr ""
 
+#. FragmentThermostat.ModString.UI_FTMOD.Options.MAX_TEMP
+msgctxt "FragmentThermostat.ModString.UI_FTMOD.Options.MAX_TEMP"
+msgid "Max Temperature"
+msgstr ""
+
+#. FragmentThermostat.ModString.UI_FTMOD.Options.MIN_TEMP
+msgctxt "FragmentThermostat.ModString.UI_FTMOD.Options.MIN_TEMP"
+msgid "Min Temperature"
+msgstr ""
+
+#. FragmentThermostat.ModString.UI_FTMOD.Options.MODE_OPEN
+msgctxt "FragmentThermostat.ModString.UI_FTMOD.Options.MODE_OPEN"
+msgid "Open"
+msgstr ""
+
+#. FragmentThermostat.ModString.UI_FTMOD.Options.MODE_TIP
+msgctxt "FragmentThermostat.ModString.UI_FTMOD.Options.MODE_TIP"
+msgid "If this option is checked, Debris Thermostat will lower the temperature of the debris passing through the building by 14℃."
+msgstr ""
+
+#. FragmentThermostat.ModString.UI_FTMOD.Options.MODE_TIP2
+msgctxt "FragmentThermostat.ModString.UI_FTMOD.Options.MODE_TIP2"
+msgid "Only active when open this mode."
+msgstr ""
+
+#. FragmentThermostat.ModString.UI_FTMOD.Options.MODE2
+msgctxt "FragmentThermostat.ModString.UI_FTMOD.Options.MODE2"
+msgid "Work as a Thermo Aquatuner"
+msgstr ""
+
 #. FragmentThermostat.ModString.UI_FTMOD.TITLE
 msgctxt "FragmentThermostat.ModString.UI_FTMOD.TITLE"
 msgid "Target Temperature"
