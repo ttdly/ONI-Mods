@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using KMod;
 using Newtonsoft.Json;
+using PeterHan.PLib.Core;
 
 namespace StoreGoods {
   public class SpaceStoreConfigWriter {

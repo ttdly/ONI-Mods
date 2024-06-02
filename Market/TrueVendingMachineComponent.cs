@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using KSerialization;
 using Market.ItemSpwan;
+using PeterHan.PLib.Core;
 using UnityEngine;
 using static Market.MarketList;
 using Random = UnityEngine.Random;

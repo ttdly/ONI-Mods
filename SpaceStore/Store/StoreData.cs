@@ -1,5 +1,6 @@
 ﻿using System.Runtime.Serialization;
 using KSerialization;
+using PeterHan.PLib.Core;
 
 namespace SpaceStore.Store {
   [SerializationConfig(MemberSerialization.OptIn)]
