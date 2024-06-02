@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
-  <Import Condition=" !Exists('Directory.Build.props.user') " Project="Directory.Build.props.default" />
-  <Import Condition=" Exists('Directory.Build.props.user') " Project="Directory.Build.props.user" />
+  <Import Condition=" !Exists('Directory.Build.props.user') " Project="Directory.Build.props.default"/>
+  <Import Condition=" Exists('Directory.Build.props.user') " Project="Directory.Build.props.user"/>
 
   <ItemDefinitionGroup>
-    <Reference Private="False" />
-    <ProjectReference Private="True" />
+    <Reference Private="False"/>
+    <ProjectReference Private="True"/>
   </ItemDefinitionGroup>
 
 
@@ -17,23 +17,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-	<PackageReference Include="ILRepack.MSBuild.Task" Version="2.0.13" Private="True" PrivateAssets="all" />
-	<PackageReference Include="PLib" Version="4.15.0" Private="True" PrivateAssets="all" />
-	<Reference Include="Assembly-CSharp" HintPath="$(GameFolderActive)/Assembly-CSharp.dll" />
-	<Reference Include="Assembly-CSharp-firstpass" HintPath="$(GameFolderActive)/Assembly-CSharp-firstpass.dll" />
-    <Reference Include="0Harmony" HintPath="$(GameFolderActive)/0Harmony.dll" />
-    <Reference Include="FMODUnity" HintPath="$(GameFolderActive)/FMODUnity.dll" />
-    <Reference Include="Newtonsoft.Json" HintPath="$(GameFolderActive)/Newtonsoft.Json.dll" />
-    <Reference Include="UnityEngine" HintPath="$(GameFolderActive)/UnityEngine.dll" />
-    <Reference Include="UnityEngine.CoreModule" HintPath="$(GameFolderActive)/UnityEngine.CoreModule.dll" />
-    <Reference Include="UnityEngine.ImageConversionModule" HintPath="$(GameFolderActive)/UnityEngine.ImageConversionModule.dll" />
-    <Reference Include="UnityEngine.InputLegacyModule" HintPath="$(GameFolderActive)/UnityEngine.InputLegacyModule.dll" />
-    <Reference Include="Unity.TextMeshPro" HintPath="$(GameFolderActive)/Unity.TextMeshPro.dll" />
-    <Reference Include="UnityEngine.TextRenderingModule" HintPath="$(GameFolderActive)/UnityEngine.TextRenderingModule.dll" />
-    <Reference Include="UnityEngine.UI" HintPath="$(GameFolderActive)/UnityEngine.UI.dll" />
-    <Reference Include="UnityEngine.UIModule" HintPath="$(GameFolderActive)/UnityEngine.UIModule.dll" />
+    <PackageReference Include="ILRepack.MSBuild.Task" Version="2.0.13" Private="True" PrivateAssets="all"/>
+    <PackageReference Include="PLib" Version="4.15.0" Private="True" PrivateAssets="all"/>
+    <Reference Include="Assembly-CSharp" HintPath="$(GameFolderActive)/Assembly-CSharp.dll"/>
+    <Reference Include="Assembly-CSharp-firstpass" HintPath="$(GameFolderActive)/Assembly-CSharp-firstpass.dll"/>
+    <Reference Include="0Harmony" HintPath="$(GameFolderActive)/0Harmony.dll"/>
+    <Reference Include="FMODUnity" HintPath="$(GameFolderActive)/FMODUnity.dll"/>
+    <Reference Include="Newtonsoft.Json" HintPath="$(GameFolderActive)/Newtonsoft.Json.dll"/>
+    <Reference Include="UnityEngine" HintPath="$(GameFolderActive)/UnityEngine.dll"/>
+    <Reference Include="UnityEngine.CoreModule" HintPath="$(GameFolderActive)/UnityEngine.CoreModule.dll"/>
+    <Reference Include="UnityEngine.ImageConversionModule" HintPath="$(GameFolderActive)/UnityEngine.ImageConversionModule.dll"/>
+    <Reference Include="UnityEngine.InputLegacyModule" HintPath="$(GameFolderActive)/UnityEngine.InputLegacyModule.dll"/>
+    <Reference Include="Unity.TextMeshPro" HintPath="$(GameFolderActive)/Unity.TextMeshPro.dll"/>
+    <Reference Include="UnityEngine.TextRenderingModule" HintPath="$(GameFolderActive)/UnityEngine.TextRenderingModule.dll"/>
+    <Reference Include="UnityEngine.UI" HintPath="$(GameFolderActive)/UnityEngine.UI.dll"/>
+    <Reference Include="UnityEngine.UIModule" HintPath="$(GameFolderActive)/UnityEngine.UIModule.dll"/>
   </ItemGroup>
-	
+
   <PropertyGroup Condition=" '$(Platform)' == 'Mergedown' ">
     <DefineConstants>MERGEDOWN</DefineConstants>
     <APIVersion>2</APIVersion>
@@ -42,7 +42,7 @@
     <DefineConstants>LEGACY</DefineConstants>
     <APIVersion>1</APIVersion>
   </PropertyGroup>
-	
+
   <PropertyGroup>
     <Product>tTdlyONIMods</Product>
     <Authors>tTdly</Authors>

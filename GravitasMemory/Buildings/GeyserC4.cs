@@ -1,60 +1,68 @@
-﻿using KSerialization;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using KSerialization;
 using UnityEngine;
 
 [SerializationConfig(MemberSerialization.OptIn)]
-public class GeyserC4 : StateMachineComponent<GeyserC4.StatesInstance>, IGameObjectEffectDescriptor
-{
-  [MyCmpGet]
-  private Operational operational;
-  [MyCmpGet]
-  private Storage storage;
-  [MyCmpGet]
-  private ElementConverter elementConverter;
-  [MyCmpGet]
-  private ElementConsumer elementConsumer;
+public class GeyserC4 : StateMachineComponent<GeyserC4.StatesInstance>, IGameObjectEffectDescriptor {
   public Tag consumeTag;
 
-  public bool HasFilter() => this.elementConverter.HasEnoughMass(this.consumeTag);
+  [MyCmpGet] private ElementConsumer elementConsumer;
 
-  public bool IsConvertable() => this.elementConverter.HasEnoughMassToStartConverting();
+  [MyCmpGet] private ElementConverter elementConverter;
 
-  protected override void OnSpawn()
-  {
+  [MyCmpGet] private Operational operational;
+
+  [MyCmpGet] private Storage storage;
+
+  public List<Descriptor> GetDescriptors(GameObject go) {
+    return null;
+  }
+
+  public bool HasFilter() {
+    return elementConverter.HasEnoughMass(consumeTag);
+  }
+
+  public bool IsConvertable() {
+    return elementConverter.HasEnoughMassToStartConverting();
+  }
+
+  protected override void OnSpawn() {
     base.OnSpawn();
-    this.smi.StartSM();
+    smi.StartSM();
   }
 
-  public List<Descriptor> GetDescriptors(GameObject go) => (List<Descriptor>) null;
-
-  public class StatesInstance : 
-    GameStateMachine<GeyserC4.States, GeyserC4.StatesInstance, GeyserC4, object>.GameInstance
-  {
+  public class StatesInstance :
+    GameStateMachine<States, StatesInstance, GeyserC4, object>.GameInstance {
     public StatesInstance(GeyserC4 smi)
-      : base(smi)
-    {
+      : base(smi) {
     }
   }
 
-  public class States : GameStateMachine<GeyserC4.States, GeyserC4.StatesInstance, GeyserC4>
-  {
-    public GeyserC4.States.ReadyStates hasFilter;
-    public GameStateMachine<GeyserC4.States, GeyserC4.StatesInstance, GeyserC4, object>.State waiting;
+  public class States : GameStateMachine<States, StatesInstance, GeyserC4> {
+    public ReadyStates hasFilter;
+    public State waiting;
 
-    public override void InitializeStates(out StateMachine.BaseState default_state)
-    {
-      default_state = (StateMachine.BaseState) this.waiting;
-      this.waiting.EventTransition(GameHashes.OnStorageChange, (GameStateMachine<GeyserC4.States, GeyserC4.StatesInstance, GeyserC4, object>.State) this.hasFilter, (StateMachine<GeyserC4.States, GeyserC4.StatesInstance, GeyserC4, object>.Transition.ConditionCallback) (smi => smi.master.HasFilter() && smi.master.operational.IsOperational)).EventTransition(GameHashes.OperationalChanged, (GameStateMachine<GeyserC4.States, GeyserC4.StatesInstance, GeyserC4, object>.State) this.hasFilter, (StateMachine<GeyserC4.States, GeyserC4.StatesInstance, GeyserC4, object>.Transition.ConditionCallback) (smi => smi.master.HasFilter() && smi.master.operational.IsOperational));
-      this.hasFilter.EventTransition(GameHashes.OperationalChanged, this.waiting, (StateMachine<GeyserC4.States, GeyserC4.StatesInstance, GeyserC4, object>.Transition.ConditionCallback) (smi => !smi.master.operational.IsOperational)).Enter("EnableConsumption", (StateMachine<GeyserC4.States, GeyserC4.StatesInstance, GeyserC4, object>.State.Callback) (smi => smi.master.elementConsumer.EnableConsumption(true))).Exit("DisableConsumption", (StateMachine<GeyserC4.States, GeyserC4.StatesInstance, GeyserC4, object>.State.Callback) (smi => smi.master.elementConsumer.EnableConsumption(false))).DefaultState(this.hasFilter.idle);
-      this.hasFilter.idle.EventTransition(GameHashes.OnStorageChange, this.hasFilter.converting, (StateMachine<GeyserC4.States, GeyserC4.StatesInstance, GeyserC4, object>.Transition.ConditionCallback) (smi => smi.master.IsConvertable()));
-      this.hasFilter.converting.Enter("SetActive(true)", (StateMachine<GeyserC4.States, GeyserC4.StatesInstance, GeyserC4, object>.State.Callback) (smi => smi.master.operational.SetActive(true))).Exit("SetActive(false)", (StateMachine<GeyserC4.States, GeyserC4.StatesInstance, GeyserC4, object>.State.Callback) (smi => smi.master.operational.SetActive(false))).EventTransition(GameHashes.OnStorageChange, this.hasFilter.idle, (StateMachine<GeyserC4.States, GeyserC4.StatesInstance, GeyserC4, object>.Transition.ConditionCallback) (smi => !smi.master.IsConvertable()));
+    public override void InitializeStates(out BaseState default_state) {
+      default_state = waiting;
+      waiting.EventTransition(GameHashes.OnStorageChange, hasFilter,
+        smi => smi.master.HasFilter() && smi.master.operational.IsOperational).EventTransition(
+        GameHashes.OperationalChanged, hasFilter,
+        smi => smi.master.HasFilter() && smi.master.operational.IsOperational);
+      hasFilter.EventTransition(GameHashes.OperationalChanged, waiting, smi => !smi.master.operational.IsOperational)
+        .Enter("EnableConsumption", smi => smi.master.elementConsumer.EnableConsumption(true))
+        .Exit("DisableConsumption", smi => smi.master.elementConsumer.EnableConsumption(false))
+        .DefaultState(hasFilter.idle);
+      hasFilter.idle.EventTransition(GameHashes.OnStorageChange, hasFilter.converting,
+        smi => smi.master.IsConvertable());
+      hasFilter.converting.Enter("SetActive(true)", smi => smi.master.operational.SetActive(true))
+        .Exit("SetActive(false)", smi => smi.master.operational.SetActive(false))
+        .EventTransition(GameHashes.OnStorageChange, hasFilter.idle, smi => !smi.master.IsConvertable());
     }
 
-    public class ReadyStates : 
-      GameStateMachine<GeyserC4.States, GeyserC4.StatesInstance, GeyserC4, object>.State
-    {
-      public GameStateMachine<GeyserC4.States, GeyserC4.StatesInstance, GeyserC4, object>.State idle;
-      public GameStateMachine<GeyserC4.States, GeyserC4.StatesInstance, GeyserC4, object>.State converting;
+    public class ReadyStates :
+      State {
+      public State converting;
+      public State idle;
     }
   }
 }

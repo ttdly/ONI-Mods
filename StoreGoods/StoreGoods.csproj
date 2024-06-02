@@ -9,6 +9,6 @@
     <Platforms>Vanilla;Mergedown</Platforms>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="translations\" />
+    <Folder Include="translations\"/>
   </ItemGroup>
 </Project>

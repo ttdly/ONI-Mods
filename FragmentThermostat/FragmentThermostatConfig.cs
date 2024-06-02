@@ -6,7 +6,9 @@ namespace FragmentThermostat {
   public class FragmentThermostatConfig : IBuildingConfig {
     public const string ID = "FTMod";
 
-    public override string[] GetDlcIds() => DlcManager.AVAILABLE_ALL_VERSIONS;
+    public override string[] GetDlcIds() {
+      return DlcManager.AVAILABLE_ALL_VERSIONS;
+    }
 
     public override BuildingDef CreateBuildingDef() {
       var buildingDef = BuildingTemplates.CreateBuildingDef(ID, 3, 1, "fragment_thermostat_kanim",

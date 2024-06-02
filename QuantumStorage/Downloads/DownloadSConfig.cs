@@ -1,4 +1,4 @@
 ﻿namespace QuantumStorage.Downloads {
-    public class DownloadSConfig {
-    }
+  public class DownloadSConfig {
+  }
 }

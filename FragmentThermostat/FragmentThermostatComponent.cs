@@ -1,7 +1,5 @@
-﻿using KSerialization;
-using PeterHan.PLib.Options;
+﻿using PeterHan.PLib.Options;
 using STRINGS;
-using UnityEngine;
 
 namespace FragmentThermostat {
 #pragma warning disable CS0649
@@ -38,19 +36,33 @@ namespace FragmentThermostat {
 
     public string SliderUnits => UI.UNITSUFFIXES.TEMPERATURE.CELSIUS;
 
-    public int SliderDecimalPlaces(int index) => 0;
+    public int SliderDecimalPlaces(int index) {
+      return 0;
+    }
 
-    public float GetSliderMin(int index) => SingletonOptions<ModOptions>.Instance.MinTemperature;
+    public float GetSliderMin(int index) {
+      return SingletonOptions<ModOptions>.Instance.MinTemperature;
+    }
 
-    public float GetSliderMax(int index) => SingletonOptions<ModOptions>.Instance.MaxTemperature;
+    public float GetSliderMax(int index) {
+      return SingletonOptions<ModOptions>.Instance.MaxTemperature;
+    }
 
-    public float GetSliderValue(int index) => targetTemperature;
+    public float GetSliderValue(int index) {
+      return targetTemperature;
+    }
 
-    public void SetSliderValue(float percent, int index) => targetTemperature = percent;
+    public void SetSliderValue(float percent, int index) {
+      targetTemperature = percent;
+    }
 
-    public string GetSliderTooltipKey(int index) => "STRINGS.UI_FTMOD.TITLE";
+    public string GetSliderTooltipKey(int index) {
+      return "STRINGS.UI_FTMOD.TITLE";
+    }
 
-    public string GetSliderTooltip(int index) => $"{targetTemperature}";
+    public string GetSliderTooltip(int index) {
+      return $"{targetTemperature}";
+    }
 
     #endregion
   }

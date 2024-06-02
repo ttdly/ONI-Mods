@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using TUNING;
 
 namespace FragmentThermostat {
   public class Patches {
@@ -9,7 +10,7 @@ namespace FragmentThermostat {
         LocString.CreateLocStringKeys(typeof(ModString.UI_FTMOD));
         ModUtil.AddBuildingToPlanScreen("Conveyance", FragmentThermostatConfig.ID);
         Db.Get().Techs.Get("SolidManagement").unlockedItemIDs.Add(FragmentThermostatConfig.ID);
-        TUNING.BUILDINGS.PLANSUBCATEGORYSORTING.Add(FragmentThermostatConfig.ID, "cooler");
+        BUILDINGS.PLANSUBCATEGORYSORTING.Add(FragmentThermostatConfig.ID, "cooler");
       }
     }
   }

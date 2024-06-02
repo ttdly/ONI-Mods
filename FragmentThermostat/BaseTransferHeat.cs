@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace FragmentThermostat {
   public class BaseTransferHeat : KMonoBehaviour {
-    [Serialize] public float targetTemperature = 0f;
-    protected float TargetTemperature => targetTemperature + 273.15f;
-    protected HandleVector<int>.Handle structureTemperature;
+    [Serialize] public float targetTemperature;
     private float lastSampleTime = -1f;
+    protected HandleVector<int>.Handle structureTemperature;
+    protected float TargetTemperature => targetTemperature + 273.15f;
 
     protected static float CountHeat(PrimaryElement primaryElement, float targetTemp) {
       return (primaryElement.Temperature - targetTemp) * primaryElement.Element.specificHeatCapacity *
