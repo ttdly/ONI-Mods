@@ -16,13 +16,13 @@ namespace PackAnything {
       new PLocalization().Register();
       LocString.CreateLocStringKeys(typeof(PackAnythingString), "");
 #if DEBUG
-            ModUtil.RegisterForTranslation(typeof(STRINGS));
+      ModUtil.RegisterForTranslation(typeof(PackAnythingString.STRINGS));
 #endif
       new POptions().RegisterOptions(this, typeof(Options));
-      ManualPatchs(harmony);
+      ManualPatches(harmony);
     }
 
-    public void ManualPatchs(Harmony harmony) {
+    private static void ManualPatches(Harmony harmony) {
       var entityPostfix = typeof(PackAnythingPatches).GetMethod(nameof(PackAnythingPatches.EntityPostfix));
       var entityPatchMap = new Dictionary<Type, string> {
         { typeof(OilWellConfig), nameof(OilWellConfig.CreatePrefab) },
@@ -38,7 +38,6 @@ namespace PackAnything {
       };
       foreach (var pair in entityPatchMap)
         harmony.Patch(pair.Key.GetMethod(pair.Value), postfix: new HarmonyMethod(entityPostfix));
-
       var buildingPostfix = typeof(PackAnythingPatches).GetMethod(nameof(PackAnythingPatches.BuildingPostfix));
       var buildingPatchMap = new Dictionary<Type, string> {
         { typeof(LonelyMinionHouseConfig), nameof(LonelyMinionHouseConfig.DoPostConfigureComplete) },

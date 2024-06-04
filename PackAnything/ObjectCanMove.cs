@@ -8,8 +8,6 @@ namespace PackAnything {
     private static readonly EventSystem.IntraObjectHandler<ObjectCanMove> OnRefreshUserMenuDelegate =
       new EventSystem.IntraObjectHandler<ObjectCanMove>((component, data) => component.OnRefreshUserMenu(data));
 
-    [Serialize] public bool isSurveyed;
-
     [Serialize] public ObjectType objectType;
 
     private WorldModifier buffer;
@@ -22,9 +20,6 @@ namespace PackAnything {
       base.OnSpawn();
       Subscribe((int)GameHashes.RefreshUserMenu, OnRefreshUserMenuDelegate);
       Subscribe((int)GameHashes.StatusChange, OnRefreshUserMenuDelegate);
-      if (isSurveyed) {
-        PackAnythingStaticVars.SurveableCmps.Add(this);
-      }
     }
 
     protected override void OnCleanUp() {
@@ -41,16 +36,6 @@ namespace PackAnything {
         gameObject,
         new KIconButtonMenu.ButtonInfo("action_control", UI.USERMENUACTIONS.PICKUPABLEMOVE.NAME, OnClickMove,
           tooltipText: UI.USERMENUACTIONS.PICKUPABLEMOVE.TOOLTIP));
-      if (isSurveyed) return;
-      if (PackAnythingStaticVars.IsDlc)
-        Game.Instance.userMenu.AddButton(
-          gameObject,
-          new KIconButtonMenu.ButtonInfo(
-            "action_follow_cam",
-            PackAnythingString.UI.SURVEY.NAME,
-            AddThisToList,
-            tooltipText: PackAnythingString.UI.SURVEY.TOOLTIP)
-        );
     }
 
     private void OnClickMove() {
@@ -62,7 +47,6 @@ namespace PackAnything {
       PackAnythingStaticVars.SetTargetObjectCanMove(this);
       PackAnythingStaticVars.SetTargetModifier(buffer);
       ActiveMoveTool(this);
-      isSurveyed = false;
     }
 
 
@@ -109,12 +93,10 @@ namespace PackAnything {
     // ---- End Copy ---
 
     public void AddThisToList() {
-      isSurveyed = true;
       PackAnythingStaticVars.SurveableCmps.Add(this);
     }
 
     public void RemoveThisFromList() {
-      isSurveyed = false;
       PackAnythingStaticVars.SurveableCmps.Remove(this);
     }
 

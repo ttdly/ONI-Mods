@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using HarmonyLib;
-using TUNING;
+using PackAnything.Movable;
+using PackAnything.MoveTool;
 using UnityEngine;
-using static DetailsScreen;
+
 
 namespace PackAnything {
   public class PackAnythingPatches {
@@ -17,10 +18,7 @@ namespace PackAnything {
     [HarmonyPatch(typeof(GeneratedBuildings), "LoadGeneratedBuildings")]
     public class GeneratedBuildings_LoadGeneratedBuildings_Patch {
       public static void Prefix() {
-        LocString.CreateLocStringKeys(typeof(STRINGS), "");
-        ModUtil.AddBuildingToPlanScreen("Equipment", WorldModifierConfig.ID);
-        BUILDINGS.PLANSUBCATEGORYSORTING.Add(WorldModifierConfig.ID, "World Modifier");
-        Db.Get().Techs.Get("AdvancedResearch").unlockedItemIDs.Add(WorldModifierConfig.ID);
+        LocString.CreateLocStringKeys(typeof(PackAnythingString.STRINGS), "");
         PackAnythingStaticVars.Init();
       }
     }
@@ -29,7 +27,7 @@ namespace PackAnything {
     [HarmonyPatch(typeof(GeyserGenericConfig), nameof(GeyserGenericConfig.CreateGeyser))]
     private class GeyserGenericConfig_Patch {
       public static void Postfix(GameObject __result) {
-        __result.AddOrGet<ObjectCanMove>().objectType = ObjectType.Geyser;
+        __result.AddOrGet<GeyserMovable>();
       }
     }
 
@@ -57,37 +55,22 @@ namespace PackAnything {
       }
     }
 
-    [HarmonyPatch(typeof(Game), nameof(Game.Load))]
-    public class Game_Load_Patch {
-      public static void Prefix() {
-        PackAnythingStaticVars.SurveableCmps.Clear();
-      }
-    }
-
     [HarmonyPatch(typeof(PlayerController), "OnPrefabInit")]
     public static class PlayerController_OnPrefabInit_Patch {
+      private static T CreateToolInstance<T>(PlayerController playerController)
+        where T : InterfaceTool {
+        var proxyGameObject = new GameObject(typeof(T).Name);
+        var tool = proxyGameObject.AddComponent<T>();
+        proxyGameObject.transform.SetParent(playerController.gameObject.transform);
+        proxyGameObject.SetActive(true);
+        proxyGameObject.SetActive(false);
+        return tool;
+      }
+
       internal static void Postfix(PlayerController __instance) {
         var interfaceTools = new List<InterfaceTool>(__instance.tools);
-        var moveBeaconTool = new GameObject("MoveBeacon");
-        var tool = moveBeaconTool.AddComponent<MoveTargetTool>();
-        moveBeaconTool.transform.SetParent(__instance.gameObject.transform);
-        moveBeaconTool.SetActive(true);
-        moveBeaconTool.SetActive(false);
-        interfaceTools.Add(tool);
-        var moveSoryTool = new GameObject("MoveStory");
-        var tool2 = moveSoryTool.AddComponent<MoveStoryTargetTool>();
-        moveSoryTool.transform.SetParent(__instance.gameObject.transform);
-        moveSoryTool.SetActive(true);
-        moveSoryTool.SetActive(false);
-        interfaceTools.Add(tool2);
+        interfaceTools.Add(CreateToolInstance<EntityMoveTool>(__instance));
         __instance.tools = interfaceTools.ToArray();
-      }
-    }
-
-    [HarmonyPatch(typeof(DetailsScreen), "OnPrefabInit")]
-    public static class DetailsScreen_OnPrefabInit_Patch {
-      internal static void Postfix(List<SideScreenRef> ___sideScreens, GameObject ___sideScreenConfigContentBody) {
-        ModifierSideScreen.AddSideScreen(___sideScreens, ___sideScreenConfigContentBody);
       }
     }
   }

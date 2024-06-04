@@ -1,13 +1,13 @@
 ﻿using System;
+using PackAnything.Movable;
 using UnityEngine;
 
-namespace PackAnything {
-  public class MoveTargetTool : InterfaceTool {
-    public static MoveTargetTool Instance;
+namespace PackAnything.MoveTool {
+  public class EntityMoveTool : InterfaceTool {
+    public static EntityMoveTool Instance;
     private static SpriteRenderer PlacerSpriteRenderer;
-    private ObjectCanMove waitingMoveObject;
+    private BaseMovable targetMovable;
     
-
     protected override void OnPrefabInit() {
       base.OnPrefabInit();
       Instance = this;
@@ -28,17 +28,18 @@ namespace PackAnything {
         spriteRenderer.enabled = true;
         offsTransform.localScale = new Vector3(scaleWidth, scaleWidth, 1.0f);
       }
+
       visualizer.SetActive(false);
     }
 
     public override void OnLeftClickDown(Vector3 cursor_pos) {
       base.OnLeftClickDown(cursor_pos);
-      if (!(waitingMoveObject != null))
+      if (!(targetMovable != null))
         return;
       var mouseCell = DebugHandler.GetMouseCell();
-      if (SurveyableCanMoveTo(mouseCell)) {
+      if (ObjectCanMoveTo(mouseCell)) {
         PlaySound(GlobalAssets.GetSound("HUD_Click"));
-        SetMoveBeacon(mouseCell);
+        targetMovable.StartMove(mouseCell);
         SelectTool.Instance.Activate();
       } else {
         PlaySound(GlobalAssets.GetSound("Negative"));
@@ -47,36 +48,28 @@ namespace PackAnything {
 
     public override void OnMouseMove(Vector3 cursor_pos) {
       base.OnMouseMove(cursor_pos);
- 
       RefreshColor();
     }
-
-    protected override void OnActivateTool() {
-      base.OnActivateTool();
-    }
+    
 
     protected override void OnDeactivateTool(InterfaceTool new_tool) {
       base.OnDeactivateTool(new_tool);
       visualizer.SetActive(false);
     }
 
-    public void Acitvate(ObjectCanMove waitingMove) {
-      waitingMoveObject = waitingMove;
+    public void Activate(BaseMovable movable) {
+      targetMovable = movable;
       PlayerController.Instance.ActivateTool(this);
     }
 
-    private void SetMoveBeacon(int mouseCell) {
-
-    }
-
-    private void RefreshColor() {
+    private static void RefreshColor() {
       var c = new Color(0.91f, 0.21f, 0.2f);
-      if (SurveyableCanMoveTo(DebugHandler.GetMouseCell()))
+      if (ObjectCanMoveTo(DebugHandler.GetMouseCell()))
         c = Color.white;
       PlacerSpriteRenderer.color = c;
     }
 
-    private static bool SurveyableCanMoveTo(int cell) {
+    private static bool ObjectCanMoveTo(int cell) {
       try {
         if (!Grid.IsValidCell(cell)) return false;
         return !Grid.Element[cell].IsSolid;

@@ -16,10 +16,10 @@
     <PropertyGroup>
       <ModInfoFile>$(IntermediateOutputPath)\mod_info.yaml</ModInfoFile>
       <ModInfoFileContent>
-        supportedContent: $(SupportedContent)
-        minimumSupportedBuild: $(LastWorkingBuild)
-        version: $(FileVersion)
-        APIVersion: $(APIVersion)
+supportedContent: $(SupportedContent)
+minimumSupportedBuild: $(LastWorkingBuild)
+version: $(FileVersion)
+APIVersion: $(APIVersion)
       </ModInfoFileContent>
     </PropertyGroup>
     <WriteLinesToFile File="$(ModInfoFile)" Overwrite="true" Lines="$(ModInfoFileContent)"/>
@@ -29,9 +29,9 @@
     <PropertyGroup>
       <ModDescriptionFile>$(IntermediateOutputPath)\mod.yaml</ModDescriptionFile>
       <ModDescriptionFileContent>
-        title: "$(AssemblyTitle)"
-        description: "$(Description)"
-        staticID: CalYu.$(AssemblyName)
+title: "$(AssemblyTitle)"
+description: "$(Description)"
+staticID: CalYu.$(AssemblyName)
       </ModDescriptionFileContent>
     </PropertyGroup>
     <WriteLinesToFile File="$(ModDescriptionFile)" Overwrite="true" Lines="$(ModDescriptionFileContent)"/>
