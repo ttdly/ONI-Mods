@@ -22,6 +22,8 @@ namespace PackAnything {
         PackAnythingStaticVars.Init();
       }
     }
+    
+    
 
     // 所有泉
     [HarmonyPatch(typeof(GeyserGenericConfig), nameof(GeyserGenericConfig.CreateGeyser))]
@@ -68,8 +70,9 @@ namespace PackAnything {
       }
 
       internal static void Postfix(PlayerController __instance) {
-        var interfaceTools = new List<InterfaceTool>(__instance.tools);
-        interfaceTools.Add(CreateToolInstance<EntityMoveTool>(__instance));
+        var interfaceTools = new List<InterfaceTool>() {
+          CreateToolInstance<EntityMoveTool>(__instance)
+        };
         __instance.tools = interfaceTools.ToArray();
       }
     }

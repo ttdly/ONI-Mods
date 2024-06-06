@@ -1,10 +1,13 @@
-﻿using STRINGS;
+﻿using PackAnything.MoveTool;
+using STRINGS;
 
 namespace PackAnything.Movable {
   public class BaseMovable : KMonoBehaviour {
     private static readonly EventSystem.IntraObjectHandler<BaseMovable> OnRefreshUserMenuDelegate =
       new EventSystem.IntraObjectHandler<BaseMovable>((component, data) =>
         component.OnRefreshUserMenu(data));
+
+    protected bool canCrossMove = true;
 
 
     protected override void OnSpawn() {
@@ -24,9 +27,18 @@ namespace PackAnything.Movable {
     }
 
     protected virtual void OnClickMove() {
+      EntityMoveTool.Instance.Activate(this);
     }
 
-    public virtual void StartMove(int targetCell) {
+    public void MovePrepare(int targetCell) {
+      if (!canCrossMove && Grid.WorldIdx[targetCell] != gameObject.GetMyWorldId()) {
+        PlaySound(GlobalAssets.GetSound("Negative"));
+        return;
+      }
+      Move(targetCell);
     }
+    
+    protected virtual void Move(int targetCell){}
+    
   }
 }

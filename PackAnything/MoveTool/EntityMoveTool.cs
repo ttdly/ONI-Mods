@@ -39,7 +39,7 @@ namespace PackAnything.MoveTool {
       var mouseCell = DebugHandler.GetMouseCell();
       if (ObjectCanMoveTo(mouseCell)) {
         PlaySound(GlobalAssets.GetSound("HUD_Click"));
-        targetMovable.StartMove(mouseCell);
+        targetMovable.MovePrepare(mouseCell);
         SelectTool.Instance.Activate();
       } else {
         PlaySound(GlobalAssets.GetSound("Negative"));
@@ -50,7 +50,6 @@ namespace PackAnything.MoveTool {
       base.OnMouseMove(cursor_pos);
       RefreshColor();
     }
-    
 
     protected override void OnDeactivateTool(InterfaceTool new_tool) {
       base.OnDeactivateTool(new_tool);

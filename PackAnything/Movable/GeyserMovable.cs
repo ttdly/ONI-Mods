@@ -15,13 +15,8 @@ namespace PackAnything.Movable {
       studied = PDetours.DetourField<Studyable, bool>("studied");
     }
 
-    protected override void OnClickMove() {
-      base.OnClickMove();
-      EntityMoveTool.Instance.Activate(this);
-    }
-
-    public override void StartMove(int targetCell) {
-      base.StartMove(targetCell);
+    protected override void Move(int targetCell) {
+      base.MovePrepare(targetCell);
       var cloned = Util.KInstantiate(Assets.GetPrefab(gameObject.PrefabID()));
       // 同步间歇泉研究状态
       if (gameObject.GetComponent<Studyable>().Studied)
