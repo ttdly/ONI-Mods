@@ -15,7 +15,7 @@ namespace PackAnything.Movable {
       canCrossMove = false;
     }
 
-    protected override void Move(int targetCell) {
+    public override void Move(int targetCell) {
       base.Move(targetCell);
       var cloned = GameUtil.KInstantiate(gameObject, gameObject.transform.position, Grid.SceneLayer.Building);
       // 同步接收器/发送器探索状态

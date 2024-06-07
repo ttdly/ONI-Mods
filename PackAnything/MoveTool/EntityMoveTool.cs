@@ -5,31 +5,11 @@ using UnityEngine;
 namespace PackAnything.MoveTool {
   public class EntityMoveTool : InterfaceTool {
     public static EntityMoveTool Instance;
-    private static SpriteRenderer PlacerSpriteRenderer;
     private BaseMovable targetMovable;
-    
-    protected override void OnPrefabInit() {
-      base.OnPrefabInit();
-      Instance = this;
-      visualizer = new GameObject("MoveBeaconToolVisualizer");
-      var offs = new GameObject("MoveBeaconToolOffset");
-      var offsTransform = offs.transform;
-      offsTransform.SetParent(visualizer.transform);
-      offsTransform.SetLocalPosition(new Vector3(0.0f, Grid.HalfCellSizeInMeters, 0.0f));
-      offs.SetLayerRecursively(LayerMask.NameToLayer("Overlay"));
-      var spriteRenderer = offs.AddComponent<SpriteRenderer>();
-      if (spriteRenderer != null && PackAnythingStaticVars.ToolIcon != null) {
-        PlacerSpriteRenderer = spriteRenderer;
-        float widthInM = PackAnythingStaticVars.ToolIcon.texture.width / PackAnythingStaticVars.ToolIcon.pixelsPerUnit,
-          scaleWidth = Grid.CellSizeInMeters / widthInM;
-        spriteRenderer.name = "MoveBeaconToolSprite";
-        spriteRenderer.color = Color.white;
-        spriteRenderer.sprite = PackAnythingStaticVars.ToolIcon;
-        spriteRenderer.enabled = true;
-        offsTransform.localScale = new Vector3(scaleWidth, scaleWidth, 1.0f);
-      }
+    private KBatchedAnimController kBatchedAnimController;
 
-      visualizer.SetActive(false);
+    protected override void OnPrefabInit() {
+      Instance = this;
     }
 
     public override void OnLeftClickDown(Vector3 cursor_pos) {
@@ -37,9 +17,9 @@ namespace PackAnything.MoveTool {
       if (!(targetMovable != null))
         return;
       var mouseCell = DebugHandler.GetMouseCell();
-      if (ObjectCanMoveTo(mouseCell)) {
+      if (targetMovable.CanMoveTo(mouseCell)) {
         PlaySound(GlobalAssets.GetSound("HUD_Click"));
-        targetMovable.MovePrepare(mouseCell);
+        targetMovable.Move(mouseCell);
         SelectTool.Instance.Activate();
       } else {
         PlaySound(GlobalAssets.GetSound("Negative"));
@@ -51,30 +31,57 @@ namespace PackAnything.MoveTool {
       RefreshColor();
     }
 
+    protected override void OnActivateTool() {
+      base.OnActivateTool();
+      if (targetMovable == null) return;
+      visualizer = GameUtil.KInstantiate(CreateVisualizer(), Grid.SceneLayer.Ore,
+        gameLayer: LayerMask.NameToLayer("Place"));
+      visualizer.SetActive(true);
+      // 显示鼠标周围的网格效果
+      GridCompositor.Instance.ToggleMajor(true);
+    }
+
     protected override void OnDeactivateTool(InterfaceTool new_tool) {
+      Destroy(visualizer);
+      GridCompositor.Instance.ToggleMajor(false);
+      if (new_tool == SelectTool.Instance)
+        Game.Instance.Trigger(-1190690038);
       base.OnDeactivateTool(new_tool);
-      visualizer.SetActive(false);
     }
 
     public void Activate(BaseMovable movable) {
       targetMovable = movable;
       PlayerController.Instance.ActivateTool(this);
+      OnActivateTool();
     }
 
-    private static void RefreshColor() {
-      var c = new Color(0.91f, 0.21f, 0.2f);
-      if (ObjectCanMoveTo(DebugHandler.GetMouseCell()))
+    private void RefreshColor() {
+      if (targetMovable == null) return;
+      var c = Color.red;
+      if (targetMovable.CanMoveTo(DebugHandler.GetMouseCell()))
         c = Color.white;
-      PlacerSpriteRenderer.color = c;
+      if (kBatchedAnimController == null) return;
+      kBatchedAnimController.TintColour = c;
     }
 
-    private static bool ObjectCanMoveTo(int cell) {
-      try {
-        if (!Grid.IsValidCell(cell)) return false;
-        return !Grid.Element[cell].IsSolid;
-      } catch (Exception) {
-        return false;
-      }
+    // 创建一个工具视图对象
+    private GameObject CreateVisualizer() {
+      var visualBuffer = new GameObject(targetMovable.gameObject.name + "Proxy");
+      visualBuffer.SetActive(false);
+      visualBuffer.AddOrGet<KPrefabID>();
+      visualBuffer.AddOrGet<KSelectable>();
+      visualBuffer.AddOrGet<StateMachineController>();
+      var primaryElement = visualBuffer.AddOrGet<PrimaryElement>();
+      primaryElement.Mass = 1f;
+      primaryElement.Temperature = 293f;
+      DontDestroyOnLoad(visualBuffer);
+      BuildingLoader.AddID(visualBuffer, targetMovable.gameObject.PrefabID() + "Moving");
+      var visualAnimController = visualBuffer.AddOrGet<KBatchedAnimController>();
+      var gameObjectController = targetMovable.gameObject.GetComponent<KBatchedAnimController>();
+      visualAnimController.AnimFiles = gameObjectController.AnimFiles;
+      visualAnimController.initialAnim = gameObjectController.initialAnim;
+      kBatchedAnimController = visualAnimController;
+      return visualBuffer;
     }
   }
 }

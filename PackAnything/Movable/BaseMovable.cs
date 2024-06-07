@@ -1,5 +1,7 @@
-﻿using PackAnything.MoveTool;
+﻿using System;
+using PackAnything.MoveTool;
 using STRINGS;
+using UnityEngine;
 
 namespace PackAnything.Movable {
   public class BaseMovable : KMonoBehaviour {
@@ -8,7 +10,6 @@ namespace PackAnything.Movable {
         component.OnRefreshUserMenu(data));
 
     protected bool canCrossMove = true;
-
 
     protected override void OnSpawn() {
       base.OnSpawn();
@@ -30,15 +31,17 @@ namespace PackAnything.Movable {
       EntityMoveTool.Instance.Activate(this);
     }
 
-    public void MovePrepare(int targetCell) {
-      if (!canCrossMove && Grid.WorldIdx[targetCell] != gameObject.GetMyWorldId()) {
-        PlaySound(GlobalAssets.GetSound("Negative"));
-        return;
+    public bool CanMoveTo(int targetCell) {
+      if (!canCrossMove && Grid.WorldIdx[targetCell] != gameObject.GetMyWorldId()) return false;
+      try {
+        if (!Grid.IsValidCell(targetCell)) return false;
+        return !Grid.Element[targetCell].IsSolid;
+      } catch (Exception) {
+        return false;
       }
-      Move(targetCell);
     }
-    
-    protected virtual void Move(int targetCell){}
-    
+
+    public virtual void Move(int targetCell) {
+    }
   }
 }

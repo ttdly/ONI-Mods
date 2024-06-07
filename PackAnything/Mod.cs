@@ -10,8 +10,6 @@ using PeterHan.PLib.Options;
 namespace PackAnything {
   public class Mod : UserMod2 {
     public override void OnLoad(Harmony harmony) {
-      // TODO 有些东西不能跨星球移动
-      // TODO 间歇泉的中子物质得重新生成一下
       // TODO 故事特质建筑移动需要同步
       // TODO OverlayMode 
       base.OnLoad(harmony);

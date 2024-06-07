@@ -23,16 +23,6 @@ namespace PackAnything {
       }
     }
     
-    
-
-    // 所有泉
-    [HarmonyPatch(typeof(GeyserGenericConfig), nameof(GeyserGenericConfig.CreateGeyser))]
-    private class GeyserGenericConfig_Patch {
-      public static void Postfix(GameObject __result) {
-        __result.AddOrGet<GeyserMovable>();
-      }
-    }
-
     // 所有遗迹
     [HarmonyPatch(typeof(EntityTemplates), "ConfigPlacedEntity")]
     public class EntityTemplates_ConfigPlacedEntity_Patch {
@@ -56,7 +46,7 @@ namespace PackAnything {
         __instance.gameObject.AddOrGet<ObjectCanMove>();
       }
     }
-
+    // 添加工具栏工具
     [HarmonyPatch(typeof(PlayerController), "OnPrefabInit")]
     public static class PlayerController_OnPrefabInit_Patch {
       private static T CreateToolInstance<T>(PlayerController playerController)
@@ -68,13 +58,14 @@ namespace PackAnything {
         proxyGameObject.SetActive(false);
         return tool;
       }
-
+    
       internal static void Postfix(PlayerController __instance) {
-        var interfaceTools = new List<InterfaceTool>() {
+        var interfaceTools = new List<InterfaceTool>(__instance.tools) {
           CreateToolInstance<EntityMoveTool>(__instance)
         };
         __instance.tools = interfaceTools.ToArray();
       }
     }
+    
   }
 }
