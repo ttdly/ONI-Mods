@@ -1,12 +1,11 @@
-﻿using System;
-using PackAnything.Movable;
+﻿using PackAnything.Movable;
 using UnityEngine;
 
 namespace PackAnything.MoveTool {
   public class EntityMoveTool : InterfaceTool {
     public static EntityMoveTool Instance;
+    private static readonly Color red = new Color(0.91f, 0.21f, 0.2f);
     private BaseMovable targetMovable;
-    private KBatchedAnimController kBatchedAnimController;
 
     protected override void OnPrefabInit() {
       Instance = this;
@@ -57,11 +56,10 @@ namespace PackAnything.MoveTool {
 
     private void RefreshColor() {
       if (targetMovable == null) return;
-      var c = Color.red;
+      var c = red;
       if (targetMovable.CanMoveTo(DebugHandler.GetMouseCell()))
         c = Color.white;
-      if (kBatchedAnimController == null) return;
-      kBatchedAnimController.TintColour = c;
+      if (visualizer.TryGetComponent(out KBatchedAnimController controller)) controller.TintColour = c;
     }
 
     // 创建一个工具视图对象
@@ -80,7 +78,6 @@ namespace PackAnything.MoveTool {
       var gameObjectController = targetMovable.gameObject.GetComponent<KBatchedAnimController>();
       visualAnimController.AnimFiles = gameObjectController.AnimFiles;
       visualAnimController.initialAnim = gameObjectController.initialAnim;
-      kBatchedAnimController = visualAnimController;
       return visualBuffer;
     }
   }

@@ -8,8 +8,8 @@ using UnityEngine;
 namespace PackAnything.Movable {
   public class GeyserMovable : BaseMovable {
     private static readonly IDetouredField<Studyable, bool> studied = PDetours.DetourField<Studyable, bool>("studied");
-    private int unoCount;
     private static readonly Tag smallVolcanoTag = new Tag("GeyserGeneric_small_volcano");
+    private int unoCount;
 
     protected override void OnSpawn() {
       base.OnSpawn();
@@ -27,12 +27,23 @@ namespace PackAnything.Movable {
       // 在新址创建中子物质
       if (SingletonOptions<Options>.Instance.GenerateUnobtanium && unoCount > 0)
         CreateNeutronium(Grid.CellBelow(targetCell));
+      // 同步数值
+      if (SingletonOptions<Options>.Instance.ToggleGeyserAttribute) ToggleGeyser(cloned);
       // 设置间歇泉的位置
       var posCbc = Grid.CellToPosCBC(targetCell, Grid.SceneLayer.BuildingBack);
       posCbc.z -= 0.15f; // 从官方代码复制，不加 z 轴设置间歇泉的位置会异常
       cloned.transform.SetPosition(posCbc);
       cloned.SetActive(true);
       gameObject.DeleteObject();
+    }
+
+    public void ToggleGeyser(GameObject cloned) {
+      if (gameObject.TryGetComponent(out UserNameable userNameable))
+        cloned.AddOrGet<UserNameable>().savedName = userNameable.savedName;
+
+      if (!gameObject.TryGetComponent(out Geyser geyser)) return;
+      var clonedGeyser = cloned.AddOrGet<Geyser>();
+      clonedGeyser.configuration = geyser.configuration;
     }
 
     public void CreateNeutronium(int cell) {

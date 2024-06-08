@@ -10,16 +10,37 @@ namespace PackAnything.Movable {
       PDetours.DetourField<SetLocker, bool>("used");
 
     public static void ToggleLoreBearer(GameObject origin, GameObject cloned) {
+      if (origin == null || cloned == null) return;
       var originComponent = origin.GetComponent<LoreBearer>();
       var clonedComponent = cloned.GetComponent<LoreBearer>();
-      if (originComponent == null || clonedComponent == null) return;
-      if (originComponent.SidescreenButtonInteractable()) return;
-      LoreBareUsed.Set(clonedComponent, true);
+      ToggleLoreBearer(originComponent, clonedComponent);
     }
-    
-    public static Vector3 GetBuildingPosCbc(int cell) => Grid.CellToPosCBC(cell, Grid.SceneLayer.Building);
+
+    public static void ToggleLoreBearer(LoreBearer origin, LoreBearer cloned) {
+      if (origin == null || cloned == null) return;
+      if (origin.SidescreenButtonInteractable()) return;
+      LoreBareUsed.Set(cloned, true);
+    }
+
+    public static void ToggleSetLocker(GameObject origin, GameObject cloned) {
+      if (origin == null || cloned == null) return;
+      var originComponent = origin.GetComponent<SetLocker>();
+      var clonedComponent = cloned.GetComponent<SetLocker>();
+      ToggleSetLocker(originComponent, clonedComponent);
+    }
+
+    public static void ToggleSetLocker(SetLocker origin, SetLocker cloned) {
+      if (origin == null || cloned == null) return;
+      if (origin.SidescreenButtonInteractable()) return;
+      SetLockerUsed.Set(cloned, true);
+    }
+
+    public static Vector3 GetBuildingPosCbc(int cell) {
+      return Grid.CellToPosCBC(cell, Grid.SceneLayer.Building);
+    }
 
     public static void MoveOver(GameObject origin, GameObject cloned) {
+      cloned.SetActive(false);
       cloned.SetActive(true);
       origin.SetActive(false);
       origin.DeleteObject();

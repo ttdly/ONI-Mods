@@ -1,7 +1,6 @@
 ﻿using System;
 using PackAnything.MoveTool;
 using STRINGS;
-using UnityEngine;
 
 namespace PackAnything.Movable {
   public class BaseMovable : KMonoBehaviour {
@@ -9,7 +8,7 @@ namespace PackAnything.Movable {
       new EventSystem.IntraObjectHandler<BaseMovable>((component, data) =>
         component.OnRefreshUserMenu(data));
 
-    protected bool canCrossMove = true;
+    public bool canCrossMove = true;
 
     protected override void OnSpawn() {
       base.OnSpawn();

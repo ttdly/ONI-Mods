@@ -1,51 +1,17 @@
 ﻿using System.Collections.Generic;
 using HarmonyLib;
-using PackAnything.Movable;
 using PackAnything.MoveTool;
 using UnityEngine;
 
-
 namespace PackAnything {
   public class PackAnythingPatches {
-    public static void EntityPostfix(GameObject __result) {
-      __result.AddOrGet<ObjectCanMove>();
-    }
-
-    public static void BuildingPostfix(GameObject go) {
-      go.AddOrGet<ObjectCanMove>();
-    }
-
     [HarmonyPatch(typeof(GeneratedBuildings), "LoadGeneratedBuildings")]
     public class GeneratedBuildings_LoadGeneratedBuildings_Patch {
       public static void Prefix() {
-        LocString.CreateLocStringKeys(typeof(PackAnythingString.STRINGS), "");
-        PackAnythingStaticVars.Init();
-      }
-    }
-    
-    // 所有遗迹
-    [HarmonyPatch(typeof(EntityTemplates), "ConfigPlacedEntity")]
-    public class EntityTemplates_ConfigPlacedEntity_Patch {
-      public static void Postfix(GameObject __result) {
-        if (__result.HasTag(GameTags.Gravitas)) __result.AddOrGet<ObjectCanMove>();
+        LocString.CreateLocStringKeys(typeof(ModString.Options));
       }
     }
 
-    // 梦境合成
-    [HarmonyPatch(typeof(MegaBrainTank), "OnSpawn")]
-    public class MegaBrainTank_OnSpawn_Patch {
-      public static void Postfix(MegaBrainTank __instance) {
-        __instance.gameObject.AddOrGet<ObjectCanMove>();
-      }
-    }
-
-    // 生物织构
-    [HarmonyPatch(typeof(MorbRoverMakerWorkable), "OnSpawn")]
-    public class MorbRoverMakerWorkable_OnSpawn_Patch {
-      public static void Postfix(MorbRoverMakerWorkable __instance) {
-        __instance.gameObject.AddOrGet<ObjectCanMove>();
-      }
-    }
     // 添加工具栏工具
     [HarmonyPatch(typeof(PlayerController), "OnPrefabInit")]
     public static class PlayerController_OnPrefabInit_Patch {
@@ -58,7 +24,7 @@ namespace PackAnything {
         proxyGameObject.SetActive(false);
         return tool;
       }
-    
+
       internal static void Postfix(PlayerController __instance) {
         var interfaceTools = new List<InterfaceTool>(__instance.tools) {
           CreateToolInstance<EntityMoveTool>(__instance)
@@ -66,6 +32,5 @@ namespace PackAnything {
         __instance.tools = interfaceTools.ToArray();
       }
     }
-    
   }
 }

@@ -5,10 +5,10 @@ using static PackAnything.Movable.StaticMethods;
 
 namespace PackAnything.Movable {
   public class WarpMovable : BaseMovable {
-    public bool isReceiver;
-
     private static readonly IDetouredField<WarpPortal, bool> discovered =
       PDetours.DetourField<WarpPortal, bool>("discovered");
+
+    public bool isReceiver;
 
     protected override void OnSpawn() {
       base.OnSpawn();
