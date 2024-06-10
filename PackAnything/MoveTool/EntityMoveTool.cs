@@ -1,4 +1,5 @@
 ﻿using PackAnything.Movable;
+using PeterHan.PLib.Core;
 using UnityEngine;
 
 namespace PackAnything.MoveTool {
@@ -33,8 +34,16 @@ namespace PackAnything.MoveTool {
     protected override void OnActivateTool() {
       base.OnActivateTool();
       if (targetMovable == null) return;
-      visualizer = GameUtil.KInstantiate(CreateVisualizer(), Grid.SceneLayer.Ore,
+      var (visualBuffer, needOffset) = CreateVisualizer();
+      visualizer = GameUtil.KInstantiate(visualBuffer, Grid.SceneLayer.Building,
         gameLayer: LayerMask.NameToLayer("Place"));
+      if (needOffset) {
+        var posCbc = visualizer.transform.position;
+        PUtil.LogDebug($"Offset {posCbc.x}");
+        posCbc.x += 0.5f;        
+        visualizer.transform.SetPosition(posCbc);
+      }
+
       visualizer.SetActive(true);
       // 显示鼠标周围的网格效果
       GridCompositor.Instance.ToggleMajor(true);
@@ -63,7 +72,7 @@ namespace PackAnything.MoveTool {
     }
 
     // 创建一个工具视图对象
-    private GameObject CreateVisualizer() {
+    private (GameObject visualizer, bool needOffset) CreateVisualizer() {
       var visualBuffer = new GameObject(targetMovable.gameObject.name + "Proxy");
       visualBuffer.SetActive(false);
       visualBuffer.AddOrGet<KPrefabID>();
@@ -73,12 +82,14 @@ namespace PackAnything.MoveTool {
       primaryElement.Mass = 1f;
       primaryElement.Temperature = 293f;
       DontDestroyOnLoad(visualBuffer);
-      BuildingLoader.AddID(visualBuffer, targetMovable.gameObject.PrefabID() + "Moving");
       var visualAnimController = visualBuffer.AddOrGet<KBatchedAnimController>();
       var gameObjectController = targetMovable.gameObject.GetComponent<KBatchedAnimController>();
       visualAnimController.AnimFiles = gameObjectController.AnimFiles;
       visualAnimController.initialAnim = gameObjectController.initialAnim;
-      return visualBuffer;
+      var needOffset = targetMovable.gameObject.TryGetComponent(out KBoxCollider2D kBoxCollider2D) &&
+                       kBoxCollider2D.size.x % 2 == 0;
+      PUtil.LogDebug(kBoxCollider2D.size.x);
+      return (visualBuffer, needOffset);
     }
   }
 }

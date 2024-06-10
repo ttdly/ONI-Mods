@@ -56,13 +56,6 @@ namespace PackAnything.Movable {
       }
     }
 
-    [HarmonyPatch(typeof(LonelyMinionHouseConfig), nameof(LonelyMinionHouseConfig.DoPostConfigureComplete))]
-    public class Patch_6 {
-      private static void Postfix(GameObject go) {
-        go.AddOrGet<StoryMovable>();
-      }
-    }
-
     [HarmonyPatch(typeof(LonelyMinionMailboxConfig), nameof(LonelyMinionMailboxConfig.DoPostConfigureComplete))]
     public class Patch_7 {
       private static void Postfix(GameObject go) {

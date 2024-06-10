@@ -3,143 +3,23 @@ msgstr ""
 "Application: Oxygen Not Included"
 "POT Version: 2.0"
 
-#. PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.DESC
-msgctxt "PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.DESC"
-msgid "Record the information of an object, activate this beacon, and the recorded object will be moved to this location."
-msgstr ""
-
-#. PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.NAME
-msgctxt "PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.NAME"
-msgid "Displacement Beacon"
-msgstr ""
-
-#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TEXT
-msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TEXT"
-msgid "Move It"
-msgstr ""
-
-#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TOOL_TIP
-msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TOOL_TIP"
-msgid "Move this object to a specific location"
-msgstr ""
-
-#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.CANCEL_BUTTON_TOOL_TIP
-msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.CANCEL_BUTTON_TOOL_TIP"
-msgid "Cancel survey for this item."
-msgstr ""
-
-#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.NAME
-msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.NAME"
-msgid "Survyed List"
-msgstr ""
-
-#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP
-msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP"
-msgid "There is no object being surveyed, or alternatively, there is an object in motion"
-msgstr ""
-
-#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_ELEMENT
-msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_ELEMENT"
-msgid "Need some steel to start."
-msgstr ""
-
-#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_OBJ
-msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_OBJ"
-msgid "\n\nDouble-click to view this object."
-msgstr ""
-
-#. PackAnything.PackAnythingString.UI.SURVEY.NAME
-msgctxt "PackAnything.PackAnythingString.UI.SURVEY.NAME"
-msgid "Survey"
-msgstr ""
-
-#. PackAnything.PackAnythingString.UI.SURVEY.NAME_OFF
-msgctxt "PackAnything.PackAnythingString.UI.SURVEY.NAME_OFF"
-msgid "Cancel Survey"
-msgstr ""
-
-#. PackAnything.PackAnythingString.UI.SURVEY.TOOLTIP
-msgctxt "PackAnything.PackAnythingString.UI.SURVEY.TOOLTIP"
-msgid "Survey this item for move."
-msgstr ""
-
-#. PackAnything.PackAnythingString.UI.SURVEY.TOOLTIP_OFF
-msgctxt "PackAnything.PackAnythingString.UI.SURVEY.TOOLTIP_OFF"
-msgid "Cancel order to survey this item."
-msgstr ""
-
-#. PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.DESC
-msgctxt "PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.DESC"
-msgid "The magical machine that can alter this world."
-msgstr ""
-
-#. PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.EFFECT
-msgctxt "PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.EFFECT"
-msgid "Move the object surveyed."
-msgstr ""
-
-#. PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.NAME
-msgctxt "PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.NAME"
-msgid "<link=\"MOVABLEBEACON\">Displacement Beacon</link>"
-msgstr ""
-
-#. PackAnything.STRINGS.DONT_CONSUME_ANYTHING
-msgctxt "PackAnything.STRINGS.DONT_CONSUME_ANYTHING"
-msgid "No consumption is required"
-msgstr ""
-
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.NAME
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.NAME"
-msgid "Survey"
-msgstr ""
-
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.REPORT_NAME
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.REPORT_NAME"
-msgid "Survey {0}"
-msgstr ""
-
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.STATUS
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.STATUS"
-msgid "Going to Survey"
-msgstr ""
-
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.TOOLTIP
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.TOOLTIP"
-msgid "This Duplicant is surving an object"
-msgstr ""
-
-#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.SURVEYITEM.NAME
-msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.SURVEYITEM.NAME"
-msgid "Surveying"
-msgstr ""
-
-#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.SURVEYITEM.TOOLTIP
-msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.SURVEYITEM.TOOLTIP"
-msgid "This Duplicant is surveying an object"
-msgstr ""
-
-#. PackAnything.STRINGS.GENERATE_UNOBTANIUM
-msgctxt "PackAnything.STRINGS.GENERATE_UNOBTANIUM"
+#. PackAnything.ModString.Options.GENERATE_UNOBTANIUM
+msgctxt "PackAnything.ModString.Options.GENERATE_UNOBTANIUM"
 msgid "Generate Unobtanium"
 msgstr ""
 
-#. PackAnything.STRINGS.GENERATE_UNOBTANIUM_DESC
-msgctxt "PackAnything.STRINGS.GENERATE_UNOBTANIUM_DESC"
-msgid "Whether or not does moving a geyser create neutronium"
+#. PackAnything.ModString.Options.GENERATE_UNOBTANIUM_DESC
+msgctxt "PackAnything.ModString.Options.GENERATE_UNOBTANIUM_DESC"
+msgid "Whether or not does moving a geyser create Unobtanium"
 msgstr ""
 
-#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.NAME
-msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.NAME"
-msgid "Survey Errand"
+#. PackAnything.ModString.Options.TOGGLE_GEYSER_NUM
+msgctxt "PackAnything.ModString.Options.TOGGLE_GEYSER_NUM"
+msgid "Toggle Geyser Num"
 msgstr ""
 
-#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.TOOLTIP
-msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.TOOLTIP"
-msgid "Item will be surveyed once a Duplicant is available"
-msgstr ""
-
-#. PackAnything.STRINGS.NO_NEED_DUPLICANTS_OPERATE
-msgctxt "PackAnything.STRINGS.NO_NEED_DUPLICANTS_OPERATE"
-msgid "No need for a duplicate operation."
+#. PackAnything.ModString.Options.TOGGLE_GEYSER_NUM_DESC
+msgctxt "PackAnything.ModString.Options.TOGGLE_GEYSER_NUM_DESC"
+msgid "When moving a geyser, do not change its attributes."
 msgstr ""
 

@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using Klei.AI;
 using UnityEngine;
 using static PackAnything.Movable.StaticMethods;
 
