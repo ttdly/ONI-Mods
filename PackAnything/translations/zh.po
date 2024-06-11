@@ -20,8 +20,8 @@ msgstr "生成中子物质"
 
 #. PackAnything.ModString.Options.GENERATE_UNOBTANIUM_DESC
 msgctxt "PackAnything.ModString.Options.GENERATE_UNOBTANIUM_DESC"
-msgid "Whether or not does moving a geyser create Unobtanium"
-msgstr "是否在移动间歇泉的时候一起移动中子物质"
+msgid "Whether or not does moving a geyser create Unobtanium."
+msgstr "是否在移动间歇泉的时候一起移动中子物质。"
 
 #. PackAnything.ModString.Options.TOGGLE_GEYSER_NUM
 msgctxt "PackAnything.ModString.Options.TOGGLE_GEYSER_NUM"

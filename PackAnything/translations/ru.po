@@ -10,156 +10,134 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Application: Oxygen Not IncludedPOT Version: 2.0\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.0\n"
 
-#. PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.DESC
-msgctxt "PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.DESC"
-msgid ""
-"Record the information of an object, activate this beacon, and the recorded "
-"object will be moved to this location."
-msgstr ""
-"Запишите информацию об объекте, активируйте этот маяк, и записанный объект "
-"будет перемещён в это место."
-
-#. PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.NAME
-msgctxt "PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.NAME"
-msgid "Displacement Beacon"
-msgstr "Маяк перемещения"
-
-#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TEXT
-msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TEXT"
-msgid "Move It"
-msgstr "Переместить"
-
-#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TOOL_TIP
-msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TOOL_TIP"
-msgid "Move this object to a specific location"
-msgstr "Переместить этот объект в определённое место"
-
-#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.CANCEL_BUTTON_TOOL_TIP
-msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.CANCEL_BUTTON_TOOL_TIP"
-msgid "Cancel survey for this item."
-msgstr "Отменить обследование этого объекта."
-
-#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.NAME
-msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.NAME"
-msgid "Survyed List"
-msgstr "Список обследованных объектов"
-
-#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP
-msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP"
-msgid ""
-"There is no object being surveyed, or alternatively, there is an object in "
-"motion"
-msgstr "Объект обследования отсутствует или находится в движении"
-
-#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_ELEMENT
-msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_ELEMENT"
-msgid "Need some steel to start."
-msgstr "Для начала работы нужна сталь."
-
-#. PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_OBJ
-msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_OBJ"
-msgid ""
-"\n"
-"\n"
-"Double-click to view this object."
-msgstr ""
-"\n"
-"\n"
-"Дважды щелкните, чтобы просмотреть этот объект."
-
-#. PackAnything.PackAnythingString.UI.SURVEY.NAME
-msgctxt "PackAnything.PackAnythingString.UI.SURVEY.NAME"
-msgid "Survey"
-msgstr "Обследование"
-
-#. PackAnything.PackAnythingString.UI.SURVEY.NAME_OFF
-msgctxt "PackAnything.PackAnythingString.UI.SURVEY.NAME_OFF"
-msgid "Cancel Survey"
-msgstr "Отменить обследование"
-
-#. PackAnything.PackAnythingString.UI.SURVEY.TOOLTIP
-msgctxt "PackAnything.PackAnythingString.UI.SURVEY.TOOLTIP"
-msgid "Survey this item for move."
-msgstr "Обследовать этот объект для перемещения."
-
-#. PackAnything.PackAnythingString.UI.SURVEY.TOOLTIP_OFF
-msgctxt "PackAnything.PackAnythingString.UI.SURVEY.TOOLTIP_OFF"
-msgid "Cancel order to survey this item."
-msgstr "Отменить обследование этого объекта."
-
-#. PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.DESC
-msgctxt "PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.DESC"
-msgid "The magical machine that can alter this world."
-msgstr "Волшебная машина, способная изменить этот мир."
-
-#. PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.EFFECT
-msgctxt "PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.EFFECT"
-msgid "Move the object surveyed."
-msgstr "Переместить обследуемый объект."
-
-#. PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.NAME
-msgctxt "PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.NAME"
-msgid "<link=\"MOVABLEBEACON\">Displacement Beacon</link>"
-msgstr "<link=\"MOVABLEBEACON\">Маяк перемещения</link>"
-
-#. PackAnything.STRINGS.DONT_CONSUME_ANYTHING
-msgctxt "PackAnything.STRINGS.DONT_CONSUME_ANYTHING"
-msgid "No consumption is required"
-msgstr "Нет потребления"
-
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.NAME
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.NAME"
-msgid "Survey"
-msgstr "Обследование"
-
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.REPORT_NAME
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.REPORT_NAME"
-msgid "Survey {0}"
-msgstr "Обследует {0}"
-
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.STATUS
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.STATUS"
-msgid "Going to Survey"
-msgstr "Собирается обследовать"
-
-#. PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.TOOLTIP
-msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.TOOLTIP"
-msgid "This Duplicant is surving an object"
-msgstr "Этот дубликант обследует объект"
-
-#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.SURVEYITEM.NAME
-msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.SURVEYITEM.NAME"
-msgid "Surveying"
-msgstr "Обследование"
-
-#. PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.SURVEYITEM.TOOLTIP
-msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.SURVEYITEM.TOOLTIP"
-msgid "This Duplicant is surveying an object"
-msgstr "Этот дубликант обследует объект"
-
-#. PackAnything.STRINGS.GENERATE_UNOBTANIUM
-msgctxt "PackAnything.STRINGS.GENERATE_UNOBTANIUM"
+#. PackAnything.ModString.Options.GENERATE_UNOBTANIUM
+msgctxt "PackAnything.ModString.Options.GENERATE_UNOBTANIUM"
 msgid "Generate Unobtanium"
 msgstr "Генерация нейтрония"
 
-#. PackAnything.STRINGS.GENERATE_UNOBTANIUM_DESC
-msgctxt "PackAnything.STRINGS.GENERATE_UNOBTANIUM_DESC"
-msgid "Whether or not does moving a geyser create neutronium"
-msgstr "Создаст ли гейзер нейтроний после перемещения"
+#. PackAnything.ModString.Options.GENERATE_UNOBTANIUM_DESC
+msgctxt "PackAnything.ModString.Options.GENERATE_UNOBTANIUM_DESC"
+msgid "Whether or not does moving a geyser create Unobtanium."
+msgstr "Создаст ли гейзер нейтроний после перемещения."
 
-#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.NAME
-msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.NAME"
-msgid "Survey Errand"
-msgstr "Поручение обследования"
+#. PackAnything.ModString.Options.TOGGLE_GEYSER_NUM
+msgctxt "PackAnything.ModString.Options.TOGGLE_GEYSER_NUM"
+msgid "Toggle Geyser Num"
+msgstr "Номер гейзера"
 
-#. PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.TOOLTIP
-msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.TOOLTIP"
-msgid "Item will be surveyed once a Duplicant is available"
-msgstr "Объект будет обследован, как только появится свободный дубликант"
+#. PackAnything.ModString.Options.TOGGLE_GEYSER_NUM_DESC
+msgctxt "PackAnything.ModString.Options.TOGGLE_GEYSER_NUM_DESC"
+msgid "When moving a geyser, do not change its attributes."
+msgstr "Перемещая гейзер, не изменять его атрибуты."
 
-#. PackAnything.STRINGS.NO_NEED_DUPLICANTS_OPERATE
-msgctxt "PackAnything.STRINGS.NO_NEED_DUPLICANTS_OPERATE"
-msgid "No need for a duplicate operation."
-msgstr "Для работы не нужны дубликанты."
+#~ msgctxt "PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.DESC"
+#~ msgid "Record the information of an object, activate this beacon, and the recorded object will be moved to this location."
+#~ msgstr "Запишите информацию об объекте, активируйте этот маяк, и записанный объект будет перемещён в это место."
+
+#~ msgctxt "PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.NAME"
+#~ msgid "Displacement Beacon"
+#~ msgstr "Маяк перемещения"
+
+#~ msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TEXT"
+#~ msgid "Move It"
+#~ msgstr "Переместить"
+
+#~ msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TOOL_TIP"
+#~ msgid "Move this object to a specific location"
+#~ msgstr "Переместить этот объект в определённое место"
+
+#~ msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.CANCEL_BUTTON_TOOL_TIP"
+#~ msgid "Cancel survey for this item."
+#~ msgstr "Отменить обследование этого объекта."
+
+#~ msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.NAME"
+#~ msgid "Survyed List"
+#~ msgstr "Список обследованных объектов"
+
+#~ msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP"
+#~ msgid "There is no object being surveyed, or alternatively, there is an object in motion"
+#~ msgstr "Объект обследования отсутствует или находится в движении"
+
+#~ msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_ELEMENT"
+#~ msgid "Need some steel to start."
+#~ msgstr "Для начала работы нужна сталь."
+
+#~ msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_OBJ"
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "Double-click to view this object."
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "Дважды щелкните, чтобы просмотреть этот объект."
+
+#~ msgctxt "PackAnything.PackAnythingString.UI.SURVEY.NAME"
+#~ msgid "Survey"
+#~ msgstr "Обследование"
+
+#~ msgctxt "PackAnything.PackAnythingString.UI.SURVEY.NAME_OFF"
+#~ msgid "Cancel Survey"
+#~ msgstr "Отменить обследование"
+
+#~ msgctxt "PackAnything.PackAnythingString.UI.SURVEY.TOOLTIP"
+#~ msgid "Survey this item for move."
+#~ msgstr "Обследовать этот объект для перемещения."
+
+#~ msgctxt "PackAnything.PackAnythingString.UI.SURVEY.TOOLTIP_OFF"
+#~ msgid "Cancel order to survey this item."
+#~ msgstr "Отменить обследование этого объекта."
+
+#~ msgctxt "PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.DESC"
+#~ msgid "The magical machine that can alter this world."
+#~ msgstr "Волшебная машина, способная изменить этот мир."
+
+#~ msgctxt "PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.EFFECT"
+#~ msgid "Move the object surveyed."
+#~ msgstr "Переместить обследуемый объект."
+
+#~ msgctxt "PackAnything.STRINGS.BUILDINGS.PREFABS.MOVABLEBEACON.NAME"
+#~ msgid "<link=\"MOVABLEBEACON\">Displacement Beacon</link>"
+#~ msgstr "<link=\"MOVABLEBEACON\">Маяк перемещения</link>"
+
+#~ msgctxt "PackAnything.STRINGS.DONT_CONSUME_ANYTHING"
+#~ msgid "No consumption is required"
+#~ msgstr "Нет потребления"
+
+#~ msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.NAME"
+#~ msgid "Survey"
+#~ msgstr "Обследование"
+
+#~ msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.REPORT_NAME"
+#~ msgid "Survey {0}"
+#~ msgstr "Обследует {0}"
+
+#~ msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.STATUS"
+#~ msgid "Going to Survey"
+#~ msgstr "Собирается обследовать"
+
+#~ msgctxt "PackAnything.STRINGS.DUPLICANTS.CHORES.SURVEY.TOOLTIP"
+#~ msgid "This Duplicant is surving an object"
+#~ msgstr "Этот дубликант обследует объект"
+
+#~ msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.SURVEYITEM.NAME"
+#~ msgid "Surveying"
+#~ msgstr "Обследование"
+
+#~ msgctxt "PackAnything.STRINGS.DUPLICANTS.STATUSITEMS.SURVEYITEM.TOOLTIP"
+#~ msgid "This Duplicant is surveying an object"
+#~ msgstr "Этот дубликант обследует объект"
+
+#~ msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.NAME"
+#~ msgid "Survey Errand"
+#~ msgstr "Поручение обследования"
+
+#~ msgctxt "PackAnything.STRINGS.MISC.STATUSITEMS.WAITINGSURVEY.TOOLTIP"
+#~ msgid "Item will be surveyed once a Duplicant is available"
+#~ msgstr "Объект будет обследован, как только появится свободный дубликант"
+
+#~ msgctxt "PackAnything.STRINGS.NO_NEED_DUPLICANTS_OPERATE"
+#~ msgid "No need for a duplicate operation."
+#~ msgstr "Для работы не нужны дубликанты."

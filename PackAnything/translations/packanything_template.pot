@@ -10,7 +10,7 @@ msgstr ""
 
 #. PackAnything.ModString.Options.GENERATE_UNOBTANIUM_DESC
 msgctxt "PackAnything.ModString.Options.GENERATE_UNOBTANIUM_DESC"
-msgid "Whether or not does moving a geyser create Unobtanium"
+msgid "Whether or not does moving a geyser create Unobtanium."
 msgstr ""
 
 #. PackAnything.ModString.Options.TOGGLE_GEYSER_NUM
