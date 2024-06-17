@@ -37,13 +37,12 @@ namespace PackAnything.MoveTool {
       var (visualBuffer, needOffset) = CreateVisualizer();
       visualizer = GameUtil.KInstantiate(visualBuffer, Grid.SceneLayer.Building,
         gameLayer: LayerMask.NameToLayer("Place"));
-      if (needOffset) {
-        var posCbc = visualizer.transform.position;
-        PUtil.LogDebug($"Offset {posCbc.x}");
-        posCbc.x += 0.5f;        
-        visualizer.transform.SetPosition(posCbc);
+      var animController = visualizer.GetComponent<KBatchedAnimController>();
+      if (needOffset && animController != null) {
+        var offset = animController.Offset;
+        offset.x += 0.5f;
+        animController.Offset = offset;
       }
-
       visualizer.SetActive(true);
       // 显示鼠标周围的网格效果
       GridCompositor.Instance.ToggleMajor(true);
@@ -88,7 +87,6 @@ namespace PackAnything.MoveTool {
       visualAnimController.initialAnim = gameObjectController.initialAnim;
       var needOffset = targetMovable.gameObject.TryGetComponent(out KBoxCollider2D kBoxCollider2D) &&
                        kBoxCollider2D.size.x % 2 == 0;
-      PUtil.LogDebug(kBoxCollider2D.size.x);
       return (visualBuffer, needOffset);
     }
   }
