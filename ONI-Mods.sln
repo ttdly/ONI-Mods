@@ -278,6 +278,10 @@ Global
 		{B231A0A6-8889-41E7-9B5C-14289E09D5BD}.Release|Mergedown.Build.0 = Release|Mergedown
 		{B231A0A6-8889-41E7-9B5C-14289E09D5BD}.Release|Vanilla.ActiveCfg = Release|Vanilla
 		{B231A0A6-8889-41E7-9B5C-14289E09D5BD}.Release|Vanilla.Build.0 = Release|Vanilla
+		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Release|Mergedown.ActiveCfg = Release|Mergedown
+		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Release|Mergedown.Build.0 = Release|Mergedown
+		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Debug|Mergedown.ActiveCfg = Debug|Mergedown
+		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Debug|Mergedown.Build.0 = Debug|Mergedown
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -301,8 +305,11 @@ Global
 		{2AE27D1A-5224-4832-A11E-F182FDA21F28} = {EA38FED7-E861-45D1-8BCA-C29F00400F9F}
 		{D20A4852-009F-4FC7-A853-2D150F2D7AD3} = {6C166698-42A6-4AFD-9F4C-CA6C20F55887}
 		{B231A0A6-8889-41E7-9B5C-14289E09D5BD} = {84877F02-1D2E-4A8E-BC3E-44FA8F6A417F}
+		{940D0B7D-6C28-4D91-A0FD-04A321076D1E} = {6C166698-42A6-4AFD-9F4C-CA6C20F55887}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {05AD4341-9C99-4998-8BEC-CFBB218B464B}
 	EndGlobalSection
 EndGlobal
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomaticGeyser", "AutomaticGeyser\AutomaticGeyser.csproj", "{940D0B7D-6C28-4D91-A0FD-04A321076D1E}"
+EndProject
