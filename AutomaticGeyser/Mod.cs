@@ -24,9 +24,19 @@ namespace AutomaticGeyser {
   public class GeyserGenericConfig_Patch {
     public static void Postfix(GameObject __result) {
       __result.AddOrGet<GeyserLogic>();
-      GeneratedBuildings.RegisterWithOverlay(OverlayModes.Logic.HighlightItemIDs, __result.PrefabID().ToString());
     }
   }
+
+  // [HarmonyPatch(typeof(Geyser.States), "InitializeStates")]
+  // public class Geyser_States_InitializeStates {
+  //   public static void Postfix(Geyser.States __instance) {
+  //     __instance.erupt.Enter(smi => {
+  //       if (smi.master.gameObject.TryGetComponent(out GeyserLogic geyserLogic)) {
+  //         if ()
+  //       }
+  //     });
+  //   }
+  // }
 
   [HarmonyPatch(typeof(LogicPorts), "OnSpawn")]
   public class LogicPorts_OnSpawn_Patches {
