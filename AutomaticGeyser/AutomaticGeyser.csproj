@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <AssemblyTitle>自动化间歇泉</AssemblyTitle>
+    <AssemblyTitle>Geysers Automation Extension 间歇泉自动化扩展</AssemblyTitle>
     <FileVersion>1.0.0</FileVersion>
     <RootNamespace>AutomaticGeyser</RootNamespace>
     <Description>Add logical prots for geysers</Description>

@@ -6,6 +6,7 @@ using HarmonyLib;
 using KMod;
 using PeterHan.PLib.AVC;
 using PeterHan.PLib.Core;
+using PeterHan.PLib.Database;
 using UnityEngine;
 
 namespace AutomaticGeyser {
@@ -15,7 +16,9 @@ namespace AutomaticGeyser {
       // 初始化 PUtil 的文件
       PUtil.InitLibrary();
       // 检查模组版本是否更新
+      ModUtil.RegisterForTranslation(typeof(ModStrings));
       new PVersionCheck().Register(this, new SteamVersionChecker());
+      new PLocalization().Register();
     }
   }
   
@@ -33,6 +36,7 @@ namespace AutomaticGeyser {
       __instance.pre_erupt.Enter(smi => {
         if (!smi.master.gameObject.TryGetComponent(out GeyserLogic geyserLogic)) return;
         geyserLogic.SendStatus(GeyserLogicStatus.OutputLogic.PreErupt);
+        geyserLogic.AlwaysDormant();
       });
       
       __instance.erupt.Enter(smi => {
@@ -57,14 +61,14 @@ namespace AutomaticGeyser {
       
       __instance.idle.Enter(smi => {
         if (!smi.master.gameObject.TryGetComponent(out GeyserLogic geyserLogic)) return;
-        if (geyserLogic.SkipIdle()) return;
         geyserLogic.SendStatus(GeyserLogicStatus.OutputLogic.Dormant);
+        geyserLogic.SkipIdle();
       });
-      
+
       __instance.dormant.Enter(smi => {
         if (!smi.master.gameObject.TryGetComponent(out GeyserLogic geyserLogic)) return;
-        if (geyserLogic.SkipDormant()) return;
         geyserLogic.SendStatus(GeyserLogicStatus.OutputLogic.Dormant);
+        geyserLogic.SkipDormant();
       });
     }
   }

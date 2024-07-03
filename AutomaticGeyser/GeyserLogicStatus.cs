@@ -3,13 +3,21 @@
     public enum InputLogic {
       SkipErupt = 1,
       SkipDormant = 2,
-      ForeverDormant = 3, // TODO
+      AlwaysDormant = 4,
       UnusedCase = -1
     }
 
     public static InputLogic GetInputLogic(int logicValue) {
-      if (logicValue > 0 && logicValue < 4) return (InputLogic)logicValue;
-      return InputLogic.UnusedCase;
+      switch (logicValue) {
+        case 1:
+          return InputLogic.SkipErupt;
+        case 2:
+          return InputLogic.SkipDormant;
+        case 4:
+          return InputLogic.AlwaysDormant;
+        default:
+          return InputLogic.UnusedCase;
+      }
     }
 
     public enum OutputLogic {
@@ -37,5 +45,8 @@
         var geyserLogic = (GeyserLogic)data;
         return str.Replace("{0}", geyserLogic.skipEruptTimes.ToString());
       });
+
+    public static StatusItem AlwaysDormant = new StatusItem(nameof(AlwaysDormant), "GEYSER", "",
+      StatusItem.IconType.Info, NotificationType.Neutral, false, OverlayModes.None.ID);
   }
 }
