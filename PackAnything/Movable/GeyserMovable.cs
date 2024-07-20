@@ -1,9 +1,8 @@
-﻿using System;
-using HarmonyLib;
-using PeterHan.PLib.Core;
+﻿using HarmonyLib;
 using PeterHan.PLib.Detours;
 using PeterHan.PLib.Options;
 using UnityEngine;
+using static PackAnything.Movable.StaticMethods;
 
 namespace PackAnything.Movable {
   public class GeyserMovable : BaseMovable {
@@ -55,13 +54,7 @@ namespace PackAnything.Movable {
       };
       foreach (var x in cells) {
         if (unoCount == 0) continue;
-        if (Grid.Element.Length < x || Grid.Element[x] == null) {
-          PUtil.LogError("Out of index.");
-          throw new IndexOutOfRangeException();
-        }
-
-        if (!Grid.IsValidCell(x)) continue;
-        SimMessages.ReplaceElement(x, SimHashes.Unobtanium, CellEventLogger.Instance.DebugTool, 20000f);
+        AddNeutroniumOneCell(x);
         unoCount--;
       }
     }
@@ -73,12 +66,7 @@ namespace PackAnything.Movable {
         Grid.CellDownRight(cell),
         Grid.CellRight(Grid.CellDownRight(cell))
       };
-      foreach (var x in cells) {
-        if (Grid.Element.Length < x || Grid.Element[x] == null) throw new IndexOutOfRangeException();
-        var e = Grid.Element[x];
-        if (!e.IsSolid || !e.id.ToString().ToUpperInvariant().Equals("UNOBTANIUM")) continue;
-        SimMessages.ReplaceElement(x, SimHashes.Vacuum, CellEventLogger.Instance.DebugTool, 100f);
-      }
+      foreach (var x in cells) DeleteNeutroniumOneCell(x);
     }
 
     #region 补丁

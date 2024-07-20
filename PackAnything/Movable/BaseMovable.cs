@@ -13,7 +13,6 @@ namespace PackAnything.Movable {
     protected override void OnSpawn() {
       base.OnSpawn();
       Subscribe((int)GameHashes.RefreshUserMenu, OnRefreshUserMenuDelegate);
-      Subscribe((int)GameHashes.StatusChange, OnRefreshUserMenuDelegate);
     }
 
     private void OnRefreshUserMenu(object _) {

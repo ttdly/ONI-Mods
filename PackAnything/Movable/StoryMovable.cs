@@ -13,11 +13,6 @@ namespace PackAnything.Movable {
       house.transform.SetPosition(GetBuildingPosCbc(houseCell));
     }
 
-    private static void AddMovable(GameObject go) {
-      if (go.TryGetComponent(out GravitiesMovable component)) DestroyImmediate(component);
-      go.AddOrGet<StoryMovable>();
-    }
-
     #region 补丁
 
     [HarmonyPatch(typeof(GravitasCreatureManipulatorConfig),
@@ -38,21 +33,21 @@ namespace PackAnything.Movable {
     [HarmonyPatch(typeof(FossilSiteConfig_Ice), nameof(FossilSiteConfig_Ice.CreatePrefab))]
     public class Patch_3 {
       private static void Postfix(GameObject __result) {
-        AddMovable(__result);
+        RemoveGravitiesAndAddMovable<StoryMovable>(__result);
       }
     }
 
     [HarmonyPatch(typeof(FossilSiteConfig_Resin), nameof(FossilSiteConfig_Ice.CreatePrefab))]
     public class Patch_4 {
       private static void Postfix(GameObject __result) {
-        AddMovable(__result);
+        RemoveGravitiesAndAddMovable<StoryMovable>(__result);
       }
     }
 
     [HarmonyPatch(typeof(FossilSiteConfig_Rock), nameof(FossilSiteConfig_Ice.CreatePrefab))]
     public class Patch_5 {
       private static void Postfix(GameObject __result) {
-        AddMovable(__result);
+        RemoveGravitiesAndAddMovable<StoryMovable>(__result);
       }
     }
 

@@ -1,5 +1,4 @@
 ﻿using PackAnything.Movable;
-using PeterHan.PLib.Core;
 using UnityEngine;
 
 namespace PackAnything.MoveTool {
@@ -43,6 +42,7 @@ namespace PackAnything.MoveTool {
         offset.x += 0.5f;
         animController.Offset = offset;
       }
+
       visualizer.SetActive(true);
       // 显示鼠标周围的网格效果
       GridCompositor.Instance.ToggleMajor(true);

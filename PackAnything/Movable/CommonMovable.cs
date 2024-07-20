@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using Klei.AI;
 using UnityEngine;
 using static PackAnything.Movable.StaticMethods;
 
@@ -52,6 +51,30 @@ namespace PackAnything.Movable {
         __result.AddOrGet<CommonMovable>();
       }
     }
+
+    // 柴堆
+    [HarmonyPatch(typeof(WoodStorageConfig), nameof(WoodStorageConfig.DoPostConfigureComplete))]
+    public class Patch_6 {
+      private static void Postfix(GameObject go) {
+        go.AddOrGet<CommonMovable>();
+      }
+    }
+
+    // 流明石英
+    [HarmonyPatch(typeof(PinkRockConfig), nameof(PinkRockConfig.CreatePrefab))]
+    public class Patch_7 {
+      private static void Postfix(GameObject __result) {
+        __result.AddOrGet<CommonMovable>();
+      }
+    }
+
+    // 部分植物
+    // [HarmonyPatch(typeof(EntityTemplates), nameof(EntityTemplates.ExtendEntityToBasicPlant))]
+    // public class Patch_8 {
+    //   private static void Postfix(GameObject __result) {
+    //     __result.AddOrGet<CommonMovable>();
+    //   }
+    // }
 
     #endregion
   }
