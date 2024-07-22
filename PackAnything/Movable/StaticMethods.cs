@@ -54,14 +54,18 @@ namespace PackAnything.Movable {
       go.AddOrGet<T>();
     }
 
+    public static bool CellIsUnobtanium(int cell) {
+      var e = Grid.Element[cell];
+      return e.IsSolid && e.id.ToString().ToUpperInvariant().Equals("UNOBTANIUM");
+    }
+
     public static void DeleteNeutroniumOneCell(int cell) {
       if (Grid.Element.Length < cell || Grid.Element[cell] == null) {
         PUtil.LogError("Out of index when delete Neutronium");
         throw new IndexOutOfRangeException();
       }
-
-      var e = Grid.Element[cell];
-      if (!e.IsSolid || !e.id.ToString().ToUpperInvariant().Equals("UNOBTANIUM")) return;
+      
+      if (!CellIsUnobtanium(cell)) return;
       SimMessages.ReplaceElement(cell, SimHashes.Vacuum, CellEventLogger.Instance.DebugTool, 100f);
     }
 

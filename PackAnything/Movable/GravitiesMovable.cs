@@ -4,9 +4,11 @@ using static PackAnything.Movable.StaticMethods;
 
 namespace PackAnything.Movable {
   public class GravitiesMovable : BaseMovable {
+    public bool needNew = true;
     public override void Move(int targetCell) {
       base.Move(targetCell);
-      var cloned = GameUtil.KInstantiate(gameObject, GetBuildingPosCbc(targetCell), Grid.SceneLayer.Building);
+      var template = needNew ? Assets.GetPrefab(gameObject.PrefabID()) : gameObject;
+      var cloned = GameUtil.KInstantiate(template, GetBuildingPosCbc(targetCell), Grid.SceneLayer.Building);
       var loreBearer = gameObject.GetComponent<LoreBearer>();
       if (loreBearer != null) ToggleLoreBearer(loreBearer, cloned.AddOrGet<LoreBearer>());
       var setLocker = gameObject.GetComponent<SetLocker>();
@@ -47,7 +49,9 @@ namespace PackAnything.Movable {
     [HarmonyPatch(typeof(HeadquartersConfig), nameof(HeadquartersConfig.DoPostConfigureComplete))]
     public class Patch_5 {
       public static void Postfix(GameObject go) {
-        go.AddOrGet<GravitiesMovable>().canCrossMove = false;
+        var movable = go.AddOrGet<GravitiesMovable>();
+        movable.canCrossMove = false;
+        movable.needNew = false;
       }
     }
 
