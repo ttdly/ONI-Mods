@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using HarmonyLib;
 using KSerialization;
+using PeterHan.PLib.Options;
 using TUNING;
 
 namespace AutomaticGeyser {
@@ -38,7 +39,7 @@ namespace AutomaticGeyser {
       attributeExperienceMultiplier = DUPLICANTSTATS.ATTRIBUTE_LEVELING.MOST_DAY_EXPERIENCE;
       skillExperienceSkillGroup = Db.Get().SkillGroups.Building.Id;
       skillExperienceMultiplier = SKILLS.MOST_DAY_EXPERIENCE;
-      SetWorkTime(3600f);
+      SetWorkTime(SingletonOptions<ModOptions>.Instance.WorkTime);
     }
 
     protected override void OnSpawn() {
