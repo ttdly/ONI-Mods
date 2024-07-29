@@ -13,6 +13,16 @@ msgctxt "PackAnything.ModString.Options.GENERATE_UNOBTANIUM_DESC"
 msgid "Whether or not does moving a geyser create Unobtanium."
 msgstr ""
 
+#. PackAnything.ModString.Options.STABLE_MODE
+msgctxt "PackAnything.ModString.Options.STABLE_MODE"
+msgid "Stable Mode"
+msgstr ""
+
+#. PackAnything.ModString.Options.STABLE_MODE_DESC
+msgctxt "PackAnything.ModString.Options.STABLE_MODE_DESC"
+msgid "If stable mode is enabled, the game needs to be reloaded from the save file after each item is moved in order for the changes to take effect."
+msgstr ""
+
 #. PackAnything.ModString.Options.TOGGLE_GEYSER_NUM
 msgctxt "PackAnything.ModString.Options.TOGGLE_GEYSER_NUM"
 msgid "Toggle Geyser Num"

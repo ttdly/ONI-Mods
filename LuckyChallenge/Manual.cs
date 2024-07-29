@@ -19,6 +19,7 @@ namespace LuckyChallenge {
 
     void ISidescreenButtonControl.OnSidescreenButtonPressed() {
       Toggle();
+      throw new NotImplementedException();
     }
 
     void ISidescreenButtonControl.SetButtonTextOverride(ButtonMenuTextOverride textOverride) {

@@ -1,6 +1,4 @@
-﻿using System;
-using PeterHan.PLib.Core;
-using PeterHan.PLib.Detours;
+﻿using PeterHan.PLib.Detours;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -53,30 +51,6 @@ namespace PackAnything.Movable {
       if (go.TryGetComponent(out GravitiesMovable component)) Object.DestroyImmediate(component);
       go.AddOrGet<T>();
     }
-
-    public static bool CellIsUnobtanium(int cell) {
-      var e = Grid.Element[cell];
-      return e.IsSolid && e.id.ToString().ToUpperInvariant().Equals("UNOBTANIUM");
-    }
-
-    public static void DeleteNeutroniumOneCell(int cell) {
-      if (Grid.Element.Length < cell || Grid.Element[cell] == null) {
-        PUtil.LogError("Out of index when delete Neutronium");
-        throw new IndexOutOfRangeException();
-      }
-      
-      if (!CellIsUnobtanium(cell)) return;
-      SimMessages.ReplaceElement(cell, SimHashes.Vacuum, CellEventLogger.Instance.DebugTool, 100f);
-    }
-
-    public static void AddNeutroniumOneCell(int cell) {
-      if (Grid.Element.Length < cell || Grid.Element[cell] == null) {
-        PUtil.LogError("Out of index when add Neutronium");
-        throw new IndexOutOfRangeException();
-      }
-
-      if (!Grid.IsValidCell(cell)) return;
-      SimMessages.ReplaceElement(cell, SimHashes.Unobtanium, CellEventLogger.Instance.DebugTool, 20000f);
-    }
+    
   }
 }

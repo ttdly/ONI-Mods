@@ -1,4 +1,5 @@
 ﻿using PackAnything.Movable;
+using PeterHan.PLib.Options;
 using UnityEngine;
 
 namespace PackAnything.MoveTool {
@@ -18,7 +19,12 @@ namespace PackAnything.MoveTool {
       var mouseCell = DebugHandler.GetMouseCell();
       if (targetMovable.CanMoveTo(mouseCell)) {
         PlaySound(GlobalAssets.GetSound("HUD_Click"));
-        targetMovable.Move(mouseCell);
+        if (SingletonOptions<Options>.Instance.StableMode) {
+          targetMovable.StableMove(mouseCell);
+        } else {
+          targetMovable.Move(mouseCell);
+        }
+        targetMovable.SetOriginCell(mouseCell);
         SelectTool.Instance.Activate();
       } else {
         PlaySound(GlobalAssets.GetSound("Negative"));

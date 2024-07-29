@@ -1,6 +1,9 @@
 ﻿using System;
 using PackAnything.MoveTool;
+using PeterHan.PLib.Core;
+using PeterHan.PLib.Options;
 using STRINGS;
+using static PackAnything.Movable.StaticMethods;
 
 namespace PackAnything.Movable {
   public class BaseMovable : KMonoBehaviour {
@@ -9,9 +12,12 @@ namespace PackAnything.Movable {
         component.OnRefreshUserMenu(data));
 
     public bool canCrossMove = true;
+    public int originCell;
+
 
     protected override void OnSpawn() {
       base.OnSpawn();
+      originCell = Grid.PosToCell(gameObject.transform.position);
       Subscribe((int)GameHashes.RefreshUserMenu, OnRefreshUserMenuDelegate);
     }
 
@@ -39,6 +45,13 @@ namespace PackAnything.Movable {
       }
     }
 
+    public int SetOriginCell(int cell) => originCell = cell;
+
+    public virtual void StableMove(int targetCell) {
+      var posCbc = GetBuildingPosCbc(targetCell);
+      gameObject.transform.SetPosition(posCbc);
+    }
+    
     public virtual void Move(int targetCell) {
     }
   }

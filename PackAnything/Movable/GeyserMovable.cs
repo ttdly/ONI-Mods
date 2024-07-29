@@ -1,19 +1,35 @@
 ﻿using HarmonyLib;
+using PeterHan.PLib.Core;
 using PeterHan.PLib.Detours;
 using PeterHan.PLib.Options;
 using UnityEngine;
-using static PackAnything.Movable.StaticMethods;
 
 namespace PackAnything.Movable {
   public class GeyserMovable : BaseMovable {
     private static readonly IDetouredField<Studyable, bool> studied = PDetours.DetourField<Studyable, bool>("studied");
     private static readonly Tag smallVolcanoTag = new Tag("GeyserGeneric_small_volcano");
-    private int unoCount;
+    private NeutroniumMover neutroniumMover;
 
     protected override void OnSpawn() {
       base.OnSpawn();
-      unoCount = gameObject.PrefabID() == smallVolcanoTag ? 3 : 4;
+      var offset = gameObject.PrefabID() == smallVolcanoTag ? new[] { 0, 1, 2 } : new[] { -1, 0, 1, 2 };
+      if (gameObject.PrefabID() == smallVolcanoTag &&
+          NeutroniumMover.CellIsUnobtanium(Grid.OffsetCell(originCell, -1, -1))) {
+        offset = new[] { -1, 0, 1, 2 };
+      }
+      neutroniumMover = new NeutroniumMover() {
+        neutroniumOffsets = offset
+      };
     }
+
+    public override void StableMove(int targetCell) {
+      base.StableMove(targetCell);
+      var posCbc = gameObject.transform.position;
+      posCbc.z -= 0.15f;
+      gameObject.transform.SetPosition(posCbc);
+      neutroniumMover.Move(originCell, targetCell);
+    }
+
 
     public override void Move(int targetCell) {
       base.Move(targetCell);
@@ -21,11 +37,7 @@ namespace PackAnything.Movable {
       // 同步间歇泉研究状态
       if (gameObject.GetComponent<Studyable>().Studied)
         studied.Set(cloned.AddOrGet<Studyable>(), true);
-      // 删除原址中子物质
-      DeleteNeutronium(Grid.PosToCell(gameObject.transform.position));
-      // 在新址创建中子物质
-      if (SingletonOptions<Options>.Instance.GenerateUnobtanium && unoCount > 0)
-        CreateNeutronium(Grid.CellBelow(targetCell));
+      neutroniumMover.Move(originCell, targetCell);
       // 同步数值
       if (SingletonOptions<Options>.Instance.ToggleGeyserAttribute) ToggleGeyser(cloned);
       // 设置间歇泉的位置
@@ -43,30 +55,6 @@ namespace PackAnything.Movable {
       if (!gameObject.TryGetComponent(out Geyser geyser)) return;
       var clonedGeyser = cloned.AddOrGet<Geyser>();
       clonedGeyser.configuration = geyser.configuration;
-    }
-
-    public void CreateNeutronium(int cell) {
-      int[] cells = {
-        Grid.CellLeft(cell),
-        cell,
-        Grid.CellRight(cell),
-        Grid.CellRight(Grid.CellRight(cell))
-      };
-      foreach (var x in cells) {
-        if (unoCount == 0) continue;
-        AddNeutroniumOneCell(x);
-        unoCount--;
-      }
-    }
-
-    public void DeleteNeutronium(int cell) {
-      int[] cells = {
-        Grid.CellDownLeft(cell),
-        Grid.CellBelow(cell),
-        Grid.CellDownRight(cell),
-        Grid.CellRight(Grid.CellDownRight(cell))
-      };
-      foreach (var x in cells) DeleteNeutroniumOneCell(x);
     }
 
     #region 补丁

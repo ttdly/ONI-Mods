@@ -12,5 +12,9 @@ namespace PackAnything {
     [Option("STRINGS.Options.TOGGLE_GEYSER_NUM", "STRINGS.Options.TOGGLE_GEYSER_NUM_DESC")]
     [JsonProperty]
     public bool ToggleGeyserAttribute { get; set; } = true;
+    
+    [Option("STRINGS.Options.STABLE_MODE", "STRINGS.Options.STABLE_MODE_DESC")]
+    [JsonProperty]
+    public bool StableMode { get; set; } = false;
   }
 }
