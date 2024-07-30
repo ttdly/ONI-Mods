@@ -2,26 +2,13 @@
 using UnityEngine;
 using static PackAnything.Movable.StaticMethods;
 
-namespace PackAnything.Movable {
+namespace PackAnything.Movable.Stories {
   public class StoryMovable : BaseMovable {
     public override void Move(int targetCell) {
-      base.Move(targetCell);
-      gameObject.transform.SetPosition(GetBuildingPosCbc(targetCell));
-      if (gameObject.PrefabID().ToString() != LonelyMinionMailboxConfig.ID) return;
-      var house = gameObject.GetComponent<LonelyMinionMailbox>().House.gameObject;
-      var houseCell = Grid.OffsetCell(targetCell, new CellOffset(3, 0));
-      house.transform.SetPosition(GetBuildingPosCbc(houseCell));
+      base.StableMove(targetCell);
     }
 
     #region 补丁
-
-    [HarmonyPatch(typeof(GravitasCreatureManipulatorConfig),
-      nameof(GravitasCreatureManipulatorConfig.DoPostConfigureComplete))]
-    public class Patch_1 {
-      private static void Postfix(GameObject go) {
-        go.AddOrGet<StoryMovable>();
-      }
-    }
 
     [HarmonyPatch(typeof(FossilDigSiteConfig), nameof(FossilDigSiteConfig.DoPostConfigureComplete))]
     public class Patch_2 {
@@ -51,15 +38,8 @@ namespace PackAnything.Movable {
       }
     }
 
-    [HarmonyPatch(typeof(LonelyMinionMailboxConfig), nameof(LonelyMinionMailboxConfig.DoPostConfigureComplete))]
-    public class Patch_7 {
-      private static void Postfix(GameObject go) {
-        go.AddOrGet<StoryMovable>();
-      }
-    }
-
     // 梦境合成
-    [HarmonyPatch(typeof(MegaBrainTank), "OnSpawn")]
+    [HarmonyPatch(typeof(MegaBrainTankConfig), "OnSpawn")]
     public class MegaBrainTank_OnSpawn_Patch {
       public static void Postfix(MegaBrainTank __instance) {
         __instance.gameObject.AddOrGet<StoryMovable>();

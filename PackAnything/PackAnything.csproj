@@ -9,9 +9,9 @@
     <Platforms>Vanilla;Mergedown</Platforms>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="images\tooIcon.png"/>
+    <None Remove="images\tooIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="images\tooIcon.png"/>
+    <EmbeddedResource Include="images\tooIcon.png" />
   </ItemGroup>
 </Project>

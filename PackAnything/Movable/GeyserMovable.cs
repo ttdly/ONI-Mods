@@ -12,10 +12,10 @@ namespace PackAnything.Movable {
 
     protected override void OnSpawn() {
       base.OnSpawn();
-      var offset = gameObject.PrefabID() == smallVolcanoTag ? new[] { 0, 1, 2 } : new[] { -1, 0, 1, 2 };
+      var offset = new[] { -1, 0, 1, 2 };
       if (gameObject.PrefabID() == smallVolcanoTag &&
-          NeutroniumMover.CellIsUnobtanium(Grid.OffsetCell(originCell, -1, -1))) {
-        offset = new[] { -1, 0, 1, 2 };
+          !NeutroniumMover.CellIsUnobtanium(Grid.OffsetCell(originCell, -1, -1))) {
+        offset = new[] { 0, 1, 2 };
       }
       neutroniumMover = new NeutroniumMover() {
         neutroniumOffsets = offset

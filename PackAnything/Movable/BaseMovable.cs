@@ -1,7 +1,5 @@
 ﻿using System;
 using PackAnything.MoveTool;
-using PeterHan.PLib.Core;
-using PeterHan.PLib.Options;
 using STRINGS;
 using static PackAnything.Movable.StaticMethods;
 
@@ -24,7 +22,7 @@ namespace PackAnything.Movable {
     private void OnRefreshUserMenu(object _) {
       if (gameObject.HasTag("OilWell") &&
           gameObject.GetComponent<BuildingAttachPoint>()?.points[0].attachedBuilding != null) return;
-
+      
       Game.Instance.userMenu.AddButton(
         gameObject,
         new KIconButtonMenu.ButtonInfo("action_control", UI.USERMENUACTIONS.PICKUPABLEMOVE.NAME, OnClickMove,
@@ -48,8 +46,7 @@ namespace PackAnything.Movable {
     public int SetOriginCell(int cell) => originCell = cell;
 
     public virtual void StableMove(int targetCell) {
-      var posCbc = GetBuildingPosCbc(targetCell);
-      gameObject.transform.SetPosition(posCbc);
+      gameObject.transform.SetPosition(GetBuildingPosCbc(targetCell));
     }
     
     public virtual void Move(int targetCell) {

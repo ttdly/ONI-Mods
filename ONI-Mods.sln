@@ -52,6 +52,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuantumStorage", "QuantumSt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FragmentThermostat", "FragmentThermostat\FragmentThermostat.csproj", "{B231A0A6-8889-41E7-9B5C-14289E09D5BD}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomaticGeyser", "AutomaticGeyser\AutomaticGeyser.csproj", "{940D0B7D-6C28-4D91-A0FD-04A321076D1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -278,10 +280,18 @@ Global
 		{B231A0A6-8889-41E7-9B5C-14289E09D5BD}.Release|Mergedown.Build.0 = Release|Mergedown
 		{B231A0A6-8889-41E7-9B5C-14289E09D5BD}.Release|Vanilla.ActiveCfg = Release|Vanilla
 		{B231A0A6-8889-41E7-9B5C-14289E09D5BD}.Release|Vanilla.Build.0 = Release|Vanilla
-		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Release|Mergedown.ActiveCfg = Release|Mergedown
-		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Release|Mergedown.Build.0 = Release|Mergedown
+		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Debug|Any CPU.ActiveCfg = Debug|Vanilla
+		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Debug|Any CPU.Build.0 = Debug|Vanilla
 		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Debug|Mergedown.ActiveCfg = Debug|Mergedown
 		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Debug|Mergedown.Build.0 = Debug|Mergedown
+		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Debug|Vanilla.ActiveCfg = Debug|Vanilla
+		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Debug|Vanilla.Build.0 = Debug|Vanilla
+		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Release|Any CPU.ActiveCfg = Release|Vanilla
+		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Release|Any CPU.Build.0 = Release|Vanilla
+		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Release|Mergedown.ActiveCfg = Release|Mergedown
+		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Release|Mergedown.Build.0 = Release|Mergedown
+		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Release|Vanilla.ActiveCfg = Release|Vanilla
+		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Release|Vanilla.Build.0 = Release|Vanilla
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -311,5 +321,3 @@ Global
 		SolutionGuid = {05AD4341-9C99-4998-8BEC-CFBB218B464B}
 	EndGlobalSection
 EndGlobal
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomaticGeyser", "AutomaticGeyser\AutomaticGeyser.csproj", "{940D0B7D-6C28-4D91-A0FD-04A321076D1E}"
-EndProject
