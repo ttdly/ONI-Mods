@@ -39,7 +39,7 @@ namespace PackAnything.Movable.Stories {
     }
 
     // 梦境合成
-    [HarmonyPatch(typeof(MegaBrainTankConfig), "OnSpawn")]
+    [HarmonyPatch(typeof(MegaBrainTank), "OnSpawn")]
     public class MegaBrainTank_OnSpawn_Patch {
       public static void Postfix(MegaBrainTank __instance) {
         __instance.gameObject.AddOrGet<StoryMovable>();

@@ -6,7 +6,7 @@
       public static LocString TOGGLE_GEYSER_NUM = "Toggle Geyser Num";
       public static LocString TOGGLE_GEYSER_NUM_DESC = "When moving a geyser, do not change its attributes.";
       public static LocString STABLE_MODE = "Stable Mode";
-      public static LocString STABLE_MODE_DESC = "If stable mode is enabled, the game needs to be reloaded from the save file after each item is moved in order for the changes to take effect.";
+      public static LocString STABLE_MODE_DESC = "If enabled, the save file needs to be reloaded after moving items.";
     }
   }
 }

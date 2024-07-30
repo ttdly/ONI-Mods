@@ -30,12 +30,8 @@ msgstr "稳定模式"
 
 #. PackAnything.ModString.Options.STABLE_MODE_DESC
 msgctxt "PackAnything.ModString.Options.STABLE_MODE_DESC"
-msgid ""
-"If stable mode is enabled, the game needs to be reloaded from the save file "
-"after each item is moved in order for the changes to take effect."
-msgstr ""
-"如果启用稳定模式，则每次移动物品之后需要重新加载游戏存档才能使移动的物品生"
-"效。"
+msgid "If enabled, the save file needs to be reloaded after moving items."
+msgstr "如果启用，移动物品之后需要重新加载存档"
 
 #. PackAnything.ModString.Options.TOGGLE_GEYSER_NUM
 msgctxt "PackAnything.ModString.Options.TOGGLE_GEYSER_NUM"
@@ -47,10 +43,12 @@ msgctxt "PackAnything.ModString.Options.TOGGLE_GEYSER_NUM_DESC"
 msgid "When moving a geyser, do not change its attributes."
 msgstr "当移动间歇泉的时候，不改变其属性。"
 
+#~ msgctxt "PackAnything.ModString.Options.STABLE_MODE_DESC"
+#~ msgid "If stable mode is enabled, the game needs to be reloaded from the save file after each item is moved in order for the changes to take effect."
+#~ msgstr "如果启用稳定模式，则每次移动物品之后需要重新加载游戏存档才能使移动的物品生效。"
+
 #~ msgctxt "PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.DESC"
-#~ msgid ""
-#~ "Record the information of an object, activate this beacon, and the "
-#~ "recorded object will be moved to this location."
+#~ msgid "Record the information of an object, activate this beacon, and the recorded object will be moved to this location."
 #~ msgstr "记录一个物体的信息，激活该信标，记录的物体就会被移动到这个位置。"
 
 #~ msgctxt "PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.NAME"
@@ -61,13 +59,11 @@ msgstr "当移动间歇泉的时候，不改变其属性。"
 #~ msgid "Move It"
 #~ msgstr "移动"
 
-#~ msgctxt ""
-#~ "PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TOOL_TIP"
+#~ msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TOOL_TIP"
 #~ msgid "Move this object to a specific location"
 #~ msgstr "将这个物体移动到指定位置"
 
-#~ msgctxt ""
-#~ "PackAnything.PackAnythingString.UI.SIDE_SCREEN.CANCEL_BUTTON_TOOL_TIP"
+#~ msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.CANCEL_BUTTON_TOOL_TIP"
 #~ msgid "Cancel survey for this item."
 #~ msgstr "取消对这个物品的测绘"
 
@@ -76,9 +72,7 @@ msgstr "当移动间歇泉的时候，不改变其属性。"
 #~ msgstr "已测绘物体"
 
 #~ msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP"
-#~ msgid ""
-#~ "There is no object being surveyed, or alternatively, there is an object "
-#~ "in motion"
+#~ msgid "There is no object being surveyed, or alternatively, there is an object in motion"
 #~ msgstr "没有测绘任何物品或有物品正在移动"
 
 #~ msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_OBJ"

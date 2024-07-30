@@ -20,7 +20,7 @@ msgstr ""
 
 #. PackAnything.ModString.Options.STABLE_MODE_DESC
 msgctxt "PackAnything.ModString.Options.STABLE_MODE_DESC"
-msgid "If stable mode is enabled, the game needs to be reloaded from the save file after each item is moved in order for the changes to take effect."
+msgid "If enabled, the save file needs to be reloaded after moving items."
 msgstr ""
 
 #. PackAnything.ModString.Options.TOGGLE_GEYSER_NUM
