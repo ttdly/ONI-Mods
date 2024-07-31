@@ -33,7 +33,7 @@ namespace PackAnything.Movable {
       EntityMoveTool.Instance.Activate(this);
     }
 
-    public bool CanMoveTo(int targetCell) {
+    public virtual bool CanMoveTo(int targetCell) {
       if (!canCrossMove && Grid.WorldIdx[targetCell] != gameObject.GetMyWorldId()) return false;
       try {
         if (!Grid.IsValidCell(targetCell)) return false;

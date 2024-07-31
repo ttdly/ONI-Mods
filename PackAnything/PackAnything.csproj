@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <AssemblyTitle>Movable Features 位移信标</AssemblyTitle>
-    <FileVersion>2.1.10</FileVersion>
+    <AssemblyTitle>【特供版】位移信标</AssemblyTitle>
+    <FileVersion>1.0.0</FileVersion>
     <RootNamespace>PackAnything</RootNamespace>
     <Description>Move something that can't move.</Description>
-    <AssemblyVersion>2.1.10</AssemblyVersion>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
     <LastWorkingBuild>622222</LastWorkingBuild>
     <Platforms>Vanilla;Mergedown</Platforms>
   </PropertyGroup>
