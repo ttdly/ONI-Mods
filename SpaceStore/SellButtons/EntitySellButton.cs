@@ -10,6 +10,7 @@
       if (StaticVars.coinSaver == null) return;
       StaticVars.coinSaver.AddCoin(coin);
       base.Sell();
+      NeutroniumMover.Delete(Grid.PosToCell(gameObject.transform.position));
       gameObject.DeleteObject();
     }
   }
