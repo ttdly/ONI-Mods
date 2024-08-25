@@ -22,6 +22,16 @@ msgctxt "PackAnything.ModString.Options.GENERATE_UNOBTANIUM_DESC"
 msgid "Whether or not does moving a geyser create Unobtanium."
 msgstr "Создаст ли гейзер нейтроний после перемещения."
 
+#. PackAnything.ModString.Options.STABLE_MODE
+msgctxt "PackAnything.ModString.Options.STABLE_MODE"
+msgid "Stable Mode"
+msgstr "Стабильный режим"
+
+#. PackAnything.ModString.Options.STABLE_MODE_DESC
+msgctxt "PackAnything.ModString.Options.STABLE_MODE_DESC"
+msgid "If enabled, the save file needs to be reloaded after moving items."
+msgstr "Если включено, то файл сохранения необходимо перезагрузить после перемещения предметов."
+
 #. PackAnything.ModString.Options.TOGGLE_GEYSER_NUM
 msgctxt "PackAnything.ModString.Options.TOGGLE_GEYSER_NUM"
 msgid "Toggle Geyser Num"
