@@ -27,7 +27,7 @@ namespace PackAnything.Movable {
       }
       
       if (!CellIsUnobtanium(cell)) return;
-      SimMessages.ReplaceElement(cell, SimHashes.Vacuum, CellEventLogger.Instance.DebugTool, 100f);
+      SimMessages.ReplaceElement(cell, SimHashes.Vacuum, CellEventLogger.Instance.DebugTool, 0);
     }
 
     private static void AddNeutroniumOneCell(int cell) {

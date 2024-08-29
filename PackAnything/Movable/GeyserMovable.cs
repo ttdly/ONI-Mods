@@ -1,4 +1,6 @@
-﻿using HarmonyLib;
+﻿using System.Collections.Generic;
+using System.Linq;
+using HarmonyLib;
 using PeterHan.PLib.Core;
 using PeterHan.PLib.Detours;
 using PeterHan.PLib.Options;
@@ -8,14 +10,15 @@ namespace PackAnything.Movable {
   public class GeyserMovable : BaseMovable {
     private static readonly IDetouredField<Studyable, bool> studied = PDetours.DetourField<Studyable, bool>("studied");
     private static readonly Tag smallVolcanoTag = new Tag("GeyserGeneric_small_volcano");
+    private static readonly Tag moltenCobaltTag = new Tag("GeyserGeneric_molten_cobalt");
     private NeutroniumMover neutroniumMover;
 
     protected override void OnSpawn() {
       base.OnSpawn();
+      if (neutroniumMover != null) return;
       var offset = new[] { -1, 0, 1, 2 };
-      if (gameObject.PrefabID() == smallVolcanoTag &&
-          !NeutroniumMover.CellIsUnobtanium(Grid.OffsetCell(originCell, -1, -1))) {
-        offset = new[] { 0, 1, 2 };
+      if (gameObject.PrefabID() == smallVolcanoTag || gameObject.PrefabID() == moltenCobaltTag) {
+        offset = NeutroniumDetector();
       }
       neutroniumMover = new NeutroniumMover() {
         neutroniumOffsets = offset
@@ -34,6 +37,8 @@ namespace PackAnything.Movable {
     public override void Move(int targetCell) {
       base.Move(targetCell);
       var cloned = Util.KInstantiate(Assets.GetPrefab(gameObject.PrefabID()));
+      // 同步中子物质移动
+      cloned.GetComponent<GeyserMovable>().neutroniumMover = neutroniumMover;
       // 同步间歇泉研究状态
       if (gameObject.GetComponent<Studyable>().Studied)
         studied.Set(cloned.AddOrGet<Studyable>(), true);
@@ -55,6 +60,17 @@ namespace PackAnything.Movable {
       if (!gameObject.TryGetComponent(out Geyser geyser)) return;
       var clonedGeyser = cloned.AddOrGet<Geyser>();
       clonedGeyser.configuration = geyser.configuration;
+    }
+
+    private int[] NeutroniumDetector() {
+      var buffer = new HashSet<int>();
+      for (var i = 0; i < 4; i++) {
+        if (NeutroniumMover.CellIsUnobtanium(Grid.OffsetCell(originCell, i, -1))) 
+          buffer.Add(i);
+        if (NeutroniumMover.CellIsUnobtanium(Grid.OffsetCell(originCell, -i, -1)))
+          buffer.Add(-i);
+      }
+      return buffer.ToArray();
     }
 
     #region 补丁
