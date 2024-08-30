@@ -35,11 +35,15 @@ namespace PackAnything.Movable {
 
     #region 补丁
 
-    [HarmonyPatch(typeof(ExobaseHeadquartersConfig), nameof(ExobaseHeadquartersConfig.DoPostConfigureComplete))]
-    public class Patch_6 {
-      public static void Postfix(GameObject go) {
-        go.AddOrGet<ActivateMovable>().canCrossMove = false;
-      }
+    public static void PatchBuildings(Harmony harmony) {
+      var targetMethod = typeof(ExobaseHeadquartersConfig).GetMethod("DoPostConfigureComplete");
+      
+      var postfix_noCrossMove = AccessTools.Method(typeof(GravitiesMovable), nameof(PostfixNoCrossMove));
+      harmony.Patch(targetMethod, postfix: new HarmonyMethod(postfix_noCrossMove));
+    }
+
+    public static void PostfixNoCrossMove(GameObject go) {
+      go.AddOrGet<ActivateMovable>().canCrossMove = false;
     }
 
     #endregion

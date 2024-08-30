@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using System.Reflection;
+using HarmonyLib;
 using UnityEngine;
 using static PackAnything.Movable.StaticMethods;
 
@@ -11,6 +12,24 @@ namespace PackAnything.Movable {
     }
 
     #region 补丁
+
+    public static void PatchBuildings(Harmony harmony) {
+      // 反熵
+      var targetMethod_1 = typeof(MassiveHeatSinkConfig).GetMethod("DoPostConfigureComplete");
+      // 睡衣柜
+      var targetMethod_2 = typeof(GravitasContainerConfig).GetMethod("DoPostConfigureComplete");
+      // 柴堆
+      var targetMethod_3 = typeof(WoodStorageConfig).GetMethod("DoPostConfigureComplete");
+
+      var postfix = AccessTools.Method(typeof(CommonMovable), nameof(CommonPostfix));
+      harmony.Patch(targetMethod_1, postfix: new HarmonyMethod(postfix));
+      harmony.Patch(targetMethod_2, postfix: new HarmonyMethod(postfix));
+      harmony.Patch(targetMethod_3, postfix: new HarmonyMethod(postfix));
+    }
+
+    public static void CommonPostfix(GameObject go) {
+      go.AddOrGet<CommonMovable>();
+    }
 
     // 储油石
     [HarmonyPatch(typeof(OilWellConfig), nameof(OilWellConfig.CreatePrefab))]
@@ -28,35 +47,11 @@ namespace PackAnything.Movable {
       }
     }
 
-    // 反熵
-    [HarmonyPatch(typeof(MassiveHeatSinkConfig), nameof(MassiveHeatSinkConfig.DoPostConfigureComplete))]
-    public class Patch_3 {
-      public static void Postfix(GameObject go) {
-        go.AddOrGet<CommonMovable>();
-      }
-    }
-
-    // 睡衣柜
-    [HarmonyPatch(typeof(GravitasContainerConfig), nameof(GravitasContainerConfig.DoPostConfigureComplete))]
-    public class Patch_4 {
-      public static void Postfix(GameObject go) {
-        go.AddOrGet<CommonMovable>();
-      }
-    }
-
     // 辐射蜂巢
     [HarmonyPatch(typeof(BaseBeeHiveConfig), nameof(BaseBeeHiveConfig.CreatePrefab))]
     public class Patch_5 {
       private static void Postfix(GameObject __result) {
         __result.AddOrGet<CommonMovable>();
-      }
-    }
-
-    // 柴堆
-    [HarmonyPatch(typeof(WoodStorageConfig), nameof(WoodStorageConfig.DoPostConfigureComplete))]
-    public class Patch_6 {
-      private static void Postfix(GameObject go) {
-        go.AddOrGet<CommonMovable>();
       }
     }
 
@@ -67,14 +62,6 @@ namespace PackAnything.Movable {
         __result.AddOrGet<CommonMovable>();
       }
     }
-
-    // 部分植物
-    // [HarmonyPatch(typeof(EntityTemplates), nameof(EntityTemplates.ExtendEntityToBasicPlant))]
-    // public class Patch_8 {
-    //   private static void Postfix(GameObject __result) {
-    //     __result.AddOrGet<CommonMovable>();
-    //   }
-    // }
 
     #endregion
   }

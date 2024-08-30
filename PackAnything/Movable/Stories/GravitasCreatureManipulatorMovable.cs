@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using System.Reflection;
+using HarmonyLib;
 using UnityEngine;
 
 namespace PackAnything.Movable.Stories {
@@ -29,12 +30,15 @@ namespace PackAnything.Movable.Stories {
 
     #region 补丁
 
-    [HarmonyPatch(typeof(GravitasCreatureManipulatorConfig),
-      nameof(GravitasCreatureManipulatorConfig.DoPostConfigureComplete))]
-    public class Patch_1 {
-      private static void Postfix(GameObject go) {
-        go.AddOrGet<GravitasCreatureManipulatorMovable>();
-      }
+    public static void PatchBuildings(Harmony harmony) {
+      var targetMethod_1 = typeof(GravitasCreatureManipulatorConfig).GetMethod("DoPostConfigureComplete");
+
+      var postfix = AccessTools.Method(typeof(GravitasCreatureManipulatorMovable), nameof(CommonPostfix)); 
+      harmony.Patch(targetMethod_1, postfix: new HarmonyMethod(postfix));
+    }
+
+    public static void CommonPostfix(GameObject go) {
+      go.AddOrGet<GravitasCreatureManipulatorMovable>();
     }
 
     #endregion

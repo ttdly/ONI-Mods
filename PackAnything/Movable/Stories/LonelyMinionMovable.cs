@@ -1,4 +1,6 @@
-﻿using HarmonyLib;
+﻿using System.Reflection;
+using HarmonyLib;
+using PeterHan.PLib.Core;
 using UnityEngine;
 using static PackAnything.Movable.StaticMethods;
 
@@ -15,18 +17,17 @@ namespace PackAnything.Movable.Stories {
 
     #region 补丁
 
-    [HarmonyPatch(typeof(LonelyMinionMailboxConfig), nameof(LonelyMinionMailboxConfig.DoPostConfigureComplete))]
-    public class Patch_1 {
-      private static void Postfix(GameObject go) {
-        go.AddOrGet<LonelyMinionMovable>();
-      }
+    public static void PatchBuildings(Harmony harmony) {
+      var targetMethod_1 = typeof(LonelyMinionMailboxConfig).GetMethod("DoPostConfigureComplete");
+      var targetMethod_2 = typeof(LonelyMinionHouseConfig).GetMethod("DoPostConfigureComplete");
+
+      var postfix = AccessTools.Method(typeof(LonelyMinionMovable), nameof(CommonPostfix));
+      harmony.Patch(targetMethod_1, postfix: new HarmonyMethod(postfix));
+      harmony.Patch(targetMethod_2, postfix: new HarmonyMethod(postfix));
     }
 
-    [HarmonyPatch(typeof(LonelyMinionHouseConfig), nameof(LonelyMinionHouseConfig.DoPostConfigureComplete))]
-    public class Patch_2 {
-      private static void Postfix(GameObject go) {
-        go.AddOrGet<LonelyMinionMovable>();
-      }
+    public static void CommonPostfix(GameObject go) {
+      go.AddOrGet<LonelyMinionMovable>();
     }
 
     #endregion

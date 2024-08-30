@@ -1,4 +1,6 @@
-﻿using HarmonyLib;
+﻿using System.Reflection;
+using HarmonyLib;
+using PeterHan.PLib.Core;
 using UnityEngine;
 using static PackAnything.Movable.StaticMethods;
 
@@ -10,13 +12,17 @@ namespace PackAnything.Movable.Stories {
 
     #region 补丁
 
-    [HarmonyPatch(typeof(FossilDigSiteConfig), nameof(FossilDigSiteConfig.DoPostConfigureComplete))]
-    public class Patch_2 {
-      private static void Postfix(GameObject go) {
-        go.AddOrGet<StoryMovable>();
-      }
+    public static void PatchBuildings(Harmony harmony) {
+      var targetMethod_1 = typeof(FossilDigSiteConfig).GetMethod("DoPostConfigureComplete");
+      
+      var postfix = AccessTools.Method(typeof(StoryMovable), nameof(CommonPostfix)); 
+      harmony.Patch(targetMethod_1, postfix: new HarmonyMethod(postfix));
     }
 
+    public static void CommonPostfix(GameObject go) {
+      go.AddOrGet<StoryMovable>();
+    }
+    
     [HarmonyPatch(typeof(FossilSiteConfig_Ice), nameof(FossilSiteConfig_Ice.CreatePrefab))]
     public class Patch_3 {
       private static void Postfix(GameObject __result) {
