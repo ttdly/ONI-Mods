@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using HarmonyLib;
 using KSerialization;
+using PeterHan.PLib.Core;
 using PeterHan.PLib.Options;
 using TUNING;
 
@@ -16,6 +17,7 @@ namespace AutomaticGeyser {
     private Geyser geyser;
     [Serialize] private bool markForAddLogicPorts;
     [Serialize] public float skipEruptTimes;
+    private float elapsedTime;
     private GeyserLogicStatus.InputLogic currentInputLogic = GeyserLogicStatus.InputLogic.UnusedCase;
     private LogicPorts ports;
     private const string OutputId = "GeyserLogicOutput";
@@ -70,6 +72,7 @@ namespace AutomaticGeyser {
       ports = gameObject.AddOrGet<LogicPorts>();
       ports.outputPortInfo = output.ToArray();
       ports.inputPortInfo = input.ToArray();
+      
     }
 
     private void GetGeyserAndState() {
@@ -115,13 +118,16 @@ namespace AutomaticGeyser {
       float offsetTime,
       float times
     ) {
+      PUtil.LogDebug($"Skip time: {GameClock.Instance.GetTime()}");
       if (!addedLogicPorts || ports == null) return;
       if (wishInputLogic != currentInputLogic) return;
       if (!geyserState.IsInsideState(fromSate)) return;
       if (skipEruptTimes + times < 0) return;
+      // if (GameClock.Instance.GetTime() - skipEruptTimes < 5f) return;
       geyser.AlterTime(offsetTime);
       geyserState.GoTo(toState);
       skipEruptTimes += times;
+      // elapsedTime = GameClock.Instance.GetTime();
       ports.SendSignal(SkipTimesOutputId, skipEruptTimes > 0 ? 1 : 0);
     }
 
@@ -209,7 +215,7 @@ namespace AutomaticGeyser {
       Trigger(1488501379);
     }
 
-    protected override void OnCompleteWork(Worker curr_worker) {
+    protected override void OnCompleteWork(WorkerBase curr_worker) {
       base.OnCompleteWork(curr_worker);
       chore = null;
       AddLogicPort();
