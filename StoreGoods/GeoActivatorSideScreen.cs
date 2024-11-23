@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using HarmonyLib;
 using PeterHan.PLib.Core;
 using PeterHan.PLib.Detours;
 using STRINGS;
@@ -131,7 +133,16 @@ namespace StoreGoods {
       return true;
     }
 
-    public static void AddSideScreen(IList<DetailsScreen.SideScreenRef> existing, GameObject parent) {
+    public static void AddSideScreen(IList<DetailsScreen.SideScreenRef> existing, DetailsScreen.SidescreenTab[] tabs) {
+      GameObject parent = null;
+      var tabList = tabs.ToList();
+      foreach (var sidescreenTab in tabList) {
+        if (sidescreenTab.type == DetailsScreen.SidescreenTabTypes.Config) 
+          parent = sidescreenTab.bodyInstance;
+      }
+      if (parent == null) {
+        PUtil.LogError("Failed finding side screen ref");
+      }
       var found = false;
       foreach (var ssRef in existing)
         if (ssRef.screenPrefab is ArtableSelectionSideScreen sideScreen) {
@@ -147,7 +158,7 @@ namespace StoreGoods {
           existing.Insert(0, newScreen);
           break;
         }
-
+      
       if (!found)
         PUtil.LogWarning("Unable to find side screen!");
     }
