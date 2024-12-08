@@ -292,6 +292,10 @@ Global
 		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Release|Mergedown.Build.0 = Release|Mergedown
 		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Release|Vanilla.ActiveCfg = Release|Vanilla
 		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Release|Vanilla.Build.0 = Release|Vanilla
+		{1AB73741-CFBD-42D9-A997-29102225795F}.Debug|Mergedown.ActiveCfg = Debug|Mergedown
+		{1AB73741-CFBD-42D9-A997-29102225795F}.Debug|Mergedown.Build.0 = Debug|Mergedown
+		{1AB73741-CFBD-42D9-A997-29102225795F}.Release|Mergedown.ActiveCfg = Release|Mergedown
+		{1AB73741-CFBD-42D9-A997-29102225795F}.Release|Mergedown.Build.0 = Release|Mergedown
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -316,8 +320,11 @@ Global
 		{D20A4852-009F-4FC7-A853-2D150F2D7AD3} = {6C166698-42A6-4AFD-9F4C-CA6C20F55887}
 		{B231A0A6-8889-41E7-9B5C-14289E09D5BD} = {84877F02-1D2E-4A8E-BC3E-44FA8F6A417F}
 		{940D0B7D-6C28-4D91-A0FD-04A321076D1E} = {84877F02-1D2E-4A8E-BC3E-44FA8F6A417F}
+		{1AB73741-CFBD-42D9-A997-29102225795F} = {84877F02-1D2E-4A8E-BC3E-44FA8F6A417F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {05AD4341-9C99-4998-8BEC-CFBB218B464B}
 	EndGlobalSection
 EndGlobal
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyntheticEvolution", "SyntheticEvolution\SyntheticEvolution.csproj", "{1AB73741-CFBD-42D9-A997-29102225795F}"
+EndProject
