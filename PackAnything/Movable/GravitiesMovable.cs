@@ -25,6 +25,7 @@ namespace PackAnything.Movable {
       var targetMethod_noCrossMove_1 = typeof(WarpConduitSenderConfig).GetMethod("DoPostConfigureComplete");
       var targetMethod_noCrossMove_2 = typeof(WarpConduitReceiverConfig).GetMethod("DoPostConfigureComplete");
       var targetMethod_headquarters = typeof(HeadquartersConfig).GetMethod("DoPostConfigureComplete");
+      var targetMethod_expose_headquarters = typeof(ExobaseHeadquartersConfig).GetMethod("DoPostConfigureComplete");
       var postfix_common = AccessTools.Method(typeof(GravitiesMovable), nameof(PostfixCommon)); 
       var postfix_noCrossMove = AccessTools.Method(typeof(GravitiesMovable), nameof(PostfixNoCrossMove));
       var postfix_headquarters = AccessTools.Method(typeof(GravitiesMovable), nameof(PostfixHeadquarters));
@@ -32,6 +33,7 @@ namespace PackAnything.Movable {
       harmony.Patch(targetMethod_noCrossMove_1, postfix: new HarmonyMethod(postfix_noCrossMove));
       harmony.Patch(targetMethod_noCrossMove_2, postfix: new HarmonyMethod(postfix_noCrossMove));
       harmony.Patch(targetMethod_headquarters, postfix: new HarmonyMethod(postfix_headquarters));
+      harmony.Patch(targetMethod_expose_headquarters, postfix: new HarmonyMethod(postfix_headquarters));
     }
 
     public static void PostfixNoCrossMove(GameObject go) {

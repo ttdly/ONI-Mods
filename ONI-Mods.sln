@@ -54,6 +54,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FragmentThermostat", "Fragm
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutomaticGeyser", "AutomaticGeyser\AutomaticGeyser.csproj", "{940D0B7D-6C28-4D91-A0FD-04A321076D1E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyntheticEvolution", "SyntheticEvolution\SyntheticEvolution.csproj", "{1AB73741-CFBD-42D9-A997-29102225795F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -292,10 +294,18 @@ Global
 		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Release|Mergedown.Build.0 = Release|Mergedown
 		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Release|Vanilla.ActiveCfg = Release|Vanilla
 		{940D0B7D-6C28-4D91-A0FD-04A321076D1E}.Release|Vanilla.Build.0 = Release|Vanilla
+		{1AB73741-CFBD-42D9-A997-29102225795F}.Debug|Any CPU.ActiveCfg = Debug|Vanilla
+		{1AB73741-CFBD-42D9-A997-29102225795F}.Debug|Any CPU.Build.0 = Debug|Vanilla
 		{1AB73741-CFBD-42D9-A997-29102225795F}.Debug|Mergedown.ActiveCfg = Debug|Mergedown
 		{1AB73741-CFBD-42D9-A997-29102225795F}.Debug|Mergedown.Build.0 = Debug|Mergedown
+		{1AB73741-CFBD-42D9-A997-29102225795F}.Debug|Vanilla.ActiveCfg = Debug|Vanilla
+		{1AB73741-CFBD-42D9-A997-29102225795F}.Debug|Vanilla.Build.0 = Debug|Vanilla
+		{1AB73741-CFBD-42D9-A997-29102225795F}.Release|Any CPU.ActiveCfg = Release|Vanilla
+		{1AB73741-CFBD-42D9-A997-29102225795F}.Release|Any CPU.Build.0 = Release|Vanilla
 		{1AB73741-CFBD-42D9-A997-29102225795F}.Release|Mergedown.ActiveCfg = Release|Mergedown
 		{1AB73741-CFBD-42D9-A997-29102225795F}.Release|Mergedown.Build.0 = Release|Mergedown
+		{1AB73741-CFBD-42D9-A997-29102225795F}.Release|Vanilla.ActiveCfg = Release|Vanilla
+		{1AB73741-CFBD-42D9-A997-29102225795F}.Release|Vanilla.Build.0 = Release|Vanilla
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -326,5 +336,3 @@ Global
 		SolutionGuid = {05AD4341-9C99-4998-8BEC-CFBB218B464B}
 	EndGlobalSection
 EndGlobal
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyntheticEvolution", "SyntheticEvolution\SyntheticEvolution.csproj", "{1AB73741-CFBD-42D9-A997-29102225795F}"
-EndProject

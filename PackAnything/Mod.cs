@@ -29,7 +29,7 @@ namespace PackAnything {
   public class PatchBuildings {
     public static void Prefix() {
       GravitiesMovable.PatchBuildings(Mod.HarmonyInstance);
-      ActivateMovable.PatchBuildings(Mod.HarmonyInstance);
+      // ActivateMovable.PatchBuildings(Mod.HarmonyInstance);
       CommonMovable.PatchBuildings(Mod.HarmonyInstance);
       LonelyMinionMovable.PatchBuildings(Mod.HarmonyInstance);
       StoryMovable.PatchBuildings(Mod.HarmonyInstance);
