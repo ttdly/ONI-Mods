@@ -16,7 +16,6 @@
     <PropertyGroup>
       <ModInfoFile>$(IntermediateOutputPath)\mod_info.yaml</ModInfoFile>
       <ModInfoFileContent>
-supportedContent: $(SupportedContent)
 minimumSupportedBuild: $(LastWorkingBuild)
 version: $(FileVersion)
 APIVersion: $(APIVersion)

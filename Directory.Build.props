@@ -48,7 +48,6 @@
     <Authors>tTdly</Authors>
     <Copyright>Copyright ©tTdly2023</Copyright>
     <TargetFramework>net471</TargetFramework>
-    <SupportedContent>VANILLA_ID,EXPANSION1_ID</SupportedContent>
     <LastWorkingBuild>0</LastWorkingBuild>
     <DistributeMod>true</DistributeMod>
     <ArchivedVersionPath></ArchivedVersionPath>

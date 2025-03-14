@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
 using PeterHan.PLib.Core;
@@ -75,7 +76,12 @@ namespace PackAnything.Movable {
 
     #region 补丁
 
-    [HarmonyPatch(typeof(GeyserGenericConfig), nameof(GeyserGenericConfig.CreateGeyser))]
+    [HarmonyPatch(typeof(GeyserGenericConfig))]
+    [HarmonyPatch(nameof(GeyserGenericConfig.CreateGeyser))]
+    [HarmonyPatch(new Type[] {
+      typeof(string), typeof(string), typeof(int), typeof(int), typeof(string), typeof(string), 
+      typeof(HashedString), typeof(float), typeof(string[]), typeof(string[])
+    })]
     private class GeyserGenericConfig_Patch {
       public static void Postfix(GameObject __result) {
         __result.AddOrGet<GeyserMovable>();
