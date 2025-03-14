@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AssemblyTitle>Space Store 太空商店</AssemblyTitle>
-    <FileVersion>1.0.6</FileVersion>
+    <FileVersion>1.0.7</FileVersion>
     <RootNamespace>SpaceStore</RootNamespace>
     <Description>Space Store</Description>
-    <AssemblyVersion>1.0.6</AssemblyVersion>
-    <LastWorkingBuild>596100</LastWorkingBuild>
+    <AssemblyVersion>1.0.7</AssemblyVersion>
+    <LastWorkingBuild>659901</LastWorkingBuild>
     <Platforms>Vanilla;Mergedown</Platforms>
   </PropertyGroup>
   <ItemGroup>

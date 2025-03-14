@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using HarmonyLib;
 using PeterHan.PLib.UI;
 using SpaceStore.SellButtons;
@@ -31,7 +32,12 @@ namespace SpaceStore {
       }
     }
 
-    [HarmonyPatch(typeof(GeyserGenericConfig), nameof(GeyserGenericConfig.CreateGeyser))]
+    [HarmonyPatch(typeof(GeyserGenericConfig)
+    ,nameof(GeyserGenericConfig.CreateGeyser)
+    ,new []{
+      typeof(string), typeof(string), typeof(int), typeof(int), typeof(string), typeof(string), 
+      typeof(HashedString), typeof(float), typeof(string[]), typeof(string[])
+    })]
     private class GeyserGenericConfig_Patch {
       public static void Postfix(GameObject __result) {
         __result.AddOrGet<EntitySellButton>();
@@ -65,6 +71,13 @@ namespace SpaceStore {
     }
 
     [HarmonyPatch(typeof(EntityTemplates), nameof(EntityTemplates.CreateAndRegisterSeedForPlant))]
+    [HarmonyPatch(new [] {
+      typeof(GameObject), typeof(IHasDlcRestrictions), typeof(SeedProducer.ProductionType), typeof(string), 
+      typeof(string), typeof(string), typeof(KAnimFile), typeof(string), typeof(int), typeof(List<Tag>), 
+      typeof(SingleEntityReceptacle.ReceptacleDirection), typeof(Tag), typeof(int), typeof(string), 
+      typeof(EntityTemplates.CollisionShape), typeof(float), typeof(float), typeof(Recipe.Ingredient[]), 
+      typeof(string), typeof(bool)
+    })]
     public static class EntityTemplates_CreateAndRegisterSeedForPlant_Patch {
       public static void Postfix(GameObject __result) {
         AddSellButton<ElementSellButton>(__result);
