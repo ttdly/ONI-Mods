@@ -19,7 +19,7 @@ namespace TweaksPack.Tweakable {
       }
     }
 
-    protected override void OnCompleteWork(Worker worker) {
+    protected override void OnCompleteWork(WorkerBase worker) {
       base.OnCompleteWork(worker);
       isTweaked = true;
       ToogleTweak();

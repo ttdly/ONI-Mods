@@ -9,7 +9,7 @@ namespace LuckyChallenge {
     public string anim = "idle_1";
     public GiftType type;
     private Chore chore;
-    private Worker currWorker;
+    private WorkerBase currWorkerBase;
     private bool isMarkForSurvey;
     private int workerCell;
 
@@ -35,16 +35,16 @@ namespace LuckyChallenge {
       gameObject.GetComponent<KBatchedAnimController>().Play(anim);
     }
 
-    protected override void OnStartWork(Worker worker) {
+    protected override void OnStartWork(WorkerBase worker) {
       base.OnStartWork(worker);
       progressBar.barColor = new Color(0.5f, 1f, 0.5f, 1f);
     }
 
-    protected override void OnAbortWork(Worker worker) {
+    protected override void OnAbortWork(WorkerBase worker) {
       base.OnAbortWork(worker);
     }
 
-    protected override void OnCompleteWork(Worker worker) {
+    protected override void OnCompleteWork(WorkerBase worker) {
       base.OnCompleteWork(worker);
       God.OpenTheGift(type, Grid.PosToCell(gameObject), count, this.worker);
       if (DetailsScreen.Instance != null && DetailsScreen.Instance.CompareTargetWith(gameObject))
@@ -82,7 +82,7 @@ namespace LuckyChallenge {
       chore = new WorkChore<Gift>(Db.Get().ChoreTypes.Build, this, only_when_operational: false);
     }
 
-    public void CreateTemplate(Worker worker) {
+    public void CreateTemplate(WorkerBase worker) {
       var dic = "hq";
       var template = TemplateCache.GetTemplate(dic);
       if (template == null || template.cells == null) return;
@@ -99,7 +99,7 @@ namespace LuckyChallenge {
       workerCell = centerCell;
     }
 
-    public void Complete(Worker worker) {
+    public void Complete(WorkerBase worker) {
       worker.transform.SetPosition(Grid.CellToPosCBC(workerCell, Grid.SceneLayer.Move));
     }
   }

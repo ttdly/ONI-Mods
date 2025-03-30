@@ -3,7 +3,7 @@
 namespace TweaksPack.Tweakable {
   [SerializationConfig(MemberSerialization.OptIn)]
   public class GeyserTweakable : BaseTweakable {
-    protected override void OnCompleteWork(Worker worker) {
+    protected override void OnCompleteWork(WorkerBase worker) {
       base.OnCompleteWork(worker);
       ShowGeyserChangeDialog();
     }

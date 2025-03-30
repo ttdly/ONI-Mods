@@ -11,7 +11,7 @@ namespace Market.ItemSpwan {
     }
 
     public GameObject CreatePrefab() {
-      return EntityTemplates.CreatePlacedEntity(ID, ITEMS.CARGO_CAPSULE.NAME, "", 1f,
+      return EntityTemplates.CreatePlacedEntity(ID, STRINGS.ITEMS.CARGO_CAPSULE.NAME, "", 1f,
         Assets.GetAnim("hardplastic_kanim"), "idle3", Grid.SceneLayer.Front, 1, 1, DECOR.BONUS.TIER4);
     }
 

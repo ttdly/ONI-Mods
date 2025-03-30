@@ -26,17 +26,17 @@ namespace TweaksPack.Tweakable {
       }
     }
 
-    protected override void OnStopWork(Worker worker) {
+    protected override void OnStopWork(WorkerBase worker) {
       base.OnStopWork(worker);
       DestroyWork();
     }
 
-    protected override void OnAbortWork(Worker worker) {
+    protected override void OnAbortWork(WorkerBase worker) {
       base.OnAbortWork(worker);
       DestroyWork();
     }
 
-    protected override void OnCompleteWork(Worker worker) {
+    protected override void OnCompleteWork(WorkerBase worker) {
       base.OnCompleteWork(worker);
       DestroyWork();
     }

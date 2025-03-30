@@ -11,7 +11,7 @@ namespace LuckyChallenge {
   }
 
   public class God {
-    public static void OpenTheGift(GiftType type, int cell = 0, int num = 0, Worker worker = null) {
+    public static void OpenTheGift(GiftType type, int cell = 0, int num = 0, WorkerBase worker = null) {
       switch (type) {
         case GiftType.Normal:
           RandomInAllElement(cell, num);
@@ -22,7 +22,7 @@ namespace LuckyChallenge {
       }
     }
 
-    public static void RandomRoom(int cell, Worker worker) {
+    public static void RandomRoom(int cell, WorkerBase worker) {
       var dic = "hq";
       var template = TemplateCache.GetTemplate(dic);
       if (template == null || template.cells == null) return;
@@ -38,7 +38,7 @@ namespace LuckyChallenge {
       TemplateLoader.Stamp(template, Grid.CellToXY(centerCell), () => TransWorker(worker, cell));
     }
 
-    public static void TransWorker(Worker worker, int cell) {
+    public static void TransWorker(WorkerBase worker, int cell) {
       worker.transform.SetPosition(Grid.CellToPosCBC(cell, Grid.SceneLayer.Move));
     }
 

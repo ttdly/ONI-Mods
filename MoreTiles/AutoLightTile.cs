@@ -8,12 +8,12 @@ namespace MoreTiles {
 
     [MyCmpReq] public readonly Operational operational;
 
-    private readonly HashSet<Worker> workers = new HashSet<Worker>();
+    private readonly HashSet<WorkerBase> workers = new HashSet<WorkerBase>();
     private bool animStatues;
     private IEnergyConsumer energy;
     private Extents pickupableExtents;
     private HandleVector<int>.Handle pickupablesChangedEntry;
-    private Worker targetWorker;
+    private WorkerBase targetWorkerBase;
 
     public void Sim1000ms(float dt) {
       RefreshLight();
@@ -42,25 +42,25 @@ namespace MoreTiles {
     }
 
     private void OnPickupablesChanged(object data) {
-      if (targetWorker != null) return;
+      if (targetWorkerBase != null) return;
       var pickupable = data as Pickupable;
       if (pickupable == null) return;
       if (!pickupable.KPrefabID.HasTag(GameTags.DupeBrain)) return;
-      var worker = pickupable.gameObject.GetComponent<Worker>();
+      var worker = pickupable.gameObject.GetComponent<WorkerBase>();
       if (worker != null) workers.Add(worker);
       RefreshLight();
     }
 
     private bool CanLight() {
-      if (targetWorker == null) return false;
+      if (targetWorkerBase == null) return false;
       if (!energy.IsConnected || !energy.IsPowered) return false;
-      if (targetWorker.state == Worker.State.Working) return true;
-      targetWorker = null;
+      if (targetWorkerBase.GetState() == WorkerBase.State.Working) return true;
+      targetWorkerBase = null;
       return false;
     }
 
     private void RefreshLight() {
-      if (workers.Count > 0 || targetWorker != null) SelectTargetWorker();
+      if (workers.Count > 0 || targetWorkerBase != null) SelectTargetWorkerBase();
       var canlight = CanLight();
       if (operational.IsActive != canlight) operational.SetActive(canlight);
       if (light2D.enabled != canlight) light2D.enabled = canlight;
@@ -71,10 +71,10 @@ namespace MoreTiles {
       }
     }
 
-    private void SelectTargetWorker() {
+    private void SelectTargetWorkerBase() {
       foreach (var worker in workers)
-        if (worker.state == Worker.State.Working) {
-          targetWorker = worker;
+        if (worker.GetState() == WorkerBase.State.Working) {
+          targetWorkerBase = worker;
           workers.Clear();
           break;
         }

@@ -14,7 +14,7 @@ namespace PipeGeyser {
             if (close || storage == null) return;
             
             if (ElementLoader.FindElementByHash(outputElement.elementHash).IsLiquid) {
-                PUtil.LogDebug("执行液体");
+                // PUtil.LogDebug("执行液体");
                 var result = storage.AddLiquid(
                     outputElement.elementHash, 
                     outputElement.massGenerationRate, 
