@@ -9,9 +9,19 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Application: Oxygen Not IncludedPOT Version: 2.0\n"
-"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"Application: Oxygen Not IncludedPOT Version: 2.0\n"
+"X-Generator: Poedit 3.5\n"
+
+#. PackAnything.ModString.INFO.DESC
+msgctxt "PackAnything.ModString.INFO.DESC"
+msgid "Now more items in fixed positions can be moved!"
+msgstr "现在更多固定位置的物品可以被移动了！"
+
+#. PackAnything.ModString.INFO.NAME
+msgctxt "PackAnything.ModString.INFO.NAME"
+msgid "Movable Features"
+msgstr "位移信标 [Movable Features]"
 
 #. PackAnything.ModString.Options.GENERATE_UNOBTANIUM
 msgctxt "PackAnything.ModString.Options.GENERATE_UNOBTANIUM"
@@ -31,7 +41,7 @@ msgstr "稳定模式"
 #. PackAnything.ModString.Options.STABLE_MODE_DESC
 msgctxt "PackAnything.ModString.Options.STABLE_MODE_DESC"
 msgid "If enabled, the save file needs to be reloaded after moving items."
-msgstr "如果启用，移动物品之后需要重新加载存档"
+msgstr "如果启用，移动物品之后需要重新加载存档。"
 
 #. PackAnything.ModString.Options.TOGGLE_GEYSER_NUM
 msgctxt "PackAnything.ModString.Options.TOGGLE_GEYSER_NUM"

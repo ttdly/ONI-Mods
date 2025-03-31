@@ -1,4 +1,6 @@
-﻿using HarmonyLib;
+﻿using System;
+using System.Linq;
+using HarmonyLib;
 using KMod;
 using PackAnything.Movable;
 using PackAnything.Movable.Stories;
@@ -6,6 +8,7 @@ using PeterHan.PLib.AVC;
 using PeterHan.PLib.Core;
 using PeterHan.PLib.Database;
 using PeterHan.PLib.Options;
+using UnityEngine;
 
 namespace PackAnything {
   public class Mod : UserMod2 {
@@ -20,8 +23,21 @@ namespace PackAnything {
       LocString.CreateLocStringKeys(typeof(ModString), "");
 #if DEBUG
       ModUtil.RegisterForTranslation(typeof(ModString.Options));
+      ModUtil.RegisterForTranslation(typeof(ModString.INFO));
 #endif
       new POptions().RegisterOptions(this, typeof(Options));
+    }
+  }
+
+  [HarmonyPatch(typeof(ModsScreen), "BuildDisplay")]
+  public class ModsScreenBuildDisplayPatch {
+    public static void Postfix() {
+      for (var index = 0; index != Global.Instance.modManager.mods.Count; ++index) {
+        var mod = Global.Instance.modManager.mods[index];
+        if (mod.staticID != "CalYu.PackAnything") continue;
+        if (Strings.TryGet(mod.title, out var result1))
+          mod.title = result1;
+      }
     }
   }
 

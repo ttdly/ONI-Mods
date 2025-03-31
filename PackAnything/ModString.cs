@@ -1,5 +1,9 @@
 ﻿namespace PackAnything {
   public class ModString {
+    public class INFO {
+      public static LocString NAME = "Movable Features";
+      public static LocString DESC = "Now more items in fixed positions can be moved!";
+    }
     public class Options {
       public static LocString GENERATE_UNOBTANIUM = "Generate Unobtanium";
       public static LocString GENERATE_UNOBTANIUM_DESC = "Whether or not does moving a geyser create Unobtanium.";

@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <AssemblyTitle>Movable Features 位移信标</AssemblyTitle>
-    <FileVersion>2.1.14</FileVersion>
+    <AssemblyTitle>STRINGS.CAL.MOD.INFO.NAME</AssemblyTitle>
+    <FileVersion>2.1.16</FileVersion>
     <RootNamespace>PackAnything</RootNamespace>
-    <Description>Move something that can't move.</Description>
-    <AssemblyVersion>2.1.14</AssemblyVersion>
+    <Description>STRINGS.CAL.MOD.INFO.DESC</Description>
+    <AssemblyVersion>2.1.16</AssemblyVersion>
     <LastWorkingBuild>659901</LastWorkingBuild>
     <Platforms>Vanilla;Mergedown</Platforms>
   </PropertyGroup>

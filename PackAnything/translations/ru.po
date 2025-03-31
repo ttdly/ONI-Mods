@@ -10,7 +10,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Application: Oxygen Not IncludedPOT Version: 2.0\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.5\n"
+
+#. PackAnything.ModString.INFO.DESC
+msgctxt "PackAnything.ModString.INFO.DESC"
+msgid "Now more items in fixed positions can be moved!"
+msgstr "Позволяет перемещать некоторые строения и гейзеры в желаемое место."
+
+#. PackAnything.ModString.INFO.NAME
+msgctxt "PackAnything.ModString.INFO.NAME"
+msgid "Movable Features"
+msgstr "Перемещение объектов [Movable Features]"
 
 #. PackAnything.ModString.Options.GENERATE_UNOBTANIUM
 msgctxt "PackAnything.ModString.Options.GENERATE_UNOBTANIUM"
@@ -30,7 +40,9 @@ msgstr "Стабильный режим"
 #. PackAnything.ModString.Options.STABLE_MODE_DESC
 msgctxt "PackAnything.ModString.Options.STABLE_MODE_DESC"
 msgid "If enabled, the save file needs to be reloaded after moving items."
-msgstr "Если включено, то файл сохранения необходимо перезагрузить после перемещения предметов."
+msgstr ""
+"Если включено, то файл сохранения необходимо перезагрузить после перемещения "
+"предметов."
 
 #. PackAnything.ModString.Options.TOGGLE_GEYSER_NUM
 msgctxt "PackAnything.ModString.Options.TOGGLE_GEYSER_NUM"
@@ -43,8 +55,12 @@ msgid "When moving a geyser, do not change its attributes."
 msgstr "Перемещая гейзер, не изменять его атрибуты."
 
 #~ msgctxt "PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.DESC"
-#~ msgid "Record the information of an object, activate this beacon, and the recorded object will be moved to this location."
-#~ msgstr "Запишите информацию об объекте, активируйте этот маяк, и записанный объект будет перемещён в это место."
+#~ msgid ""
+#~ "Record the information of an object, activate this beacon, and the "
+#~ "recorded object will be moved to this location."
+#~ msgstr ""
+#~ "Запишите информацию об объекте, активируйте этот маяк, и записанный "
+#~ "объект будет перемещён в это место."
 
 #~ msgctxt "PackAnything.PackAnythingString.MISC.DISPLACEMENT_BEACON.NAME"
 #~ msgid "Displacement Beacon"
@@ -54,11 +70,13 @@ msgstr "Перемещая гейзер, не изменять его атриб
 #~ msgid "Move It"
 #~ msgstr "Переместить"
 
-#~ msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TOOL_TIP"
+#~ msgctxt ""
+#~ "PackAnything.PackAnythingString.UI.SIDE_SCREEN.APPLY_BUTTON_TOOL_TIP"
 #~ msgid "Move this object to a specific location"
 #~ msgstr "Переместить этот объект в определённое место"
 
-#~ msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.CANCEL_BUTTON_TOOL_TIP"
+#~ msgctxt ""
+#~ "PackAnything.PackAnythingString.UI.SIDE_SCREEN.CANCEL_BUTTON_TOOL_TIP"
 #~ msgid "Cancel survey for this item."
 #~ msgstr "Отменить обследование этого объекта."
 
@@ -67,7 +85,9 @@ msgstr "Перемещая гейзер, не изменять его атриб
 #~ msgstr "Список обследованных объектов"
 
 #~ msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP"
-#~ msgid "There is no object being surveyed, or alternatively, there is an object in motion"
+#~ msgid ""
+#~ "There is no object being surveyed, or alternatively, there is an object "
+#~ "in motion"
 #~ msgstr "Объект обследования отсутствует или находится в движении"
 
 #~ msgctxt "PackAnything.PackAnythingString.UI.SIDE_SCREEN.TOOL_TIP_ELEMENT"

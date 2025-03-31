@@ -9,6 +9,7 @@ namespace PackAnything {
     public class GeneratedBuildings_LoadGeneratedBuildings_Patch {
       public static void Prefix() {
         LocString.CreateLocStringKeys(typeof(ModString.Options));
+        LocString.CreateLocStringKeys(typeof(ModString.INFO), "STRINGS.CAL.MOD.");
       }
     }
 

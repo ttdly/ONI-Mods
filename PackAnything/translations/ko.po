@@ -1,45 +1,55 @@
 msgid ""
 msgstr ""
-"Application: Oxygen Not Included"
-"POT Version: 2.0"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Nubula\n"
+"Language-Team: \n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Application: Oxygen Not IncludedPOT Version: 2.0Language: ko\n"
+"X-Generator: Poedit 3.5\n"
 
 #. PackAnything.ModString.INFO.DESC
 msgctxt "PackAnything.ModString.INFO.DESC"
 msgid "Now more items in fixed positions can be moved!"
 msgstr ""
+"간헐천과 구조물들이 이상한 위치에 나오거나 사용하기 어려운 위치에 나와서 불만이 있으셨습니까?\n"
+"이 모드를 사용하면 마우스 두번만 눌러서 행성을 넘나들며 원하는 위치로 옮길 수 있습니다! 더 이상 스트레스 받지 마세요!"
 
 #. PackAnything.ModString.INFO.NAME
 msgctxt "PackAnything.ModString.INFO.NAME"
 msgid "Movable Features"
-msgstr ""
+msgstr "자유로운 구조물 이동 도구 [Movable Features]"
 
 #. PackAnything.ModString.Options.GENERATE_UNOBTANIUM
 msgctxt "PackAnything.ModString.Options.GENERATE_UNOBTANIUM"
 msgid "Generate Unobtanium"
-msgstr ""
+msgstr "뉴트로늄 생성"
 
 #. PackAnything.ModString.Options.GENERATE_UNOBTANIUM_DESC
 msgctxt "PackAnything.ModString.Options.GENERATE_UNOBTANIUM_DESC"
 msgid "Whether or not does moving a geyser create Unobtanium."
-msgstr ""
+msgstr "간헐천을 움직일 때 뉴트로늄이 간헐천 아래 생성됩니다."
 
 #. PackAnything.ModString.Options.STABLE_MODE
 msgctxt "PackAnything.ModString.Options.STABLE_MODE"
 msgid "Stable Mode"
-msgstr ""
+msgstr "안전 모드"
 
 #. PackAnything.ModString.Options.STABLE_MODE_DESC
 msgctxt "PackAnything.ModString.Options.STABLE_MODE_DESC"
 msgid "If enabled, the save file needs to be reloaded after moving items."
-msgstr ""
+msgstr "활성화 시, 물체를 이동한 후 저장 파일을 다시 불러와야 합니다."
 
 #. PackAnything.ModString.Options.TOGGLE_GEYSER_NUM
 msgctxt "PackAnything.ModString.Options.TOGGLE_GEYSER_NUM"
 msgid "Toggle Geyser Num"
-msgstr ""
+msgstr "간헐천 번호 전환"
 
 #. PackAnything.ModString.Options.TOGGLE_GEYSER_NUM_DESC
 msgctxt "PackAnything.ModString.Options.TOGGLE_GEYSER_NUM_DESC"
 msgid "When moving a geyser, do not change its attributes."
-msgstr ""
-
+msgstr "간헐천을 옮기는 중에 속성을 변경하지 않습니다."
