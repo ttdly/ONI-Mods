@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyTitle>Geyser Expand Machine</AssemblyTitle>
+    <FileVersion>1.0.0</FileVersion>
+    <RootNamespace>GeyserExpandMachine</RootNamespace>
+    <Description>GeyserExpandMachine</Description>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <LastWorkingBuild>659901</LastWorkingBuild>
+    <Platforms>Vanilla;Mergedown</Platforms>
+  </PropertyGroup>
+</Project>
