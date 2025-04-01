@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -22,7 +23,12 @@ namespace AutomaticGeyser {
     }
   }
   
-  [HarmonyPatch(typeof(GeyserGenericConfig), nameof(GeyserGenericConfig.CreateGeyser))]
+  [HarmonyPatch(typeof(GeyserGenericConfig))]
+  [HarmonyPatch(nameof(GeyserGenericConfig.CreateGeyser))]
+  [HarmonyPatch(new Type[] {
+    typeof(string), typeof(string), typeof(int), typeof(int), typeof(string), typeof(string), 
+    typeof(HashedString), typeof(float), typeof(string[]), typeof(string[])
+  })]
   public class GeyserGenericConfig_Patch {
     public static void Postfix(GameObject __result) {
       __result.AddOrGet<GeyserLogic>();

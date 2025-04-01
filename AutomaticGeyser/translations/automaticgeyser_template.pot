@@ -1,0 +1,110 @@
+msgid ""
+msgstr ""
+"Application: Oxygen Not Included"
+"POT Version: 2.0"
+
+#. AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.ALWAYSDORMANT.NAME
+msgctxt "AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.ALWAYSDORMANT.NAME"
+msgid "Permanent Dormancy"
+msgstr ""
+
+#. AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.ALWAYSDORMANT.TOOLTIP
+msgctxt "AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.ALWAYSDORMANT.TOOLTIP"
+msgid "Automation enabled, this geyser will remain dormant indefinitely."
+msgstr ""
+
+#. AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.SKIPDORMANTSTATUSITEM.NAME
+msgctxt "AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.SKIPDORMANTSTATUSITEM.NAME"
+msgid "Skip Dormant/Idle Mode (Available Skips: {0})"
+msgstr ""
+
+#. AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.SKIPDORMANTSTATUSITEM.TOOLTIP
+msgctxt "AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.SKIPDORMANTSTATUSITEM.TOOLTIP"
+msgid "Automation enabled, this geyser will not go dormant/idle."
+msgstr ""
+
+#. AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.SKIPERUPTSTATUSITEM.NAME
+msgctxt "AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.SKIPERUPTSTATUSITEM.NAME"
+msgid "Skip Eruption Mode (Total Skips: {0})"
+msgstr ""
+
+#. AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.SKIPERUPTSTATUSITEM.TOOLTIP
+msgctxt "AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.SKIPERUPTSTATUSITEM.TOOLTIP"
+msgid "Automation enabled, this geyser will not erupt."
+msgstr ""
+
+#. AutomaticGeyser.ModStrings.UI.Logic.GroupInput_active
+msgctxt "AutomaticGeyser.ModStrings.UI.Logic.GroupInput_active"
+msgid "Bitwise description, 1 is green 0 is red\nSignal input 1000: Skip Eruption Mode\nSignal input 0100: Skip Dormant/Idle Mode\nSignal input 0010: Permanent Dormancy Mode"
+msgstr ""
+
+#. AutomaticGeyser.ModStrings.UI.Logic.GroupInput_desc
+msgctxt "AutomaticGeyser.ModStrings.UI.Logic.GroupInput_desc"
+msgid "Input to control geyser behavior"
+msgstr ""
+
+#. AutomaticGeyser.ModStrings.UI.Logic.GroupOutput_active
+msgctxt "AutomaticGeyser.ModStrings.UI.Logic.GroupOutput_active"
+msgid "Bitwise description, 1 is green 0 is red\nSignal output 0000: Dormant/Idle\nSignal output 1000: Rising pressure\nSignal output 0100: Erupting\nSignal output 0010: Eruption Ended\nSignal output 0001: Overpressure "
+msgstr ""
+
+#. AutomaticGeyser.ModStrings.UI.Logic.GroupOutput_desc
+msgctxt "AutomaticGeyser.ModStrings.UI.Logic.GroupOutput_desc"
+msgid "Output geyser status"
+msgstr ""
+
+#. AutomaticGeyser.ModStrings.UI.Logic.Output_active
+msgctxt "AutomaticGeyser.ModStrings.UI.Logic.Output_active"
+msgid "At least one skip of the dormant/idle state is possible"
+msgstr ""
+
+#. AutomaticGeyser.ModStrings.UI.Logic.Output_desc
+msgctxt "AutomaticGeyser.ModStrings.UI.Logic.Output_desc"
+msgid "Whether skipping the dormant/idle state is possible"
+msgstr ""
+
+#. AutomaticGeyser.ModStrings.UI.Logic.Output_inactive
+msgctxt "AutomaticGeyser.ModStrings.UI.Logic.Output_inactive"
+msgid "Skipping the dormant/idle state is not possible"
+msgstr ""
+
+#. AutomaticGeyser.ModStrings.UI.SideButton.CancelAddLogic
+msgctxt "AutomaticGeyser.ModStrings.UI.SideButton.CancelAddLogic"
+msgid "Cancel Logic Port Addition"
+msgstr ""
+
+#. AutomaticGeyser.ModStrings.UI.SideButton.CancelAddLogic_Tip
+msgctxt "AutomaticGeyser.ModStrings.UI.SideButton.CancelAddLogic_Tip"
+msgid "Cancel the task of adding a port."
+msgstr ""
+
+#. AutomaticGeyser.ModStrings.UI.SideButton.LogicAdded
+msgctxt "AutomaticGeyser.ModStrings.UI.SideButton.LogicAdded"
+msgid "Logic Port Added"
+msgstr ""
+
+#. AutomaticGeyser.ModStrings.UI.SideButton.LogicAdded_Tip
+msgctxt "AutomaticGeyser.ModStrings.UI.SideButton.LogicAdded_Tip"
+msgid "No further action required."
+msgstr ""
+
+#. AutomaticGeyser.ModStrings.UI.SideButton.MarkForAddLogic
+msgctxt "AutomaticGeyser.ModStrings.UI.SideButton.MarkForAddLogic"
+msgid "Add Logic Port"
+msgstr ""
+
+#. AutomaticGeyser.ModStrings.UI.SideButton.MarkForAddLogic_Tip
+msgctxt "AutomaticGeyser.ModStrings.UI.SideButton.MarkForAddLogic_Tip"
+msgid "After adding an logic port, the geyser can be controlled via logic ribbon."
+msgstr ""
+
+#. AutomaticGeyser.ModStrings.UI.SideButton.NeedAnalyze
+msgctxt "AutomaticGeyser.ModStrings.UI.SideButton.NeedAnalyze"
+msgid "Need Analysis"
+msgstr ""
+
+#. AutomaticGeyser.ModStrings.UI.SideButton.NeedAnalyze_Tip
+msgctxt "AutomaticGeyser.ModStrings.UI.SideButton.NeedAnalyze_Tip"
+msgid "This geyser can only be automated after it has been analyzed."
+msgstr ""
+

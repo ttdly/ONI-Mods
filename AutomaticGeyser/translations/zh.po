@@ -1,0 +1,144 @@
+msgid ""
+msgstr ""
+"Application: Oxygen Not IncludedPOT Version: 2.0\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#. AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.ALWAYSDORMANT.NAME
+msgctxt "AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.ALWAYSDORMANT.NAME"
+msgid "Permanent Dormancy"
+msgstr "永久休眠"
+
+#. AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.ALWAYSDORMANT.TOOLTIP
+msgctxt "AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.ALWAYSDORMANT.TOOLTIP"
+msgid "Automation enabled, this geyser will remain dormant indefinitely."
+msgstr "自动化启用，该间歇泉会一直处于休眠状态"
+
+#. AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.SKIPDORMANTSTATUSITEM.NAME
+msgctxt ""
+"AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.SKIPDORMANTSTATUSITEM.NAME"
+msgid "Skip Dormant/Idle Mode (Available Skips: {0})"
+msgstr "跳过休眠/闲置模式（可用跳过次数：{0}）"
+
+#. AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.SKIPDORMANTSTATUSITEM.TOOLTIP
+msgctxt ""
+"AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.SKIPDORMANTSTATUSITEM.TOOLTIP"
+msgid "Automation enabled, this geyser will not go dormant/idle."
+msgstr "自动化启用，该间歇泉不会再休眠/闲置"
+
+#. AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.SKIPERUPTSTATUSITEM.NAME
+msgctxt ""
+"AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.SKIPERUPTSTATUSITEM.NAME"
+msgid "Skip Eruption Mode (Total Skips: {0})"
+msgstr "跳过喷发模式（累计跳过次数：{0}）"
+
+#. AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.SKIPERUPTSTATUSITEM.TOOLTIP
+msgctxt ""
+"AutomaticGeyser.ModStrings.GEYSER.STATUSITEMS.SKIPERUPTSTATUSITEM.TOOLTIP"
+msgid "Automation enabled, this geyser will not erupt."
+msgstr "自动化启用，该间歇泉不会再喷发"
+
+#. AutomaticGeyser.ModStrings.UI.Logic.GroupInput_active
+msgctxt "AutomaticGeyser.ModStrings.UI.Logic.GroupInput_active"
+msgid ""
+"Bitwise description, 1 is green 0 is red\n"
+"Signal input 1000: Skip Eruption Mode\n"
+"Signal input 0100: Skip Dormant/Idle Mode\n"
+"Signal input 0010: Permanent Dormancy Mode"
+msgstr ""
+"按位描述，1 为绿色 0 为红色\n"
+"信号输入 1000：跳过喷发模式\n"
+"信号输入 0100：跳过闲置/休眠模式\n"
+"信号输入 0010：永久休眠模式"
+
+#. AutomaticGeyser.ModStrings.UI.Logic.GroupInput_desc
+msgctxt "AutomaticGeyser.ModStrings.UI.Logic.GroupInput_desc"
+msgid "Input to control geyser behavior"
+msgstr "输入以控制间歇泉行为"
+
+#. AutomaticGeyser.ModStrings.UI.Logic.GroupOutput_active
+msgctxt "AutomaticGeyser.ModStrings.UI.Logic.GroupOutput_active"
+msgid ""
+"Bitwise description, 1 is green 0 is red\n"
+"Signal output 0000: Dormant/Idle\n"
+"Signal output 1000: Rising pressure\n"
+"Signal output 0100: Erupting\n"
+"Signal output 0010: Eruption Ended\n"
+"Signal output 0001: Overpressure "
+msgstr ""
+"按位描述，1 为绿色 0 为红色\n"
+"信号输出 0000：闲置/休眠\n"
+"信号输出 1000：压力上升\n"
+"信号输出 0100：喷发\n"
+"信号输出 0010：喷发结束\n"
+"信号输出 0001：压力过大"
+
+#. AutomaticGeyser.ModStrings.UI.Logic.GroupOutput_desc
+msgctxt "AutomaticGeyser.ModStrings.UI.Logic.GroupOutput_desc"
+msgid "Output geyser status"
+msgstr "输出间歇泉状态"
+
+#. AutomaticGeyser.ModStrings.UI.Logic.Output_active
+msgctxt "AutomaticGeyser.ModStrings.UI.Logic.Output_active"
+msgid "At least one skip of the dormant/idle state is possible"
+msgstr "至少可以跳过一次休眠/闲置状态"
+
+#. AutomaticGeyser.ModStrings.UI.Logic.Output_desc
+msgctxt "AutomaticGeyser.ModStrings.UI.Logic.Output_desc"
+msgid "Whether skipping the dormant/idle state is possible"
+msgstr "是否可以跳过休眠/闲置状态"
+
+#. AutomaticGeyser.ModStrings.UI.Logic.Output_inactive
+msgctxt "AutomaticGeyser.ModStrings.UI.Logic.Output_inactive"
+msgid "Skipping the dormant/idle state is not possible"
+msgstr "无法跳过休眠/闲置状态"
+
+#. AutomaticGeyser.ModStrings.UI.SideButton.CancelAddLogic
+msgctxt "AutomaticGeyser.ModStrings.UI.SideButton.CancelAddLogic"
+msgid "Cancel Logic Port Addition"
+msgstr "取消端口添加"
+
+#. AutomaticGeyser.ModStrings.UI.SideButton.CancelAddLogic_Tip
+msgctxt "AutomaticGeyser.ModStrings.UI.SideButton.CancelAddLogic_Tip"
+msgid "Cancel the task of adding a port."
+msgstr "取消添加端口的任务"
+
+#. AutomaticGeyser.ModStrings.UI.SideButton.LogicAdded
+msgctxt "AutomaticGeyser.ModStrings.UI.SideButton.LogicAdded"
+msgid "Logic Port Added"
+msgstr "自动化端口已添加"
+
+#. AutomaticGeyser.ModStrings.UI.SideButton.LogicAdded_Tip
+msgctxt "AutomaticGeyser.ModStrings.UI.SideButton.LogicAdded_Tip"
+msgid "No further action required."
+msgstr "无需任何操作"
+
+#. AutomaticGeyser.ModStrings.UI.SideButton.MarkForAddLogic
+msgctxt "AutomaticGeyser.ModStrings.UI.SideButton.MarkForAddLogic"
+msgid "Add Logic Port"
+msgstr "添加端口"
+
+#. AutomaticGeyser.ModStrings.UI.SideButton.MarkForAddLogic_Tip
+msgctxt "AutomaticGeyser.ModStrings.UI.SideButton.MarkForAddLogic_Tip"
+msgid ""
+"After adding an logic port, the geyser can be controlled via logic ribbon."
+msgstr "添加自动化端口之后可以通过信号线控制间歇泉的行为"
+
+#. AutomaticGeyser.ModStrings.UI.SideButton.NeedAnalyze
+msgctxt "AutomaticGeyser.ModStrings.UI.SideButton.NeedAnalyze"
+msgid "Need Analysis"
+msgstr "需要分析"
+
+#. AutomaticGeyser.ModStrings.UI.SideButton.NeedAnalyze_Tip
+msgctxt "AutomaticGeyser.ModStrings.UI.SideButton.NeedAnalyze_Tip"
+msgid "This geyser can only be automated after it has been analyzed."
+msgstr "该间歇泉只有在被分析之后才能添加自动化端口"
