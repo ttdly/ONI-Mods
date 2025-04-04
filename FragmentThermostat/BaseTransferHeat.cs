@@ -1,4 +1,5 @@
 ﻿using KSerialization;
+using PeterHan.PLib.Options;
 using STRINGS;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace FragmentThermostat {
 
     protected static float CountHeat(PrimaryElement primaryElement, float targetTemp) {
       return (primaryElement.Temperature - targetTemp) * primaryElement.Element.specificHeatCapacity *
-             primaryElement.Mass;
+             primaryElement.Mass * SingletonOptions<ModOptions>.Instance.HeatMultiply;
     }
 
     public void TransferHeat(float heat) {

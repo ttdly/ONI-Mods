@@ -40,6 +40,11 @@ msgctxt "FragmentThermostat.ModString.UI_FTMOD.Options.MIN_TEMP"
 msgid "Min Temperature"
 msgstr "最低温度"
 
+#. FragmentThermostat.ModString.UI_FTMOD.Options.HEAT_MULTIPLY
+msgctxt "FragmentThermostat.ModString.UI_FTMOD.Options.HEAT_MULTIPLY"
+msgid "Heat Multiply"
+msgstr "产热倍率"
+
 #. FragmentThermostat.ModString.UI_FTMOD.Options.MODE_OPEN
 msgctxt "FragmentThermostat.ModString.UI_FTMOD.Options.MODE_OPEN"
 msgid "Open"
