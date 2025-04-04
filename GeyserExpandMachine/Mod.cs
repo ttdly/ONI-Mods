@@ -9,6 +9,7 @@ namespace GeyserExpandMachine {
       base.OnLoad(harmony);
       PUtil.InitLibrary();
       new PVersionCheck().Register(this, new SteamVersionChecker());
+      ModData.Instance = new ModData();
     }
   }
 }
