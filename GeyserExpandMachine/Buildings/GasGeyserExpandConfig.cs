@@ -3,9 +3,9 @@ using TUNING;
 using UnityEngine;
 
 namespace GeyserExpandMachine.Buildings {
-    public class LiquidGeyserExpandConfig : IBuildingConfig {
-        public const string ID = "LiquidGeyserExpand";
-        private const ConduitType CONDUIT_TYPE = ConduitType.Liquid;
+    public class GasGeyserExpandConfig : IBuildingConfig {
+        public const string ID = "GasGeyserExpand";
+        private const ConduitType CONDUIT_TYPE = ConduitType.Gas;
         public static readonly HashedString OutputRibbonID = new HashedString($"{ID}RibbonOutput");
         public static readonly HashedString OutputPortID = new HashedString($"{ID}Output");
 
@@ -14,18 +14,16 @@ namespace GeyserExpandMachine.Buildings {
             var rawMetals = MATERIALS.RAW_METALS;
             var tieR1 = NOISE_POLLUTION.NOISY.TIER1;
             var tieR0 = BUILDINGS.DECOR.PENALTY.TIER0;
-            var buildingDef = BuildingTemplates.CreateBuildingDef(ID, 2, 1, "logic_not_kanim", 30, 10f, tieR3, rawMetals, 1600f, BuildLocationRule.OnFloor, tieR0, tieR1);
+            var buildingDef = BuildingTemplates.CreateBuildingDef(ID, 2, 1, "logic_filter_kanim", 30, 10f, tieR3, rawMetals, 1600f, BuildLocationRule.OnFloor, tieR0, tieR1);
             buildingDef.SceneLayer = Grid.SceneLayer.BuildingFront;
             buildingDef.OutputConduitType = CONDUIT_TYPE;
             buildingDef.Floodable = false;
-            buildingDef.ViewMode = OverlayModes.LiquidConduits.ID;
+            buildingDef.ViewMode = OverlayModes.GasConduits.ID;
             buildingDef.AudioCategory = "Metal";
-
             buildingDef.AttachmentSlotTag = GameTags.GeyserFeature;
             buildingDef.BuildLocationRule = BuildLocationRule.BuildingAttachPoint;
             buildingDef.UtilityOutputOffset = new CellOffset(1, 0);
             buildingDef.ObjectLayer = ObjectLayer.AttachableBuilding;
-
             buildingDef.LogicOutputPorts = new List<LogicPorts.Port> {
                 LogicPorts.Port.RibbonOutputPort(OutputRibbonID, new CellOffset(0, 0),
                     STRINGS.BUILDINGS.PREFABS.LOGICRIBBONREADER.LOGIC_PORT,

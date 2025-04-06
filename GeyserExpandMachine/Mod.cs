@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using GeyserExpandMachine.Screen;
+using HarmonyLib;
 using KMod;
 using PeterHan.PLib.AVC;
 using PeterHan.PLib.Core;
@@ -9,7 +10,7 @@ namespace GeyserExpandMachine {
       base.OnLoad(harmony);
       PUtil.InitLibrary();
       new PVersionCheck().Register(this, new SteamVersionChecker());
-      ModData.Instance = new ModData();
+      ModAssets.LoadAssets();
     }
   }
 }

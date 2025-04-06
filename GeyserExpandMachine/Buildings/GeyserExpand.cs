@@ -8,7 +8,7 @@ namespace GeyserExpandMachine.Buildings {
         [Serialize]
         public float skipEruptTimes;
         [Serialize]
-        public RunMode runMode = RunMode.SkipDormant;
+        public RunMode runMode = RunMode.Default;
         public static readonly Tag ComponentTag = "GeyserExpand";
         public Storage storage;
         private Geyser geyser;
@@ -26,14 +26,14 @@ namespace GeyserExpandMachine.Buildings {
         
         public enum RunMode {
             SkipErupt = 1,
-            SkipDormant = 2,
-            AlwaysDormant = 3,
+            SkipIdle = 2,
+            Dormant = 3,
             Default = 4
         }
 
         protected override void OnSpawn() {
             base.OnSpawn();
-               
+            
             GetGeyserAndState();
             geyser.gameObject.AddTag(ComponentTag);
             geyserState.master.AddTag(ComponentTag);
@@ -41,24 +41,28 @@ namespace GeyserExpandMachine.Buildings {
             ports = GetComponent<LogicPorts>();
             storage = GetComponent<Storage>();
             ModData.Instance.GeyserExpands.Add(thisCell, this);
-            foreach (var VARIABLE in ModData.Instance.GeyserExpands) {
-                PUtil.LogDebug($"GeyserExpand: {VARIABLE.Key}-{VARIABLE.Value}");
-            }
+            
+            geyser.gameObject.SetActive(false);
+            geyser.gameObject.SetActive(true);
         }
 
         protected override void OnCleanUp() {
             base.OnCleanUp();
+            ModData.Instance.GeyserExpands.Remove(thisCell);
             geyser.gameObject.RemoveTag(ComponentTag);
+            
+            geyser.gameObject.SetActive(false);
+            geyser.gameObject.SetActive(true);
         }
         
         private void GetGeyserAndState() {
+            PUtil.LogDebug($"RunMode: {runMode}");
             if (geyser != null && geyserState != null) return;
             var cell = Grid.PosToCell(this);
             var geyserFeature = Grid.Objects[cell, (int)ObjectLayer.Building];
-            if (!geyserFeature.TryGetComponent(out Geyser geyserComponent)) {
-                var errorMsg = $"未能找到 {geyserFeature} 的间歇泉组件";
-                PUtil.LogError(errorMsg);
-                throw new Exception(errorMsg);
+            var geyserComponent = geyserFeature.GetComponent<Geyser>();
+            if (geyserComponent == null) {
+                PUtil.LogError($"Geyser component not found: {geyserFeature}");
             }
             
             geyser = geyserComponent;
@@ -79,10 +83,12 @@ namespace GeyserExpandMachine.Buildings {
             float offsetTime,
             float times
         ) {
-            PUtil.LogDebug($"Skip time: {GameClock.Instance.GetTime()}");
+            // PUtil.LogDebug($"Skip time: {GameClock.Instance.GetTime()}");
+            // if (ports == null 
+            //     || !geyserState.IsInsideState(fromSate)
+            //     || skipEruptTimes + times < 0) return;
             if (ports == null 
-                || !geyserState.IsInsideState(fromSate)
-                || skipEruptTimes + times < 0) return;
+                || !geyserState.IsInsideState(fromSate)) return;
 
         
             // if (GameClock.Instance.GetTime() - skipEruptTimes < 5f) return;
@@ -95,7 +101,7 @@ namespace GeyserExpandMachine.Buildings {
         }
 
         private bool CheckMode(RunMode targetRunMode) {
-            PUtil.LogDebug($"Checking mode: {targetRunMode}; {runMode}");
+            // PUtil.LogDebug($"Checking mode: {targetRunMode}; {runMode}");
             return runMode == targetRunMode;
         } 
         
@@ -111,7 +117,7 @@ namespace GeyserExpandMachine.Buildings {
 
         public void SkipIdle() {
             GetGeyserAndState();
-            if (!CheckMode(RunMode.SkipDormant)) return;
+            if (!CheckMode(RunMode.SkipIdle)) return;
             SkipStage(
                 geyserState.sm.idle,
                 geyserState.sm.pre_erupt,
@@ -121,7 +127,7 @@ namespace GeyserExpandMachine.Buildings {
 
         public void SkipDormant() {
             GetGeyserAndState();
-            if (!CheckMode(RunMode.SkipDormant)) return;
+            if (!CheckMode(RunMode.SkipIdle)) return;
             SkipStage(
                 geyserState.sm.dormant,
                 geyserState.sm.pre_erupt,
@@ -131,7 +137,7 @@ namespace GeyserExpandMachine.Buildings {
 
         public void AlwaysDormant() {
             GetGeyserAndState();
-            if (!CheckMode(RunMode.AlwaysDormant)) return;
+            if (!CheckMode(RunMode.Dormant)) return;
             SkipStage(
                 geyserState.sm.pre_erupt,
                 geyserState.sm.dormant,

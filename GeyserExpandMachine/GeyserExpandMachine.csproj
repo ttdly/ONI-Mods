@@ -7,5 +7,6 @@
     <AssemblyVersion>1.0.0</AssemblyVersion>
     <LastWorkingBuild>659901</LastWorkingBuild>
     <Platforms>Vanilla;Mergedown</Platforms>
+    <LangVersion>8</LangVersion>
   </PropertyGroup>
 </Project>

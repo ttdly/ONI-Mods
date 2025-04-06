@@ -204,7 +204,7 @@ namespace GeyserExpandMachine.Buildings {
 
         public string GetSliderTooltip(int index) => "克描述";
 
-        public string SliderTitleKey => STRINGS.UI.UISIDESCREENS.VALVESIDESCREEN.TITLE;
+        public string SliderTitleKey => "STRINGS.UI.UISIDESCREENS.VALVESIDESCREEN.TITLE";
         public string SliderUnits => "g";
 
         #endregion
