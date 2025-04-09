@@ -66,6 +66,7 @@ namespace GeyserExpandMachine.Buildings {
             }
             
             geyser = geyserComponent;
+            geyser.gameObject.AddComponent<GeyserLogicController>();
             geyserState = geyserFeature.GetSMI<Geyser.StatesInstance>();
             thisCell = cell;
         }

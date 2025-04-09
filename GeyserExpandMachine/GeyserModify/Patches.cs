@@ -22,63 +22,63 @@ namespace GeyserExpandMachine.GeyserModify {
 
         #region 逻辑端口
 
-                [HarmonyPatch(typeof(Geyser.States), "InitializeStates")]
-        public class GeyserStatesInitializeStatesPatch {
-            private static bool GetGeyserExpandByCell(int cell, out GeyserExpand rtnGeyserExpand) {
-                ModData.Instance.GeyserExpands.TryGetValue(cell, out var geyserExpand);
-                rtnGeyserExpand = geyserExpand;
-// #if DEBUG
-//                 if (geyserExpand == null) {
-//                     PUtil.LogDebug($"没在 {cell} 找到目标组件");
-//                 }
-//                 else {
-//                     PUtil.LogDebug($"Find yet geyserExpand: {geyserExpand}");
-//                 }
-// #endif
-                return geyserExpand != null;
-            }
-                
-            
-            public static void Postfix(Geyser.States __instance) {
-                __instance.pre_erupt.Enter(smi => {
-                    if (!GetGeyserExpandByCell(Grid.PosToCell(smi.master), out var geyserExpand)) return;
-                    geyserExpand.SendLogic(GeyserExpand.OutputLogic.PreErupt);
-                    geyserExpand.AlwaysDormant();
-                });
-      
-                __instance.erupt.Enter(smi => {
-                    if (!GetGeyserExpandByCell(Grid.PosToCell(smi.master), out var geyserExpand)) return;
-                    geyserExpand.SkipErupt();
-                });
-      
-                __instance.post_erupt.Enter(smi => {
-                    if (!GetGeyserExpandByCell(Grid.PosToCell(smi.master), out var geyserExpand)) return;
-                    geyserExpand.SendLogic(GeyserExpand.OutputLogic.PostErupt);
-                });
-      
-                __instance.erupt.erupting.Enter(smi => {
-                    if (!GetGeyserExpandByCell(Grid.PosToCell(smi.master), out var geyserExpand)) return;
-                    geyserExpand.SendLogic(GeyserExpand.OutputLogic.Erupting);
-                });
-      
-                __instance.erupt.overpressure.Enter(smi => {
-                    if (!GetGeyserExpandByCell(Grid.PosToCell(smi.master), out var geyserExpand)) return;
-                    geyserExpand.SendLogic(GeyserExpand.OutputLogic.OverPressure);
-                });
-      
-                __instance.idle.Enter(smi => {
-                    if (!GetGeyserExpandByCell(Grid.PosToCell(smi.master), out var geyserExpand)) return;
-                    geyserExpand.SendLogic(GeyserExpand.OutputLogic.Dormant);
-                    geyserExpand.SkipIdle();
-                });
-
-                __instance.dormant.Enter(smi => {
-                    if (!GetGeyserExpandByCell(Grid.PosToCell(smi.master), out var geyserExpand)) return;
-                    geyserExpand.SendLogic(GeyserExpand.OutputLogic.Dormant);
-                    geyserExpand.SkipDormant();
-                });
-            }
-        }
+//         [HarmonyPatch(typeof(Geyser.States), "InitializeStates")]
+//         public class GeyserStatesInitializeStatesPatch {
+//             private static bool GetGeyserExpandByCell(int cell, out GeyserExpand rtnGeyserExpand) {
+//                 ModData.Instance.GeyserExpands.TryGetValue(cell, out var geyserExpand);
+//                 rtnGeyserExpand = geyserExpand;
+// // #if DEBUG
+// //                 if (geyserExpand == null) {
+// //                     PUtil.LogDebug($"没在 {cell} 找到目标组件");
+// //                 }
+// //                 else {
+// //                     PUtil.LogDebug($"Find yet geyserExpand: {geyserExpand}");
+// //                 }
+// // #endif
+//                 return geyserExpand != null;
+//             }
+//                 
+//             
+//             public static void Postfix(Geyser.States __instance) {
+//                 __instance.pre_erupt.Enter(smi => {
+//                     if (!GetGeyserExpandByCell(Grid.PosToCell(smi.master), out var geyserExpand)) return;
+//                     geyserExpand.SendLogic(GeyserExpand.OutputLogic.PreErupt);
+//                     geyserExpand.AlwaysDormant();
+//                 });
+//       
+//                 __instance.erupt.Enter(smi => {
+//                     if (!GetGeyserExpandByCell(Grid.PosToCell(smi.master), out var geyserExpand)) return;
+//                     geyserExpand.SkipErupt();
+//                 });
+//       
+//                 __instance.post_erupt.Enter(smi => {
+//                     if (!GetGeyserExpandByCell(Grid.PosToCell(smi.master), out var geyserExpand)) return;
+//                     geyserExpand.SendLogic(GeyserExpand.OutputLogic.PostErupt);
+//                 });
+//       
+//                 __instance.erupt.erupting.Enter(smi => {
+//                     if (!GetGeyserExpandByCell(Grid.PosToCell(smi.master), out var geyserExpand)) return;
+//                     geyserExpand.SendLogic(GeyserExpand.OutputLogic.Erupting);
+//                 });
+//       
+//                 __instance.erupt.overpressure.Enter(smi => {
+//                     if (!GetGeyserExpandByCell(Grid.PosToCell(smi.master), out var geyserExpand)) return;
+//                     geyserExpand.SendLogic(GeyserExpand.OutputLogic.OverPressure);
+//                 });
+//       
+//                 __instance.idle.Enter(smi => {
+//                     if (!GetGeyserExpandByCell(Grid.PosToCell(smi.master), out var geyserExpand)) return;
+//                     geyserExpand.SendLogic(GeyserExpand.OutputLogic.Dormant);
+//                     geyserExpand.SkipIdle();
+//                 });
+//
+//                 __instance.dormant.Enter(smi => {
+//                     if (!GetGeyserExpandByCell(Grid.PosToCell(smi.master), out var geyserExpand)) return;
+//                     geyserExpand.SendLogic(GeyserExpand.OutputLogic.Dormant);
+//                     geyserExpand.SkipDormant();
+//                 });
+//             }
+//         }
 
         #endregion
 
