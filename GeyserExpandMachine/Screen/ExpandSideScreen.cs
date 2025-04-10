@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GeyserExpandMachine.Buildings;
+using GeyserExpandMachine.GeyserModify;
 using KSerialization;
 using PeterHan.PLib.Core;
 using PeterHan.PLib.Detours;
@@ -10,21 +11,18 @@ using UnityEngine.UI;
 namespace GeyserExpandMachine.Screen {
     public class ExpandSideScreen : SideScreenContent {
         
-        private GeyserExpand expand;
+        private GeyserLogicExpand expand;
         public Toggle[] toggles;
 
         [Serialize]
-        public GeyserExpand.RunMode runMode = GeyserExpand.RunMode.Default;
+        public GeyserLogicController.RunMode runMode = GeyserLogicController.RunMode.Default;
 
-        public GeyserExpand.RunMode RunMode {
-            get {
-                if (expand != null) return expand.runMode;
-                return runMode;
-            }
+        public GeyserLogicController.RunMode RunMode {
+
             set {
                 runMode = value;
-                expand.runMode = runMode;
-                PUtil.LogDebug($"被设了{expand.runMode}");
+                expand.RunMode = value;
+                // PUtil.LogDebug($"被设了{expand.RunMode}");
             }
         }
 
@@ -57,10 +55,10 @@ namespace GeyserExpandMachine.Screen {
 
         public override void SetTarget(GameObject target) {
             base.SetTarget(target);
-            expand = target.GetComponent<GeyserExpand>();
-            if (runMode == expand.runMode) return;
+            expand = target.GetComponent<GeyserLogicExpand>();
+            if (runMode == expand.RunMode) return;
             foreach (var toggle in toggles) {
-                if (toggle.name != Enum.GetName(typeof(GeyserExpand.RunMode), expand.runMode)) continue;
+                if (toggle.name != Enum.GetName(typeof(GeyserLogicController.RunMode), expand.RunMode)) continue;
                 toggle.isOn = true;
                 break;
             }
@@ -71,16 +69,16 @@ namespace GeyserExpandMachine.Screen {
         }
 
         public override bool IsValidForTarget(GameObject target) {
-            return target.GetComponent<GeyserExpand>() != null && target.GetComponent<GeyserExpandProxy>() != null;
+            return target.GetComponent<GeyserLogicExpand>() != null && target.GetComponent<GeyserExpandProxy>() != null;
         }
 
         void OnToggleValueChange(Toggle toggle) {
             if (!toggle.isOn) return;
             PUtil.LogDebug($"Toogle {toggle.name}");
-            if (toggle.name == "SkipIdle")  {RunMode = GeyserExpand.RunMode.SkipIdle; return;}
-            if (toggle.name == "SkipEruption") {RunMode = GeyserExpand.RunMode.SkipErupt; return;}
-            if (toggle.name == "Default")   {RunMode = GeyserExpand.RunMode.Default; return;}
-            if (toggle.name == "Dormancy")   {RunMode = GeyserExpand.RunMode.Dormant; }
+            if (toggle.name == "SkipIdle")  {RunMode = GeyserLogicController.RunMode.SkipIdle; return;}
+            if (toggle.name == "SkipEruption") {RunMode = GeyserLogicController.RunMode.SkipErupt; return;}
+            if (toggle.name == "Default")   {RunMode = GeyserLogicController.RunMode.Default; return;}
+            if (toggle.name == "Dormancy")   {RunMode = GeyserLogicController.RunMode.Dormant; }
 
         }
         

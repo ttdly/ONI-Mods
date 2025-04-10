@@ -41,10 +41,9 @@ namespace GeyserExpandMachine.Buildings {
 
         public override void ConfigureBuildingTemplate(GameObject go, Tag prefab_tag) {
             BuildingConfigManager.Instance.IgnoreDefaultKComponent(typeof(RequiresFoundation), prefab_tag);
-            // GeneratedBuildings.MakeBuildingAlwaysOperational(go);
-            // go.AddOrGet<DevPump>().elementState = Filterable.ElementState.Liquid;
-            // go.AddOrGet<GeyserExpand>();
-            go.AddOrGet<GeyserLogicExpand>();
+            var logicExpand = go.AddOrGet<GeyserLogicExpand>();
+            logicExpand.portID = OutputPortID;
+            logicExpand.ribbonPortID = OutputRibbonID;
             go.AddOrGet<GeyserExpandProxy>();
             var storage = go.AddOrGet<Storage>();
             storage.capacityKg = 50000f;

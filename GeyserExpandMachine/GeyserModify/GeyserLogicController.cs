@@ -1,10 +1,13 @@
 ﻿using System;
+using GeyserExpandMachine.Buildings;
 using PeterHan.PLib.Core;
 using YamlDotNet.Core;
 
-namespace GeyserExpandMachine.Buildings {
+namespace GeyserExpandMachine.GeyserModify {
     public class GeyserLogicController: StateMachineComponent<GeyserLogicController.StatesInstance> {
         public LogicPorts ports;
+        public HashedString portID;
+        public HashedString ribbonPortID;
         public RunMode runMode;
         private Geyser geyser;
         private Geyser.StatesInstance geyserState;
@@ -30,9 +33,19 @@ namespace GeyserExpandMachine.Buildings {
             base.OnSpawn();
             geyser = GetComponent<Geyser>();
             emitter = GetComponent<ElementEmitter>();
+            geyserState = geyser.GetSMI<Geyser.StatesInstance>();
+            
+            geyser.gameObject.SetActive(false);
+            geyser.gameObject.SetActive(true);
             smi.StartSM();
         }
-        
+
+        protected override void OnCleanUp() {
+            base.OnCleanUp();
+            geyser.gameObject.SetActive(false);
+            geyser.gameObject.SetActive(true);
+        }
+
         #region 设置泉的状态
 
         public void SkipStage(
@@ -41,12 +54,19 @@ namespace GeyserExpandMachine.Buildings {
             float offsetTime,
             float times
         ) {
-            // PUtil.LogDebug($"Skip time: {GameClock.Instance.GetTime()}");
+            // PUtil.LogDebug($"RunMode{runMode}; " +
+            //                $"\n\t from:{fromSate.name}; " +
+            //                $"\n\t to:{toState.name}; " +
+            //                $"\n\t offsetTime:{offsetTime}" +
+            //                $"\n\t times:{times}" +
+            //                $"\n\t IsInsideState: {geyserState.IsInsideState(fromSate)}" +
+            //                $"\n\t GeyserState: {geyserState.GetCurrentState().name}; ");
+
             // if (ports == null 
             //     || !geyserState.IsInsideState(fromSate)
-            //     || skipEruptTimes + times < 0) return;
-            if (ports == null 
-                || !geyserState.IsInsideState(fromSate)) return;
+            // //     || skipEruptTimes + times < 0) return;
+            // if (ports == null 
+            //     || !geyserState.IsInsideState(fromSate)) return;
 
         
             // if (GameClock.Instance.GetTime() - skipEruptTimes < 5f) return;
@@ -59,7 +79,7 @@ namespace GeyserExpandMachine.Buildings {
         }
 
         private bool CheckMode(RunMode targetRunMode) {
-            // PUtil.LogDebug($"Checking mode: {targetRunMode}; {runMode}");
+            PUtil.LogDebug($"Checking mode: {targetRunMode}; real mod{runMode}");
             return runMode == targetRunMode;
         } 
         
@@ -108,7 +128,7 @@ namespace GeyserExpandMachine.Buildings {
         
         public void SendLogic(OutputLogic status) {
             if (ports == null) return;
-            ports.SendSignal(LiquidGeyserExpandConfig.OutputRibbonID, (int) status);
+            ports.SendSignal(ribbonPortID, (int) status);
         }
         
 
