@@ -12,13 +12,13 @@ namespace GeyserExpandMachine {
             public static void Prefix() {
                 LocString.CreateLocStringKeys(typeof(ModString));
                 
-                ModUtil.AddBuildingToPlanScreen("Conveyance", LiquidGeyserExpandConfig.ID);
-                Db.Get().Techs.Get("SolidManagement").unlockedItemIDs.Add(LiquidGeyserExpandConfig.ID);
-                BUILDINGS.PLANSUBCATEGORYSORTING.Add(LiquidGeyserExpandConfig.ID, "cooler");
+                ModUtil.AddBuildingToPlanScreen("Plumbing", LiquidGeyserExpandConfig.ID);
+                Db.Get().Techs.Get("LiquidPiping").unlockedItemIDs.Add(LiquidGeyserExpandConfig.ID);
+                BUILDINGS.PLANSUBCATEGORYSORTING.Add(LiquidGeyserExpandConfig.ID, "LiquidPump");
                 
-                ModUtil.AddBuildingToPlanScreen("Conveyance", GasGeyserExpandConfig.ID);
-                Db.Get().Techs.Get("SolidManagement").unlockedItemIDs.Add(GasGeyserExpandConfig.ID);
-                BUILDINGS.PLANSUBCATEGORYSORTING.Add(GasGeyserExpandConfig.ID, "cooler");
+                ModUtil.AddBuildingToPlanScreen("HVAC", GasGeyserExpandConfig.ID);
+                Db.Get().Techs.Get("GasPiping").unlockedItemIDs.Add(GasGeyserExpandConfig.ID);
+                BUILDINGS.PLANSUBCATEGORYSORTING.Add(GasGeyserExpandConfig.ID, "GasPump");
             }
         }
 
@@ -32,7 +32,15 @@ namespace GeyserExpandMachine {
         [HarmonyPatch(typeof(GeneratedBuildings), "LoadGeneratedBuildings")]
         public class GeneratedBuildingsLoadGeneratedBuildingsPatch {
             public static void Prefix() {
-                LocString.CreateLocStringKeys(typeof(ModString.UI), "STRINGS.");
+                LocString
+                    .CreateLocStringKeys(typeof(ModString.TOGGLEGROUP), 
+                        "STRINGS.UI.GEYSEREXPANDSIDESCREEN.MAINCONTENT.");
+                LocString
+                    .CreateLocStringKeys(typeof(ModString.GASGEYSEREXPAND), "STRINGS.BUILDINGS.PREFABS.");
+                LocString
+                    .CreateLocStringKeys(typeof(ModString.LIQUIDGEYSEREXPAND), "STRINGS.BUILDINGS.PREFABS.");
+                LocString
+                    .CreateLocStringKeys(typeof(ModString.SIDESCREEN), "STRINGS.CAL");
             }
         }
     }

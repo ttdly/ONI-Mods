@@ -17,7 +17,7 @@ namespace GeyserExpandMachine.Screen {
             var TMPConverter = new TMPConverter();
             TMPConverter.ReplaceAllText(ExpandSideSecondScreenPrefab);
             // PUtil.LogDebug($"Loaded geyser_expand_ui.prefab {ExpandSideSecondScreenPrefab == null}");
-            // ListChildren(ExpandSideSecondScreenPrefab.transform, 0, 10);
+            ListChildren(ExpandSideSecondScreenPrefab.transform, 0, 10);
         }
         /// <summary>
         /// Credit: Sgt_Imalas

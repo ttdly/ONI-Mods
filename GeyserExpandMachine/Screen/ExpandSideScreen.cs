@@ -26,59 +26,90 @@ namespace GeyserExpandMachine.Screen {
             }
         }
 
+        public override int GetSideScreenSortOrder() => -1;
+
         protected override void OnPrefabInit() {
             base.OnPrefabInit();
             // ModAssets.ListChildren(transform);
             transform
-                .Find("MainContent/ToggleGroup/Default/Label")
+                .Find("MainContent/ToggleGroup/Default/Background/Label")
                 .gameObject.GetComponent<LocText>()
-                .SetText(ModString.UI.GEYSEREXPANDSIDESCREEN.MAINCONTENT.TOGGLEGROUP.DEFAULT.Label);
+                .SetText(ModString.TOGGLEGROUP.DEFAULT.Label);
             transform
-                .Find("MainContent/ToggleGroup/SkipEruption/Label")
+                .Find("MainContent/ToggleGroup/SkipEruption/Background/Label")
                 .gameObject.GetComponent<LocText>()
-                .SetText(ModString.UI.GEYSEREXPANDSIDESCREEN.MAINCONTENT.TOGGLEGROUP.SKIPERUPTION.Label);
+                .SetText(ModString.TOGGLEGROUP.SKIPERUPTION.Label);
             transform
-                .Find("MainContent/ToggleGroup/SkipIdle/Label")
+                .Find("MainContent/ToggleGroup/SkipIdle/Background/Label")
                 .gameObject.GetComponent<LocText>()
-                .SetText(ModString.UI.GEYSEREXPANDSIDESCREEN.MAINCONTENT.TOGGLEGROUP.SKIPIDLE.Label);
+                .SetText(ModString.TOGGLEGROUP.SKIPIDLE.Label);
             transform
-                .Find("MainContent/ToggleGroup/Dormancy/Label")
+                .Find("MainContent/ToggleGroup/Dormancy/Background/Label")
                 .gameObject.GetComponent<LocText>()
-                .SetText(ModString.UI.GEYSEREXPANDSIDESCREEN.MAINCONTENT.TOGGLEGROUP.DORMANCY.Label);
+                .SetText(ModString.TOGGLEGROUP.DORMANCY.Label);
 
             toggles = transform.GetComponentsInChildren<Toggle>();
 
             foreach (var toggle in toggles) {
-                toggle.onValueChanged.AddListener((value => OnToggleValueChange(toggle)));
+                toggle.onValueChanged.AddListener((value => OnToggleValueChange(toggle, value)));
             }
         }
 
         public override void SetTarget(GameObject target) {
             base.SetTarget(target);
             expand = target.GetComponent<GeyserLogicExpand>();
-            if (runMode == expand.RunMode) return;
             foreach (var toggle in toggles) {
                 if (toggle.name != Enum.GetName(typeof(GeyserLogicController.RunMode), expand.RunMode)) continue;
                 toggle.isOn = true;
-                break;
+                ActivateToggle(toggle);
             }
         }
 
+        private static void ActivateToggle(Toggle toggle) {
+            toggle.transform.Find("Background").gameObject.GetComponent<Image>().color =
+                new Color(0.4980392f, 0.2392157f, 0.3686275f);
+            toggle.transform.Find("Background/Label").gameObject.GetComponent<LocText>().color = Color.white;
+        }
+
+        private static void DeactivateToggle(Toggle toggle) {
+            toggle.transform.Find("Background").gameObject.GetComponent<Image>().color = Color.white;
+            toggle.transform.Find("Background/Label").gameObject.GetComponent<LocText>().color = Color.black;
+        }
+
         public override string GetTitle() {
-            return "流量/模式控制";
+            return ModString.SIDESCREEN.TITLE;
         }
 
         public override bool IsValidForTarget(GameObject target) {
             return target.GetComponent<GeyserLogicExpand>() != null && target.GetComponent<GeyserExpandProxy>() != null;
         }
 
-        void OnToggleValueChange(Toggle toggle) {
-            if (!toggle.isOn) return;
-            PUtil.LogDebug($"Toogle {toggle.name}");
-            if (toggle.name == "SkipIdle")  {RunMode = GeyserLogicController.RunMode.SkipIdle; return;}
-            if (toggle.name == "SkipEruption") {RunMode = GeyserLogicController.RunMode.SkipErupt; return;}
-            if (toggle.name == "Default")   {RunMode = GeyserLogicController.RunMode.Default; return;}
-            if (toggle.name == "Dormancy")   {RunMode = GeyserLogicController.RunMode.Dormant; }
+        void OnToggleValueChange(Toggle toggle, bool value) {
+            if (value) {
+                ActivateToggle(toggle);
+            }
+            else {
+                DeactivateToggle(toggle);
+                return;
+            }
+
+            switch (toggle.name) {
+                case "SkipIdle":
+                    RunMode = GeyserLogicController.RunMode.SkipIdle;
+                    break;
+                case "SkipEruption":
+                    RunMode = GeyserLogicController.RunMode.SkipErupt;
+                    break;
+                case "Default":
+                    RunMode = GeyserLogicController.RunMode.Default;
+                    break;
+                case "Dormancy":
+                    RunMode = GeyserLogicController.RunMode.Dormant;
+                    break;
+                default:
+                    PUtil.LogDebug($"Toogle {toggle.name}");
+                    break;
+            }
 
         }
         

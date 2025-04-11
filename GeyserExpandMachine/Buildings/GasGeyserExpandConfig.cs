@@ -8,7 +8,8 @@ namespace GeyserExpandMachine.Buildings {
         private const ConduitType CONDUIT_TYPE = ConduitType.Gas;
         public static readonly HashedString OutputRibbonID = new HashedString($"{ID}RibbonOutput");
         public static readonly HashedString OutputPortID = new HashedString($"{ID}Output");
-
+        public static readonly HashedString InputRibbonID = new HashedString($"{ID}RibbonInput");
+        
         public override BuildingDef CreateBuildingDef() {
             var tieR3 = BUILDINGS.CONSTRUCTION_MASS_KG.TIER3;
             var rawMetals = MATERIALS.RAW_METALS;
@@ -25,21 +26,28 @@ namespace GeyserExpandMachine.Buildings {
             buildingDef.UtilityOutputOffset = new CellOffset(1, 0);
             buildingDef.ObjectLayer = ObjectLayer.AttachableBuilding;
             buildingDef.LogicOutputPorts = new List<LogicPorts.Port> {
+                LogicPorts.Port.RibbonInputPort(InputRibbonID, new CellOffset(0, 1),
+                    ModString.Logic.GroupInputDesc,
+                    ModString.Logic.GroupOutputActive,
+                    ""),
                 LogicPorts.Port.RibbonOutputPort(OutputRibbonID, new CellOffset(0, 0),
-                    STRINGS.BUILDINGS.PREFABS.LOGICRIBBONREADER.LOGIC_PORT,
-                    STRINGS.BUILDINGS.PREFABS.LOGICRIBBONREADER.INPUT_PORT_ACTIVE,
-                    STRINGS.BUILDINGS.PREFABS.LOGICRIBBONREADER.INPUT_PORT_INACTIVE),
+                    ModString.Logic.GroupOutputDesc,
+                    ModString.Logic.GroupOutputActive,
+                    ""),
                 LogicPorts.Port.OutputPort(OutputPortID, new CellOffset(1, 0),
-                    STRINGS.BUILDINGS.PREFABS.LOGICRIBBONREADER.LOGIC_PORT_OUTPUT,
-                    STRINGS.BUILDINGS.PREFABS.LOGICRIBBONREADER.OUTPUT_PORT_ACTIVE,
-                    STRINGS.BUILDINGS.PREFABS.LOGICRIBBONREADER.OUTPUT_PORT_INACTIVE)
+                    ModString.Logic.OutputDesc,
+                    ModString.Logic.OutputActive,
+                    ModString.Logic.OutputInactive),
+                LogicPorts.Port.OutputPort(SmartReservoir.PORT_ID, new CellOffset(1, 1),
+                    STRINGS.BUILDINGS.PREFABS.SMARTRESERVOIR.LOGIC_PORT,
+                    STRINGS.BUILDINGS.PREFABS.SMARTRESERVOIR.LOGIC_PORT_ACTIVE,
+                    STRINGS.BUILDINGS.PREFABS.SMARTRESERVOIR.LOGIC_PORT_INACTIVE)
             };
             return buildingDef;
         }
 
         public override void ConfigureBuildingTemplate(GameObject go, Tag prefab_tag) {
             BuildingConfigManager.Instance.IgnoreDefaultKComponent(typeof(RequiresFoundation), prefab_tag);
-
             var logicExpand = go.AddOrGet<GeyserLogicExpand>();
             logicExpand.portID = OutputPortID;
             logicExpand.ribbonPortID = OutputRibbonID;
@@ -51,6 +59,20 @@ namespace GeyserExpandMachine.Buildings {
             liquidGeyserExpandDispenser.conduitType = CONDUIT_TYPE;
             liquidGeyserExpandDispenser.alwaysDispense = true;
             liquidGeyserExpandDispenser.elementFilter = null;
+            go.AddOrGet<SmartReservoir>();
+            // BuildingConfigManager.Instance.IgnoreDefaultKComponent(typeof(RequiresFoundation), prefab_tag);
+            //
+            // var logicExpand = go.AddOrGet<GeyserLogicExpand>();
+            // logicExpand.portID = OutputPortID;
+            // logicExpand.ribbonPortID = OutputRibbonID;
+            // go.AddOrGet<GeyserExpandProxy>();
+            // var storage = go.AddOrGet<Storage>();
+            // storage.capacityKg = 50000f;
+            // storage.SetDefaultStoredItemModifiers(Storage.StandardInsulatedStorage);
+            // var liquidGeyserExpandDispenser = go.AddOrGet<GeyserExpandDispenser>();            
+            // liquidGeyserExpandDispenser.conduitType = CONDUIT_TYPE;
+            // liquidGeyserExpandDispenser.alwaysDispense = true;
+            // liquidGeyserExpandDispenser.elementFilter = null;
         }
 
         public override void DoPostConfigureComplete(GameObject go) {

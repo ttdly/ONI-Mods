@@ -1,5 +1,6 @@
 ﻿using System;
 using GeyserExpandMachine.Buildings;
+using KSerialization;
 using PeterHan.PLib.Core;
 using YamlDotNet.Core;
 
@@ -8,7 +9,8 @@ namespace GeyserExpandMachine.GeyserModify {
         public LogicPorts ports;
         public HashedString portID;
         public HashedString ribbonPortID;
-        public RunMode runMode;
+        [Serialize]
+        public RunMode runMode = RunMode.Default;
         private Geyser geyser;
         private Geyser.StatesInstance geyserState;
         private ElementEmitter emitter;
