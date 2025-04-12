@@ -6,6 +6,9 @@
             public class DORMANCY {
                 public static LocString Label = "Always Dormancy";
             }
+            public class SKIPDORMANCY {
+                public static LocString Label = "Skip Dormancy";
+            }
             public class SKIPIDLE {
                 public static LocString Label = "Skip Idle";
             }

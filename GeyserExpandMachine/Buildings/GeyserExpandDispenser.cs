@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using KSerialization;
 using UnityEngine;
 
 namespace GeyserExpandMachine.Buildings {
-    public class GeyserExpandDispenser : KMonoBehaviour, ISaveLoadable, IConduitDispenser, ISingleSliderControl {
+    public class GeyserExpandDispenser : KMonoBehaviour, ISaveLoadable, IConduitDispenser {
         [SerializeField]
         public ConduitType conduitType;
 
@@ -29,6 +30,9 @@ namespace GeyserExpandMachine.Buildings {
 
         [SerializeField]
         public CellOffset noBuildingOutputCellOffset;
+
+        [Serialize]
+        public float flowMass = 10f;
 
         private static readonly Operational.Flag OutputConduitFlag =
             new Operational.Flag("output_conduit", Operational.Flag.Type.Functional);
@@ -187,25 +191,25 @@ namespace GeyserExpandMachine.Buildings {
         }
 
         #region 滑动条
-        
-        private float flowMass = 10f;
-        
-        public int SliderDecimalPlaces(int index) => 0;
-
-        public float GetSliderMin(int index) => 0f;
-
-        public float GetSliderMax(int index) => 10000f;
-
-        public float GetSliderValue(int index) => flowMass * 1000f;
-
-        public void SetSliderValue(float percent, int index) => flowMass = percent / 1000f;
-
-        public string GetSliderTooltipKey(int index) => "克";
-
-        public string GetSliderTooltip(int index) => "克描述";
-
-        public string SliderTitleKey => "STRINGS.UI.UISIDESCREENS.VALVESIDESCREEN.TITLE";
-        public string SliderUnits => "g";
+        //
+        // private float flowMass = 10f;
+        //
+        // public int SliderDecimalPlaces(int index) => 0;
+        //
+        // public float GetSliderMin(int index) => 0f;
+        //
+        // public float GetSliderMax(int index) => 10000f;
+        //
+        // public float GetSliderValue(int index) => flowMass * 1000f;
+        //
+        // public void SetSliderValue(float percent, int index) => flowMass = percent / 1000f;
+        //
+        // public string GetSliderTooltipKey(int index) => "克";
+        //
+        // public string GetSliderTooltip(int index) => "克描述";
+        //
+        // public string SliderTitleKey => "STRINGS.UI.UISIDESCREENS.VALVESIDESCREEN.TITLE";
+        // public string SliderUnits => "g";
 
         #endregion
 

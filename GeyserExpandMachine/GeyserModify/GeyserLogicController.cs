@@ -19,8 +19,9 @@ namespace GeyserExpandMachine.GeyserModify {
         public enum RunMode {
             SkipErupt = 1,
             SkipIdle = 2,
-            Dormant = 3,
-            Default = 4
+            SkipDormant = 3,
+            AlwaysDormant = 4,
+            Default = 5
         }
         
         public enum OutputLogic {
@@ -50,6 +51,23 @@ namespace GeyserExpandMachine.GeyserModify {
 
         #region 设置泉的状态
 
+        public void ImmediatelySkip() {
+            switch (runMode) {
+                case RunMode.SkipIdle:
+                    SkipIdle();
+                    break;
+                case RunMode.SkipErupt:
+                    SkipErupt();
+                    break;
+                case RunMode.SkipDormant:
+                    SkipDormant();
+                    break;
+                case RunMode.AlwaysDormant:
+                    AlwaysDormant();
+                    break;
+            }
+        }
+        
         public void SkipStage(
             StateMachine.BaseState fromSate,
             StateMachine.BaseState toState,
@@ -107,7 +125,7 @@ namespace GeyserExpandMachine.GeyserModify {
 
         public void SkipDormant() {
 
-            if (!CheckMode(RunMode.SkipIdle)) return;
+            if (!CheckMode(RunMode.SkipDormant)) return;
             SkipStage(
                 geyserState.sm.dormant,
                 geyserState.sm.pre_erupt,
@@ -117,7 +135,7 @@ namespace GeyserExpandMachine.GeyserModify {
 
         public void AlwaysDormant() {
 
-            if (!CheckMode(RunMode.Dormant)) return;
+            if (!CheckMode(RunMode.AlwaysDormant)) return;
             SkipStage(
                 geyserState.sm.pre_erupt,
                 geyserState.sm.dormant,
@@ -191,7 +209,7 @@ namespace GeyserExpandMachine.GeyserModify {
                     .Enter(smi => smi.master.SendLogic(OutputLogic.OverPressure));
                 post_erupt
                     .ScheduleGoTo(smi => smi.master.geyser.RemainingEruptPostTime(), idle)
-                    .Enter(smi => smi.master.SendLogic(OutputLogic.Dormant));
+                    .Enter(smi => smi.master.SendLogic(OutputLogic.PostErupt));
             }
 
             public class EruptState :

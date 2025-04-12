@@ -1,4 +1,5 @@
 ﻿using GeyserExpandMachine.GeyserModify;
+using KSerialization;
 using PeterHan.PLib.Core;
 using UnityEngine;
 
@@ -14,10 +15,22 @@ public class GeyserLogicExpand : KMonoBehaviour{
     private GameObject geyserFeature;
     private static readonly EventSystem.IntraObjectHandler<GeyserLogicExpand> OnLogicValueChangedDelegate =
         new ((component, data) => component.OnLogicValueChanged(data));
+    private GeyserExpandDispenser expandDispenser;
+    
+    [Serialize]
+    public float logicMin = 0f; 
+    [Serialize]
+    public float logicMax = 100f;
+    
 
     public GeyserLogicController.RunMode RunMode {
       get => controller.runMode;
       set => controller.runMode = value;
+    }
+
+    public float FlowMass {
+        get => expandDispenser.flowMass * 1000f;
+        set => expandDispenser.flowMass = value / 1000f;
     }
     
     
@@ -37,6 +50,7 @@ public class GeyserLogicExpand : KMonoBehaviour{
             controller.portID = portID;
             controller.ribbonPortID = ribbonPortID;
         }
+        expandDispenser = gameObject.GetComponent<GeyserExpandDispenser>();
         geyserFeature.SetActive(false);
         geyserFeature.SetActive(true);
     }
@@ -60,7 +74,7 @@ public class GeyserLogicExpand : KMonoBehaviour{
                 RunMode = GeyserLogicController.RunMode.SkipIdle;
                 break;
             case 4:
-                RunMode = GeyserLogicController.RunMode.Dormant;
+                RunMode = GeyserLogicController.RunMode.AlwaysDormant;
                 break;
             default:
                 RunMode = GeyserLogicController.RunMode.Default;

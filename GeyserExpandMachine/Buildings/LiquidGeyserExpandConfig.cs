@@ -61,7 +61,7 @@ namespace GeyserExpandMachine.Buildings {
             liquidGeyserExpandDispenser.conduitType = CONDUIT_TYPE;
             liquidGeyserExpandDispenser.alwaysDispense = true;
             liquidGeyserExpandDispenser.elementFilter = null;
-            go.AddOrGet<SmartReservoir>();
+            // go.AddOrGet<SmartReservoir>();
         }
 
         public override void DoPostConfigureComplete(GameObject go) {
