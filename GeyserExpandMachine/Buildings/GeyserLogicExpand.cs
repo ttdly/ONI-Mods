@@ -1,12 +1,11 @@
 ﻿using GeyserExpandMachine.GeyserModify;
 using KSerialization;
-using PeterHan.PLib.Core;
 using UnityEngine;
 
 
 namespace GeyserExpandMachine.Buildings;
 
-public class GeyserLogicExpand : KMonoBehaviour{
+public class GeyserLogicExpand : KMonoBehaviour, ISim200ms{
     
     private GeyserLogicController controller;
     public HashedString portID;
@@ -16,6 +15,10 @@ public class GeyserLogicExpand : KMonoBehaviour{
     private static readonly EventSystem.IntraObjectHandler<GeyserLogicExpand> OnLogicValueChangedDelegate =
         new ((component, data) => component.OnLogicValueChanged(data));
     private GeyserExpandDispenser expandDispenser;
+    private LogicPorts ports;
+    private Storage storage;
+    private float PercentFull => storage.MassStored() / storage.Capacity();
+    private bool activated;
     
     [Serialize]
     public float logicMin = 0f; 
@@ -33,24 +36,25 @@ public class GeyserLogicExpand : KMonoBehaviour{
         set => expandDispenser.flowMass = value / 1000f;
     }
     
-    
     protected override void OnSpawn() {
         base.OnSpawn();
         Unsubscribe((int)GameHashes.LogicEvent, OnLogicValueChangedDelegate);
         var cell = Grid.PosToCell(this);
+        ports = GetComponent<LogicPorts>();
 
         geyserFeature = Grid.Objects[cell, (int)ObjectLayer.Building];
         var geyserComponent = geyserFeature.GetComponent<Geyser>();
         if (geyserComponent == null) {
-            PUtil.LogError($"Geyser component not found: {geyserFeature}");
+            Debug.LogError($"Geyser component not found: {geyserFeature}");
         }
         else {
             controller = geyserFeature.gameObject.AddOrGet<GeyserLogicController>();
-            controller.ports = GetComponent<LogicPorts>();
+            controller.ports = ports;
             controller.portID = portID;
             controller.ribbonPortID = ribbonPortID;
         }
         expandDispenser = gameObject.GetComponent<GeyserExpandDispenser>();
+        storage = gameObject.GetComponent<Storage>();
         geyserFeature.SetActive(false);
         geyserFeature.SetActive(true);
     }
@@ -73,6 +77,9 @@ public class GeyserLogicExpand : KMonoBehaviour{
             case 2:
                 RunMode = GeyserLogicController.RunMode.SkipIdle;
                 break;
+            case 3:
+                RunMode = GeyserLogicController.RunMode.SkipDormant;
+                break;
             case 4:
                 RunMode = GeyserLogicController.RunMode.AlwaysDormant;
                 break;
@@ -80,8 +87,19 @@ public class GeyserLogicExpand : KMonoBehaviour{
                 RunMode = GeyserLogicController.RunMode.Default;
                 break;
         }
-        // Debug.Log($"收到信号：{logicValueChanged.newValue}");
-        // RefreshStatus();
     }
 
+
+    public void Sim200ms(float dt) {
+        var num = PercentFull * 100f;
+        if (activated) {
+            if (num >= (double)logicMax)
+                activated = false;
+        }
+        else if (num <= (double)logicMin) {
+            activated = true;
+        }
+        var newActivated = activated;
+        ports.SendSignal(SmartReservoir.PORT_ID, newActivated ? 1 : 0);
+    }
 }

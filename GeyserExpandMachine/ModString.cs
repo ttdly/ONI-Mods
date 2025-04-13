@@ -21,7 +21,7 @@
         }
         
         public class SIDESCREEN {
-            public static LocString TITLE = "Mode / Flow Control";
+            public static LocString TITLE = "Geyser Mode Control";
         }
 
         public class GASGEYSEREXPAND {

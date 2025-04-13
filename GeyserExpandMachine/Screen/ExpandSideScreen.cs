@@ -28,12 +28,7 @@ namespace GeyserExpandMachine.Screen {
 
         [Serialize]
         public GeyserLogicController.RunMode runMode = GeyserLogicController.RunMode.Default;
-        // [Serialize]
-        // public float flowControlValue = 10000f;
-        // [Serialize]
-        // public float logicMaxValue = 100f;
-        // [Serialize]
-        // public float logicMinValue = 0f;
+
 
         public GeyserLogicController.RunMode RunMode {
 
@@ -64,7 +59,6 @@ namespace GeyserExpandMachine.Screen {
             logicMaxInputField.SetTextFromData("rehook");
             logicMinInputField.SetTextFromData("rehook");
             
-            
             logicMaxSlider = transform.Find("LogicActivateContent/Max/Slider").gameObject.AddComponent<FSlider>();
             logicMinSlider = transform.Find("LogicActivateContent/Min/Slider").gameObject.AddComponent<FSlider>();
             logicMaxSlider.UnitString = "%";
@@ -73,6 +67,7 @@ namespace GeyserExpandMachine.Screen {
             logicMaxSlider.SetMin(0);
             logicMaxSlider.SetMax(100);
             logicMaxSlider.OnChange += OnLogicMaxValueChanged;
+            logicMaxSlider.SetWholeNumbers(true);
             
             logicMinSlider.UnitString = "%";
             logicMinSlider.AttachInputField(logicMinInputField);
@@ -80,6 +75,7 @@ namespace GeyserExpandMachine.Screen {
             logicMinSlider.SetMin(0);
             logicMinSlider.SetMax(100);
             logicMinSlider.OnChange += OnLogicMinValueChanged;
+            logicMaxSlider.SetWholeNumbers(true);
             
             toggles = transform.Find("ModeControl").GetComponentsInChildren<Toggle>();
             foreach (var toggle in toggles) {
@@ -91,6 +87,7 @@ namespace GeyserExpandMachine.Screen {
 
         public void OnFlowMassValueChanged(float value) {
             expand.FlowMass = value;
+            flowControlSlider.SetWholeNumbers(value > 1);
         }
 
         public void OnLogicMaxValueChanged(float value) {
@@ -208,7 +205,7 @@ namespace GeyserExpandMachine.Screen {
                 case "SkipIdle":
                     RunMode = GeyserLogicController.RunMode.SkipIdle;
                     break;
-                case "SkipEruption":
+                case "SkipErupt":
                     RunMode = GeyserLogicController.RunMode.SkipErupt;
                     break;
                 case "Default":
