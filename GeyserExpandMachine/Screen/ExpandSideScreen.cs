@@ -14,7 +14,7 @@ namespace GeyserExpandMachine.Screen {
         private static readonly Color Pink = new (0.4980392f, 0.2392157f, 0.3686275f);
         private static readonly Color Blue = new (0.2431373f, 0.2627451f, 0.3411765f);
             
-        private GeyserLogicExpand expand;
+        private BaseGeyserExpand expand;
         public Toggle[] toggles;
 
         public FNumberInputField flowControlInput;
@@ -23,7 +23,7 @@ namespace GeyserExpandMachine.Screen {
         public FSlider flowControlSlider;
         public FSlider logicMaxSlider;
         public FSlider logicMinSlider;
-        public const float MaxFlowValue = 10000f;
+        private const float MaxFlowValue = 10000f;
         
 
         [Serialize]
@@ -53,6 +53,7 @@ namespace GeyserExpandMachine.Screen {
             flowControlSlider.SetMin(0);
             flowControlSlider.SetMax(10000);
             flowControlSlider.OnChange += OnFlowMassValueChanged;
+            flowControlSlider.SetWholeNumbers(true);
             
             logicMaxInputField = transform.Find("LogicActivateContent/Max/Input").FindOrAddComponent<FNumberInputField>();
             logicMinInputField = transform.Find("LogicActivateContent/Min/Input").FindOrAddComponent<FNumberInputField>();
@@ -75,7 +76,7 @@ namespace GeyserExpandMachine.Screen {
             logicMinSlider.SetMin(0);
             logicMinSlider.SetMax(100);
             logicMinSlider.OnChange += OnLogicMinValueChanged;
-            logicMaxSlider.SetWholeNumbers(true);
+            logicMinSlider.SetWholeNumbers(true);
             
             toggles = transform.Find("ModeControl").GetComponentsInChildren<Toggle>();
             foreach (var toggle in toggles) {
@@ -160,7 +161,11 @@ namespace GeyserExpandMachine.Screen {
         
         public override void SetTarget(GameObject target) {
             base.SetTarget(target);
-            expand = target.GetComponent<GeyserLogicExpand>();
+            expand = target.GetComponent<BaseGeyserExpand>();
+            if (!expand.safe) {
+                LogUtil.Error("不安全状态不允许刷新界面，请及时删除不安全的建筑");
+                return;
+            }
             RefreshUI();
         }
 
@@ -189,7 +194,7 @@ namespace GeyserExpandMachine.Screen {
         }
 
         public override bool IsValidForTarget(GameObject target) {
-            return target.GetComponent<GeyserLogicExpand>() != null && target.GetComponent<GeyserExpandProxy>() != null;
+            return target.GetComponent<BaseGeyserExpand>() != null && target.GetComponent<GeyserExpandProxy>() != null;
         }
 
         private void OnToggleValueChange(Toggle toggle, bool value) {

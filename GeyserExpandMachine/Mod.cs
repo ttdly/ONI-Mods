@@ -11,6 +11,9 @@ namespace GeyserExpandMachine {
       PUtil.InitLibrary();
       new PVersionCheck().Register(this, new SteamVersionChecker());
       ModAssets.LoadAssets();
+#if DEBUG
+      Localization.RegisterForTranslation(typeof(ModString));
+#endif
     }
   }
 }

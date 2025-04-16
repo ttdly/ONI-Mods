@@ -20,6 +20,25 @@ namespace GeyserExpandMachine.GeyserModify {
             }
         }
 
+        [HarmonyPatch(typeof(Geyser), "OnSpawn")]
+        public class GeyserOnSpawnPatch {
+            public static void Postfix(Geyser __instance) {
+                ModData.Instance.Geysers.Add(Grid.PosToCell(__instance), __instance);
+                if (ModData.Instance.BaseGeyserExpands.TryGetValue(Grid.PosToCell(__instance), out var expand)) {
+                    if (!expand.safe) {
+                        expand.BindGeyser(__instance);
+                    }
+                }
+            }
+        }
+        
+        [HarmonyPatch(typeof(Geyser), "OnCleanUp")]
+        public class GeyserOnCleanUpPatch {
+            public static void Postfix(Geyser __instance) {
+                ModData.Instance.Geysers.Add(Grid.PosToCell(__instance), __instance);
+            }
+        }
+
         #region 逻辑端口
 
 //         [HarmonyPatch(typeof(Geyser.States), "InitializeStates")]
@@ -87,7 +106,7 @@ namespace GeyserExpandMachine.GeyserModify {
         [HarmonyPatch(typeof(ElementEmitter), "SetEmitting")]
         public class ElementEmitterSetEmittingPatch {
             public static void Postfix(ElementEmitter __instance, bool emitting) {
-                if (!ModData.Instance.GeyserExpandProxies.
+                if (!ModData.Instance.BaseGeyserExpands.
                         TryGetValue(Grid.PosToCell(__instance), out var geyserExpandProxy)) return;
                 geyserExpandProxy.close = !emitting;
             }
@@ -96,7 +115,7 @@ namespace GeyserExpandMachine.GeyserModify {
         [HarmonyPatch(typeof(ElementEmitter), "OnSimActivate")]
         public class ElementEmitterOnSimActivatePatch {
             public static bool Prefix(ElementEmitter __instance) {
-                if (!ModData.Instance.GeyserExpandProxies.
+                if (!ModData.Instance.BaseGeyserExpands.
                         TryGetValue(Grid.PosToCell(__instance), out var geyserExpandProxy)) return true;
                 geyserExpandProxy.close = false;
                 return false;
@@ -106,7 +125,7 @@ namespace GeyserExpandMachine.GeyserModify {
         [HarmonyPatch(typeof(ElementEmitter), "OnSimDeactivate")]
         public class ElementEmitterOnSimDeactivatePatch {
             public static bool Prefix(ElementEmitter __instance) {
-                if (!ModData.Instance.GeyserExpandProxies.
+                if (!ModData.Instance.BaseGeyserExpands.
                         TryGetValue(Grid.PosToCell(__instance), out var geyserExpandProxy)) return true;
                 geyserExpandProxy.close = true;
                 return false;
@@ -118,7 +137,7 @@ namespace GeyserExpandMachine.GeyserModify {
         public class GeyserApplyConfigurationEmissionValuesPatch {
             public static bool Prefix(Geyser __instance, GeyserConfigurator.GeyserInstanceConfiguration config) {
                 var emitter = __instance.gameObject.GetComponent<ElementEmitter>();
-                if (!ModData.Instance.GeyserExpandProxies.
+                if (!ModData.Instance.BaseGeyserExpands.
                         TryGetValue(Grid.PosToCell(__instance), out var geyserExpandProxy)) return true;
                 var output = new ElementConverter.OutputElement(
                     config.GetEmitRate(),

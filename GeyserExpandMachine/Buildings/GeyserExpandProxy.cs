@@ -1,26 +1,34 @@
-﻿using PeterHan.PLib.Core;
+﻿using System;
 using UnityEngine;
 
 namespace GeyserExpandMachine.Buildings {
     public class GeyserExpandProxy : KMonoBehaviour, ISim1000ms{
-        private int thisCell;
         public Storage storage;
         public ElementConverter.OutputElement outputElement;
         public bool close = true;
         private Geyser geyser;
+        private bool safe;
+        private int thisCell;
 
         protected override void OnSpawn() {
             base.OnSpawn();
-
-            thisCell = Grid.PosToCell(this);
-            ModData.Instance.GeyserExpandProxies.Add(thisCell, this);
+            safe = false;
             var cell = Grid.PosToCell(this);
+            // ModData.Instance.BaseGeyserExpands.Add(cell, this);
+            thisCell = cell;
+
             var geyserFeature = Grid.Objects[cell, (int)ObjectLayer.Building];
+            if (geyserFeature == null) {
+                LogUtil.Error($"没有在指定的位置找到实体 {cell}");
+                return;
+            }
+
             var geyserComponent = geyserFeature.GetComponent<Geyser>();
             if (geyserComponent == null) {
-                PUtil.LogError($"Geyser component not found: {geyserFeature}");
+                LogUtil.Error($"没有在指定的位置找到间歇泉；实体：{geyserFeature}；");
+                return;
             }
-            
+
             geyser = geyserComponent;
             outputElement = new ElementConverter.OutputElement(
                 geyser.configuration.GetEmitRate(),
@@ -32,14 +40,16 @@ namespace GeyserExpandMachine.Buildings {
                     geyser.configuration.GetDiseaseCount() * geyser.configuration.GetEmitRate())
             );
             storage = GetComponent<Storage>();
+            safe = true;
         }
 
         protected override void OnCleanUp() {
             base.OnCleanUp();
-            ModData.Instance.GeyserExpandProxies.Remove(thisCell);
+            ModData.Instance.BaseGeyserExpands.Remove(thisCell);
         }
         
         public void Sim1000ms(float dt) {
+            if (!safe) return;
             if (close || storage == null || outputElement.elementHash == 0) return;
 
             if (ElementLoader.FindElementByHash(outputElement.elementHash).IsLiquid) {

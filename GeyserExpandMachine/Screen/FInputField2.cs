@@ -111,7 +111,6 @@ public class FInputField2 : KScreen, IInputHandler
 
 		public override void OnKeyDown(KButtonEvent e)
 		{
-			Debug.Log($"OnKeyDown: {e.GetAction()}");
 			if (!isEditing)
 			{
 				base.OnKeyDown(e);

@@ -6,7 +6,9 @@ namespace GeyserExpandMachine {
     public class ModData {
         public static ModData Instance;
         
-        public readonly Dictionary<int, GeyserExpandProxy> GeyserExpandProxies = new Dictionary<int, GeyserExpandProxy>();
+        public readonly Dictionary<int, BaseGeyserExpand> BaseGeyserExpands = new Dictionary<int, BaseGeyserExpand>();
+        
+        public readonly Dictionary<int, Geyser> Geysers = new Dictionary<int, Geyser>();
     }
 
 
@@ -14,7 +16,8 @@ namespace GeyserExpandMachine {
     public static class GameLoadPatch {
         public static void Postfix() {
             if (ModData.Instance != null) {
-                ModData.Instance.GeyserExpandProxies.Clear();
+                ModData.Instance.BaseGeyserExpands.Clear();
+                ModData.Instance.Geysers.Clear();
             }
             ModData.Instance = new ModData();
         }
