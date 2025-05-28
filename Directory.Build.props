@@ -1,58 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
-  <Import Condition=" !Exists('Directory.Build.props.user') " Project="Directory.Build.props.default"/>
-  <Import Condition=" Exists('Directory.Build.props.user') " Project="Directory.Build.props.user"/>
+    <Import Condition=" !Exists('Directory.Build.props.user') " Project="Directory.Build.props.default"/>
+    <Import Condition=" Exists('Directory.Build.props.user') " Project="Directory.Build.props.user"/>
 
-  <ItemDefinitionGroup>
-    <Reference Private="False"/>
-    <ProjectReference Private="True"/>
-  </ItemDefinitionGroup>
+    <ItemDefinitionGroup>
+        <Reference Private="False"/>
+        <ProjectReference Private="True"/>
+    </ItemDefinitionGroup>
+    
+    <PropertyGroup>
+        <March25Qof>659901</March25Qof>
+        <LatestBuild>$(March25Qof)</LatestBuild>
+    </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Platform)' == 'Mergedown' ">
+        <GameFolderActive>$(GameFolderMergedown)</GameFolderActive>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Platform)' != 'Mergedown' ">
+        <GameFolderActive>$(GameFolderLegacy)</GameFolderActive>
+    </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Platform)' == 'Mergedown' ">
-    <GameFolderActive>$(GameFolderMergedown)</GameFolderActive>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Platform)' != 'Mergedown' ">
-    <GameFolderActive>$(GameFolderLegacy)</GameFolderActive>
-  </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="ILRepack.MSBuild.Task" Version="2.0.13" Private="True" PrivateAssets="all"/>
+        <PackageReference Include="PLib" Version="4.17.1" Private="True" PrivateAssets="all"/>
+        <Reference Include="Assembly-CSharp" HintPath="$(GameFolderActive)/Assembly-CSharp.dll"/>
+        <Reference Include="Assembly-CSharp-firstpass" HintPath="$(GameFolderActive)/Assembly-CSharp-firstpass.dll"/>
+        <Reference Include="0Harmony" HintPath="$(GameFolderActive)/0Harmony.dll"/>
+        <Reference Include="FMODUnity" HintPath="$(GameFolderActive)/FMODUnity.dll"/>
+        <Reference Include="Newtonsoft.Json" HintPath="$(GameFolderActive)/Newtonsoft.Json.dll"/>
+        <Reference Include="UnityEngine" HintPath="$(GameFolderActive)/UnityEngine.dll"/>
+        <Reference Include="UnityEngine.CoreModule" HintPath="$(GameFolderActive)/UnityEngine.CoreModule.dll"/>
+        <Reference Include="UnityEngine.ImageConversionModule" HintPath="$(GameFolderActive)/UnityEngine.ImageConversionModule.dll"/>
+        <Reference Include="UnityEngine.InputLegacyModule" HintPath="$(GameFolderActive)/UnityEngine.InputLegacyModule.dll"/>
+        <Reference Include="Unity.TextMeshPro" HintPath="$(GameFolderActive)/Unity.TextMeshPro.dll"/>
+        <Reference Include="UnityEngine.TextRenderingModule" HintPath="$(GameFolderActive)/UnityEngine.TextRenderingModule.dll"/>
+        <Reference Include="UnityEngine.UI" HintPath="$(GameFolderActive)/UnityEngine.UI.dll"/>
+        <Reference Include="UnityEngine.UIModule" HintPath="$(GameFolderActive)/UnityEngine.UIModule.dll"/>
+        <Reference Include="UnityEngine.AssetBundleModule" HintPath="$(GameFolderActive)/UnityEngine.AssetBundleModule.dll"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="ILRepack.MSBuild.Task" Version="2.0.13" Private="True" PrivateAssets="all"/>
-    <PackageReference Include="PLib" Version="4.17.1" Private="True" PrivateAssets="all"/>
-    <Reference Include="Assembly-CSharp" HintPath="$(GameFolderActive)/Assembly-CSharp.dll"/>
-    <Reference Include="Assembly-CSharp-firstpass" HintPath="$(GameFolderActive)/Assembly-CSharp-firstpass.dll"/>
-    <Reference Include="0Harmony" HintPath="$(GameFolderActive)/0Harmony.dll"/>
-    <Reference Include="FMODUnity" HintPath="$(GameFolderActive)/FMODUnity.dll"/>
-    <Reference Include="Newtonsoft.Json" HintPath="$(GameFolderActive)/Newtonsoft.Json.dll"/>
-    <Reference Include="UnityEngine" HintPath="$(GameFolderActive)/UnityEngine.dll"/>
-    <Reference Include="UnityEngine.CoreModule" HintPath="$(GameFolderActive)/UnityEngine.CoreModule.dll"/>
-    <Reference Include="UnityEngine.ImageConversionModule" HintPath="$(GameFolderActive)/UnityEngine.ImageConversionModule.dll"/>
-    <Reference Include="UnityEngine.InputLegacyModule" HintPath="$(GameFolderActive)/UnityEngine.InputLegacyModule.dll"/>
-    <Reference Include="Unity.TextMeshPro" HintPath="$(GameFolderActive)/Unity.TextMeshPro.dll"/>
-    <Reference Include="UnityEngine.TextRenderingModule" HintPath="$(GameFolderActive)/UnityEngine.TextRenderingModule.dll"/>
-    <Reference Include="UnityEngine.UI" HintPath="$(GameFolderActive)/UnityEngine.UI.dll"/>
-    <Reference Include="UnityEngine.UIModule" HintPath="$(GameFolderActive)/UnityEngine.UIModule.dll"/>
-    <Reference Include="UnityEngine.AssetBundleModule" HintPath="$(GameFolderActive)/UnityEngine.AssetBundleModule.dll"/>
-  </ItemGroup>
+    <PropertyGroup Condition=" '$(Platform)' == 'Mergedown' ">
+        <DefineConstants>MERGEDOWN</DefineConstants>
+        <APIVersion>2</APIVersion>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Platform)' == 'Vanilla' ">
+        <DefineConstants>LEGACY</DefineConstants>
+        <APIVersion>1</APIVersion>
+    </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Platform)' == 'Mergedown' ">
-    <DefineConstants>MERGEDOWN</DefineConstants>
-    <APIVersion>2</APIVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Platform)' == 'Vanilla' ">
-    <DefineConstants>LEGACY</DefineConstants>
-    <APIVersion>1</APIVersion>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <Product>tTdlyONIMods</Product>
-    <Authors>tTdly</Authors>
-    <Copyright>Copyright ©tTdly2023</Copyright>
-    <TargetFramework>net471</TargetFramework>
-    <LastWorkingBuild>0</LastWorkingBuild>
-    <DistributeMod>true</DistributeMod>
-    <ArchivedVersionPath></ArchivedVersionPath>
-    <UsePublicized>false</UsePublicized>
-    <PLibVersion>4.16.0.0</PLibVersion>
-  </PropertyGroup>
+    <PropertyGroup>
+        <Product>tTdlyONIMods</Product>
+        <Authors>tTdly</Authors>
+        <Copyright>Copyright ©tTdly2023</Copyright>
+        <TargetFramework>net471</TargetFramework>
+        <DistributeMod>true</DistributeMod>
+        <ArchivedVersionPath>archived_versions</ArchivedVersionPath>
+        <UsePublicized>false</UsePublicized>
+    </PropertyGroup>
 </Project>
