@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyTitle>Blueprints Button More Hints</AssemblyTitle>
+    <FileVersion>1.0.0</FileVersion>
+    <RootNamespace>BlueprintsButtonTooltip</RootNamespace>
+    <Description>Blueprints Button More Hints</Description>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <LastWorkingBuild>$(LatestBuild)</LastWorkingBuild>
+    <UsePLib>false</UsePLib>
+    <Platforms>Vanilla;Mergedown</Platforms>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Remove="PLib" />
+  </ItemGroup>
+</Project>
