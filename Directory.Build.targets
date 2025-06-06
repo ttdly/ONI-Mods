@@ -13,87 +13,57 @@
     </Target>
 
     <Target Name="WriteModInfoFile" BeforeTargets="PreBuildEvent" Condition=" '$(DistributeMod)' == 'true' ">
-        <PropertyGroup>
-            <ModInfoFile>$(IntermediateOutputPath)\mod_info.yaml</ModInfoFile>
-        </PropertyGroup>
-        <ItemGroup>
-            <ModInfoFileContentLines Include="minimumSupportedBuild: $(LastWorkingBuild)"/>
-            <ModInfoFileContentLines Include="version: $(FileVersion)"/>
-            <ModInfoFileContentLines Include="APIVersion: $(APIVersion)"/>
-        </ItemGroup>
-        <WriteLinesToFile
-                File="$(ModInfoFile)"
-                Overwrite="true"
-                Lines="@(ModInfoFileContentLines)"/>
-    </Target>
-
-    <Target Name="PrepareDlcIds">
-        <!-- DLC 名称映射表 -->
-        <ItemGroup>
-            <DlcNameMap Include="spaceout">
-                <DlcId>EXPANSION1_ID</DlcId>
-            </DlcNameMap>
-            <DlcNameMap Include="hanshuang">
-                <DlcId>DLC2_ID</DlcId>
-            </DlcNameMap>
-            <DlcNameMap Include="fangshengren">
-                <DlcId>DLC3_ID</DlcId>
-            </DlcNameMap>
-            <DlcNameMap Include="shiqian">
-                <DlcId>DLC4_ID</DlcId>
-            </DlcNameMap>
-        </ItemGroup>
-
-        <PropertyGroup>
-            <RequiredDlcNamesWithSpaces>$(RequiredDlcNames)</RequiredDlcNamesWithSpaces>
-            <ForbiddenDlcNamesWithSpaces>$(ForbiddenDlcNames)</ForbiddenDlcNamesWithSpaces>
-        </PropertyGroup>
-
-        <ItemGroup>
-            <RequiredDlcIds Include="%(DlcNameMap.DlcId)"
-                            Condition=" '$(RequiredDlcNames)' == 'all' Or $(RequiredDlcNamesWithSpaces.Contains('%(DlcNameMap.Identity)'))"/>
-        </ItemGroup>
-        <ItemGroup>
-            <ForbiddenDlcIds Include="%(DlcNameMap.DlcId)"
-                             Condition=" $(ForbiddenDlcNamesWithSpaces.Contains('%(DlcNameMap.Identity)'))"/>
-        </ItemGroup>
-
-        <ItemGroup>
-            <RequiredDlcIdsYaml Include="%(RequiredDlcIds.Identity)">
-                <Line>- %(RequiredDlcIds.Identity)</Line>
-            </RequiredDlcIdsYaml>
-        </ItemGroup>
-        <ItemGroup>
-            <ForbiddenDlcIdsYaml Include="%(ForbiddenDlcIds.Identity)">
-                <Line>- %(ForbiddenDlcIds.Identity)</Line>
-            </ForbiddenDlcIdsYaml>
-        </ItemGroup>
+    <PropertyGroup>
+        <ModInfoFile>$(IntermediateOutputPath)\mod_info.yaml</ModInfoFile>
+    </PropertyGroup>
+    <ItemGroup>
+        <ModInfoFileContentLines Include="minimumSupportedBuild: $(LastWorkingBuild)"/>
+        <ModInfoFileContentLines Include="version: $(FileVersion)"/>
+        <ModInfoFileContentLines Include="APIVersion: $(APIVersion)"/>
+    </ItemGroup>
+    <WriteLinesToFile
+            File="$(ModInfoFile)"
+            Overwrite="true"
+            Lines="@(ModInfoFileContentLines)"/>
     </Target>
 
 
-    <Target Name="WriteModDescriptionFile" BeforeTargets="PreBuildEvent" Condition=" '$(DistributeMod)' == 'true' "
-            DependsOnTargets="PrepareDlcIds">
+    <Target Name="WriteModDescriptionFile" BeforeTargets="PreBuildEvent" Condition=" '$(DistributeMod)' == 'true' ">
+    <PropertyGroup>
+        <ModDescriptionFile>$(IntermediateOutputPath)\mod.yaml</ModDescriptionFile>
+    </PropertyGroup>
+    <ItemGroup>
+        <ModDescriptionFileContentLines Include="title: &quot;$(AssemblyTitle)&quot;"/>
+        <ModDescriptionFileContentLines Include="description: &quot;$(Description)&quot;"/>
+        <ModDescriptionFileContentLines Include="staticID: CalYu.$(AssemblyName)"/>
+    </ItemGroup>
+    <WriteLinesToFile
+            File="$(ModDescriptionFile)"
+            Overwrite="true"
+            Lines="@(ModDescriptionFileContentLines)"/>
+    </Target>
+
+    <Target Name="ILRepack" AfterTargets="Build">
         <PropertyGroup>
-            <ModDescriptionFile>$(IntermediateOutputPath)\mod.yaml</ModDescriptionFile>
+            <Internalize>true</Internalize>
         </PropertyGroup>
-        <ItemGroup>
-            <ModDescriptionFileContentLines Include="title: &quot;$(AssemblyTitle)&quot;"/>
-            <ModDescriptionFileContentLines Include="description: &quot;$(Description)&quot;"/>
-            <ModDescriptionFileContentLines Include="staticID: CalYu.$(AssemblyName)"/>
+        <ItemGroup Condition=" '$(UsesPLib)' != 'false' ">
+            <InputAssemblies Include="$(TargetPath)" />
+            <InputAssemblies Include="$(TargetDir)PLib*.dll" />
         </ItemGroup>
-        <ItemGroup Condition=" '@(RequiredDlcIds)' != '' ">
-            <ModDescriptionFileContentLines Include="requiredDlcIds:"/>
-            <ModDescriptionFileContentLines Include="@(RequiredDlcIdsYaml->'%(Line)')"/>
+        <ItemGroup Condition=" '$(UsesPLib)' == 'false' ">
+            <InputAssemblies Include="$(TargetPath)" />
         </ItemGroup>
 
-        <ItemGroup Condition=" '@(ForbiddenDlcIds)' != '' ">
-            <ModDescriptionFileContentLines Include="forbiddenDlcIds:"/>
-            <ModDescriptionFileContentLines Include="@(ForbiddenDlcIdsYaml->'%(Line)')"/>
-        </ItemGroup>
-        <WriteLinesToFile
-                File="$(ModDescriptionFile)"
-                Overwrite="true"
-                Lines="@(ModDescriptionFileContentLines)"/>
+        <ILRepack
+                TargetPlatformVersion="v4"
+                TargetKind="SameAsPrimaryAssembly"
+                OutputFile="$(TargetPath)"
+                InputAssemblies="@(InputAssemblies)"
+                XmlDocumentation="true"
+                Internalize="$(Internalize)"
+                Wildcards="true"
+                LibraryPath="$(GameFolder)" />
     </Target>
 
     <Target Name="CopyArtifactsToInstallFolder" AfterTargets="ILRepack" Condition=" '$(DistributeMod)' == 'true' ">
@@ -116,12 +86,12 @@
             <ElementFiles Include="$(ProjectDir)\elements\**\*.*"/>
             <CodexFiles Include="$(ProjectDir)\codex\**\*.*"/>
             <YamlFiles Include="$(ProjectDir)\*.yaml"/>
-            <AssestFiles Include="$(ProjectDir)\assets\**\*.*"/>
+            <AssestFiles Include="$(ProjectDir)\assets\*"/>
         </ItemGroup>
 
         <Copy SourceFiles="@(AnimFiles)" DestinationFiles="@(AnimFiles->'$(InstallFolder)\anim\%(RecursiveDir)%(Filename)%(Extension)')"/>
         <Copy SourceFiles="@(TranslationFiles)" DestinationFolder="$(InstallFolder)\translations"/>
-        <Copy SourceFiles="@(AssestFiles)" DestinationFiles="@(AssestFiles->'$(InstallFolder)\assets\%(RecursiveDir)%(Filename)')"/>
+        <Copy SourceFiles="@(AssestFiles)" DestinationFolder="$(InstallFolder)\assets"/>
         <Copy SourceFiles="@(TranslationTempleteFiles)" DestinationFolder="$(InstallFolder)\translations"/>
         <Copy SourceFiles="@(ElementFiles)" DestinationFiles="@(ElementFiles->'$(InstallFolder)\elements\%(RecursiveDir)%(Filename)%(Extension)')"/>
         <Copy SourceFiles="@(CodexFiles)" DestinationFiles="@(CodexFiles->'$(InstallFolder)\codex\%(RecursiveDir)%(Filename)%(Extension)')"/>
@@ -130,7 +100,6 @@
         <Copy SourceFiles="@(YamlFiles)" DestinationFolder="$(InstallFolder)"/>
         <Copy SourceFiles="$(ModInfoFile)" DestinationFolder="$(InstallFolder)"/>
         <Copy SourceFiles="$(ModDescriptionFile)" DestinationFolder="$(RootInstallFolder)"/>
-        <Copy SourceFiles="$(ProjectDir)\Preview.png" DestinationFiles="$(InstallFolder)\preview.png" Condition=" $(CopyPreview) == true "/>
         <Copy SourceFiles="$(TargetPath)" DestinationFiles="$(InstallFolder)\$(TargetFileName)"/>
     </Target>
 </Project>

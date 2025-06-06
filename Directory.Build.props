@@ -21,7 +21,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="ILRepack.MSBuild.Task" Version="2.0.13" Private="True" PrivateAssets="all"/>
+        <PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.43" Private="True" PrivateAssets="all"/>
         <PackageReference Include="PLib" Version="4.17.1" Private="True" PrivateAssets="all"/>
         <Reference Include="Assembly-CSharp" HintPath="$(GameFolderActive)/Assembly-CSharp.dll"/>
         <Reference Include="Assembly-CSharp-firstpass" HintPath="$(GameFolderActive)/Assembly-CSharp-firstpass.dll"/>
@@ -54,7 +54,6 @@
         <Copyright>Copyright ©tTdly2023</Copyright>
         <TargetFramework>net471</TargetFramework>
         <DistributeMod>true</DistributeMod>
-        <ArchivedVersionPath>archived_versions</ArchivedVersionPath>
         <UsePublicized>false</UsePublicized>
     </PropertyGroup>
 </Project>
