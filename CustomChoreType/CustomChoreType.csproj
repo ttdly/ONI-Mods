@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyTitle>Custom Chore Groups</AssemblyTitle>
+    <FileVersion>1.0.0</FileVersion>
+    <RootNamespace>CustomChoreType</RootNamespace>
+    <Description>Custom Chore Type</Description>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <LastWorkingBuild>$(LatestBuild)</LastWorkingBuild>
+    <Platforms>Vanilla;Mergedown</Platforms>
+  </PropertyGroup>
+</Project>
