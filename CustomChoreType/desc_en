@@ -1,0 +1,38 @@
+﻿Machine translation version
+
+[h1]Mod Introduction[/h1]
+The mod adds the function of custom chore types to the game.
+
+[h2]Modifying Task Types:[/h2]
+[olist]
+[*]Switch to the "Errands" tab on the details menu page
+[*]Right-click the task title
+[*]In the pop-up "select" window, select the task type(s) you want to set for this task (multiple selections are allowed; the button background turns green when selected)
+[*]Click the "CONFIRM" button to immediately modify the task type
+[/olist]
+
+[h2]Restoring Default Settings:[/h2]  
+If you have modified the task type of a task, a "Delete" button will appear in the "Select" pop-up window. Clicking "Delete" will restore the default settings.
+Note:
+[b]This mod will generate a custom_chore_types_config.json file in the Klei\OxygenNotIncluded\mods folder. 
+This file records modifications made in the game. To avoid losing your changes, do not delete this file.[/b]
+[b]Since I'm not yet familiar enough with the UI code, the "Select" pop-up window is designed to close as soon as the cursor exits it.[/b]
+
+[h1]Having Problems with the Mod?[/h1]
+[olist]
+[*]Check if your local mod version matches the version number in the "Current Mods". If it doesn't match, please subscribe and use the Mod Updater to update this mod.
+[*]Copy the error message or the "Player.log" file. Submit the error message in the comments section (it's best to start a new discussion) or submit a new issue in my [url=https://github.com/ttdly/ONI-Mods/issues]code repository[/url], and I will address it when I see it.
+[/olist]
+
+[h1]Want to Support My Mod Development?[/h1]
+[list]
+[*]If you have new ideas, you can submit an issue in my [url=https://github.com/ttdly/ONI-Mods]code repository[/url].
+[*]If you have improvements for the current features, you can submit a PR directly, and I will consider merging suitable features.
+[*]You can also give me some [url=https://ko-fi.com/calvinyu]donations[/url] to encourage me to create more mods.
+[/list]
+
+[h1]Statement: [/h1]
+[list]
+[*]I will not respond if the mod crashes without providing any valid error messages.
+[*]If my mod stops updating for a long time in the future, you can publish a fixed version with my source code, but you must provide the appropriate source credits.
+[/list]

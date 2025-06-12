@@ -22,9 +22,7 @@ namespace CustomChoreType.Screen {
         public static void Show(ChoreType choreType) {
             if (_customChoreTypeGo == null) InitScreen();
 
-            foreach (var valuePair in ChoreGroupBind) {
-                valuePair.Value.toggle.image.color = Color.white;
-            }
+            foreach (var valuePair in ChoreGroupBind) valuePair.Value.Refresh();
             _targetChoreType = choreType;
             _deleteButton.SetActive(Mod.Changes.ContainsKey(_targetChoreType.Id));
             _customChoreTypeGo.SetActive(true);
@@ -71,20 +69,13 @@ namespace CustomChoreType.Screen {
                     Assets.GetSprite(choreGroup.sprite);
                 var toggle = choreGroupUIGo.GetComponent<Toggle>();
                 choreGroupUIGo.AddComponent<ToolTip>().toolTip = choreGroup.Name;
-                toggle.image.color = Color.white;
-                toggle.isOn = false;
-                toggle.onValueChanged.AddListener((value) => {
-                    toggle.isOn = value;
-                    if (value) {
-                        choreGroupEntry.selected = true;
-                        toggle.image.color = Color.green;
-                    }
-                    else {
-                        choreGroupEntry.selected = false;
-                        toggle.image.color = Color.white;
-                    }
-                });
                 choreGroupEntry.toggle = toggle;
+                choreGroupEntry.Refresh();
+                toggle.onValueChanged.AddListener((value) => {
+                    if (value) choreGroupEntry.Select();
+                    else choreGroupEntry.Refresh();
+                });
+                
                 choreGroupUIGo.SetActive(true);
                 ChoreGroupBind.Add(choreGroup.Id, choreGroupEntry);
             }

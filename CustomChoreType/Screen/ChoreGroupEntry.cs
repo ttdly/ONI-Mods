@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace CustomChoreType.Screen {
@@ -9,6 +10,18 @@ namespace CustomChoreType.Screen {
 
         public override string ToString() {
             return $"Selected: {selected}; choreGroup: {ChoreGroup.Name}; toggle: {toggle==null}";
+        }
+
+        public void Refresh() {
+            toggle.image.color = Color.white;
+            toggle.isOn = false;
+            selected = false;
+        }
+
+        public void Select() {
+            toggle.image.color = Color.green;
+            toggle.isOn = true;
+            selected = true;
         }
     }
 }
