@@ -38,17 +38,10 @@ namespace CustomChoreType {
         public class BuildingChoresPanelGetChoreEntryPatch {
             static void Postfix(ChoreType choreType, HierarchyReferences __result) {
                 var choreLabel = __result.GetReference<LocText>("ChoreLabel");
-                if (choreLabel.gameObject.GetComponent<ChoreLabelEvents>()) return;
-                var choreLabelEvents = choreLabel.gameObject.AddComponent<ChoreLabelEvents>();
+                var choreLabelEvents = choreLabel.gameObject.AddOrGet<ChoreLabelEvents>();
                 choreLabelEvents.Initialize(choreType, choreLabel);
             }
         }
-
-        // [HarmonyPatch(typeof(ChoreType), "groups", MethodType.Setter)]
-        // public class ChoreTypeGroupPatch {
-        //     static void Postfix(ChoreType __instance) {
-        //         // Debug.Log($"设置{__instance.Name}:{__instance.groups}");
-        //     }
-        // }
+        
     }
 }

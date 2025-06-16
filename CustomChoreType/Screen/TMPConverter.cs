@@ -14,7 +14,9 @@ namespace CustomChoreType.Screen //Source: Aki
 		static TMP_FontAsset NotoSans;
 		static TMP_FontAsset GrayStroke;
 
-		public TMPConverter() => Initialize();
+		public TMPConverter() {
+			Initialize();
+		}
 
 		public void Initialize()
 		{
