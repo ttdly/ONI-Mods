@@ -77,11 +77,11 @@ namespace CustomChoreType.Screen {
                 });
                 
                 choreGroupUIGo.SetActive(true);
-                ChoreGroupBind.Add(choreGroup.Id, choreGroupEntry);
+                ChoreGroupBind[choreGroup.Id] = choreGroupEntry;
             }
         }
 
-        public static void ApplyChoreGroup(string choreTypeId, ChoreGroup[] groups) {
+        private static void ApplyChoreGroup(string choreTypeId, ChoreGroup[] groups) {
             Traverse.Create(Db.Get().ChoreTypes.TryGet(choreTypeId)).Property("groups")
                 .SetValue(groups);
         }
@@ -95,11 +95,10 @@ namespace CustomChoreType.Screen {
         }
         
         private static void ApplySetting() {
-            var choreGroups = new List<ChoreGroup>();
-            foreach (var choreGroupPair in ChoreGroupBind) {
-                if (!choreGroupPair.Value.selected) continue;
-                choreGroups.Add(choreGroupPair.Value.ChoreGroup);
-            }
+            var choreGroups = ChoreGroupBind
+                .Where(gb => gb.Value.selected)
+                .Select(gb => gb.Value.ChoreGroup).ToArray();
+
             Mod.Changes[_targetChoreType.Id] =  choreGroups.Select(group => group.Id).ToArray();
             var data = JsonConvert.SerializeObject(Mod.Changes);
             
@@ -110,8 +109,18 @@ namespace CustomChoreType.Screen {
                 Debug.LogError($"Custom chore types config file could not be saved: {e}");
                 throw;
             }
+            
+            foreach (var choreGroup in _targetChoreType.groups) {
+                choreGroup.choreTypes.Remove(_targetChoreType);
+            }
+
+            foreach (var choreGroup in choreGroups) {
+                choreGroup.choreTypes.Add(_targetChoreType);
+            }
+            
             Mod.Backup[_targetChoreType.Id] = _targetChoreType.groups.Select(g => g.Id).ToArray();
-            ApplyChoreGroup(_targetChoreType.Id, choreGroups.ToArray());
+            
+            ApplyChoreGroup(_targetChoreType.Id, choreGroups);
             Hide();
         }
         

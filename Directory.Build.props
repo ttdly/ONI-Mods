@@ -10,7 +10,8 @@
     
     <PropertyGroup>
         <March25Qof>659901</March25Qof>
-        <LatestBuild>$(March25Qof)</LatestBuild>
+        <DLC4>674504</DLC4>
+        <LatestBuild>$(DLC4)</LatestBuild>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Platform)' == 'Mergedown' ">

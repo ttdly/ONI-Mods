@@ -8,6 +8,7 @@ namespace CustomChoreType {
     public class Mod: UserMod2 {
         public static Dictionary<string, string[]> Changes = new Dictionary<string, string[]>();
         public static Dictionary<string, string[]> Backup = new Dictionary<string, string[]>();
+        public static HashSet<ChoreConsumer> ChoreConsumers = new HashSet<ChoreConsumer>();
         public static string ConfigPath;
         public override void OnLoad(Harmony harmony) {
             base.OnLoad(harmony);
