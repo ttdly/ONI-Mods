@@ -9,7 +9,7 @@ namespace CustomChoreType {
         private Color originalColor;
         
         public void Initialize(ChoreType choreType, LocText choreLabel) {
-            if (thisChoreType.Id == choreType.Id) return;
+            if (thisChoreType != null && thisChoreType.Id == choreType.Id) return;
             thisChoreType = choreType;
             targetChoreLabel = choreLabel;
             originalColor = choreLabel.color;
