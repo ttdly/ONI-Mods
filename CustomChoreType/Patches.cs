@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using CustomChoreType.Screen;
 using HarmonyLib;
 using Newtonsoft.Json;
 
@@ -22,14 +20,6 @@ namespace CustomChoreType {
                     Debug.LogException(e);
                     throw;
                 }
-                // foreach (var change in Mod.Changes) {
-                //     var choreType = Db.Get().ChoreTypes.TryGet(change.Key);
-                //     if (choreType == null) continue;
-                //     var newChoreGroup = change.Value
-                //         .Select(group => Db.Get().ChoreGroups.TryGet(group)).ToArray();
-                //     Mod.Backup[choreType.Id] = choreType.groups.Select(g => g.Id).ToArray();  
-                //     CustomChoreTypeScreen.ApplyChoreGroup(choreType.Id, newChoreGroup);
-                // }
             }
         }
         
@@ -42,28 +32,13 @@ namespace CustomChoreType {
                 chore_groups = Mod.Changes[id];
             }
         }
-        
+
         [HarmonyPatch(typeof(BuildingChoresPanel), "GetChoreEntry")]
         public class BuildingChoresPanelGetChoreEntryPatch {
             static void Postfix(ChoreType choreType, HierarchyReferences __result) {
                 var choreLabel = __result.GetReference<LocText>("ChoreLabel");
                 var choreLabelEvents = choreLabel.gameObject.AddOrGet<ChoreLabelEvents>();
                 choreLabelEvents.Initialize(choreType, choreLabel);
-            }
-        }
-
-        [HarmonyPatch(typeof(ChoreConsumer), "OnSpawn")]
-        public class ChoreConsumerOnSpawnPatch {
-            public static void Postfix(ChoreConsumer __instance) {
-                Debug.Log(__instance.gameObject.GetComponent<KPrefabID>().Tags);
-                // Mod.ChoreConsumers.Add(__instance);
-            }
-        }
-
-        [HarmonyPatch(typeof(Game), nameof(Game.Load))]
-        public class GameLoadPatch {
-            public static void Prefix() {
-                // Mod.ChoreConsumers.Clear();
             }
         }
     }
