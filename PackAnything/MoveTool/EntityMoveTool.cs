@@ -87,12 +87,24 @@ namespace PackAnything.MoveTool {
       primaryElement.Mass = 1f;
       primaryElement.Temperature = 293f;
       DontDestroyOnLoad(visualBuffer);
+      var needOffset = false;
       var visualAnimController = visualBuffer.AddOrGet<KBatchedAnimController>();
-      var gameObjectController = targetMovable.gameObject.GetComponent<KBatchedAnimController>();
-      visualAnimController.AnimFiles = gameObjectController.AnimFiles;
-      visualAnimController.initialAnim = gameObjectController.initialAnim;
-      var needOffset = targetMovable.gameObject.TryGetComponent(out KBoxCollider2D kBoxCollider2D) &&
-                       kBoxCollider2D.size.x % 2 == 0;
+      if (targetMovable.gameObject.TryGetComponent(out KBatchedAnimController gameObjectController))
+      {
+      
+          visualAnimController.AnimFiles = gameObjectController.AnimFiles;
+          visualAnimController.initialAnim = gameObjectController.initialAnim;
+          needOffset = targetMovable.gameObject.TryGetComponent(out KBoxCollider2D kBoxCollider2D) &&
+                                  kBoxCollider2D.size.x % 2 == 0;
+      
+      }
+      else
+      {
+          visualAnimController.AnimFiles = new KAnimFile[1]
+          {
+          Assets.GetAnim((HashedString) "floor_mesh_kanim")
+          };
+      }
       return (visualBuffer, needOffset);
     }
   }

@@ -50,6 +50,7 @@ namespace PackAnything {
       LonelyMinionMovable.PatchBuildings(Mod.HarmonyInstance);
       StoryMovable.PatchBuildings(Mod.HarmonyInstance);
       GravitasCreatureManipulatorMovable.PatchBuildings(Mod.HarmonyInstance);
+      DecorMovable.PatchBuildings(Mod.HarmonyInstance);
     }
   }
 }
