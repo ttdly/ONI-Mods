@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <AssemblyTitle>PipStore</AssemblyTitle>
+        <FileVersion>1.0.0</FileVersion>
+        <RootNamespace>PipStore</RootNamespace>
+        <Description>pip store</Description>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+        <LastWorkingBuild>$(LatestBuild)</LastWorkingBuild>
+        <Platforms>Vanilla;Mergedown</Platforms>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Remove="PLib"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="assets\"/>
+    </ItemGroup>
+</Project>
