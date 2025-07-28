@@ -7,6 +7,7 @@
         <AssemblyVersion>1.0.0</AssemblyVersion>
         <LastWorkingBuild>$(LatestBuild)</LastWorkingBuild>
         <Platforms>Vanilla;Mergedown</Platforms>
+        <LangVersion>12</LangVersion>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Remove="PLib"/>

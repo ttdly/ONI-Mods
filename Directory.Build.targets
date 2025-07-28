@@ -13,34 +13,34 @@
     </Target>
 
     <Target Name="WriteModInfoFile" BeforeTargets="PreBuildEvent" Condition=" '$(DistributeMod)' == 'true' ">
-    <PropertyGroup>
-        <ModInfoFile>$(IntermediateOutputPath)\mod_info.yaml</ModInfoFile>
-    </PropertyGroup>
-    <ItemGroup>
-        <ModInfoFileContentLines Include="minimumSupportedBuild: $(LastWorkingBuild)"/>
-        <ModInfoFileContentLines Include="version: $(FileVersion)"/>
-        <ModInfoFileContentLines Include="APIVersion: $(APIVersion)"/>
-    </ItemGroup>
-    <WriteLinesToFile
-            File="$(ModInfoFile)"
-            Overwrite="true"
-            Lines="@(ModInfoFileContentLines)"/>
+        <PropertyGroup>
+            <ModInfoFile>$(IntermediateOutputPath)\mod_info.yaml</ModInfoFile>
+        </PropertyGroup>
+        <ItemGroup>
+            <ModInfoFileContentLines Include="minimumSupportedBuild: $(LastWorkingBuild)"/>
+            <ModInfoFileContentLines Include="version: $(FileVersion)"/>
+            <ModInfoFileContentLines Include="APIVersion: $(APIVersion)"/>
+        </ItemGroup>
+        <WriteLinesToFile
+                File="$(ModInfoFile)"
+                Overwrite="true"
+                Lines="@(ModInfoFileContentLines)"/>
     </Target>
 
 
     <Target Name="WriteModDescriptionFile" BeforeTargets="PreBuildEvent" Condition=" '$(DistributeMod)' == 'true' ">
-    <PropertyGroup>
-        <ModDescriptionFile>$(IntermediateOutputPath)\mod.yaml</ModDescriptionFile>
-    </PropertyGroup>
-    <ItemGroup>
-        <ModDescriptionFileContentLines Include="title: &quot;$(AssemblyTitle)&quot;"/>
-        <ModDescriptionFileContentLines Include="description: &quot;$(Description)&quot;"/>
-        <ModDescriptionFileContentLines Include="staticID: CalYu.$(AssemblyName)"/>
-    </ItemGroup>
-    <WriteLinesToFile
-            File="$(ModDescriptionFile)"
-            Overwrite="true"
-            Lines="@(ModDescriptionFileContentLines)"/>
+        <PropertyGroup>
+            <ModDescriptionFile>$(IntermediateOutputPath)\mod.yaml</ModDescriptionFile>
+        </PropertyGroup>
+        <ItemGroup>
+            <ModDescriptionFileContentLines Include="title: &quot;$(AssemblyTitle)&quot;"/>
+            <ModDescriptionFileContentLines Include="description: &quot;$(Description)&quot;"/>
+            <ModDescriptionFileContentLines Include="staticID: CalYu.$(AssemblyName)"/>
+        </ItemGroup>
+        <WriteLinesToFile
+                File="$(ModDescriptionFile)"
+                Overwrite="true"
+                Lines="@(ModDescriptionFileContentLines)"/>
     </Target>
 
     <Target Name="ILRepack" AfterTargets="Build">
@@ -48,11 +48,11 @@
             <Internalize>true</Internalize>
         </PropertyGroup>
         <ItemGroup Condition=" '$(UsesPLib)' != 'false' ">
-            <InputAssemblies Include="$(TargetPath)" />
-            <InputAssemblies Include="$(TargetDir)PLib*.dll" />
+            <InputAssemblies Include="$(TargetPath)"/>
+            <InputAssemblies Include="$(TargetDir)PLib*.dll"/>
         </ItemGroup>
         <ItemGroup Condition=" '$(UsesPLib)' == 'false' ">
-            <InputAssemblies Include="$(TargetPath)" />
+            <InputAssemblies Include="$(TargetPath)"/>
         </ItemGroup>
 
         <ILRepack
@@ -63,7 +63,7 @@
                 XmlDocumentation="true"
                 Internalize="$(Internalize)"
                 Wildcards="true"
-                LibraryPath="$(GameFolder)" />
+                LibraryPath="$(GameFolder)"/>
     </Target>
 
     <Target Name="CopyArtifactsToInstallFolder" AfterTargets="ILRepack" Condition=" '$(DistributeMod)' == 'true' ">
@@ -89,12 +89,12 @@
             <AssestFiles Include="$(ProjectDir)\assets\**\*"/>
         </ItemGroup>
 
-        <Copy SourceFiles="@(AnimFiles)" 
-              DestinationFiles="@(AnimFiles->'$(InstallFolder)\anim\%(RecursiveDir)%(Filename)%(Extension)')" 
+        <Copy SourceFiles="@(AnimFiles)"
+              DestinationFiles="@(AnimFiles->'$(InstallFolder)\anim\%(RecursiveDir)%(Filename)%(Extension)')"
               SkipUnchangedFiles="true"
         />
         <Copy SourceFiles="@(TranslationFiles)" DestinationFolder="$(InstallFolder)\translations"/>
-        <Copy SourceFiles="@(AssestFiles)" 
+        <Copy SourceFiles="@(AssestFiles)"
               DestinationFiles="@(AssestFiles->'$(InstallFolder)\assets\%(RecursiveDir)%(Filename)%(Extension)')"
               SkipUnchangedFiles="true"
         />

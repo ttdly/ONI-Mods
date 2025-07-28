@@ -26,26 +26,27 @@ namespace PipStore.Screen //Source: Aki
             var textComponents = parent.GetComponentsInChildren(typeof(Text), true);
 
             foreach (Text text in textComponents) {
-                if (text.gameObject.name == "SettingsDialogData") continue;
 
                 var TMPData = text.text;
                 var obj = text.gameObject;
                 var data = ExtractTMPData(TMPData, text);
-
-                if (data != null) {
-                    var LT = obj.AddComponent<LocText>();
-                    LT.font = data.Font.Contains("GRAYSTROKE") ? _grayStroke : _notoSans;
-                    LT.fontStyle = data.FontStyle;
-                    LT.fontSize = data.FontSize;
-                    LT.maxVisibleLines = data.MaxVisibleLines;
-                    LT.enableWordWrapping = data.EnableWordWrapping;
-                    LT.autoSizeTextContainer = data.AutoSizeTextContainer;
-                    LT.text = "";
-                    LT.color = new Color(data.Color[0], data.Color[1], data.Color[2]);
-                    LT.key = data.Content;
-                    // alignment isn't carried over instantiation, so it's applied later
-                    if (realign) LT.gameObject.AddComponent<TMPFixer>().alignment = data.Alignment;
+                if (data == null) {
+                    LogUtil.Error($"data is null {TMPData}");
+                    return;
                 }
+     
+                var LT = obj.AddComponent<LocText>();
+                LT.font = data.Font.Contains("GRAYSTROKE") ? _grayStroke : _notoSans;
+                LT.fontStyle = data.FontStyle;
+                LT.fontSize = data.FontSize;
+                LT.maxVisibleLines = data.MaxVisibleLines;
+                LT.enableWordWrapping = data.EnableWordWrapping;
+                LT.autoSizeTextContainer = data.AutoSizeTextContainer;
+                LT.text = "";
+                LT.color = new Color(data.Color[0], data.Color[1], data.Color[2]);
+                LT.key = data.Content;
+                if (realign) LT.gameObject.AddComponent<TMPFixer>().alignment = data.Alignment;
+                
             }
         }
 

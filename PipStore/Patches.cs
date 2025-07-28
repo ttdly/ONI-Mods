@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using PipStore.Screen;
+using STRINGS;
 
 namespace PipStore {
     public class Patches {
@@ -21,5 +22,13 @@ namespace PipStore {
                 }
             }
         }
+
+        // [HarmonyPatch(typeof(PauseScreen), "OnPrefabInit")]
+        // private static class DbInitializePatch {
+        //     private static void Postfix() {
+        //         PipStoreScreen.Instance.Init();
+        //     }
+        // }
+        
     }
 }

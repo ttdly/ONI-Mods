@@ -7,7 +7,7 @@
         <Reference Private="False"/>
         <ProjectReference Private="True"/>
     </ItemDefinitionGroup>
-    
+
     <PropertyGroup>
         <March25Qof>659901</March25Qof>
         <DLC4>674504</DLC4>

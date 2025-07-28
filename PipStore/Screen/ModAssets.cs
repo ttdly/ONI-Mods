@@ -16,7 +16,7 @@ namespace PipStore.Screen {
 
             var tmPConverter = new TMPConverter();
             tmPConverter.ReplaceAllText(prefab);
-            // ListChildren(CustomChoreTypeDialog.transform);
+            ListChildren(PipStoreScreenPrefab.transform);
         }
 
         /// <summary>
