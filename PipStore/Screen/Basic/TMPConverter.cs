@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace PipStore.Screen //Source: Aki
+namespace PipStore.Screen.Basic //Source: Aki
 {
     // IMPORTANT: This class will use data provided from my special unity asset bundle exporter script.
     public class TMPConverter {
@@ -31,7 +31,7 @@ namespace PipStore.Screen //Source: Aki
                 var obj = text.gameObject;
                 var data = ExtractTMPData(TMPData, text);
                 if (data == null) {
-                    LogUtil.Error($"data is null {TMPData}");
+                    LogUtil.Warning($"data is null {TMPData} {parent.name}");
                     return;
                 }
      

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-namespace PipStore.Screen {
+namespace PipStore.Screen.Basic {
     public class ModAssets {
         public static GameObject PipStoreScreenPrefab;
-        
         
         public static void LoadAssets() {
             var bundle = LoadAssetBundle("pipsqueakstore", platformSpecific: true);

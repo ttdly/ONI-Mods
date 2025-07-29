@@ -15,16 +15,11 @@ namespace PipStore.Screen {
         public Image goodsImage;
         public string goodsProperName;
         
-        
-        protected override void OnPrefabInit() {
-            base.OnPrefabInit();
-            coinIcon = transform.Find("Price/Image").gameObject.GetComponent<Image>();
-            coinIcon.sprite = Assets.GetSprite("ui_buildingwood");
-        }
-
         protected override void OnSpawn() {
             base.OnSpawn();
+            // LogUtil.Info($"BUTTON {button == null}");
             button.onClick.AddListener(OpenConfirmDialog);
+            
         }
         private void OpenConfirmDialog() {
             PipStoreScreen.Instance.SetTargetGoods(this);
@@ -33,7 +28,11 @@ namespace PipStore.Screen {
         public void SetInfo(Tag thisTag, float price) {
             goodsTag = thisTag;
             goodsPrice = price;
-            var go = Assets.GetPrefab(goodsTag) ?? throw new Exception($"Tag {goodsTag} not exist");
+            var go = Assets.GetPrefab(goodsTag);
+            if (go == null) {
+                LogUtil.Warning($"prefab {goodsTag} not found");
+                Destroy(gameObject);
+            }
             var sprite = Def.GetUISprite(goodsTag);
             goodsProperName = go.GetProperName();
             goodsName.SetText(goodsProperName);
@@ -41,6 +40,7 @@ namespace PipStore.Screen {
             goodsPriceText.SetText(goodsPrice.ToString("0.00"));
             goodsImage.sprite = sprite.first;
             goodsImage.color = sprite.second;
+            goodsImage.preserveAspect = true;
         }
         
         public string GetSpawnableQuantityOnly() {

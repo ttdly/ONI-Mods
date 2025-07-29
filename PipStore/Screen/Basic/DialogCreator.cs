@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PipStore.Screen {
+namespace PipStore.Screen.Basic {
     public class DialogCreator {
         
         /// <summary>

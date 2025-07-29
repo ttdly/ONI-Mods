@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace PipStore.Screen;
+namespace PipStore.Screen.Basic;
 
 public class FInputField2 : KScreen, IInputHandler
 	{

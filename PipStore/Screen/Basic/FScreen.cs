@@ -1,4 +1,4 @@
-﻿namespace PipStore.Screen {
+﻿namespace PipStore.Screen.Basic {
 	/// <summary>
 	///     Credit: Aki
 	/// </summary>

@@ -3,7 +3,7 @@ using UnityEngine;
 
 #pragma warning disable CS0649
 
-namespace PipStore.Screen //Source: Aki
+namespace PipStore.Screen.Basic //Source: Aki
 {
     // There is an issue with how TMP imports itself and alignment has to be reapplied
     internal class TMPFixer : KMonoBehaviour {

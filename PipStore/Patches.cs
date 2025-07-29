@@ -12,23 +12,19 @@ namespace PipStore {
                     templateButton.gameObject,
                     templateButton.gameObject.transform.parent.gameObject,
                     true);
-                MultiToggle storeToggleButton;
-                if (storeToggle.TryGetComponent<MultiToggle>(out storeToggleButton)) {
-                    LogUtil.Info("找到组件");
-                    storeToggleButton.onClick += delegate {
-                        LogUtil.Info("点击事件");
-                        PipStoreScreen.ShowWindow();
-                    };
+                if (!storeToggle.TryGetComponent<MultiToggle>(out var storeToggleButton)) {
+                    LogUtil.Error("未找到绑定组件");
                 }
+                storeToggleButton.onClick += PipStoreScreen.ShowWindow;
             }
         }
 
-        // [HarmonyPatch(typeof(PauseScreen), "OnPrefabInit")]
-        // private static class DbInitializePatch {
-        //     private static void Postfix() {
-        //         PipStoreScreen.Instance.Init();
-        //     }
-        // }
+        [HarmonyPatch(typeof(SaveGame), "OnPrefabInit")]
+        private static class SaveGameOnPrefabInitPatch {
+            internal static void Postfix(SaveGame __instance) {
+                __instance.gameObject.AddOrGet<SerializeData>();
+            }
+        }
         
     }
 }

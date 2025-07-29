@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace PipStore.Screen;
+namespace PipStore.Screen.Basic;
 public class FNumberInputField : FInputField2
 {
     public int maxValue = int.MaxValue;
