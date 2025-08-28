@@ -23,6 +23,7 @@ namespace PipStore {
         private static class SaveGameOnPrefabInitPatch {
             internal static void Postfix(SaveGame __instance) {
                 __instance.gameObject.AddOrGet<SerializeData>();
+                __instance.gameObject.AddOrGet<ResourcesCounter>();
             }
         }
         

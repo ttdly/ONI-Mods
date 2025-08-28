@@ -12,6 +12,7 @@ public enum CategoryKey {
     Egg,
     Animal,
     Artifacts,
+    Gravitas,
 }
 
 public class Category {
@@ -24,7 +25,8 @@ public class Category {
         { CategoryKey.Industrial.ToString(), new Info("STRINGS.UI.NEWBUILDCATEGORIES.INDUSTRIALSTATION.BUILDMENUTITLE", "BasicFabric") },
         { CategoryKey.Egg.ToString(), new Info("STRINGS.UI.SANDBOXTOOLS.FILTERS.ENTITIES.CREATURE_EGG", HatchConfig.EGG_ID) },
         { CategoryKey.Animal.ToString(), new Info("STRINGS.UI.CODEX.SUBWORLDS.CRITTERS", HatchConfig.ID) },
-        { CategoryKey.Artifacts.ToString(), new Info("STRINGS.UI.SANDBOXTOOLS.FILTERS.ENTITIES.ARTIFACTS", "ui_coffee_mug") },
+        { CategoryKey.Artifacts.ToString(), new Info("STRINGS.UI.SANDBOXTOOLS.FILTERS.ENTITIES.ARTIFACTS", "artifact_OfficeMug")},
+        {CategoryKey.Gravitas.ToString(), new Info("STRINGS.INPUT_BINDINGS.BUILDING.NAME", GravitasDoorConfig.ID) },
     };
 
     public class Info (string stringsKey, string spriteTag) {

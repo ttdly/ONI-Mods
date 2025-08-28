@@ -60,6 +60,7 @@ public class PipStoreScreen : FScreen {
         Instance.ConsumeMouseScroll = true;
         Instance.transform.SetAsLastSibling();
         Instance.RefreshCoinText();
+        LogUtil.Info("检索资源");
     }
 
     private static void HideWindow() {
@@ -114,11 +115,8 @@ public class PipStoreScreen : FScreen {
             var toggle = newCategoryToggle.GetComponent<Toggle>();
             toggle.isOn = false;
             toggle.onValueChanged.AddListener(value => ToggleValueChange(value, toggle));
-            var uiGo = Assets.GetPrefab(keyValuePair.Value.SpriteTag);
-            LogUtil.Info($"{uiGo == null}");
-            var sprite = (uiGo==null) ? 
-                new Tuple<Sprite, Color>(Def.GetUISpriteFromMultiObjectAnim(Assets.GetAnim(keyValuePair.Value.SpriteTag.ToString())),Color.white) : Def.GetUISprite(uiGo);
-            LogUtil.Info(sprite.first.name);
+            var sprite = Def.GetUISprite(Assets.GetPrefab(keyValuePair.Value.SpriteTag));
+            
             newCategoryToggle.transform.Find("Image").gameObject.GetComponent<Image>().sprite = sprite.first;
             newCategoryToggle.transform.Find("Image").gameObject.GetComponent<Image>().color = sprite.second;
             cateAndToggle[keyValuePair.Key] = toggle;
@@ -146,24 +144,32 @@ public class PipStoreScreen : FScreen {
     }
 
     public void GoodsInit() {
+
+        foreach (var element in ElementLoader.elements) {
+            if (element.IsSolid) {
+                AddEntry(element.tag, 1, CategoryKey.Solid.ToString());
+                continue;
+            }
+        
+            if (element.IsLiquid) {
+                AddEntry(element.tag, 2, CategoryKey.Liquid.ToString());
+                continue;
+            }
+        
+            if (element.IsGas) {
+                AddEntry(element.tag, 3, CategoryKey.Gas.ToString());
+            }
+        }
         foreach (var kPrefabID in Assets.Prefabs) {
+            
             if (kPrefabID == null) continue;
-            // 遗迹
-            if (kPrefabID.HasTag(GameTags.Solid) && kPrefabID.gameObject.GetComponent<Element>()!=null) {
-                AddEntry(kPrefabID.PrefabTag, 1, CategoryKey.Solid.ToString());
-                continue;
+            try {
+                if (!Game.IsCorrectDlcActiveForCurrentSave(kPrefabID)) continue;
             }
-
-            if (kPrefabID.HasTag(GameTags.Liquid)) {
-                AddEntry(kPrefabID.PrefabTag, 2, CategoryKey.Liquid.ToString());
-                continue;
+            catch (Exception e) {
+                LogUtil.Warning(e.ToString());
             }
-
-            if (kPrefabID.HasTag(GameTags.Gas)) {
-                AddEntry(kPrefabID.PrefabTag, 3, CategoryKey.Gas.ToString());
-                continue;
-            }
-
+            
             if (IsSeed(kPrefabID)) {
                 AddEntry(kPrefabID.PrefabTag, 4, CategoryKey.Seed.ToString());
                 continue;
@@ -184,8 +190,18 @@ public class PipStoreScreen : FScreen {
                 continue;
             }
 
-            if (kPrefabID.HasTag(GameTags.CreatureBrain)) {
+            if (kPrefabID.HasTag(GameTags.CreatureBrain)&&Game.IsCorrectDlcActiveForCurrentSave(kPrefabID)) {
                 AddEntry(kPrefabID.PrefabTag, 8, CategoryKey.Animal.ToString());
+                continue;
+            }
+
+            if (kPrefabID.HasTag(GameTags.Artifact)) {
+                AddEntry(kPrefabID.PrefabTag, 9,  CategoryKey.Artifacts.ToString());
+                continue;
+            }
+
+            if (kPrefabID.gameObject.GetComponent<Building>() == null && kPrefabID.HasTag(GameTags.Gravitas)) {
+                AddEntry(kPrefabID.PrefabTag, 10, CategoryKey.Gravitas.ToString());
             }
             
         }
